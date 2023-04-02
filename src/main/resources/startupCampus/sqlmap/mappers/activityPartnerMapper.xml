@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.ActivityPartnerMapper">
+	<!-- <resultMap type="bookListDTO" id="bookWithAccountId" autoMapping="true">
+		<id column="SEQ_ID" property="seqId"/>
+		<result column="PLACE_ID" property="placeId"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="STATUS" property="status"/>
+		<association property="userDTO" javaType="userDTO" autoMapping="true">
+			<result column="USER_ID" property="seqId"/>
+			<result column="ACCOUNT_ID" property="accountId"/>
+		</association>
+	</resultMap> -->
+	
+	<!-- 게시글 리스트 카운트 -->
+	<select id="selectActivityPartnerPostCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT
+				count(*)
+			FROM
+				board_activity_partner
+			WHERE
+				1 = 1
+		]]>
+		<include refid="search" />
+	</select>
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectActivityPartnerPostList" parameterType="map" resultType="boardGalleryDTO">
+			<![CDATA[
+				SELECT
+					SEQ_ID, REPRESENT_IMAGE, TITLE, left(CONTENT, 600) AS CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+				FROM
+					board_activity_partner
+				WHERE
+					1 = 1
+			]]>
+			<include refid="search" />
+			<![CDATA[
+				ORDER BY
+					SEQ_ID DESC
+				LIMIT #{index}, #{size}
+			]]>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'content'.toString()">
+				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'titleAndContent'.toString()">
+				AND (TITLE LIKE CONCAT('%', #{keyword}, '%')
+					OR CONTENT LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectActivityPartnerPostOne" parameterType="int" resultType="map">
+		SELECT
+			SEQ_ID, REPRESENT_IMAGE, WRITER_ID, TITLE, CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT,
+			FILE_PATH,FILE_NAME
+		FROM
+			board_activity_partner
+		WHERE
+			SEQ_ID = #{value}
+	</select>
+	
+	<update id="updateActivityPartnerPostViewCount" parameterType="int">
+		UPDATE
+			board_activity_partner
+		SET
+			VIEW_COUNT = VIEW_COUNT + 1
+		WHERE
+			SEQ_ID = #{value}
+	</update>
+
+	<insert id="insertActivityPartnerPostOne" parameterType="boardGalleryDTO">
+		INSERT INTO
+			board_activity_partner
+		(
+			WRITER_ID, WRITER_IP, REPRESENT_IMAGE, TITLE, CONTENT , FILE_PATH, FILE_NAME
+		)
+		values (
+			#{writerId}, #{writerIp}, #{representImage}, #{title}, #{content},#{filePath},#{fileName}
+		)
+	</insert>
+	
+	<update id="updateActivityPartnerPostOne" parameterType="boardGalleryDTO">
+		UPDATE
+			board_activity_partner
+		SET
+			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, REPRESENT_IMAGE = #{representImage},
+			TITLE = #{title}, CONTENT = #{content},
+			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteActivityPartnerPostOne" parameterType="int">
+		DELETE FROM board_activity_partner
+		WHERE SEQ_ID = #{value}
+	</delete>
+	
+	<!-- 입주기업(유저)용 -->
+	<insert id="insertActivityPartnerPostOneForPartner" parameterType="boardDTO">
+		INSERT INTO
+			board_activity_partner
+		(
+			WRITER_ID, WRITER_IP, REPRESENT_IMAGE, TITLE, CONTENT , FILE_PATH, FILE_NAME
+		)
+		values (
+			#{writerId}, #{writerIp}, #{representImage}, #{title}, #{content},#{filePath},#{fileName}
+		)
+	</insert>
+	
+	<update id="updateActivityPartnerPostOneForPartner" parameterType="boardDTO">
+		UPDATE
+			board_activity_partner
+		SET
+			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, REPRESENT_IMAGE = #{representImage},
+			TITLE = #{title}, CONTENT = #{content},
+			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+			AND WRITER_ID = #{writerId}
+	</update>
+	
+	<delete id="deleteActivityPartnerPostOneForPartner" parameterType="boardDTO">
+		DELETE FROM board_activity_partner
+		WHERE SEQ_ID = #{seqId}
+		AND WRITER_ID = #{writerId}
+	</delete>
+	<!-- 입주기업(유저)용 -->
+
+</mapper>

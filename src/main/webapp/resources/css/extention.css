@@ -1,0 +1,303 @@
+@charset "UTF-8";
+/*
+	AUTHOR : Kim Kee Seop (Apeak co.)
+*/
+
+
+/* 회의실 예약 페이지 */
+.reservation-table td.not-current-month {
+	background: #c7c7c7;
+}
+
+.reservation-table tr.booked td {
+	background: #c7c7c7;
+}
+
+.reservation-table tr.booked td:hover {
+	background: #c7c7c7;
+}
+
+.reservation-table tr.reservation-choice td:hover {
+	background: #80c8ff;
+}
+
+.reservation-table td.not-current-month:hover {
+	background: #c7c7c7;
+	cursor: default;
+}
+
+.reservation-wait {
+    background:#fff;
+    width:90%;
+    height:20px;
+    border-radius:50px;
+}
+
+.book-list-text {
+    font-family:'KoPubWorld_Dotum_L';
+    font-size:1.5em;
+    color:#515151;
+    margin:5px 0 15px 0;
+    line-height:1.8em;
+    float:left;
+    width:100%;
+}
+
+.book-list-title {
+    font-family:'KoPubWorld_Dotum_L';
+    font-size:2.4em;
+    color:#264e9c;
+    margin:15px 0;
+}
+
+.book-list-text ul {
+    border-top:2px solid #ddd;
+}
+
+.book-list-text ul li {
+    border-bottom:1px solid #ddd;
+    width:100%;
+    float:left;
+    padding:.3em 0;
+}
+
+/* .book-list-text ul li span.date{
+    width:15%;
+    float:left;
+} */
+.book-list-text ul li span.time{
+    width:15%;
+    float:left;
+}
+.book-list-text ul li span.name{
+    width:20%;
+    float:left;
+}
+.book-list-text ul li span.description{
+    width:50%;
+    float:left;
+}
+
+.book-list-text ul li span.delete{
+    width:15%;
+    float:left;
+}
+
+
+.form-check-inline {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 0;
+  margin-right: 5px;
+}
+
+.form-check-inline input {
+	margin: 0px 5px 0px 0px;
+}
+
+.form-check-inline label {
+	margin: 0px 0px 0px 0px;
+	font-weight: 100;
+}
+
+input[type=password] {
+	width: 200px;
+    padding: .5em;
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.5em;
+    color: #515151;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	margin-right: 10px;
+} 
+
+input#post_date_string.board-input[type=text], input#agency_name.board-input[type=text] {
+	width: auto;
+	padding: 5px;
+	margin-left: 10px;
+	font-family: 'KoPubWorld_Dotum_M';
+	font-size: 1em;
+	color: #515151;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 1px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 10px;
+} 
+
+input#youtubeId.board-input[type=text] {
+	width: 30%;
+	padding: 5px;
+	margin-left: 10px;
+	font-family: 'KoPubWorld_Dotum_M';
+	font-size: 1em;
+	color: #515151;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 1px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 10px;
+}
+
+input#representImageFile.board-input[type=file] {
+	width: 30%;
+	padding: 5px;
+	margin-left: 10px;
+	font-family: 'KoPubWorld_Dotum_M';
+	font-size: 1em;
+	color: #515151;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 1px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 10px;
+	display: inline;
+}
+
+input#post_title.board-input[type=text] {
+	width: 70%;
+	padding: 5px;
+	margin-left: 10px;
+	font-family: 'KoPubWorld_Dotum_M';
+	font-size: 1em;
+	color: #515151;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 1px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 10px;
+}
+
+.title-label input.board-input{
+	width: 30%;
+	padding: 5px;
+	margin-left: 10px;
+	font-family: 'KoPubWorld_Dotum_M';
+	font-size: 1em;
+	color: #515151;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 1px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 10px;
+	display: inline;
+}
+
+.title-label select.board-input {
+	width: 15%;
+	padding: 5px;
+	margin-left: 10px;
+	font-family: 'KoPubWorld_Dotum_M';
+	font-size: 1em;
+	color: #515151;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 1px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 10px;
+	display: inline;
+}
+
+.board-title .title-label {
+    margin:1.5em 0 0 0;   
+}
+
+.board-title .title-label h5 {
+    display:inline-block;
+    font-size: 1.1em;
+}
+
+.you-are-here {
+	color: white;
+	background: #ed6d6d ;
+}
+
+.board-table .board-contents {
+	padding: 20px;
+	font-size: 1.5em;
+	
+}
+
+.item-label .yellow-label {
+    font-size:1.2em;
+}
+
+.gallery-represent-wrapper {
+	max-width: 100%;
+}
+.gallery-represent-wrapper img {
+	max-width: 100%;
+	height: auto;
+}
+
+.board-table .board-contents p {
+	padding: 5px 0;
+}
+
+.board-table .board-contents img {
+	margin: 0px;
+	display: block;
+	max-width: 100%;
+	height: auto;
+	cursor: pointer;
+}
+
+.btn-group-justified[role="group"] a{
+	padding: 10px 0px;
+}
+
+.btn-group[role="group"] button{
+	padding: 10px 0px;
+}
+
+.result-all ul li {
+	width: 30%;
+}
+
+.board-title .start-end-label h5:nth-child(4)  {
+    margin-left:10px;
+}
+
+div#partner-list td {
+	text-overflow: ellipsis;
+}
+
+.embed-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.embed-container iframe, .embed-container object, .embed-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* .sm-main-box {
+	display: block;
+} */
+
+/* .board-table .board-contents img {
+    height: auto;
+} */

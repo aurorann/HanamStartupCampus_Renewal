@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.TotalSearchMapper">
+	<!-- <resultMap type="bookListDTO" id="bookWithAccountId" autoMapping="true">
+		<id column="SEQ_ID" property="seqId"/>
+		<result column="PLACE_ID" property="placeId"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="STATUS" property="status"/>
+		<association property="userDTO" javaType="userDTO" autoMapping="true">
+			<result column="USER_ID" property="seqId"/>
+			<result column="ACCOUNT_ID" property="accountId"/>
+		</association>
+	</resultMap> -->
+	
+	<!-- 게시글 리스트 카운트 -->
+	<select id="selectTotalPostListByKeyword" parameterType="String" resultType="boardDTO">
+		(SELECT
+			'MEDIA' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_media
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+			ORDER BY CREATED_AT DESC
+			LIMIT 0, 10	
+		)UNION ALL(
+		SELECT
+			'NOTICE' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_notice
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+					LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'AGENCY' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_agency
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+		        OR AGENCY_NAME LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+				LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'FAQ' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_faq
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+			LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'PRESS' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_press
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+			LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'PROMOTION' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_promotion
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+			LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'BIO-INFO' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_bioinfo
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+			LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'PARTNER-MEDIA' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_media_partner
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+			LIMIT 0, 10
+		)UNION ALL(
+		SELECT
+			'PARTNER-ACTIVITY' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_activity_partner
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+			LIMIT 0, 10
+		)
+	</select>
+
+</mapper>

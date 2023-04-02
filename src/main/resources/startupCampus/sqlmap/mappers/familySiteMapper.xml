@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.FamilySiteMapper">
+	<!-- 협력사 소개 페이지 조회용 -->
+	<select id="selectFamilySiteList" resultType="familySiteDTO">
+			SELECT
+				*
+			FROM family_sites
+			ORDER BY SEQ_ID ASC
+	</select>
+	
+	<insert id="insertFamilySiteOne" parameterType="familySiteDTO">
+		INSERT INTO
+			family_sites
+		(
+			NAME, PAGE_ADDRESS
+		)
+		values (
+			#{name}, #{pageAddress}
+		)
+	</insert>
+	
+	<update id="updateFamilySiteOne" parameterType="familySiteDTO" >
+			UPDATE
+				family_sites
+			SET
+				NAME = #{name},
+				PAGE_ADDRESS = #{pageAddress}
+			WHERE
+				SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteFamilySiteOne" parameterType="int">
+		DELETE FROM family_sites
+		WHERE SEQ_ID = #{value}
+	</delete>
+	
+</mapper>

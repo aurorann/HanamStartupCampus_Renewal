@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.PopUpMapper">
+	
+	<insert id="insertPopUp" parameterType="popUpDTO">
+		INSERT INTO popup VALUES(NULL,#{title},#{link},#{contents},#{contentsWidth},#{contentsHeight},#{displayYn},#{displayDate},#{displayPositionX},#{displayPositionY},now(),NOW())
+	</insert>
+
+	<update id="updatePopUp" parameterType="popUpDTO">
+		UPDATE popup SET 
+		TITLE = #{title},
+		LINK = #{link},
+		CONTENTS = #{contents},
+		CONTENTS_WIDTH = #{contentsWidth},
+		CONTENTS_HEIGHT = #{contentsHeight},
+		DISPLAY_YN = #{displayYn},
+		DISPLAY_DATE = #{displayDate},
+		DISPLAY_POSITION_X = #{displayPositionX},
+		DISPLAY_POSITION_Y = #{displayPositionY},
+		UPDATED_AT = NOW() 
+		WHERE NUM=#{num}
+	</update>
+
+	<delete id="deletePopUp" parameterType="int">
+		DELETE FROM popup WHERE NUM=#{value}
+	</delete>
+
+	<select id="getPopUpListCnt" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM popup
+	</select>
+
+	<select id="getPopUpList" parameterType="map" resultType="popUpDTO">
+		SELECT * FROM popup
+		LIMIT #{startIndex},#{pageSize} 
+	</select>
+	
+	<select id="getPopUpOne" parameterType="int" resultType="popUpDTO">
+		SELECT * FROM popup WHERE NUM=#{value}
+	</select>
+	
+	<select id="usingPopUpList" resultType="popUpDTO">
+		SELECT * FROM popup WHERE DATE_FORMAT(NOW(),'%Y-%m-%d') &lt;= display_date AND display_yn='Y'
+	</select>
+
+</mapper>

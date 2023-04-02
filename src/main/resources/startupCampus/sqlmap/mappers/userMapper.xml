@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.UserMapper">
+
+	<!-- <resultMap id="sample" type="egovframework.example.sample.service.SampleVO">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="description" column="description"/>
+		<result property="useYn" column="use_yn"/>
+		<result property="regUser" column="reg_user"/>
+	</resultMap> -->
+	
+
+	<select id="selectUserListAll" resultType="UserDTO">
+			SELECT
+				*
+			FROM user_info
+			ORDER BY SEQ_ID ASC
+	</select>
+	
+	<!--  -->
+	<!--		 # Login 관련 -->
+	<!--  -->
+	<select id="selectUserByAccountId" parameterType="string" resultType="UserDTO">
+			SELECT
+				*
+			FROM user_info
+			WHERE
+				ACCOUNT_ID = #{accountId}
+				AND ACTIVATE != 'EMPTY'
+	</select>
+	
+	<select id="selectUserAuthorityByAccountId" parameterType="int" resultType="authorityDTO">
+			SELECT
+				*
+			FROM user_role
+			WHERE
+				USER_ID = #{userId}
+	</select>
+	
+	
+	<insert id="insertUserLoginHistory" parameterType="loginHistoryDTO">
+			INSERT INTO
+				login_history (USER_ID, ACCOUNT_ID, IP_ADDR, DEVICE, SUCCESS, LOGIN_DATETIME)
+			VALUES
+				(#{userId}, #{accountId}, #{ipAddr}, #{device}, #{success}, SYSDATE())
+	</insert>
+	
+	
+	<update id="updateUserLastLogin" parameterType="int">
+			UPDATE
+				user_info
+			SET
+				LAST_LOGIN = SYSDATE()
+			WHERE
+				SEQ_ID = #{userId}
+	</update>
+	
+	
+	<select id="selectUserPasswordBySeqId" parameterType="int" resultType="String">
+			SELECT
+				ACCOUNT_PW
+			FROM user_info
+			WHERE
+				SEQ_ID = #{seqId}
+	</select>
+	<update id="updatePasswordBySeqId" parameterType="map">
+			UPDATE
+				user_info
+			SET
+				ACCOUNT_PW = #{newPassword}
+			WHERE
+				SEQ_ID = #{seqId}
+	</update>
+
+</mapper>

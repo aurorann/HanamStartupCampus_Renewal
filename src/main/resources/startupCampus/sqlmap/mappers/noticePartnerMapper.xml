@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.NoticePartnerMapper">
+	<!-- <resultMap type="bookListDTO" id="bookWithAccountId" autoMapping="true">
+		<id column="SEQ_ID" property="seqId"/>
+		<result column="PLACE_ID" property="placeId"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="STATUS" property="status"/>
+		<association property="userDTO" javaType="userDTO" autoMapping="true">
+			<result column="USER_ID" property="seqId"/>
+			<result column="ACCOUNT_ID" property="accountId"/>
+		</association>
+	</resultMap> -->
+	
+	<!-- 게시글 리스트 카운트 -->
+	<select id="selectNoticePartnerPostCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT
+				count(*)
+			FROM
+				board_notice_partner
+				LEFT JOIN user_info
+					ON	user_info.SEQ_ID = board_notice_partner.WRITER_ID
+			WHERE
+				1 = 1
+		]]>
+		<include refid="search" />
+	</select>
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectNoticePartnerPostList" parameterType="map" resultType="boardDTO">
+			<![CDATA[
+				SELECT
+					board_notice_partner.SEQ_ID AS SEQ_ID, WRITER_ID, WRITER_IP, user_info.NAME AS WRITER_NAME,
+					TITLE, CONTENT, VIEW_COUNT, board_notice_partner.CREATED_AT, board_notice_partner.UPDATED_AT
+				FROM
+					board_notice_partner
+					LEFT JOIN user_info
+					ON	user_info.SEQ_ID = board_notice_partner.WRITER_ID
+				WHERE
+					1 = 1
+			]]>
+			<include refid="search" />
+			<![CDATA[
+				ORDER BY
+					board_notice_partner.SEQ_ID DESC
+				LIMIT #{index}, #{size}
+			]]>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'content'.toString()">
+				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'titleAndContent'.toString()">
+				AND (TITLE LIKE CONCAT('%', #{keyword}, '%')
+					OR CONTENT LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'writer'.toString()">
+				AND user_info.NAME LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectNoticePartnerPostOne" parameterType="int" resultType="map">
+		SELECT
+			board_notice_partner.SEQ_ID, WRITER_ID, user_info.NAME AS WRITER_NAME, TITLE, CONTENT, VIEW_COUNT,
+			DATE_FORMAT(board_notice_partner.CREATED_AT,'%Y-%m-%d') AS CREATED_AT,
+			board_notice_partner.FILE_PATH AS FILE_PATH,board_notice_partner.FILE_NAME AS FILE_NAME
+		FROM
+			board_notice_partner
+			LEFT JOIN user_info
+			ON	user_info.SEQ_ID = board_notice_partner.WRITER_ID
+		WHERE
+			board_notice_partner.SEQ_ID = #{value}
+	</select>
+	
+	<update id="updateNoticePartnerPostViewCount" parameterType="int">
+		UPDATE
+			board_notice_partner
+		SET
+			VIEW_COUNT = VIEW_COUNT + 1
+		WHERE
+			SEQ_ID = #{value}
+	</update>
+
+	<!-- 관리자용 -->
+	<insert id="insertNoticePartnerPostOne" parameterType="boardDTO">
+		INSERT INTO
+			board_notice_partner
+		(
+			WRITER_ID, WRITER_IP, TITLE, CONTENT, FILE_NAME, FILE_PATH
+		)
+		values (
+			#{writerId}, #{writerIp}, #{title}, #{content}, #{fileName}, #{filePath}
+		)
+	</insert>
+	
+	<update id="updateNoticePartnerPostOne" parameterType="boardDTO">
+		UPDATE
+			board_notice_partner
+		SET
+			TITLE = #{title}, CONTENT = #{content},
+			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteNoticePartnerPostOne" parameterType="int">
+		DELETE FROM board_notice_partner
+		WHERE SEQ_ID = #{value}
+	</delete>
+	<!-- 관리자용 -->
+	
+	<!-- 입주기업(유저)용 -->
+	<insert id="insertNoticePartnerPostOneForPartner" parameterType="boardDTO">
+		INSERT INTO
+			board_notice_partner
+		(
+			WRITER_ID, WRITER_IP, TITLE, CONTENT
+		)
+		values (
+			#{writerId}, #{writerIp}, #{title}, #{content}
+		)
+	</insert>
+	
+	<update id="updateNoticePartnerPostOneForPartner" parameterType="boardDTO">
+		UPDATE
+			board_notice_partner
+		SET
+			TITLE = #{title}, CONTENT = #{content},
+			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+			AND WRITER_ID = #{writerId}
+	</update>
+	
+	<delete id="deleteNoticePartnerPostOneForPartner" parameterType="boardDTO">
+		DELETE FROM board_notice_partner
+		WHERE SEQ_ID = #{seqId}
+		AND WRITER_ID = #{writerId}
+	</delete>
+	<!-- 입주기업(유저)용 -->
+
+</mapper>

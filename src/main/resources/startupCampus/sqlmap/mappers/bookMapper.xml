@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.BookMapper">
+	<resultMap type="bookListDTO" id="bookWithAccountId" autoMapping="true">
+		<id column="SEQ_ID" property="seqId"/>
+		<result column="PLACE_ID" property="placeId"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="STATUS" property="status"/>
+		<association property="userDTO" javaType="userDTO" autoMapping="true">
+			<result column="USER_ID" property="seqId"/>
+			<result column="ACCOUNT_ID" property="accountId"/>
+		</association>
+	</resultMap>
+	
+	<!-- 회의살 정보 조회 -->
+	<select id="selectBookPlaceInfo" parameterType="int" resultType="bookPlaceDTO">
+		SELECT
+			book.*
+		FROM
+		   book_place as book
+		WHERE
+			book.SEQ_ID = #{value}
+	</select>
+	
+	<!-- 회의살 예약이력 검색 -->
+	<select id="selectBookCalendarMonthly" parameterType="map" resultType="bookCalendarDTO">
+		SELECT
+			book.PLACE_ID,
+		    book.BOOK_DATE,
+		    (
+		    	SUM(book.H09)+SUM(book.H10)+SUM(book.H11)+
+			    SUM(book.H12)+SUM(book.H13)+SUM(book.H14)+
+			    SUM(book.H15)+SUM(book.H16)+SUM(book.H17)
+			) AS BOOK_TIME_COUNT,
+			count(*) as BOOK_COUNT
+		FROM
+		   book_list as book
+		WHERE
+			book.`STATUS` = 0
+			AND book.PLACE_ID = #{placeId}
+			AND YEAR(book.BOOK_DATE) = #{year}
+			AND MONTH(book.BOOK_DATE) = #{month}
+		GROUP BY
+			book.PLACE_ID, book.BOOK_DATE
+	</select>
+	
+	<!-- 해당 월 예약 캘린더 조회  -->
+	<select id="selectBookListMonthly" parameterType="map" resultType="bookListDTO">
+		<![CDATA[
+			SELECT
+				book.SEQ_ID, 
+				book.USER_ID, 
+				book.USER_NAME, 
+				book.PLACE_ID, 
+				book.DESCRIPTION, 
+				book.`STATUS`, 
+				book.BOOK_DATE, 
+				book.H09, 
+				book.H10, 
+				book.H11, 
+				book.H12, 
+				book.H13, 
+				book.H14,
+				book.H15, 
+				book.H16, 
+				book.H17, 
+				book.START_INDEX,
+				book.END_INDEX,
+				book.CREATED_AT
+			FROM
+				book_list AS book
+			WHERE
+				book.`STATUS` = 0
+				AND book.PLACE_ID = #{placeId}
+				AND YEAR(book.BOOK_DATE) = #{year}
+				AND MONTH(book.BOOK_DATE) = #{month}
+			ORDER BY
+				book.BOOK_DATE ASC,
+				book.START_INDEX ASC
+		]]>
+	</select>
+	
+	<select id="selectDailyBookCountByUserId" parameterType="bookListDTO" resultType="int">
+		SELECT 
+			IFNULL( SUM(
+				IFNULL(H09, 0) + IFNULL(H10, 0) + IFNULL(H11, 0) + 
+				IFNULL(H12, 0) + IFNULL(H13, 0) + IFNULL(H14, 0) +
+				IFNULL(H15, 0) + IFNULL(H16, 0) + IFNULL(H17, 0)
+			), 0)
+		FROM
+			book_list
+		WHERE
+			BOOK_DATE = DATE_FORMAT(#{bookDate},'%Y-%m-%d')
+			AND USER_ID = #{userId};
+	</select>
+	
+	<insert id="insertBookListOne" parameterType="bookListDTO">
+		INSERT INTO
+			book_list
+		(
+			`USER_ID`, `USER_NAME`, `PLACE_ID`, `DESCRIPTION`, `STATUS`, `BOOK_DATE`, 
+			`H09`, `H10`, `H11`, `H12`, `H13`, `H14`, `H15`, `H16`, `H17`,
+			`START_INDEX`, `END_INDEX`
+		)
+		values (
+			#{userId}, #{userName}, #{placeId}, #{description}, #{status}, #{bookDate},
+			#{h09, jdbcType=INTEGER}, #{h10, jdbcType=INTEGER}, #{h11, jdbcType=INTEGER},
+			#{h12, jdbcType=INTEGER}, #{h13, jdbcType=INTEGER}, #{h14, jdbcType=INTEGER},
+			#{h15, jdbcType=INTEGER}, #{h16, jdbcType=INTEGER}, #{h17, jdbcType=INTEGER},
+			#{startIndex}, #{endIndex}     
+		)
+	</insert>
+	
+	<update id="updateBookMaxValueOne" parameterType="bookPlaceDTO">
+		UPDATE
+			BOOK_PLACE
+		SET
+			MAX_DAILY_CNT = #{maxDailyCnt},
+			MAX_AVAIL_DAY = #{maxAvailDay}
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteBookHistoryOneForAdmin" parameterType="bookListDTO">
+		DELETE FROM book_list
+		WHERE SEQ_ID = #{seqId}
+	</delete>
+	
+	<delete id="deleteBookHistoryOne" parameterType="bookListDTO">
+		DELETE FROM book_list
+		WHERE
+			SEQ_ID = #{seqId}
+			AND USER_ID = #{userId}
+	</delete>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'date'.toString()">
+				AND LOGIN_DATE >= DATE_FORMAT(#{sDate},'%Y-%m-%d')
+				AND LOGIN_DATE &lt;= DATE_ADD(DATE_FORMAT(#{eDate},'%Y-%m-%d'), INTERVAL 1 DAY)
+			</if>
+		</if>
+	</sql>
+
+</mapper>

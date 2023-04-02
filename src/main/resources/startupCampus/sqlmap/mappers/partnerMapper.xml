@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.PartnerMapper">
+	<!-- 협력사 소개 페이지 조회용 -->
+	<select id="selectPartnerInformationList" resultType="userDTO">
+			SELECT
+				SEQ_ID, NAME, CEO_NAME, ROOM_NAME, BUSINESS_NAME, HOMEPAGE, CONTRACT, PROFILE_IMAGE
+			FROM user_info
+			WHERE ACTIVATE = 'PARTNER'
+			AND SEQ_ID &lt; 100
+			ORDER BY SEQ_ID ASC
+	</select>
+	
+	<select id="selectGraduatePartnerInformationList" resultType="userDTO">
+			SELECT
+				SEQ_ID, NAME, CEO_NAME, ROOM_NAME, BUSINESS_NAME, HOMEPAGE, CONTRACT, PROFILE_IMAGE
+			FROM user_info
+			WHERE ACTIVATE = 'GRADUATE'
+			AND SEQ_ID &lt; 100
+			ORDER BY SEQ_ID ASC
+	</select>
+	
+	<select id="selectPartnerInformationOne" parameterType="int" resultType="map">
+			SELECT
+				SEQ_ID, NAME, CEO_NAME, BUSINESS_NAME, ROOM_NAME, HOMEPAGE, CONTRACT, PROFILE_IMAGE, INTRODUCE
+			FROM user_info
+			WHERE
+				(ACTIVATE = 'PARTNER' OR ACTIVATE = 'GRADUATE')
+				AND SEQ_ID &lt; 100
+				AND SEQ_ID = #{value}
+	</select>
+	<!-- 협력사 소개 페이지 조회용 -->
+	
+	<select id="selectAdminPartnerInformationList" resultType="userDTO">
+			SELECT
+				SEQ_ID, ACTIVATE, ACCOUNT_ID, NAME, CEO_NAME, BUSINESS_NAME, ROOM_NAME, HOMEPAGE, CONTRACT, PROFILE_IMAGE
+			FROM user_info
+			WHERE ACTIVATE != 'ADMIN'
+			AND SEQ_ID &lt; 100
+			ORDER BY SEQ_ID ASC
+	</select>
+	
+	<select id="selectAdminPartnerInformationOne" parameterType="int" resultType="map">
+			SELECT
+				SEQ_ID, ACTIVATE, ACCOUNT_ID, NAME, CEO_NAME, BUSINESS_NAME, ROOM_NAME, HOMEPAGE, CONTRACT, PROFILE_IMAGE, INTRODUCE
+			FROM user_info
+			WHERE ACTIVATE != 'ADMIN'
+			AND SEQ_ID &lt; 100
+			AND SEQ_ID = #{value}
+	</select>
+	
+	<select id="checkPartnerExist" parameterType="int" resultType="int">
+			SELECT
+				count(*)
+			FROM user_info
+			WHERE SEQ_ID = #{value}
+	</select>
+	
+	<select id="checkPostExist" parameterType="int" resultType="int">
+			SELECT
+				count(*)
+			FROM board_notice_partner
+			WHERE WRITER_ID = #{value}
+	</select>
+	
+	<update id="updatePartnerInformation" parameterType="partnerDTO" >
+			UPDATE
+				user_info
+			SET
+				ACTIVATE = #{activate},
+				NAME = #{name},
+				BUSINESS_NAME = '-',
+				ROOM_NAME = #{roomName},
+				CEO_NAME = #{ceoName},
+				BUSINESS_NAME = #{businessName},
+				HOMEPAGE = #{homepage},
+				CONTRACT = #{contract},
+				PROFILE_IMAGE = #{profileImage},
+				INTRODUCE = #{introduce}
+				<if test='accountPw != null and !accountPw.equals("")'>
+					,ACCOUNT_PW = #{accountPw}
+				</if>
+			WHERE
+				SEQ_ID = #{seqId}
+				AND SEQ_ID &lt; 100
+	</update>
+	
+</mapper>

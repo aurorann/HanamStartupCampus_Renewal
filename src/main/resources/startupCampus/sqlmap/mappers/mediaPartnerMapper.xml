@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.MediaMapper">
+	<!-- <resultMap type="bookListDTO" id="bookWithAccountId" autoMapping="true">
+		<id column="SEQ_ID" property="seqId"/>
+		<result column="PLACE_ID" property="placeId"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="STATUS" property="status"/>
+		<association property="userDTO" javaType="userDTO" autoMapping="true">
+			<result column="USER_ID" property="seqId"/>
+			<result column="ACCOUNT_ID" property="accountId"/>
+		</association>
+	</resultMap> -->
+	
+	<!-- 게시글 리스트 카운트 -->
+	<select id="selectMediaPostCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT
+				count(*)
+			FROM
+				board_media
+			WHERE
+				1 = 1
+		]]>
+		<include refid="search" />
+	</select>
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectMediaPostList" parameterType="map" resultType="boardMediaDTO">
+			<![CDATA[
+				SELECT
+					SEQ_ID, YOUTUBE_ID, TITLE, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+				FROM
+					board_media
+				WHERE
+					1 = 1
+			]]>
+			<include refid="search" />
+			<![CDATA[
+				ORDER BY
+					SEQ_ID DESC
+				LIMIT #{index}, #{size}
+			]]>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'content'.toString()">
+				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'titleAndContent'.toString()">
+				AND (TITLE LIKE CONCAT('%', #{keyword}, '%')
+					OR CONTENT LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectMediaPostOne" parameterType="int" resultType="map">
+		SELECT
+			SEQ_ID, YOUTUBE_ID, TITLE, CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT,
+			FILE_PATH, FILE_NAME 
+		FROM
+			board_media
+		WHERE
+			SEQ_ID = #{value}
+	</select>
+	
+	<update id="updateMediaPostViewCount" parameterType="int">
+		UPDATE
+			board_media
+		SET
+			VIEW_COUNT = VIEW_COUNT + 1
+		WHERE
+			SEQ_ID = #{value}
+	</update>
+
+	<insert id="insertMediaPostOne" parameterType="boardMediaDTO">
+		INSERT INTO
+			board_media
+		(
+			WRITER_ID, WRITER_IP, YOUTUBE_ID, TITLE, CONTENT, FILE_PATH, FILE_NAME
+		)
+		values (
+			#{writerId}, #{writerIp}, #{youtubeId}, #{title}, #{content},#{filePath},#{fileName}
+		)
+	</insert>
+	
+	<update id="updateMediaPostOne" parameterType="boardMediaDTO">
+		UPDATE
+			board_media
+		SET
+			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, YOUTUBE_ID = #{youtubeId},
+			TITLE = #{title}, CONTENT = #{content},
+			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteMediaPostOne" parameterType="int">
+		DELETE FROM board_media
+		WHERE SEQ_ID = #{value}
+	</delete>
+
+</mapper>

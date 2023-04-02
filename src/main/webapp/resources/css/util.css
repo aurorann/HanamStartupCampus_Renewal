@@ -1,0 +1,337 @@
+*, *:before, *:after {
+	margin: 0px; 
+	padding: 0px; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html {overflow-y:scroll; overflow-x:hidden;}
+
+body, html {
+	font-size: 10px;
+	color: #333;
+	height: 100%;
+	background-color: #fff;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family:'KoPubWorld_Dotum_M';
+}
+
+.hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/*---------------------------------------------*/
+a {color:#666; transition:all 0.5s;}
+.left-menu a {transition:none;}
+a:focus {outline: none;}
+a:hover {text-decoration: none;}
+.laber {color:#666;}
+
+/* ------------------------------------ */
+h1,h2,h3,h4,h5,h6,p {margin: 0px;font-size:10px;}
+
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+
+select::-ms-expand {display:none}
+
+
+/* ------------------------------------ 
+input, textarea, label {
+	display: block;
+	outline: none;
+	border: none;
+}
+*/
+
+/* ------------------------------------ */
+button {
+	outline: none;
+	border: none;
+	background: transparent;
+    cursor: pointer;
+    font-family:"KoPubWorld_Dotum_M";
+}
+button:focus {outline: none;}
+
+iframe {border: none;}
+
+.hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+select{
+    width: 200px;
+    padding: .5em;
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.5em;
+    color: #515151;
+    background: #fff url(../img/arrow-down.png)no-repeat 95% 50%;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 10px;
+}
+
+input[type=text], input[type=date] {
+	width: 200px;
+    padding: .5em;
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.5em;
+    color: #515151;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	margin-right: 10px;
+} 
+
+input[type=number] {
+	width: 200px;
+    padding: .5em;
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.5em;
+    color: #515151;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	margin-right: 10px;
+} 
+
+.search-btn {
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.5em;
+    padding: .7em 1.5em;
+    background: #2f5ebd;
+    color: #fff;
+    border-radius: 3px;
+    transition:all 0.5s;
+    float:right;
+}
+
+.search-btn:hover {
+    background: #1d335e;
+}
+
+.default-btn {
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.3em;
+    padding: .2em 1.5em;
+    background: #ed5f5f;
+    color: #fff;
+	border-radius: 3px;
+}
+
+.default-btn:hover {
+    background:#aa4040;
+}
+
+.gray-btn {
+    font-family: 'KoPubWorld_Dotum_M';
+    font-size: 1.3em;
+    padding: .2em 1.5em;
+    background: #c7c7c7;
+    color: #fff;
+	border-radius: 3px;
+}
+
+.gray-btn:hover {
+    background:rgb(122 122 122);
+}
+
+.mg-top-30 {
+    margin-top:30px!important;
+}
+
+.mg-top-60 {
+    margin-top:60px!important;
+}
+
+.table {
+    width:100%;
+    border-top:2px solid #000;
+}
+
+
+.table th {
+    background:#f9f9f9;
+	text-align:center;
+	font-size:1.5em;
+	color:#000;
+	padding:10px;
+    border:1px solid #ddd;
+    font-family: 'KoPubWorld_Dotum_M';
+    text-align:center;
+    font-weight:normal;
+    height:10px;
+}
+
+.table td {
+    font-size:1.4em;
+	color:#333;
+	padding:10px 0;
+	text-align:center;
+    border:1px solid #ddd;
+    font-family: 'KoPubWorld_Dotum_M';
+}
+
+.table-sm {
+    width:100%;
+    border-top:2px solid #b5e1ff;
+}
+
+.table-sm th {
+    background:#f9f9f9;
+	text-align:center;
+	font-size:1.3em;
+	color:#000;
+	padding:5px;
+    border:1px solid #ddd;
+    font-family: 'KoPubWorld_Dotum_M';
+    text-align:center;
+}
+
+.table-sm td {
+    font-size:1.3em;
+	color:#515151;
+	padding:5px 0;
+	text-align:center;
+    border:1px solid #ddd;
+    font-family: 'KoPubWorld_Dotum_M';
+    background:#fff;
+    padding:10px;
+}
+
+.text-left {
+    text-align:left!important;
+    padding-left:20px!important;
+}
+
+.table-hovered td {
+    cursor:pointer;
+}
+
+.t-hover {
+    background:#f2f2f2;
+}
+
+.blue-label {
+    padding:0 1.8em;
+    background:#80c8ff;
+    color:#fff;
+    border-radius:100px;
+}
+
+.pink-label {
+    padding:0 1em;
+    background:#ed6d6d;
+    color:#fff;
+    border-radius:100px;
+
+}
+
+.yellow-label {
+    padding:0 1em;
+    background:#edb234;
+    color:#fff;
+    border-radius:100px;
+
+}
+
+.white-label {
+    padding:0 1em;
+    background:#fff;
+    color:#515151;
+    border:1px solid #515151;
+    border-radius:100px;
+}
+
+.white-label-odd {
+    padding:0 1em;
+    color:#ddd;
+    border:1px solid #ddd;
+    border-radius:100px;
+}
+
+.gray-label {
+    padding:0 1em;
+    background:#8a8a8a;
+    color:#fff;
+    border-radius:100px;
+
+}
+
+.main-menu li {
+    position:relative;
+}
+
+.nav-pink:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 46%;
+    bottom: -12px;
+    background-color: #ED6D6D;
+    width: 12px;
+    height: 25px;
+}
+
+textarea {
+    font-family: 'KoPubWorld_Dotum_L';
+    width:100%;
+    border:none;
+    padding:.5em;
+    resize:none;
+    border: 1px solid #eaeaea;
+    line-height: 1.25em;
+    color: #707070;
+    font-weight:300;
+}
+
+.flex-end {
+    display:flex;
+    justify-content: flex-start;
+}
+
+#attach{
+	color: #ccc;
+	cursor: pointer;
+}
+
+#attach:hover {
+	color: gray;
+	font-weight: bold;
+}
+
+@media all and (max-width: 1200px){
+	.flex-end {
+        display:flex;
+        justify-content: flex-end;
+        flex-direction:column;
+    }
+}

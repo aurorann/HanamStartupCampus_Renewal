@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.WebpageMapper">
+	
+	<select id="selectPageContent" parameterType="string" resultType="map">
+		SELECT
+			SEQ_ID, `LEVEL`, CONTENT
+		FROM
+			board_page_content
+		WHERE
+			LEVEL = #{value}
+	</select>
+	
+	<update id="updatePageContent" parameterType="boardWebpageDTO">
+		UPDATE
+			board_page_content
+		SET
+			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, `LEVEL` = #{level},
+			CONTENT = #{content}
+		WHERE
+			LEVEL = #{level}
+	</update>
+	
+</mapper>
