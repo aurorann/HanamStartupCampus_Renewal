@@ -691,6 +691,10 @@ public class AdminController {
 		bookListDTO.setUserId(userDTO.getSeqId());
 		bookListDTO.setUserName(userDTO.getName());
 		
+		if(bookListDTO.getEndIndex() == null) {
+			bookListDTO.setEndIndex(bookListDTO.getStartIndex());
+		}
+		
 		bookListDTO.setBookSeq(
 				Utils.getSeqAsc(bookListDTO.getStartIndex(), bookListDTO.getEndIndex())
 		);

@@ -90,6 +90,23 @@
                                     ${CONTENT}
                                 </td>
                             </tr>
+                            <c:if test="${not empty FILE_NAME}">
+								<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+								<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+								<tr>
+									<td class="board-contents" style="padding: 10px;">
+										<c:forEach items="${fileNames}" varStatus="status">
+											<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
+											<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
+											<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+												<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+												<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+											</form><br/>
+										</c:forEach>
+									</td>
+								</tr>
+							</c:if>
                         </tbody>
                     </table>
 
