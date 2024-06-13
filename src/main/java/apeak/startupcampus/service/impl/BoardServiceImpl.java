@@ -42,6 +42,7 @@ import apeak.startupcampus.model.dao.PressMapper;
 import apeak.startupcampus.model.dao.PromotionMapper;
 import apeak.startupcampus.model.dao.TotalSearchMapper;
 import apeak.startupcampus.model.dao.WebpageMapper;
+import apeak.startupcampus.model.dao.NewsletterMapper;
 import apeak.startupcampus.model.dto.BoardAgencyDTO;
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardFaqDTO;
@@ -49,6 +50,7 @@ import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
+import apeak.startupcampus.model.dto.NewsletterDTO;
 import apeak.startupcampus.model.dto.PartnerDTO;
 import apeak.startupcampus.model.dto.UserDTO;
 import apeak.startupcampus.service.BoardService;
@@ -100,6 +102,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	
 	@Resource(name = "activityPartnerMapper")
 	private ActivityPartnerMapper activityPartnerMapper;
+
+	@Resource(name = "newsletterMapper")
+	private NewsletterMapper newsletterMapper;
 
 	// 파일 세이브 경로 (globals.properties)
 	@Value("#{globals['path.root']}")
@@ -459,6 +464,36 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			return resultMap;
 		}
 	}
+	
+	// [뉴스레터] 관련 서비스 메서드
+	// # 뉴스레터 게시글 리스트 조회
+	public Map<String, Object> getNewsletterPostList(Map<String, Object> searchOption) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", "success");
+		resultMap.put("searchOption", getBoardSearchOption(searchOption));
+
+		LOGGER.debug(searchOption.toString());
+
+		resultMap.put("post", newsletterMapper.selectNewsletterPostList(searchOption));
+
+		return resultMap;
+	}
+
+	// # 뉴스레터 게시글 조회
+	public Map<String, ?> getNewsletterPost(int seqId) throws Exception {
+		int rowCount = newsletterMapper.updateNewsletterPostViewCount(seqId);
+		if (rowCount > 0) {
+			return newsletterMapper.selectNewsletterPostOne(seqId);
+		} else {
+			Map<String, String> resultMap = new HashMap<String, String>();
+			resultMap.put("error", "POST_NOT_FOUND");
+			return resultMap;
+		}
+	}
+	
+	
+	
 
 	/*
 	 * 게시글 작성 메서드 category: notice, agency, faq
@@ -558,6 +593,13 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 		int insertCount = activityPartnerMapper.insertActivityPartnerPostOneForPartner(galleryDTO);
 		return getBoardWriteResultMap(insertCount, "기업 활동");
+	}
+	
+
+	public Map<String, Object> writeNewsletterPost(NewsletterDTO newsletterDTO) throws Exception {
+		setWriterInfo(newsletterDTO);
+		int insertCount = newsletterMapper.insertNewsletterPostOne(newsletterDTO);
+		return getNewsletterWriteResultMap(insertCount, "뉴스레터");
 	}
 
 	/*
@@ -841,6 +883,29 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		int insertCount = activityPartnerMapper.updateActivityPartnerPostOneForPartner(galleryDTO);
 		return getBoardEditResultMap(insertCount, "기업 활동");
 	}
+	
+
+	public Map<String, Object> editNewsletterPost(NewsletterDTO newsletterDTO, HttpServletRequest request) throws Exception {
+		setWriterInfo(newsletterDTO);
+		
+		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
+		Map<String, Object> oldPost = newsletterMapper.selectNewsletterPostOne(newsletterDTO.getSeqId());
+		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
+		
+		if(!newsletterDTO.getFilePath().equals(oldPaths)) {
+			String path = request.getSession().getServletContext().getRealPath("/");
+			
+			String oldList[] = oldPaths.split(":");
+			
+			for(String oldPath:oldList) {			
+				File oldFile = new File(path+File.separator+oldPath);
+				oldFile.delete();
+			}
+		}
+		
+		int insertCount = newsletterMapper.updateNewsletterPostOne(newsletterDTO);
+		return getBoardEditResultMap(insertCount, "뉴스레터");
+	}
 
 	/*
 	 * 게시글 삭제 메서드
@@ -1049,6 +1114,11 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return getBoardDeleteResultMap(insertCount, "기업 활동");
 	}
 
+	public Map<String, Object> deleteNewsletterPost(int seqId) throws Exception {
+		int insertCount = newsletterMapper.deleteNewsletterPostOne(seqId);
+		return getBoardDeleteResultMap(insertCount, "뉴스레터");
+	}
+
 	/*
 	 * 작성 관련 메서드
 	 */
@@ -1253,6 +1323,22 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 		return resultMap;
 	}
+	
+
+	private Map<String, Object> getNewsletterWriteResultMap(int insertCount, String boardCategory) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("count", insertCount);
+		if (insertCount > 0) {
+			resultMap.put("result", "success");
+			resultMap.put("message", "[" + boardCategory + "] 게시글을 등록했습니다.");
+		} else {
+			resultMap.put("result", "fail");
+			resultMap.put("message", "[" + boardCategory + "] 게시글 등록이 불가합니다. 관리자에게 문의해주세요.");
+		}
+
+		return resultMap;
+	}
+
 
 	public Map<String, Object> getBoardSearchOption(Map<String, Object> searchOption) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -1293,6 +1379,10 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			break;
 		case "partner-activity":
 			postCnt = activityPartnerMapper.selectActivityPartnerPostCount(searchOption);
+			pageSize = 9;
+			break;
+		case "newsletter":
+			postCnt = newsletterMapper.selectNewsletterPostCount(searchOption);
 			pageSize = 9;
 			break;
 		}

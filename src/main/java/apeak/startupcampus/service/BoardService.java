@@ -14,6 +14,7 @@ import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
+import apeak.startupcampus.model.dto.NewsletterDTO;
 import apeak.startupcampus.model.dto.PartnerDTO;
 
 
@@ -88,6 +89,10 @@ public interface BoardService  {
 	// # 기업 활동 게시글 조회	
 	public Map<String, Object> getActivityPartnerPost(int seqId) throws Exception;
 	
+	// # 뉴스레터 게시글 리스트 조회
+	public Map<String, Object> getNewsletterPostList(Map<String, Object> searchOption) throws Exception;
+	// # 뉴스레터 게시글 조회	
+	public Map<String, ?> getNewsletterPost(int seqId) throws Exception;
 	
 	/*
 	 * 게시글 작성 메서드
@@ -104,6 +109,8 @@ public interface BoardService  {
 	
 	public Map<String, Object> writeMediaPartnerPost(BoardMediaDTO mediaDTO) throws Exception;
 	
+	public Map<String, Object> writeNewsletterPost(NewsletterDTO newsletterDTO) throws Exception;
+	
 	/*
 	 * 게시글 수정 메서드
 	 */
@@ -118,6 +125,8 @@ public interface BoardService  {
 	public Map<String, Object> editBioInfoPost(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
 	
 	public Map<String, Object> editMediaPartnerPost(BoardMediaDTO mediaDTO, HttpServletRequest request) throws Exception;
+	
+	public Map<String, Object> editNewsletterPost(NewsletterDTO newsletterDTO, HttpServletRequest request) throws Exception;
 	
 	/*
 	 * 게시글 삭제 메서드
@@ -153,6 +162,9 @@ public interface BoardService  {
 	public Map<String, Object> writeActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO) throws Exception;
 	public Map<String, Object> editActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deleteActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
+	
+	public Map<String, Object> deleteNewsletterPost(int seqId) throws Exception;
+
 	
 	public String saveBoardFile(String boardType, MultipartHttpServletRequest multiReq);
 	

@@ -19,6 +19,9 @@
 <li>
     <a href="<c:url value='/gallery/press/list' />">아카이브</a>
 </li>
+<li>
+    <a href="<c:url value='/newsletter/list' />">뉴스레터</a>
+</li>
 
 <sec:authorize access="isAnonymous()">
 	<li>

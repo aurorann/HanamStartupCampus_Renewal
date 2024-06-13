@@ -38,6 +38,11 @@
                                 <li class="main-menu-title" data-location-main='아카이브'>
                                     <a href="<c:url value='/gallery/press/list' />">아카이브</a>
                                 </li>
+                
+                                <li class="main-menu-title" data-location-main='뉴스레터'>
+                                    <a href="<c:url value='/newsletter/list' />">뉴스레터</a>
+                                </li>
+                                
                                 <sec:authorize access="isAnonymous()">
                                     <li class="main-menu-title" data-location-main='사용자 로그인'>
 		                        		<a href="<c:url value='/user/login/form' />">사용자 로그인</a>
@@ -127,6 +132,10 @@
 		                                <li data-location-sub='홍보자료'><a href="<c:url value='/gallery/promotion/list' />">홍보자료</a></li>
 		                                <li data-location-sub='바이오 소식'><a href="<c:url value='/gallery/bio-info/list' />">바이오 소식</a></li>
 		                        </ul>
+		                        <ul class="dep02">
+		                                <li data-location-sub='뉴스레터'><a href="<c:url value='/newsletter/list' />">뉴스레터</a></li>
+		                                <li data-location-sub='구독신청'><a href="https://page.stibee.com/subscriptions/197616">구독신청</a></li>
+		                        </ul>
 		                        
 		                        	<sec:authorize access="isAnonymous()">
 		                        	<ul class="dep02">
@@ -158,6 +167,7 @@
 					                   		<li data-location-sub='팝업 관리'><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
 					                   		<li data-location-sub='입주기업 관련'><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
 					                   		<li data-location-sub='패밀리사이트'><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
+					                   		<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/write/form' />">뉴스레터</a></li>
 			                                <li><a href="javascript:void(0);" onclick="logout[0].submit();">로그아웃</a></li>
 		                        	</ul>
 		                        	</sec:authorize>
@@ -272,6 +282,17 @@
                             <img class="fa fa-angle-right" src="<c:url value='/resources/img/arrow_down_sm.png'/>" aria-hidden="true" alt="메뉴 열기">
                         </span>
                     </li>
+    
+                    <li class="bg-main">
+                        <a href="<c:url value='/gallery/press/list' />">뉴스레터</a>
+                        <ul class="sub-menu-m">
+                            <li data-location-sub='보도자료'><a href="<c:url value='/gallery/press/list' />">뉴스레터</a></li>
+                            <li data-location-sub='홍보자료'><a href="<c:url value='/gallery/promotion/list' />">구독신청</a></li>
+                        </ul>
+                        <span class="arrow-main-menu-m">
+                            <img class="fa fa-angle-right" src="<c:url value='/resources/img/arrow_down_sm.png'/>" aria-hidden="true" alt="메뉴 열기">
+                        </span>
+                    </li>
     				
     				<!-- Secured -->
     				<li class="bg-main">
@@ -307,6 +328,7 @@
 		                   		<li data-location-sub='팝업 관리'><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
 		                   		<li data-location-sub='입주기업 관련'><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
 		                   		<li data-location-sub='패밀리사이트'><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
+		                   		<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/write/form' />">뉴스레터</a></li>
                                 <li><a href="javascript:void(0);" onclick="logout[0].submit();">로그아웃</a></li>
 	                        </ul>
                         </sec:authorize>

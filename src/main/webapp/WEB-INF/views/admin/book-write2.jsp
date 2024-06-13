@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-lg-7 mg-top-30">
-                        <h3 class="b-title"><strong>회의실 1 예약하기</strong></h3>
+                        <h3 class="b-title"><strong>회의실 2 예약하기</strong></h3>
                         <div class="b-text">
                             <ul>
                                 <li>

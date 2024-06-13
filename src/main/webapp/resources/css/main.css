@@ -798,7 +798,7 @@
 
 .lnb_wrap{position:absolute;border-bottom:1px solid #e1e1e1;height: 300px;background:#f9f9f9;width:100%;z-index:2;top:90px;box-shadow: 0 0px 10px rgba(0,0,0,0.1);display:none;}
 .lnb_wrap .for_line {min-width:1200px;width:1200px;margin:0 auto; }
-.lnb_wrap .for_line .dep02_wrap{width:1200px;margin-left:207px;}
+.lnb_wrap .for_line .dep02_wrap{width:1200px;margin-left:70px;}
 .lnb_wrap .for_line .dep02_wrap ul:after{display:block;content:"";clear:both;}
 
 .lnb_wrap .for_line .dep02_wrap .dep02:nth-child(6){border-right:1px solid #ddd;}

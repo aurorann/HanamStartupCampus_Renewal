@@ -34,6 +34,7 @@ import apeak.startupcampus.model.dto.BoardWebpageDTO;
 import apeak.startupcampus.model.dto.BookListDTO;
 import apeak.startupcampus.model.dto.BookPlaceDTO;
 import apeak.startupcampus.model.dto.FamilySiteDTO;
+import apeak.startupcampus.model.dto.NewsletterDTO;
 import apeak.startupcampus.model.dto.PartnerDTO;
 import apeak.startupcampus.model.dto.UserDTO;
 import apeak.startupcampus.service.AdminService;
@@ -753,4 +754,70 @@ public class AdminController {
 		res.setContentType("application/json;charset=UTF-8");
 		return boardService.saveBoardFile(boardType, multiReq);
 	}
+	
+
+	
+	/*
+	 * 뉴스레터 메소드 관련
+	 * */
+	
+	
+	// 뉴스레터 게시글 작성폼 이동
+	@RequestMapping(value = "/newsletter/write/form")
+	public String goToNewsletterWriteForm(Model model) {
+		Utils.setPageViewLocation(model, locationMain, "뉴스레터");
+		return "admin/newsletter-write";
+	}
+	
+	// 뉴스레터 게시글 작성하기
+	@RequestMapping(value = "/newsletter/post/write", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> writeNewsletterPosting(@ModelAttribute NewsletterDTO newsletterDTO ,HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+
+		Map<String, ?> resultMap = null;
+		resultMap = boardService.writeNewsletterPost(newsletterDTO);
+
+		return resultMap;
+	}
+
+	// 뉴스레터 게시글 수정폼 이동
+	@RequestMapping(value = "/newsletter/edit/form/{seqId}")
+	public String goToNewsletterEditView(@PathVariable("seqId") int seqId, Model model) throws Exception {
+		String locationSub = null;
+		model.addAllAttributes(boardService.getNewsletterPost(seqId));
+		Utils.setPageViewLocation(model, locationMain, "뉴스레터");
+		return "admin/newsletter-edit";
+	}
+
+
+	// 입주기업 소개 영상 게시글 수정하기
+	@RequestMapping(value = "/newsletter/post/edit/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> editNewsletterPost(@ModelAttribute NewsletterDTO newsletterDTO, HttpServletResponse res,HttpServletRequest request)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+
+		Map<String, ?> resultMap = boardService.editNewsletterPost(newsletterDTO,request);
+
+		return resultMap;
+	}
+
+	// 입주기업 소개 영상 게시글 삭제하기
+	@RequestMapping(value = "/newsletter/post/remove/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> removeNewsletterPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+
+		Map<String, ?> resultMap = boardService.deleteNewsletterPost(seqId);
+
+		return resultMap;
+	}
+	
+	
+	
+	
+	
 }

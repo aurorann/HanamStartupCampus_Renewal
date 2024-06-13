@@ -26,18 +26,9 @@
 				                <button title="메뉴열기">
 				                    ${locationSub}
 				                </button>
-				                <form id="logout_location" method="POST" action="<c:url value='/user/logout' />">
-                                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                </form>
 				                <ul>
-				                    <li><a href="<c:url value='/admin/introduce/media/write/form' />">캠퍼스 소개</a></li>
-			                        <li><a href="<c:url value='/admin/announce/notice/write/form' />">알림마당</a></li>
-			                        <li><a href="<c:url value='/admin/gallery/press/write/form' />">아카이브</a></li>
-			                   		<li><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
-			                   		<li><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
-			                   		<li><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
-			                   		<li><a href="<c:url value='/admin/partner/notice/list' />">뉴스레터</a></li>
-	                                <li><a href="javascript:void(0);" onclick="logout_location.submit();">로그아웃</a></li>
+				                    <li data-location-sub='뉴스레터'><a href="<c:url value='/newsletter/list' />">뉴스레터</a></li>
+				                    <li data-location-sub='구독신청'><a href="https://page.stibee.com/subscriptions/197616">구독신청</a></li>
 				                </ul>
 				            </li>
 				        </ul>

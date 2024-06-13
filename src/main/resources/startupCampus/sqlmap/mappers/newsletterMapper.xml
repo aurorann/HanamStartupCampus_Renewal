@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.NewsletterMapper">
+	
+	<!-- 게시글 리스트 카운트 -->
+	<select id="selectNewsletterPostCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT
+				count(*)
+			FROM
+				newsletter
+			WHERE
+				1 = 1
+		]]>
+		<include refid="search" />
+	</select>
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectNewsletterPostList" parameterType="map" resultType="newsletterDTO">
+			<![CDATA[
+				SELECT
+					SEQ_ID, NEWSLETTER_URL, TITLE, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+				FROM
+					newsletter
+				WHERE
+					1 = 1
+			]]>
+			<include refid="search" />
+			<![CDATA[
+				ORDER BY
+					SEQ_ID DESC
+				LIMIT #{index}, #{size}
+			]]>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'content'.toString()">
+				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'titleAndContent'.toString()">
+				AND (TITLE LIKE CONCAT('%', #{keyword}, '%')
+					OR CONTENT LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectNewsletterPostOne" parameterType="int" resultType="map">
+		SELECT
+			SEQ_ID, NEWSLETTER_URL, TITLE, CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT,
+			FILE_PATH, FILE_NAME 
+		FROM
+			newsletter
+		WHERE
+			SEQ_ID = #{value}
+	</select>
+	
+	<update id="updateNewsletterPostViewCount" parameterType="int">
+		UPDATE
+			newsletter
+		SET
+			VIEW_COUNT = VIEW_COUNT + 1
+		WHERE
+			SEQ_ID = #{value}
+	</update>
+
+	<insert id="insertNewsletterPostOne" parameterType="newsletterDTO">
+		INSERT INTO
+			newsletter
+		(
+			WRITER_ID, WRITER_IP, NEWSLETTER_URL, TITLE, CONTENT, FILE_PATH, FILE_NAME
+		)
+		values (
+			#{writerId}, #{writerIp}, #{newsletterUrl}, #{title}, #{content},#{filePath},#{fileName}
+		)
+	</insert>
+	
+	<update id="updateNewsletterPostOne" parameterType="newsletterDTO">
+		UPDATE
+			newsletter
+		SET
+			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, NEWSLETTER_URL = #{newsletterUrl},
+			TITLE = #{title}, CONTENT = #{content},
+			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteNewsletterPostOne" parameterType="int">
+		DELETE FROM newsletter
+		WHERE SEQ_ID = #{value}
+	</delete>
+
+</mapper>
