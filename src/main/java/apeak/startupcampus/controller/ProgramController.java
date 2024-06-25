@@ -11,7 +11,7 @@ import apeak.startupcampus.common.Utils;
 @RequestMapping("/program")
 public class ProgramController {
 	
-	private static final String locationMain = "사업 안내"; 
+	private static final String locationMain = "주요사업"; 
 	
 	@RequestMapping(value="/{viewType}")
 	public String goToEachView(@PathVariable("viewType") String viewType ,Model model) {

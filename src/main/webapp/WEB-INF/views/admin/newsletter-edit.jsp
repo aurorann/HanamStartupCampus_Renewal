@@ -38,12 +38,11 @@
     
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+	<div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
@@ -54,81 +53,79 @@
                     	<div class="col-lg-12" style="margin:0; padding:0;">
 	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;뉴스레터 수정</h3>
 	                    </div>
-
-                        <table class="table board-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <div class="board-title">
-											<div class="title-label">
-                                                <h5>제목</h5>
-                                                <input type="text" class="board-input" id="post_title" value="${TITLE}">
-                                            </div>
-                                            <div class="title-label">
-                                            	<h5>뉴스레터 URL</h5>
-                                                <input type="text" class="board-input" id="newsletterUrl" value='${NEWSLETTER_URL}' placeholder="예시) http://"/>
-                                                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="setURLLink();">
-                                                	미리보기
-                                                </button>
-                                            </div>
-                                            <div class="start-end-label">
-                                                <h5>첨부 파일 : 
-                                                
-                                               	<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;width: 200px;"/>
-
-	                                            </h5>
-	                                            <br/><br/><small>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</small>
-		                                    </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <c:if test="${not empty FILE_NAME}">
-									<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
-									<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
-									<tr>
-										<td class="board-contents" style="padding: 10px;">
-											<c:forEach items="${fileNames}" varStatus="status">
-												<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
-												<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
-												<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
-													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-													<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
-													<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-												</form><br/>
-											</c:forEach>
-										</td>
+						<form id="galleryForm" onsubmit="return false">
+	                        <table class="table board-table">
+	                            <thead>
+	                                <tr>
+	                                    <td>
+	                                        <div class="board-title">
+												<div class="title-label">
+	                                                <h5>제목</h5>
+	                                                <input type="text" class="board-input" id="post_title" name="title" value="${TITLE}">
+	                                            </div>
+	                                            <div class="title-label">
+	                                            	<h5>대표 이미지</h5>
+	                                                <input type="file"
+														class="board-input" id="representImageFile" name="representImageFile"
+														accept=".jpg,.png,.gif" />
+													<input type="hidden" value="${REPRESENT_IMAGE}" name="representImage" />
+													<h5>첨부 파일</h5>
+													<input class="board-input" multiple="multiple" type="file" name="file" id="file" style="display: inline-block;width: 200px;"/>
+													<br/><br/><small>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</small>
+	                                            </div>
+	                                        </div>
+	                                    </td>
+	                                </tr>
+	                                <c:if test="${not empty FILE_NAME}">
+										<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+										<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+										<tr>
+											<td class="board-contents" style="padding: 10px;">
+												<c:forEach items="${fileNames}" varStatus="status">
+													<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
+													<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
+													<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+														<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+														<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+													</form><br/>
+												</c:forEach>
+											</td>
+										</tr>
+									</c:if>
+	                            </thead>
+	                            <tbody>
+	                            	<tr>
+									    <td>
+									    	<div class="gallery-represent-wrapper">
+									    		<img id="representImageExample" src="<c:url value='/upload/newsletter/newsletter' />/${REPRESENT_IMAGE}" onerror="this.src='<c:url value='/resources/img/default.png' />'" />
+									    	</div>
+									    </td>
 									</tr>
-								</c:if>
-                            </thead>
-                            <tbody>
-                            	<tr>
-								    <td>
-								    	<div class="embed-container" style="height: fit-content; padding-bottom: unset;">
-							    		<img id="previewImage" src="${NEWSLETTER_URL}" allowfullscreen="" style="width: 500px;">
-							    		</img>
-								    	</div>
-								    </td>
-								</tr>
-								<tr><td> ※ 뉴스레터 미리보기</td></tr>
-                                <tr>
-                                    <td class="board-contents">
-                                        <textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    
+	                                <tr>
+	                                    <td class="board-contents">
+	                                        <textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+    					</form>
+                        <c:forEach items="${fileNames}" varStatus="status">
+
+                        <form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+                        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        	<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+                        	<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+                        </form>
+                        
+                        </c:forEach>
                         <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
-						      <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-								    margin-top: 30px;
-								">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+						      <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 								      <div class="btn-group" role="group">
 								      	<button type="button" class="btn btn-default" onclick="editPost();">게시글 수정</button>
 								      </div>
-								      <div class="btn-group" role="group" style="margin-top: 10px">
+								      <div class="btn-group" role="group" style="margin-top: 10px;">
 								      	<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/newsletter/view' />/${SEQ_ID}';">돌아가기</button>
 								      </div>
 								</div>
@@ -136,7 +133,7 @@
 
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
@@ -146,10 +143,36 @@
 	<script  src="<c:url value='/resources/vendor/ckeditor/ckeditor.js' />"></script>
 	<script >
 		$(function() {	// DOM init
+			$('#representImageFile').on('change', function() {				
+				var reader = new FileReader();
+				var fileName = this.files[0].name;
+				var fileSize = this.files[0].size;
+				var inputEl = this;
+				
+				reader.onload = function(e) {
+					var maxSize = 10 * 1024 * 1024; // 제한 용량
+					if(e.target.result) {
+						if (!((fileName.endsWith('.jpg')
+								|| fileName.endsWith('.png')
+								|| fileName.endsWith('.gif')
+							)
+						&& fileSize <= maxSize
+						)) {
+							alert('대표 이미지는 10MB 이하의 jpg, png, gif 파일만 가능합니다.');
+							inputEl.value = "";
+							return false;	 
+						} else {
+							$('#representImageExample').attr('src',e.target.result);
+						}
+					}
+				}
+				reader.readAsDataURL(this.files[0]);
+			});
+		
 			// CKEditor init start
 			CKEDITOR.replace('post_editor', {
 				height: 450,
-				filebrowserUploadUrl: '<c:url value="/admin/partner-media/upload/image" />',
+				filebrowserUploadUrl: '<c:url value="/admin/newsletter/upload/image" />',
 						
 				format_tags: 'p;h1;h2;h3;pre',
 	
@@ -179,7 +202,7 @@
 		function editPost() {
 			var title = document.querySelector('#post_title').value;
 			var content = CKEDITOR.instances.post_editor.getData();
-			var newsletterUrl = document.querySelector('#newsletterUrl').value;
+			var representImageFile = $("#representImageFile").prop('files');
 			
 			// Validation start
 			if(title.trim() === '' || title.length > 200) {
@@ -188,13 +211,26 @@
 			} else if(content.trim() === '') {
 				alert('게시글 내용을 작성해주세요.');
 				return false;
-			} else if(newsletterUrl.trim() === '') {
-				alert('뉴스레터의 URL을 입력해주세요. (뉴스레터 이미지 확인 필요)');
-				return false;
+			} else if(representImageFile && representImageFile[0]) {
+				var maxSize = 10 * 1024 * 1024; // 제한 용량
+				if (!((representImageFile[0].name.endsWith('.jpg')
+						|| representImageFile[0].name.endsWith('.png')
+						|| representImageFile[0].name.endsWith('.gif')
+					)
+				&& representImageFile[0].size <= maxSize
+				)) {
+					alert('대표 이미지는 10MB 이하의 jpg, png, gif 파일만 가능합니다.');
+					return false;	 
+				}
+			} else {
+				if(!confirm("새 대표 이미지를 업로드하지 않으면 기존 대표 이미지가 유지됩니다. 게시글 수정을 진행하시겠습니까?")) {
+					return false;
+				}
 			}
 			
 			// Validation end		
-			
+			$('textarea[name="content"]').val(CKEDITOR.instances.post_editor.getData());
+
 			var fileName = '${FILE_NAME}';
 			var filePath = '${FILE_PATH}';
 			
@@ -208,7 +244,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/newsletter/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -231,13 +267,10 @@
 				});
 			}
 			
-			var data = {
-				title: title,
-				content: content,
-				newsletterUrl: newsletterUrl,
-				fileName: fileName,
-				filePath: filePath
-			};
+			var gall = new FormData(galleryForm);
+			
+			gall.set('fileName',fileName);
+			gall.set('filePath',filePath);
 			
 			if(confirm('게시글을 수정하시겠습니까? (뉴스레터 이미지 확인 필요)')) {
 				$.ajax({
@@ -247,7 +280,9 @@
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
-					data: data,
+					processData : false,
+					contentType : false,
+					data: gall,
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
@@ -268,16 +303,6 @@
 				});
 			} else {
 				return;
-			}
-		}
-		
-		
-		function setURLLink(){
-			var imageUrl = $("#newsletterUrl").val();
-			if (imageUrl) {
-			    $("#previewImage").attr("src", imageUrl);
-			} else {
-			    $("#previewImage").attr("src", "");
 			}
 		}
 	</script>

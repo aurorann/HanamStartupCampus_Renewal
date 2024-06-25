@@ -19,7 +19,7 @@
 	<select id="selectNewsletterPostList" parameterType="map" resultType="newsletterDTO">
 			<![CDATA[
 				SELECT
-					SEQ_ID, NEWSLETTER_URL, TITLE, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+					SEQ_ID, REPRESENT_IMAGE, TITLE, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
 				FROM
 					newsletter
 				WHERE
@@ -50,7 +50,7 @@
 	
 	<select id="selectNewsletterPostOne" parameterType="int" resultType="map">
 		SELECT
-			SEQ_ID, NEWSLETTER_URL, TITLE, CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT,
+			SEQ_ID, REPRESENT_IMAGE, TITLE, CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT,
 			FILE_PATH, FILE_NAME 
 		FROM
 			newsletter
@@ -71,10 +71,10 @@
 		INSERT INTO
 			newsletter
 		(
-			WRITER_ID, WRITER_IP, NEWSLETTER_URL, TITLE, CONTENT, FILE_PATH, FILE_NAME
+			WRITER_ID, WRITER_IP, REPRESENT_IMAGE, TITLE, CONTENT, FILE_PATH, FILE_NAME
 		)
 		values (
-			#{writerId}, #{writerIp}, #{newsletterUrl}, #{title}, #{content},#{filePath},#{fileName}
+			#{writerId}, #{writerIp}, #{representImage}, #{title}, #{content},#{filePath},#{fileName}
 		)
 	</insert>
 	
@@ -82,7 +82,7 @@
 		UPDATE
 			newsletter
 		SET
-			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, NEWSLETTER_URL = #{newsletterUrl},
+			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, REPRESENT_IMAGE = #{representImage},
 			TITLE = #{title}, CONTENT = #{content},
 			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
 		WHERE

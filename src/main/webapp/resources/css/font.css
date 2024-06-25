@@ -1,23 +1,17 @@
 @font-face {
-	font-family:'KoPubWorld_Dotum_L';
-	font-display: swap;
-	src:url('../font/KoPubWorldDotumLight.woff2') format('woff2'),
-	url('../font/KoPubWorldDotumLight.woff') format('woff'),
-	url('../font/KoPubWorld Dotum Light.eot');
+    font-family:'KoPubWorld_Dotum';
+    src:url('../font/KoPubWorld\ Dotum\ Light.ttf');
+    font-weight:300;
 }
 
 @font-face {
-	font-family:'KoPubWorld_Dotum_M';
-	font-display: swap;
-	src:url('../font/KoPubWorldDotumMedium.woff2') format('woff2'),
-	url('../font/KoPubWorldDotumMedium.woff') format('woff'),
-	url('../font/KoPubWorld Dotum Medium.eot');
+    font-family:'KoPubWorld_Dotum';
+    src:url('../font/KoPubWorld\ Dotum\ Medium.ttf');
+    font-weight:500;
 }
 
 @font-face {
-	font-family:'KoPubWorld_Dotum_B';
-	font-display: swap;
-	src:url('../font/KoPubWorldDotumBold.woff2') format('woff2'),
-	url('../font/KoPubWorldDotumBold.woff') format('woff'),
-	url('../font/KoPubWorld Dotum Bold.eot');
+    font-family:'KoPubWorld_Dotum';
+    src:url('../font/KoPubWorld\ Dotum\ Bold.ttf');
+    font-weight:700;
 }

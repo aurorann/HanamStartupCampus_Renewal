@@ -33,24 +33,18 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+	<div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
 	                <!-- # include: title-box end -->
-    
+					
                     <div class="col-lg-12 r-contents">
                     	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 					      <a href="<c:url value='/admin/introduce/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
@@ -93,7 +87,7 @@
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

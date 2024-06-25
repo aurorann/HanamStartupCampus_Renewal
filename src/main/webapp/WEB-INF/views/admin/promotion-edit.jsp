@@ -31,19 +31,13 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+	<div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
@@ -141,7 +135,7 @@
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
@@ -283,7 +277,7 @@
 				$.ajax({
 					type : 'POST',
 					cache: false,
-					url : '<c:url value="/admin/gallery/promotion/post/edit" />/${SEQ_ID}',
+					url : '<c:url value="/admin/announce/promotion/post/edit" />/${SEQ_ID}',
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -293,7 +287,7 @@
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
-							location.href = '<c:url value="/gallery/promotion/view" />/${SEQ_ID}';	
+							location.href = '<c:url value="/announce/promotion/view" />/${SEQ_ID}';	
 						} else {
 							alert('게시글을 수정할 수 없습니다, 관리자에게 문의해주세요.');
 						}

@@ -43,19 +43,13 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+    <div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
         		<!-- # include: title-box start -->
                 <%@ include file="./include/title-box.jsp"%>
@@ -83,9 +77,10 @@
                         <tbody>
                         	<tr>
 							    <td>
-							    	<div class="embed-container" style="height: fit-content; padding-bottom: unset;">
-							    		<img id="newsletterImg" src="${NEWSLETTER_URL}" allowfullscreen="" style="width: 500px;">
-							    		</img>
+							    	<div class="gallery-represent-wrapper">
+							    		<img id="representImageExample"
+							    			onerror="this.src='<c:url value='/resources/img/default.png' />'"
+							    			src="<c:url value='/upload/newsletter/newsletter' />/${REPRESENT_IMAGE}" />
 							    	</div>
 							    </td>
 							</tr>
@@ -124,7 +119,7 @@
 
                 </div><!-- r-contents div 끝 -->
             </div>
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

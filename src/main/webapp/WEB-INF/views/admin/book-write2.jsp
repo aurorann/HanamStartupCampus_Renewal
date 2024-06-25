@@ -33,12 +33,11 @@
     
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+	<div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                 <!-- # include: title-box start -->
                 <%@ include file="./include/title-box.jsp"%>
@@ -346,7 +345,7 @@
                      </div><!--col-lg-12 div 끝-->
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

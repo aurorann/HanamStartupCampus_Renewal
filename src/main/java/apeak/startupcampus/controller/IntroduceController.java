@@ -49,7 +49,7 @@ public class IntroduceController {
 	@RequestMapping(value="/contract")
 	public String goToContract(Model model) throws Exception {
 		model.addAllAttributes(boardService.getPageContent("101"));
-		Utils.setPageViewLocation(model, locationMain, "조직 및 연락처");
+		Utils.setPageViewLocation(model, locationMain, "조직도");
 		return "introduce/contract";
 	}
 	
@@ -109,6 +109,13 @@ public class IntroduceController {
 		Map<String, Object> resultMap = boardService.getMediaPostList(searchOption);
 		
 		return resultMap;
+	}
+	
+	
+	@RequestMapping(value="/join")
+	public String goToJoin(Model model) {
+		Utils.setPageViewLocation(model, locationMain, "입주신청");
+		return "introduce/join";
 	}
 	
 }

@@ -1,0 +1,206 @@
+/*
+공통
+*/
+@import 'default.css';
+@import 'font.css';
+
+.in_1400{
+    max-width:1400px;
+    width:90%;
+    margin:0 auto;
+}
+.main_title_wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+.main_title{
+    font-size:30px;
+    font-weight: 700;
+    line-height:100%;
+}
+.main_title span{ color:#1976d3; }
+.main_article{
+    font-size:18px;
+    font-weight:300;
+    margin-bottom:50px;
+}
+.more_btn{
+    display:inline-block;
+    width:40px;
+    height:40px;
+    border:1px solid #8f8f8f;
+    border-radius:10px;
+    text-indent:-9999px;
+
+    background-image:url('../img/puls_dk_ico.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    transition:all .3s ease-in-out;
+    }
+.more_btn:hover{
+    background-color:#1976d3;
+    background-image:url('../img/puls_wh_ico.png');
+    border-color:#1976d3;
+}
+.board_label{
+    display:block;
+    width:70px;
+    line-height:25px;
+    text-align:center;
+    border-radius:8px;
+
+    font-size:13px;
+    font-weight:500;
+}
+
+
+
+/*
+hd
+*/
+header{ position:relative; background-color: #fff; }
+header>div{
+    display:flex; flex-wrap:wrap;
+    align-items:center;
+}
+header>div h1{
+    display:block;
+    height:52px;
+}
+header>div h1 a img{ display: block; }
+
+header>div nav{ margin:0 auto; }
+header>div nav .dep01{ display:flex; }
+header>div nav .dep01>li{ position:relative;}
+header>div nav .dep01>li>a{
+    display:block;
+    width:150px;
+    line-height:100px;
+    text-align:center;
+    font-weight:700;
+    font-size:20px;
+    color:#000;
+}
+
+.util a:first-of-type{
+    display:inline-block;
+    height:22px;
+    vertical-align:middle;
+}
+.util a:last-of-type{
+    display:inline-block;
+    text-align:center;
+    width:100px; line-height:40px;
+    background-color:#1976d3;
+    border-radius:10px;
+    margin-left:25px;
+    color:#fff;
+}
+
+/*하위메뉴*/
+header>div nav .dep02{ display:none; z-index:111; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:100%; height:250px; background:#fafafa; border-left:1px solid #eeeeee; }
+header>div nav li:last-of-type .dep02{ border-right:1px solid #eeeeee; }
+header>div nav .dep02 li{ text-align:center; }
+header>div nav .dep02 li:first-of-type{ padding-top: 13px; }
+header>div nav .dep02 li:not(:last-of-type){ margin-bottom: 3px; }
+header>div nav .dep02 li a { font-size:12px; color:#4b4b4b; font-weight:500; }
+header>div nav .dep02 li a:hover{ font-weight:700; color:#1976d3; }
+
+header>div .menu_dummy{ display:none; z-index:2; position:absolute; top:100%; left:0; background:#fafafa; width:100%; height:250px; box-shadow:0 0px 10px rgba(0,0,0,0.1); }
+
+/*
+ft
+*/
+footer{ background-color:#333333; }
+
+/*top_ft*/
+.top_ft{ border-bottom:2px solid #474747; }
+.top_ft>div{
+    display:flex; flex-wrap:wrap;
+    padding:18px 0;
+}
+footer .link_wrap a{
+    font-weight:700;
+    font-size:15px;
+    color:#7e7e7e;
+    transition:all .2s ease-in-out;
+}
+footer .link_wrap a:not(:first-of-type){ margin-left:25px; }
+footer .link_wrap a:hover{ color:#fff; }
+footer .ico_wrap{ margin-left:auto; }
+footer .ico_wrap a{
+    display:inline-block;
+    width:27px; height:27px;
+    background-repeat:no-repeat;
+    background-position:center;
+    text-indent:-9999px;
+    transition:all .2s ease-in-out;
+}
+footer .ico_wrap a:first-of-type{ background-image:url('../img/youtube_ico.png'); }
+footer .ico_wrap a:last-of-type{
+    background-image:url('../img/instagram_ico.png');
+    margin-left:10px;
+}
+footer .ico_wrap a:first-of-type:hover{ background-image:url(../img/youtube_wh_ico.png); }
+footer .ico_wrap a:last-of-type:hover{ background-image:url(../img/instagram_wh_ico.png); }
+
+/*bottom_ft*/
+.bottom_ft>div{
+    display:flex; flex-wrap:wrap;
+    padding:30px 0;
+    color:#fff;
+}
+.bottom_ft>div .text_wrap p{
+    font-weight:300;
+    font-size:14px;
+    margin-bottom:35px;
+}
+.bottom_ft>div .text_wrap .tel{
+    font-weight:300;
+    font-size:14px;
+}
+.bottom_ft>div .text_wrap .tel span{ margin-left:30px; }
+
+.family_btn{
+    height:40px;
+    position:relative;
+    margin-left:auto;
+}
+.family_btn button{
+    display:block;
+    width:205px; height:40px;
+    line-height:40px;
+    text-align:left;
+    text-indent:20px;
+    background-color:#5c5c5c;
+
+    font-weight:700;
+    font-size:14px;
+    color:#fff;
+}
+.family_btn button::after{
+    content:'';
+    display:block;
+    width:14px;
+    height:8px;
+    position:absolute; right:15px; top:40%;
+    background:url('../img/arrow_ft_ico.png') no-repeat;
+}
+.family_btn button.active::after{ transform:rotate(180deg); }
+
+.family_btn ul{
+    z-index:3;
+    display:none;
+    position:absolute; left:0; bottom:40px;
+    width:100%;
+    padding:15px 20px;
+    background-color:#3a3a3a;
+}
+.family_btn ul li:not(:last-of-type){ margin-bottom:10px; }
+.family_btn ul li a{
+    font-size:14px;
+    font-weight:300;
+    color:#fff;
+}

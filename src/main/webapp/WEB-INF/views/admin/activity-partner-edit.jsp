@@ -38,12 +38,11 @@
     
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+    <div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
@@ -121,27 +120,20 @@
                         
                         </c:forEach>
                         <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
-						      <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-								    margin-top: 30px;
-								">
-								      <div class="btn-group" role="group">
-								      	<button type="button" class="btn btn-default" onclick="editPost();">게시글 수정</button>
-								      </div>
-								      <div class="btn-group" role="group" style="margin-top: 10px">
-								      	<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/partner/activity/view' />/${SEQ_ID}';">돌아가기</button>
-								      </div>
-									
-								    </div>
-						      
-						      
-						    </div>
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+							<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default" onclick="editPost();">게시글 수정</button>
+								</div>
+								<div class="btn-group" role="group" style="margin-top: 10px">
+									<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/partner/activity/view' />/${SEQ_ID}';">돌아가기</button>
+							     </div>
+							</div>
+						</div>
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

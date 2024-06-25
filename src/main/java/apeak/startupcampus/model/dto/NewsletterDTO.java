@@ -1,14 +1,10 @@
 package apeak.startupcampus.model.dto;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 @Alias("newsletterDTO")
 public class NewsletterDTO extends BoardDTO {
-
-	public NewsletterDTO(String newsletterUrl) {
-		super();
-		this.newsletterUrl = newsletterUrl;
-	}
 
 	public NewsletterDTO() {
 		super();
@@ -20,20 +16,31 @@ public class NewsletterDTO extends BoardDTO {
 		super(seqId, writerId, writerIp, writerName, title, content, viewCount, createdAt, updatedAt,fileName,filePath);
 		// TODO Auto-generated constructor stub
 	}
-
-	private String newsletterUrl;
-
-	public String getNewsletterUrl() {
-		return newsletterUrl;
+	
+	public NewsletterDTO(String representImage, MultipartFile representImageFile) {
+		super();
+		this.representImage = representImage;
+		this.representImageFile = representImageFile;
 	}
-
-	public void setNewsletterUrl(String newsletterUrl) {
-		this.newsletterUrl = newsletterUrl;
-	}
+	private String representImage;
+	private MultipartFile representImageFile;
 	
 	@Override
 	public String toString() {
-		return super.toString() + " / NewsletterDTO [newsletterUrl=" + newsletterUrl + "]";
+		return super.toString() + " / NewsletterDTO [representImage=" + representImage + ", representImageFile="
+				+ representImageFile + "]";
+	}
+	public String getRepresentImage() {
+		return representImage;
+	}
+	public void setRepresentImage(String representImage) {
+		this.representImage = representImage;
+	}
+	public MultipartFile getRepresentImageFile() {
+		return representImageFile;
+	}
+	public void setRepresentImageFile(MultipartFile representImageFile) {
+		this.representImageFile = representImageFile;
 	}
 	
 }

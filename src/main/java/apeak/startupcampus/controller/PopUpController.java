@@ -30,7 +30,7 @@ public class PopUpController {
 	public String popUpList(Model model) {
 		
 		Utils.setPageViewLocation(model, locationMain, "팝업 관리");
-		return "popUp/popUpList";
+		return "admin/popUpList";
 	}
 	
 	//페이징된 팝업 목록을 호출한다.
@@ -52,7 +52,7 @@ public class PopUpController {
 		model.addAttribute("dto", dto);
 		
 		Utils.setPageViewLocation(model, locationMain, "팝업 관리");
-		return "popUp/updatePopUpForm";
+		return "admin/updatePopUpForm";
 	}
 	
 	//팝업을 수정한다.
@@ -62,7 +62,7 @@ public class PopUpController {
 		popUpService.updatePopUp(dto);
 		
 		Utils.setPageViewLocation(model, locationMain, "팝업 관리");
-		return "redirect:/popUp/popUpList";
+		return "redirect:/admin/popUpList";
 	}
 	
 	//팝업 작성 폼을 호출한다.
@@ -70,7 +70,7 @@ public class PopUpController {
 	@RequestMapping("/insertPopUpForm")
 	public String insertPopupForm(Model model) {
 		Utils.setPageViewLocation(model, locationMain, "팝업 관리");
-		return "popUp/insertPopUpForm";
+		return "admin/insertPopUpForm";
 	}
 	
 	
@@ -80,7 +80,7 @@ public class PopUpController {
 	public String insertPopUp(PopUpDTO dto) throws Exception {
 		popUpService.insertPopUp(dto);
 		
-		return "redirect:/popUp/popUpList";
+		return "redirect:/admin/popUpList";
 	}
 	
 	//팝업을 삭제한다.
@@ -90,7 +90,7 @@ public class PopUpController {
 		
 		popUpService.deletePopUp(num);
 		
-		return "redirect:/popUp/popUpList";
+		return "redirect:/admin/popUpList";
 	}
 	
 	

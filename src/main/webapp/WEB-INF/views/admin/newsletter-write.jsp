@@ -31,83 +31,67 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+	<div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
 	                <!-- # include: title-box end -->
     
                     <div class="col-lg-12 r-contents">
-
-                        <table class="table board-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <div class="board-title">
-											<div class="title-label">
-                                                <h5>제목</h5>
-                                                <input type="text" class="board-input" id="post_title">
-                                            </div>
-                                            <div class="title-label">
-                                            	<h5>뉴스레터 URL</h5>
-                                                <input type="text" class="board-input" id="newsletterUrl" placeholder="예시) http://"/>
-                                                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="setURLLink();">
-                                                	미리보기
-                                                </button>
-                                            </div>
-                                            <form id="fileForm" method="post" enctype="multipart/form-data">
-                                            <div class="start-end-label">
-                                            	<h5>첨부 파일</h5>
-                                            	<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-                                            </div>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            	<tr>
-								    <td>
-								    	<div class="embed-container" style="height: fit-content; padding-bottom: unset;">
-								    		<img id="previewImage" alt="미리보기 이미지" src="" style="width: 500px;">
-								    	</div>
-								    </td>
-								</tr>
-								<tr><td> ※ 뉴스레터 미리보기</td></tr>
-                                <tr>
-                                    <td class="board-contents">
-                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    
+						<form id="galleryForm" onsubmit="return false" enctype="multipart/form-data">
+	                        <table class="table board-table">
+	                            <thead>
+	                                <tr>
+	                                    <td>
+	                                        <div class="board-title">
+												<div class="title-label">
+	                                                <h5>제목</h5>
+													<input type="text" class="board-input" name="title" id="post_title">
+	                                            </div>
+	                                            <div class="title-label">
+	                                            	<h5>대표 이미지</h5>
+	                                                <input type="file"
+														class="board-input" id="representImageFile" name="representImageFile"
+														accept=".jpg,.png,.gif" />
+													<h5>첨부 파일</h5>
+													<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+	                                            </div>
+	                                        </div>
+	                                    </td>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                            	<tr>
+									    <td>
+									    	<div class="gallery-represent-wrapper">
+									    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
+									    	</div>
+									    </td>
+									</tr>
+	                                <tr>
+	                                    <td class="board-contents">
+	                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+    					</form>
                         <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 						      <div class="btn-group" role="group">
 						        <button type="button" class="btn btn-default" onclick="writeNewPost();">게시글 작성</button>
 						      </div>
-						      
-						      
-						    </div>
+						</div>
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
@@ -117,6 +101,32 @@
 	<script  src="<c:url value='/resources/vendor/ckeditor/ckeditor.js' />"></script>
 	<script >
 		$(function() {	// DOM init
+			$('#representImageFile').on('change', function() {				
+				var reader = new FileReader();
+				var fileName = this.files[0].name;
+				var fileSize = this.files[0].size;
+				var inputEl = this;
+				
+				reader.onload = function(e) {
+					var maxSize = 10 * 1024 * 1024; // 제한 용량
+					if(e.target.result) {
+						if (!((fileName.endsWith('.jpg')
+								|| fileName.endsWith('.png')
+								|| fileName.endsWith('.gif')
+							)
+						&& fileSize <= maxSize
+						)) {
+							alert('대표 이미지는 10MB 이하의 jpg, png, gif 파일만 가능합니다.');
+							inputEl.value = "";
+							return false;	 
+						} else {
+							$('#representImageExample').attr('src',e.target.result);
+						}
+					}
+				}
+				reader.readAsDataURL(this.files[0]);
+			});
+			
 			// CKEditor init start
 			CKEDITOR.replace('post_editor', {
 				height: 450,
@@ -150,8 +160,8 @@
 		function writeNewPost() {
 			var title = document.querySelector('#post_title').value;
 			var content = CKEDITOR.instances.post_editor.getData();
-			var newsletterUrl = document.querySelector('#newsletterUrl').value;
-			
+			var representImageFile = $("#representImageFile").prop('files');
+						
 			// Validation start
 			if(title.trim() === '' || title.length > 200) {
 				alert('제목을 50자 이내로 작성해주세요.');
@@ -159,21 +169,39 @@
 			} else if(content.trim() === '') {
 				alert('게시글 내용을 작성해주세요.');
 				return false;
-			} else if(newsletterUrl.trim() === '') {
-				alert('뉴스레터 URL을 입력해주세요. (뉴스레터 URL 확인 필요)');
+			} else if(representImageFile && representImageFile[0]) {
+				var maxSize = 10 * 1024 * 1024; // 제한 용량
+				if (!((representImageFile[0].name.endsWith('.jpg')
+						|| representImageFile[0].name.endsWith('.png')
+						|| representImageFile[0].name.endsWith('.gif')
+					)
+				&& representImageFile[0].size <= maxSize
+				)) {
+					alert('대표 이미지는 10MB 이하의 jpg, png, gif 파일만 가능합니다.');
+					return false;	 
+				}
+			} else {
+				alert('대표 이미지가 필요합니다. (10MB 이하의 jpg, png, gif 파일만 가능)');
 				return false;
 			}
 			// Validation end
+			$('textarea[name="content"]').val(CKEDITOR.instances.post_editor.getData());
+
+			
 			var fileName = '';
 			var filePath = '';
 			
 			if($('#file').val()){
 				var formData = new FormData($('#fileForm')[0]); 
 				
+				$.each($("#file")[0].files, function(i, file) {
+					formData.append('file', file);
+				});
+				
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/newsletter/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -196,23 +224,24 @@
 				});
 			}
 			
-			var data = {
-				title: title,
-				content: content,
-				newsletterUrl: newsletterUrl,
-				fileName: fileName,
-				filePath: filePath
-			}
+			var gall = new FormData(galleryForm);
+			
+			gall.append('fileName',fileName);
+			gall.append('filePath',filePath);
 			
 			if(confirm('게시글을 작성하시겠습니까?')) {
 				$.ajax({
 					type : 'POST',
 					cache: false,
 					url : '<c:url value="/admin/newsletter/post/write" />',
+					processData : false,
+					contentType : false,
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
-					data: data,
+					cache : false,
+					enctype : 'multipart/form-data',
+					data: gall,
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
@@ -233,15 +262,6 @@
 				});
 			} else {
 				return;
-			}
-		}
-		
-		function setURLLink(){
-			var imageUrl = $("#newsletterUrl").val();
-			if (imageUrl) {
-			    $("#previewImage").attr("src", imageUrl);
-			} else {
-			    $("#previewImage").attr("src", "");
 			}
 		}
 	</script>

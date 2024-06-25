@@ -2,82 +2,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    	<footer class="footer">
-		    <div class="container p-b-60">
-		        <div class="row">
-		
-		            <div class="col-sm-12 col-lg-3 footer-right">
-		                <div id="family-site">
-		                        <div class="family_guide"> 
-		                            <ul>
-		                                <li>
-		                                    <button title="패밀리사이트 메뉴 열기">
-		                                        패밀리사이트 바로가기
-		                                    </button>
-		                                    <ul>
-		                                        <!-- <li>
-		                                            <a href="https://www.hanam.go.kr/www/index.do" target="_blank">하남시청</a>
-		                                        </li>
-		                                        <li>
-		                                            <a href="https://www.hnart.or.kr/" target="_blank">하남 문화재단</a>
-		                                        </li>
-		                                        <li>
-		                                            <a href="http://www.hanamrehab.or.kr/front/main/main.php" target="_blank">하남 장애인복지관</a>
-		                                        </li>
-		                                        <li>
-		                                            <a href="http://hanament.com/main/main.php" target="_blank">하남 기업인협의회</a>
-		                                        </li>
-		                                        <li>
-		                                            <a href="http://www.holthanam.or.kr/?" target="_blank">하남시 종합사회복지관</a>
-		                                        </li>
-		                                        <li>
-		                                            <a href="https://www.hnchildcare.or.kr/?" target="_blank">하남시 유아종합지원센터</a>
-		                                        </li>     -->                
-		                                    </ul>
-		                                </li>
-		                            </ul>
-		                        </div>
-		                </div>
-		            </div>
-		
-		
-		            <div class=" col-sm-12 col-lg-9 footer-left">
-		
-		                <div class="">
-		                    <div class="wrap-link-footer">
-		                        <ul class="col-left">
-		                            <li><a href="https://www.huic.co.kr/www/contents.do?key=78" style="color:#ffa646">개인정보처리방침</a></li>
-		                            <li><a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a></li>
-		                            <li><a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a></li>
-		                        </ul>
-		                    </div>
-		                </div>
-		
-		                <p>
-		                    [12902] 경기도 하남시 미사강변한강로 177 KDB산업은행 IT센터 3층 하남스타트업캠퍼스
-		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>TEL. 031)790-9591</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>FAX. 031)795-3310</span>
-		                </p>
-		                <p class="copy">
-		                    copyright &copy; 2021 Hanam Urban Innovation Corporation. All Rights reserved.
-		                </p>
-		            </div>
-		            
-		        </div>
-		    </div>
-		</footer>
+	<footer class="footer">
+	    <div class="top_ft">
+	        <div class="in_1400">
+	            <div class="link_wrap">
+	                <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
+	                <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
+	                <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
+	            </div>
+	            <div class="ico_wrap">
+	                <a href="https://www.youtube.com/channel/UCIT4wZzDZCF2J9ppP6b-6Eg"><img src="<c:url value='/resources/img/youtube_ico.png' />" alt="하남스타트업캠퍼스유튜브"></a>
+	                <a href="https://www.instagram.com/hanamstartup"><img src="<c:url value='/resources/img/instagram_ico.png' />" alt="하남스타트업캠퍼스인스타그램"></a>
+	            </div>
+	        </div>
+	    </div><!--top_ft-->
 	
-	
-		<!-- Back to top -->
-		<div class="btn-back-to-top hov-bg-main" id="myBtn">
-			<span class="symbol-btn-back-to-top">
-				<img src="<c:url value='/resources/img/top-btn.png' />"  alt="맨 위로 가기">
-			</span>
-	    </div>
-	
+        <div class="bottom_ft">
+            <div class="in_1400">
+                <div class="text_wrap">
+                    <p>
+                        [12902] 경기도 하남시 미사강변한강로 177 KDB산업은행 IT센터 3층 하남스타트업캠퍼스</br>
+                        copyright © 2021 Hanam Urban Innovation Corporation. All Rights reserved
+                    </p>
+                    <div class="tel">
+                        TEL. 031)790-9591
+                        <span>FAX. 031)8027-76101</span>
+                    </div>
+                </div>
+                <div class="family_btn" id="family-site">
+                    <button type="button">패밀리사이트 바로가기</button>
+                    <ul>
+                    	<!-- 
+                        <li><a href="#">하남도시공사</a></li>
+                        <li><a href="#">하남시청</a></li>
+                        <li><a href="#">하남시 기업인 협의회</a></li>
+                        <li><a href="#">건국대 링크플러스사업단</a></li>
+                        <li><a href="#">신용보증기금</a></li>
+                         -->
+                    </ul>
+                </div>
+            </div>
+        </div><!--bottom_ft-->
+	</footer>
+		<!-- 
 		<script src="<c:url value='/resources/js/animsition.min.js' />"></script>
 		<script src="<c:url value='/resources/js/main.js' />"></script>
 		<script src="<c:url value='/resources/js/cmmn.js'/>"></script>
-	
+		 -->
 	
 		<script >
 	        function openModal(modalname){
@@ -93,7 +64,7 @@
 		  	    });
 		        
 		        $("div.menu-desktop.gnb ul li[data-location-main='${locationMain}']").addClass("nav-pink");
-		        $("div.left-menu ul li[data-location-sub='${locationSub}'] a").addClass("hover");
+		        $("aside.left-menu ul li[data-location-sub='${locationSub}'] a").addClass("active");
 		        
 		        $.ajax({
 		    		type : 'GET',
@@ -109,7 +80,7 @@
 		                    return true;
 		    			});
 		    			
-		    			$("#family-site ul li ul").html(htmlArr.join(""));
+		    			$("#family-site ul").html(htmlArr.join(""));
 		    		},
 		    		error : function(error) {
 		    			alert('패밀리사이트 목록을 불러오지 못했습니다, 관리자에게 문의해주세요.');

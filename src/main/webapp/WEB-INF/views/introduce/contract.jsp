@@ -27,17 +27,12 @@
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
 
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
-   
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
+    <div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             
             <div class="right-contents col-lg-9">
                 <!-- # include: title-box start -->
@@ -638,7 +633,7 @@
 
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->
-        </div>
+		</main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

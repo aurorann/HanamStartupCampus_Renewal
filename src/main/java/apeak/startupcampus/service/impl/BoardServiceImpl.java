@@ -32,6 +32,7 @@ import apeak.startupcampus.common.PagingUtil;
 import apeak.startupcampus.model.dao.ActivityPartnerMapper;
 import apeak.startupcampus.model.dao.AgencyMapper;
 import apeak.startupcampus.model.dao.BioInfoMapper;
+import apeak.startupcampus.model.dao.CommunityPartnerMapper;
 import apeak.startupcampus.model.dao.FaqMapper;
 import apeak.startupcampus.model.dao.MediaMapper;
 import apeak.startupcampus.model.dao.MediaPartnerMapper;
@@ -105,6 +106,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 	@Resource(name = "newsletterMapper")
 	private NewsletterMapper newsletterMapper;
+	
+	@Resource(name = "communityPartnerMapper")
+	private CommunityPartnerMapper communityPartnerMapper;
 
 	// 파일 세이브 경로 (globals.properties)
 	@Value("#{globals['path.root']}")
@@ -149,6 +153,11 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	private String PARTNER_REPRESENT_PATH;
 	@Value("#{globals['url.partnerRepresent']}")
 	private String PARTNER_REPRESENT_URL;
+
+	@Value("#{globals['path.newsletter']}")
+	private String NEWSLETTER_PATH;
+	@Value("#{globals['url.newsletter']}")
+	private String NEWSLETTER_URL;
 	
 	// [일부 웹페이지 수정 로직]
 	public Map<String, Object> getPageContent(String level) throws Exception {
@@ -492,6 +501,118 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 	}
 	
+	// # 뉴스레터 게시글 작성
+	public Map<String, Object> writeNewsletterPost(NewsletterDTO newsletterDTO) throws Exception {
+		setWriterInfo(newsletterDTO);
+
+		MultipartFile newImage = newsletterDTO.getRepresentImageFile();
+		String fileName = saveNewMultipartImage(newImage, NEWSLETTER_PATH + File.separator + "newsletter");
+		newsletterDTO.setRepresentImage(fileName);
+		
+		int insertCount = newsletterMapper.insertNewsletterPostOne(newsletterDTO);
+		return getNewsletterWriteResultMap(insertCount, "뉴스레터");
+	}
+	
+	// # 뉴스레터 게시글 수정
+	public Map<String, Object> editNewsletterPost(NewsletterDTO newsletterDTO, HttpServletRequest request) throws Exception {
+		setWriterInfo(newsletterDTO);
+
+		MultipartFile newImage = newsletterDTO.getRepresentImageFile();
+		if (newImage != null && !newImage.isEmpty()) {
+			String fileName = saveNewMultipartImage(newImage, NEWSLETTER_PATH + File.separator + "newsletter");
+			newsletterDTO.setRepresentImage(fileName);
+		}
+		
+		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
+		Map<String, Object> oldPost = newsletterMapper.selectNewsletterPostOne(newsletterDTO.getSeqId());
+		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
+		
+		if(!newsletterDTO.getFilePath().equals(oldPaths)) {
+			String path = request.getSession().getServletContext().getRealPath("/");
+			
+			String oldList[] = oldPaths.split(":");
+			
+			for(String oldPath:oldList) {			
+				File oldFile = new File(path+File.separator+oldPath);
+				oldFile.delete();
+			}
+		}
+		
+		int insertCount = newsletterMapper.updateNewsletterPostOne(newsletterDTO);
+		return getBoardEditResultMap(insertCount, "뉴스레터");
+	}
+	
+	// # 뉴스레터 게시글 삭제
+	public Map<String, Object> deleteNewsletterPost(int seqId) throws Exception {
+		int insertCount = newsletterMapper.deleteNewsletterPostOne(seqId);
+		return getBoardDeleteResultMap(insertCount, "뉴스레터");
+	}
+	
+	
+	// [입주기업 커뮤니티] 관련 서비스 메서드
+	// # 입주기업 커뮤니티 게시글 리스트 조회
+	public Map<String, Object> getCommunityPartnerPostList(Map<String, Object> searchOption) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", "success");
+		resultMap.put("searchOption", getBoardSearchOption(searchOption));
+
+		LOGGER.debug(searchOption.toString());
+
+		resultMap.put("post", communityPartnerMapper.selectCommunityPartnerPostList(searchOption));
+
+		return resultMap;
+	}
+	
+	// # 입주기업 커뮤니티 게시글 조회
+	public Map<String, Object> getCommunityPartnerPost(int seqId) throws Exception {
+		int rowCount = communityPartnerMapper.updateCommunityPartnerPostViewCount(seqId);
+		if (rowCount > 0) {
+			return communityPartnerMapper.selectCommunityPartnerPostOne(seqId);
+		} else {
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("error", "POST_NOT_FOUND");
+			return resultMap;
+		}
+	}
+	
+	// # 입주기업 커뮤니티 게시글 삭제
+	public Map<String, Object> deleteCommunityPartnerPost(int seqId) throws Exception {
+		int insertCount = communityPartnerMapper.deleteCommunityPartnerPostOne(seqId);
+		return getBoardDeleteResultMap(insertCount, "입주기업 커뮤니티");
+	}
+	
+	// # 입주기업 커뮤니티 게시글 수정
+	public Map<String, Object> editCommunityPartnerPost(BoardDTO boardDTO,HttpServletRequest request) throws Exception {
+		setWriterInfo(boardDTO);
+		setWriterName(boardDTO);
+
+		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
+		Map<String, Object> oldPost = communityPartnerMapper.selectCommunityPartnerPostOne(boardDTO.getSeqId());
+		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
+		
+		if(!boardDTO.getFilePath().equals(oldPaths)) {
+			String path = request.getSession().getServletContext().getRealPath("/");
+			
+			String oldList[] = oldPaths.split(":");
+			
+			for(String oldPath:oldList) {			
+				File oldFile = new File(path+File.separator+oldPath);
+				oldFile.delete();
+			}
+		}
+		
+		int insertCount = communityPartnerMapper.updateCommunityPartnerPostOne(boardDTO);
+		return getBoardEditResultMap(insertCount, "입주기업 커뮤니티");
+	}
+	
+
+	public Map<String, Object> writeCommunityPartnerPost(BoardDTO boardDTO) throws Exception {
+		setWriterInfo(boardDTO);
+		setWriterName(boardDTO);
+		int insertCount = communityPartnerMapper.insertCommunityPartnerPostOne(boardDTO);
+		return getBoardWriteResultMap(insertCount, "입주기업 커뮤니티");
+	}
 	
 	
 
@@ -596,11 +717,8 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	}
 	
 
-	public Map<String, Object> writeNewsletterPost(NewsletterDTO newsletterDTO) throws Exception {
-		setWriterInfo(newsletterDTO);
-		int insertCount = newsletterMapper.insertNewsletterPostOne(newsletterDTO);
-		return getNewsletterWriteResultMap(insertCount, "뉴스레터");
-	}
+
+
 
 	/*
 	 * 게시글 수정 메서드 category: notice, agency, faq
@@ -883,29 +1001,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		int insertCount = activityPartnerMapper.updateActivityPartnerPostOneForPartner(galleryDTO);
 		return getBoardEditResultMap(insertCount, "기업 활동");
 	}
-	
 
-	public Map<String, Object> editNewsletterPost(NewsletterDTO newsletterDTO, HttpServletRequest request) throws Exception {
-		setWriterInfo(newsletterDTO);
-		
-		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
-		Map<String, Object> oldPost = newsletterMapper.selectNewsletterPostOne(newsletterDTO.getSeqId());
-		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
-		
-		if(!newsletterDTO.getFilePath().equals(oldPaths)) {
-			String path = request.getSession().getServletContext().getRealPath("/");
-			
-			String oldList[] = oldPaths.split(":");
-			
-			for(String oldPath:oldList) {			
-				File oldFile = new File(path+File.separator+oldPath);
-				oldFile.delete();
-			}
-		}
-		
-		int insertCount = newsletterMapper.updateNewsletterPostOne(newsletterDTO);
-		return getBoardEditResultMap(insertCount, "뉴스레터");
-	}
 
 	/*
 	 * 게시글 삭제 메서드
@@ -1114,10 +1210,6 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return getBoardDeleteResultMap(insertCount, "기업 활동");
 	}
 
-	public Map<String, Object> deleteNewsletterPost(int seqId) throws Exception {
-		int insertCount = newsletterMapper.deleteNewsletterPostOne(seqId);
-		return getBoardDeleteResultMap(insertCount, "뉴스레터");
-	}
 
 	/*
 	 * 작성 관련 메서드
@@ -1144,12 +1236,15 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			savePathContext = MEDIA_PATH;
 			dirUrl = MEDIA_URL;
 		} else if (boardType.equals("partner") || boardType.equals("partner-notice")
-				|| boardType.equals("partner-media") || boardType.equals("partner-activity")) {
+				|| boardType.equals("partner-media") || boardType.equals("partner-activity") || boardType.equals("community")) {
 			savePathContext = PARTNER_PATH;
 			dirUrl = PARTNER_URL;
 		} else if (boardType.equals("web-content")) {
 			savePathContext = WEBPAGE_PATH;
 			dirUrl = WEBPAGE_URL;
+		} else if (boardType.equals("newsletter")) {
+			savePathContext = NEWSLETTER_PATH;
+			dirUrl = NEWSLETTER_URL;
 		}
 
 		MultipartFile pFile = multiReq.getFile("upload");
@@ -1265,6 +1360,26 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		} catch (Exception e) {
 			LOGGER.debug("NO AUTH FOUND");
 			boardDTO.setWriterId(9999);
+		}
+	}
+	
+	private void setWriterName(BoardDTO boardDTO) {
+		HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		LOGGER.debug("setWriterName시작");
+		LOGGER.debug(boardDTO.getWriterName());
+		
+		String writerName = boardDTO.getWriterName();
+		// 작성자 NAME 등록
+		try {
+			if(writerName == null) {
+				boardDTO.setWriterName(null);
+			}else {
+				boardDTO.setWriterName(
+						((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getName());
+			}
+		} catch (Exception e) {
+			LOGGER.debug("NO AUTH FOUND");
+			boardDTO.setWriterName("9999");
 		}
 	}
 
@@ -1385,6 +1500,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			postCnt = newsletterMapper.selectNewsletterPostCount(searchOption);
 			pageSize = 9;
 			break;
+		case "partner-community":
+			postCnt = communityPartnerMapper.selectCommunityPartnerPostCount(searchOption);
+			break;
 		}
 
 		int curPage = (int) searchOption.get("curPage");
@@ -1430,12 +1548,15 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 				savePathContext = MEDIA_PATH;
 				dirUrl = MEDIA_URL;
 			} else if (boardType.equals("partner") || boardType.equals("partner-notice")
-					|| boardType.equals("partner-media") || boardType.equals("partner-activity")) {
+					|| boardType.equals("partner-media") || boardType.equals("partner-activity") || boardType.equals("community")) {
 				savePathContext = PARTNER_PATH;
 				dirUrl = PARTNER_URL;
 			} else if (boardType.equals("web-content")) {
 				savePathContext = WEBPAGE_PATH;
 				dirUrl = WEBPAGE_URL;
+			} else if (boardType.equals("newsletter")) {
+				savePathContext = NEWSLETTER_PATH;
+				dirUrl = NEWSLETTER_URL;
 			}
 
 			List<MultipartFile> fileList = mtfRequest.getFiles("file");

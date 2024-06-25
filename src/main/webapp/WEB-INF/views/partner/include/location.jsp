@@ -31,6 +31,7 @@
 				                    <li data-location-sub='졸업기업 소개'><a href="<c:url value='/partner/graduate/list' />">졸업기업 소개</a></li>
                             		<li data-location-sub='소개 영상'><a href="<c:url value='/partner/media/list' />">소개 영상</a></li>
                             		<li data-location-sub='기업 활동'><a href="<c:url value='/partner/activity/list' />">기업 활동</a></li>
+                            		<li data-location-sub='기업 커뮤니티'><a href="<c:url value='/partner/community/list' />">기업 커뮤니티</a></li>
 				                </ul>
 				            </li>
 				        </ul>

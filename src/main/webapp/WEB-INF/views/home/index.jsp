@@ -14,264 +14,332 @@
 <!-- # common: head start -->
 <%@ include file="/WEB-INF/head.jsp"%>
 <!-- # common: head end -->
-<style>
-.board-title {
-	cursor: pointer;
-}
-</style>
 </head>
 
 <body>
+	<!-- # common: header-menu start -->
+	<%@ include file="/WEB-INF/header-menu-index.jsp"%>
+	<!-- # common: header-menu end -->
 
-	<div class="main-wrap">
-		<!-- # common: header-menu start -->
-		<%@ include file="/WEB-INF/header-menu-index.jsp"%>
-		<!-- # common: header-menu end -->
+    <main>
+        <section class="main_swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="txt_title">
+                        <strong>Hanam Urban Innovation Corporation</strong>
+                        <h2>하남 스타트업 캠퍼스</h2>
+                        <span>미래를 창조하고, 새로운 가능성을 위한 든든한 파트너</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="txt_title">
+                        <strong>Hanam Urban Innovation Corporation</strong>
+                        <h2>하남 스타트업 캠퍼스2</h2>
+                        <span>미래를 창조하고, 새로운 가능성을 위한 든든한 파트너</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="txt_title">
+                        <strong>Hanam Urban Innovation Corporation</strong>
+                        <h2>하남 스타트업 캠퍼스3</h2>
+                        <span>미래를 창조하고, 새로운 가능성을 위한 든든한 파트너</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </section><!--main_swiper-->
 
-		<div class="main-title">
-			<div class="inner">
-				<h1>
-					<img src="<c:url value='/resources/img/main-title.png' />"
-						alt="메인 페이지 타이틀 배경">
-				</h1>
-				<p>생각, 현실이 되다.</p>
-			</div>
-		</div>
+        <section class="news">
+            <div class="in_1400">
+                <h3 class="main_title"><span>하남소식</span> 한눈에 보기</h3>
+                <ul class="tab_list">
+                    <li><a href="#" class="active">전체</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">정책·지원</a></li>
+                    <li><a href="#" class="more_btn">더보기</a></li>
+                </ul>
 
-		<div id="slider-div">
-			<div>
-				<img src="<c:url value='/resources/img/background1.jpg' />"
-					alt="배경1">
-			</div>
-			<div>
-				<img src="<c:url value='/resources/img/background2.jpg' />"
-					alt="배경2">
-			</div>
-			<div>
-				<img src="<c:url value='/resources/img/background4.jpg' />"
-					alt="배경3">
-			</div>
-			<div>
-				<img src="<c:url value='/resources/img/background5.jpg' />"
-					alt="배경4">
-			</div>
-			<div>
-				<img src="<c:url value='/resources/img/background6.jpg' />"
-					alt="배경5">
-			</div>
-			<div>
-				<img src="<c:url value='/resources/img/background7.jpg' />"
-					alt="배경6">
-			</div>
-		</div>
+                <div id="tab1" class="news_swiper">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
+                <div id="tab2" class="news_swiper">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label">주요공고</strong>
+                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
+                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!--news_swiper-->
+            </div>
+        </section><!--news-->
 
+        <section class="company_letter in_1400">
+            <div class="company">
+                <div class="main_title_wrap">
+                    <h3 class="main_title">입주기업 <span>소개영상</span></h3>
+                    <a href="#" class="more_btn">더보기</a>
+                </div>
+                <iframe width="100%" height="380" src="https://www.youtube.com/embed/rXiGsJTdc6w?si=QpsFg8aQWJw68Chq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div><!--company-->
 
-		<div class="main-contents">
-			<div class="inner">
-				<div class="col-lg-12 main-cintents-wrap" style="margin: 0;">
+            <div class="letter">
+                <div class="main_title_wrap">
+                    <h3 class="main_title">뉴스레터</h3>
+                    <a href="<c:url value='/newsletter/list' />" class="more_btn">더보기</a>
+                </div>
+                <a href="#">뉴스레터_bg</a>
+            </div><!--letter-->
+        </section><!--company_letter-->
 
-					<div class="col-lg-2 white-box flrst-white-box">
-						<div class="m-box-title">
-							<h1>캠퍼스 소개</h1>
-						</div>
+        <section class="business">
+            <div class="in_1400">
+                <h3 class="main_title">사업안내</h3>
+                <p class="main_article">하남 스타트업 캠퍼스가 추진하는 사업을 소개합니다.</p>
 
-						<div class="m-box-contents">
-							<ul class="introduce1">
-								<li>
-									<!-- <h2>소개 영상</h2>  -->
-									<div class="campus-video">
-										<a href="<c:url value='/introduce/media/list' />"> <img
-											src="<c:url value='/resources/img/campus-video.png' />"
-											alt="캠퍼스 소개영상">
-										</a>
-									</div>
-								</li>
-								<li>
-									<h2>시설 안내</h2>
-									<div id="slider-div-sm1"></div>
-								</li>
-							</ul>
-							<button class="more-btn"
-								onclick="location.href='<c:url value="/introduce/greeting/" />' ">
-								자세히 보기<img src="<c:url value='/resources/img/more-btn.png' />"
-									alt="자세히 보기 버튼">
-							</button>
-							<!--수정!-->
-						</div>
-					</div>
+                <div class="business_swiper">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/supporting' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img1.png' />" alt="스타트업 사업화 패키지 지원사업">
+                                </div>
+                                <h4>스타트업 사업화<br>패키지 지원사업</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/accelerating' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img2.png' />" alt="액셀러레이팅 프로그램">
+                                </div>
+                                <h4>액셀러레이팅<br>프로그램</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/training' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img3.png' />" alt="스타트업 전문교육">
+                                </div>
+                                <h4>스타트업<br>전문교육</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="c:url value='/program/competition' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img4.png' />" alt="하남도시공사 창업경진대회">
+                                </div>
+                                <h4>하남도시공사<br>창업경진대회</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/empowering' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img1.png' />" alt="투자유치 역량 강화 프로그램">
+                                </div>
+                                <h4>투자유치 역량<br>강화 프로그램</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/networking' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img2.png' />" alt="네트워킹 데이">
+                                </div>
+                                <h4>네트워킹<br>데이</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/mentoring' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img3.png' />" alt="멘토링 프로그램">
+                                </div>
+                                <h4>멘토링<br>프로그램</h4>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="<c:url value='/program/membership' />">
+                                <div class="img_box">
+                                    <img src="<c:url value='/resources/img/business_img4.png' />" alt="스타트업캠퍼스 멤버쉽 프로그램">
+                                </div>
+                                <h4>스타트업캠퍼스<br>멤버쉽 프로그램</h4>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="swiper-button">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <a href="#" class="more_btn">더보기</a>
+                    </div>
+                </div>
+            </div>
+        </section><!--business-->
 
-					<div class="col-lg-2 blue-box" style="padding: 0 9px;">
-						<div class="m-box-title">
-							<h1>사업 안내</h1>
-						</div>
-						<div class="m-box-contents">
-							<ul class="program-icon">
-								<li><a href="<c:url value="/program/supporting" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon7-sm.png' />"
-												alt="">
-										</div>
-										<p>스타트업<br>패키지<br>지원사업</p>
-								</a></li>
-								<li><a href="<c:url value="/program/accelerating" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon6-sm.png' />"
-												alt="">
-										</div>
-										<p>
-											액셀러레이팅<br>프로그램<br>
-										</p>
-								</a></li>
-								<li><a href="<c:url value="/program/training" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon1-sm.png' />"
-												alt="">
-										</div>
-										<p>스타트업<br>전문교육<br>　</p>
-								</a></li>
-								
-								
-								<li><a href="<c:url value="/program/competition" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon4-sm.png' />"
-												alt="">
-										</div>
-										<p>하남도시공사<br>창업경진대회</p>
-								</a></li>
-								<li><a href="<c:url value="/program/empowering" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon8-sm.png' />"
-												alt="">
-										</div>
-										<p>
-											투자유치<br>역량 강화<br>프로그램
-										</p>
-								</a></li>
-								<li><a href="<c:url value="/program/networking" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon5-sm.png' />"
-												alt="">
-										</div>
-										<p>
-											네트워킹<br>데이<br>　
-										</p>
-								</a></li>
-								
-								
-								<li><a href="<c:url value="/program/mentoring" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon9-sm.png' />"
-												alt="">
-										</div>
-										<p>
-											멘토링<br>프로그램
-										</p>
-								</a></li>
-								<li><a href="<c:url value="/program/membership" />">
-										<div class="icon-box">
-											<img src="<c:url value='/resources/img/main-icon2-sm.png' />"
-												alt="">
-										</div>
-										<p>
-											스타트업<br>캠퍼스<br>멤버쉽
-										</p>
-								</a></li>
-							</ul>
-						</div>
-					</div>
+        <section class="question_bio in_1400">
+            <div class="question">
+                <div class="main_title_wrap">
+                    <h3 class="main_title">자주하는 <span>질문</span></h3>
+                    <a href="#" class="more_btn">더보기</a>
+                </div>
 
-					<div class="col-lg-2 white-box">
-						<div class="m-box-title">
-							<h1>입주기업</h1>
-						</div>
+                <ul class="question_list">
+                    <li><a href="#"><span>Q.</span>창업기업 또는 소속 기관정보는 어떻게 등록해야 하나요?</a></li>
+                    <li><a href="#"><span>Q.</span>개인으로 회원 가입시 가입자는 대표자로 등록 되나요?</a></li>
+                    <li><a href="#"><span>Q.</span>이미 제출한 창업기업 확인 신청서 수정도 가능한가요?</a></li>
+                    <li><a href="#"><span>Q.</span>창업기업 확인서는 신청부터 발급까지 소요되는 기간이 어느정도나요?</a></li>
+                </ul>
+            </div><!--question-->
 
-						<div class="m-box-contents">
-							<ul class="introduce1">
-								<li>
-									<h2>입주기업 현황</h2>
-									<div id="slider-div-sm2"></div>
-								</li>
-								<li>
-									<h2>입주기업 소개영상</h2>
-									<div id="slider-div-sm3"></div>
-								</li>
-							</ul>
-							<button class="more-btn"
-								onclick="location.href='<c:url value="/partner/list" />'">
-								자세히 보기<img src="<c:url value='/resources/img/more-btn.png'/>"
-									alt="자세히 보기 버튼">
-							</button>
-							<!--수정!-->
-						</div>
-					</div>
+            <div class="bio">
+                <div class="popup1">
+                    <strong>접수중</strong>
+                    <h4>미국 바이오 시장진출 역량강화 교육 및 컨설팅 프로그램 참여 기업 모집</h4>
+                    <p>
+                        <span>신청기간</span> &nbsp;:&nbsp; 23.09.18 ~ 23.09.27 18시<br>
+                        <span>모집대상</span> &nbsp;:&nbsp; 경기도 소재 바이오분야 중소기업<br>
+                        <span>모집 규모</span> &nbsp;:&nbsp; 총 10개 업체(참여 비용 없음)
+                    </p>
+                    <a href="#">더보기</a>
+                </div><!--popup1-->
 
-					<div class="col-lg-4 black-box" style="padding: 0;">
-						<div id="board-tab">
-							<ul class="tabs">
-								<li class="active" rel="tab1">공고</li>
-								<li rel="tab2">정책 · 지원</li>
-							</ul>
-							<div class="tab_container">
-								<div id="tab1" class="tab_content">
-									<table class="tab-table">
-										<!-- <tr>
-                                                    <td style="width:20%;"><span class="pink-label">주요</span></td>
-                                                    <td style="width:60%;"><span class="board-title">하남시 기업 피해사례 신고센터 ...</span></td>
-                                                    <td style="width:20%;"><small>2020-01-14</small></td>
-                                                </tr> -->
-									</table>
-									<button class="more-btn"
-										onclick="location.href = '<c:url value="/announce/notice/list" />'">
-										자세히 보기<img src="<c:url value='/resources/img/more-btn.png' />"
-											alt="자세히 보기 버튼">
-									</button>
-								</div>
-								<!-- #tab1 -->
-								<div id="tab2" class="tab_content">
-									<table class="tab-table">
-									</table>
-									<button class="more-btn"
-										onclick="location.href = '<c:url value="/announce/agency/list" />'">
-										자세히 보기<img src="<c:url value='/resources/img/more-btn.png' />"
-											alt="자세히 보기 버튼">
-									</button>
-								</div>
-								<!-- #tab2 -->
-							</div>
-							<!-- .tab_container -->
-						</div>
-						<!-- #container -->
-					</div>
+                <a href="#" class="popup2">
+                    <h4>바이오 정책·지원</h4>
+                    <p>(지원사업)2022년 바이오헬스 분야 해외 판로개척 희망기업 모집</p>
+                    <img src="<c:url value='/resources/img/popup2_ico.png' />" alt="바이오 정책·지원">
+                </a>
+            </div><!--bio-->
+        </section><!--question_bio-->
 
-					<!--sns 이동 버튼 추가--->
+        <section class="perf">
+            <div class="in_1400">
+                <h3 class="main_title">기업실적</h3>
+                <p class="main_article">하남의 자랑스러운 영업실적을 보여드립니다.</p>
 
-					<div class="sns-box">
-						<div class="sns-title">
-							<h1>
-								SNS<br>바로가기
-							</h1>
-						</div>
-						<div class="sns-contents">
-							<ul>
-								<li><a href="https://www.instagram.com/hanamstartup"><img
-										src="<c:url value='/resources/img/hn-instagram.png' />"
-										alt="하남스타트업캠퍼스인스타그램"></a></li>
-								<li><a
-									href="https://www.youtube.com/channel/UCIT4wZzDZCF2J9ppP6b-6Eg"><img
-										src="<c:url value='/resources/img/hn-youtube.png' />"
-										alt="하남스타트업캠퍼스유튜브"></a></li>
-							</ul>
-						</div>
-					</div>
+                <ul class="perf_list">
+                    <li>
+                        <a href="#">
+                            <img src="<c:url value='/resources/img/perf_ico1.png' />" alt="수주실적">
+                            <strong>195<span>억</span></strong>
+                            <h4>수주실적</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="<c:url value='/resources/img/perf_ico2.png' />" alt="매출실적">
+                            <strong>58<span>억</span></strong>
+                            <h4>매출실적</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="<c:url value='/resources/img/perf_ico3.png' />" alt="투자유치 실적">
+                            <strong>206<span>억</span></strong>
+                            <h4>투자유치 실적</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="<c:url value='/resources/img/perf_ico4.png' />" alt="융자및보증 실적">
+                            <strong>52<span>억</span></strong>
+                            <h4>융자및보증 실적</h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section><!--perf-->
 
-					<!--sns 이동 버튼 추가 끝--->
+        <section class="ent_introduce in_1400">
+            <div class="text_ent">
+                <img src="<c:url value='/resources/' />img/green_ico.png" alt="기업소개">
+                <p>
+                    하남 스타트업 캠퍼스가 제공하는 창업공간과<br>
+                    함께 하고 있는스타트업을 소개합니다.
+                </p>
+            </div>
 
-
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="ent_introduce_swiper_wrap">
+                <div class="ent_introduce_swiper">
+                    <ul class="swiper-wrapper" id="slider-div-sm2">
+                        <li class="swiper-slide"><a href="#"><img src="img/닉스(주)_logo.png" alt="닉스(주)"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/(주)스카이런_logo.png" alt="(주)스카이런"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/메이즈(주)_logo.png" alt="메이즈(주)"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/(주)타운즈_logo.png" alt="(주)타운즈"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/(주)소금광장_logo.png" alt="(주)소금광장"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/(주)고릴라금고.png" alt="(주)고릴라금고"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/(주)파인더스.png" alt="(주)파인더스"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/(주)진케어.png" alt="(주)진케어"></a></li>
+                        <li class="swiper-slide"><a href="#"><img src="img/주식회사 에틱스템.png" alt="주식회사 에틱스템"></a></li>
+                    </ul>
+                </div>
+                <div class="swiper-button">
+                    <button class="swiper-button-prev"></button>
+                    <button class="swiper-button-next"></button>
+                    <a href="#" class="more_btn">더보기</a>
+                </div>
+            </div>
+        </section><!--ent_introduce-->
+    </main>
 
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer-index.jsp"%>
@@ -678,8 +746,7 @@
 		}
 
 		function getPartnerInformationList(curPage) {
-			$
-					.ajax({
+			$.ajax({
 						'type' : 'GET',
 						cache : false,
 						url : '<c:url value="/partner/information/post/list" />',
@@ -695,31 +762,20 @@
 												+ "..."
 												: el.homepage;
 
-										var commonHTML = '<div onclick="location.href=\'<c:url value='/partner/view' />/'
-												+ el.seqId
-												+ '\';" style="cursor: pointer; width: 100%;">'
-												+ '<table class="index-table">'
-												+ '<thead style="opacity: 0; border: 0 none; height: 0;"><tr style="margin: 0; padding: 0; border: 0 none; height: 0px;"><th style="margin: 0; padding: 0; border: 0 none; height: 0px; width: 30%"></th><th style="margin: 0; padding: 0; border: 0 none; width: 70%; height: 0px;"></th></tr></thead>'
-												+ '<tbody><tr><td colspan="2"><div class="ent-logo"><div class="ent-logo-detail">'
+										var commonHTML = '<li class="swiper-slide">'
+												+ '<a href="#">'
 												+ '<img src="<c:url value='/upload/partner-represent' />/'
 												+ el.profileImage
-												+ '"></div></div></td></tr>'
-												+ '<tr><th>회사명</th><td>'
+												+ '" alt="'
 												+ el.name
-												+ '</td></tr><tr>'
-												+ '<th>대표자</th><td>'
-												+ el.ceoName
-												+ '</td></tr>'
-												+ '<tr><th>웹사이트</th><td>'
-												+ urlString
-												+ '</td></tr>'
-												+ '</tbody></table></div>';
+												+ '">'
+												+ '</a></li>';
 
 										htmlArr.push(commonHTML);
 										return true;
 									});
 
-							$("div#slider-div-sm2").html(htmlArr.join(""));
+							$("ul#slider-div-sm2").html(htmlArr.join(""));
 
 							initSlider("slider-div-sm2");
 						},

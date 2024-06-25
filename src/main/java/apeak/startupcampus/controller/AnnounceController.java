@@ -52,10 +52,13 @@ public class AnnounceController {
 		String locationSub = null;
 		switch(boardType) {
 			case "notice":
-				locationSub = "공고";
+				locationSub = "공지사항";
 				break;
 			case "agency":
-				locationSub = "바이오 정책 · 지원";
+				locationSub = "사업공고";
+				break;
+			case "promotion":
+				locationSub = "보도자료";
 				break;
 			case "faq":
 				locationSub = "자주 묻는 질문";
@@ -76,11 +79,15 @@ public class AnnounceController {
 		switch(boardType) {
 			case "notice":
 				model.addAllAttributes(boardService.getNoticePost(seqId));
-				locationSub = "공고";
+				locationSub = "공지사항";
 				break;
 			case "agency":
 				model.addAllAttributes(boardService.getAgencyPost(seqId));
-				locationSub = "바이오 정책 · 지원";
+				locationSub = "사업공고";
+				break;
+			case "promotion":
+				model.addAllAttributes(boardService.getPromotionPost(seqId));
+				locationSub = "보도자료";
 				break;
 			case "faq":
 				model.addAllAttributes(boardService.getFaqPost(seqId));
@@ -110,11 +117,15 @@ public class AnnounceController {
 			case "notice":
 				LOGGER.debug("get Notice List");
 				resultMap = boardService.getNoticePostList(searchOption);
-				locationSub = "공고";
+				locationSub = "공지사항";
 				break;
 			case "agency":
 				resultMap = boardService.getAgencyPostList(searchOption);
-				locationSub = "바이오 정책 · 지원";
+				locationSub = "사업공고";
+				break;
+			case "promotion":
+				resultMap = boardService.getPromotionPostList(searchOption);
+				locationSub = "보도자료";
 				break;
 			case "faq":
 				resultMap = boardService.getFaqPostList(searchOption);

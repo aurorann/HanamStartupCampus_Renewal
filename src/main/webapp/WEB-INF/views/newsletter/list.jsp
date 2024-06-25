@@ -26,35 +26,25 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+    <div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                 <!-- # include: title-box start -->
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
                 <div class="col-lg-12 r-contents">
-                
-                	<div class="col-lg-12" style="margin:0; padding:0;">
-                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />" alt="제목 아이콘">&nbsp;&nbsp;뉴스레터</h3>
-                    </div>
                     
                     <div class="sm-main-box pink-bar flex-end">
                         <h3><strong>총 게시물</strong>&nbsp;|&nbsp;<span id="post_count">0건</span></h3>
         
                         <div>
-                        	<form id="searchForm" action="<c:url value='/partner/media/list' />" method="get" onsubmit="return searchNoticeList(this)">								
+                        	<form id="searchForm" action="<c:url value='/newsletter/list' />" method="get" onsubmit="return searchNoticeList(this)">								
 	                            <select name="searchType">
 	                                <option value="NONE">선택</option>
 	                                <option value="title">제목</option>
@@ -82,7 +72,7 @@
 	                </div>
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
@@ -135,7 +125,7 @@
 	                            '<a href="<c:url value='/newsletter/view' />/' + el.seqId + '" class="hongbo-img">' +
 	                                '<div class="ent-logo">' +
 	                                    '<div class="ent-logo-detail">' +
-	                                        '<img src="' + el.newsletterUrl + '" alt="뉴스레터 썸네일">' +
+	                                 	  '<img src="<c:url value='/upload/newsletter/newsletter' />/' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
 	                                    '</div>' +
 	                                '</div>' +
 	                            '</a>' +

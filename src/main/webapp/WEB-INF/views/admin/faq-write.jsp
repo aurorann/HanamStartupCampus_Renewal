@@ -33,19 +33,13 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+    <div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
@@ -54,7 +48,8 @@
                     <div class="col-lg-12 r-contents">
 						<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 					      <a href="<c:url value='/admin/announce/notice/write/form' />" class="btn btn-default" role="button">공고 글쓰기</a>
-					      <a href="<c:url value='/admin/announce/agency/write/form' />" class="btn btn-default" role="button">바이오 정책 · 지원 글쓰기</a>
+					      <a href="<c:url value='/admin/announce/agency/write/form' />" class="btn btn-default" role="button">사업공고 글쓰기</a>
+					      <a href="<c:url value='/admin/announce/promotion/write/form' />" class="btn btn-default" role="button">보도자료 글쓰기</a>
 					      <a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">자주 묻는 질문 글쓰기</a>
 					    </div>
 						
@@ -99,7 +94,7 @@
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

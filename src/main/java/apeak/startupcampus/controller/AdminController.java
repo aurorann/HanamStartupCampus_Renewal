@@ -131,6 +131,9 @@ public class AdminController {
 		case "faq":
 			model.addAllAttributes(boardService.getFaqPost(seqId));
 			break;
+		case "promotion":
+			model.addAllAttributes(boardService.getPromotionPost(seqId));
+			break;
 		default:
 			model.addAllAttributes(boardService.getNoticePost(seqId));
 			boardType = "notice";
@@ -144,7 +147,8 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, ?> writeAnnouncePosting(@PathVariable("boardType") String boardType,
 			@ModelAttribute BoardNoticeDTO noticeDTO, @ModelAttribute BoardAgencyDTO agencyDTO,
-			@ModelAttribute BoardFaqDTO faqDTO, HttpServletResponse res) throws Exception {
+			@ModelAttribute BoardFaqDTO faqDTO, @ModelAttribute BoardGalleryDTO galleryDTO, 
+			HttpServletResponse res) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 
 		Map<String, ?> resultMap = null;
@@ -158,6 +162,9 @@ public class AdminController {
 		case "faq":
 			resultMap = boardService.writeFaqPost(faqDTO);
 			break;
+		case "promotion":
+			resultMap = boardService.writePromotionPost(galleryDTO);
+			break;
 		}
 
 		return resultMap;
@@ -168,7 +175,8 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, ?> editAnnouncePost(@PathVariable("boardType") String boardType,
 			@ModelAttribute BoardNoticeDTO noticeDTO, @ModelAttribute BoardAgencyDTO agencyDTO,
-			@ModelAttribute BoardFaqDTO faqDTO, HttpServletResponse res,HttpServletRequest request) throws Exception {
+			@ModelAttribute BoardFaqDTO faqDTO, @ModelAttribute BoardGalleryDTO galleryDTO, 
+			HttpServletResponse res,HttpServletRequest request) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 
 		Map<String, ?> resultMap = null;
@@ -181,6 +189,9 @@ public class AdminController {
 			break;
 		case "faq":
 			resultMap = boardService.editFaqPost(faqDTO,request);
+			break;
+		case "promotion":
+			resultMap = boardService.editPromotionPost(galleryDTO,request);
 			break;
 		}
 
@@ -204,6 +215,9 @@ public class AdminController {
 			break;
 		case "faq":
 			resultMap = boardService.deleteFaqPost(seqId,request);
+			break;
+		case "promotion":
+			resultMap = boardService.deletePromotionPost(seqId,request);
 			break;
 		}
 
@@ -407,7 +421,8 @@ public class AdminController {
 	// [입주기업 알림공간] 관련 메서드
 	// # 입주기업 알림공간 리스트 뷰
 	@RequestMapping(value = "/partner/notice/list")
-	public String goToPartnerNoticeList(Model model, @RequestParam(value = "curPage", defaultValue = "1") int curPage,
+	public String goToPartnerNoticeList(Model model, 
+			@RequestParam(value = "curPage", defaultValue = "1") int curPage,
 			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
 		LOGGER.debug("LIST ARRIVED");
@@ -775,11 +790,7 @@ public class AdminController {
 	public Map<String, ?> writeNewsletterPosting(@ModelAttribute NewsletterDTO newsletterDTO ,HttpServletResponse res)
 			throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
-
-		Map<String, ?> resultMap = null;
-		resultMap = boardService.writeNewsletterPost(newsletterDTO);
-
-		return resultMap;
+		return boardService.writeNewsletterPost(newsletterDTO);
 	}
 
 	// 뉴스레터 게시글 수정폼 이동
@@ -792,17 +803,19 @@ public class AdminController {
 	}
 
 
-	// 입주기업 소개 영상 게시글 수정하기
+	// 뉴스레터 게시글 수정하기
 	@RequestMapping(value = "/newsletter/post/edit/{seqId}", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> editNewsletterPost(@ModelAttribute NewsletterDTO newsletterDTO, HttpServletResponse res,HttpServletRequest request)
 			throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 
-		Map<String, ?> resultMap = boardService.editNewsletterPost(newsletterDTO,request);
+		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		newsletterDTO.setWriterId(userDTO.getSeqId());
 
-		return resultMap;
+		return boardService.editNewsletterPost(newsletterDTO,request);
 	}
+	
 
 	// 입주기업 소개 영상 게시글 삭제하기
 	@RequestMapping(value = "/newsletter/post/remove/{seqId}", method = RequestMethod.POST)
@@ -814,6 +827,108 @@ public class AdminController {
 		Map<String, ?> resultMap = boardService.deleteNewsletterPost(seqId);
 
 		return resultMap;
+	}
+	
+
+	// [서식 자료실] 관련 메서드
+	// # 서식 자료실 리스트 뷰
+	@RequestMapping(value = "/partner/file/list")
+	public String goToPartnerFileList(Model model, 
+			@RequestParam(value = "curPage", defaultValue = "1") int curPage,
+			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if (curPage == 0) {
+			curPage = 1;
+		}
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-notice");
+		LOGGER.debug(searchOption.toString());
+
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		model.addAllAttributes(resultMap);
+		return "admin/notice-partner-list";
+	}
+
+	// # 서식 자료실 게시글 뷰
+	@RequestMapping(value = "/partner/file/view/{seqId}")
+	public String goToFilePartnerListView(@PathVariable("seqId") int seqId, Model model) throws Exception {
+		model.addAllAttributes(boardService.getNoticePartnerPost(seqId));
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "admin/notice-partner-view";
+	}
+
+	// 서식 자료실 게시글 작성폼 이동
+	@RequestMapping(value = "/partner/file/write/form")
+	public String goToFilePartnerWriteForm(Model model) {
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "admin/file-write";
+	}
+
+	// 서식 자료실 게시글 수정폼 이동
+	@RequestMapping(value = "/partner/file/edit/form/{seqId}")
+	public String goToFilePartnerEditView(@PathVariable("seqId") int seqId, Model model) throws Exception {
+		String locationSub = null;
+		model.addAllAttributes(boardService.getNoticePartnerPost(seqId));
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "admin/notice-partner-edit";
+	}
+
+	
+
+	// 서식 자료실 게시글 서치
+	@RequestMapping(value = "/partner/file/post/list")
+	@ResponseBody
+	public Map<String, Object> searchFilePostListByKeyword(Model model,
+			@RequestParam(value = "curPage", defaultValue = "1") int curPage,
+			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-notice");
+		Map<String, Object> resultMap = boardService.getNoticePartnerPostList(searchOption);
+		String locationSub = "입주기업 관련";
+
+		return resultMap;
+	}
+
+	
+	
+	// 서식 자료실 게시글 작성하기
+	@RequestMapping(value = "/partner/file/post/write", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> writeFilePartnerPosting(@ModelAttribute BoardDTO boardDTO, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+
+		return boardService.writeNoticePartnerPost(boardDTO);
+	}
+
+	// 서식 자료실 게시글 수정하기
+	@RequestMapping(value = "/partner/file/post/edit/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> editFilePartnerPost(@ModelAttribute BoardDTO boardDTO, HttpServletResponse res,HttpServletRequest request)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+
+		return boardService.editNoticePartnerPost(boardDTO,request);
+	}
+
+	// 서식 자료실 게시글 삭제하기
+	@RequestMapping(value = "/partner/file/post/remove/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> removeFilePartnerPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		return boardService.deleteNoticePartnerPost(seqId);
 	}
 	
 	

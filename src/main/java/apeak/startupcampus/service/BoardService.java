@@ -111,6 +111,9 @@ public interface BoardService  {
 	
 	public Map<String, Object> writeNewsletterPost(NewsletterDTO newsletterDTO) throws Exception;
 	
+	public Map<String, Object> writeCommunityPartnerPost(BoardDTO boardDTO) throws Exception;
+
+	
 	/*
 	 * 게시글 수정 메서드
 	 */
@@ -164,6 +167,14 @@ public interface BoardService  {
 	public Map<String, Object> deleteActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
 	
 	public Map<String, Object> deleteNewsletterPost(int seqId) throws Exception;
+	
+	// # 입주기업 커뮤니티 관련
+	public Map<String, Object> getCommunityPartnerPostList(Map<String, Object> searchOption) throws Exception;
+	public Map<String, Object> getCommunityPartnerPost(int seqId) throws Exception;
+	public Map<String, Object> deleteCommunityPartnerPost(int seqId) throws Exception;
+	public Map<String, Object> editCommunityPartnerPost(BoardDTO boardDTO, HttpServletRequest request) throws Exception;
+
+	
 
 	
 	public String saveBoardFile(String boardType, MultipartHttpServletRequest multiReq);

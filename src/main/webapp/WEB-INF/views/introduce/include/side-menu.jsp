@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags"  prefix="sec"%>
-
+			<!-- 
 			<div class="left-menu">
                 <div id="left">
                 	<h2><span>INTRODUCE</span><br>캠퍼스 소개</h2>
@@ -17,4 +17,16 @@
                     </ul>
                 </div>
             </div>
+             -->
+	        <aside class="left-menu">
+	            <h3>캠퍼스 소개</h3>
+	            <ul>
+                    <li data-location-sub='인사말'><a href="<c:url value='/introduce/greeting' />" class="dep01_name">인사말</a></li>
+                    <li data-location-sub='시설 안내'><a href="<c:url value='/introduce/facility' />">시설안내</a></li>
+                    <li data-location-sub='캠퍼스 개요'><a href="<c:url value='/introduce/profile' />">캠퍼스 개요</a></li>
+                    <li data-location-sub='조직도'><a href="<c:url value='/introduce/contract' />">조직도</a></li>
+                    <li data-location-sub='오시는 길'><a href="<c:url value='/introduce/direction' />">오시는 길</a></li>
+                    <li data-location-sub='입주신청'><a href="<c:url value='/introduce/join' />">입주신청</a></li>
+	            </ul>
+	        </aside>
             
