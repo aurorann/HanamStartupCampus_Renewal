@@ -5,6 +5,13 @@
 }
 li{ list-style:none; }
 a{ text-decoration:none; }
-button{ border:none; cursor:pointer; }
+button{
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+}
 img{ max-width:100%; }
-body{ font-family:'KoPubWorld_Dotum'; letter-spacing:-1px; }
+body{
+    font-family:'Pretendard GOV';
+    letter-spacing:-1px;
+}

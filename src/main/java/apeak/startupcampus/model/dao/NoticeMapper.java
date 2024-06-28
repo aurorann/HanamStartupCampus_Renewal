@@ -29,6 +29,7 @@ public interface NoticeMapper {
 	
 	List<BoardNoticeDTO> selectNoticePostList(Map<String, Object> searchOption) throws Exception;
 	List<BoardNoticeDTO> selectFixedNoticePostList(Map<String, Object> searchOption) throws Exception;
+	List<BoardNoticeDTO> selectCommonNoticePostList(Map<String, Object> searchOption) throws Exception;
 	Map<String, Object> selectNoticePostOne(int seqId) throws Exception;
 	int updateNoticePostViewCount(int seqId) throws Exception;
 	

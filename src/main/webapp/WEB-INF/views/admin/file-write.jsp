@@ -41,23 +41,27 @@
 		<!-- # include: side-menu end -->
 		<main>
             <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
-    
-                    <div class="col-lg-12 r-contents">
-						<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                    		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
-                    		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-							<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 알림공간</a>
-							<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">서식 자료실</a>
-					    </div>
-					    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-					    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
-							<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
-							<a href="<c:url value='/admin/partner/activity/write/form' />" class="btn btn-default" role="button">기업 활동 글쓰기</a>
-							<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">알림공간 글쓰기</a>     
-					    </div>
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
+				    
+				<div class="col-lg-12 r-contents">
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+						<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
+						<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
+						<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 공지사항</a>
+						<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">입주기업 공지사항 글쓰기</a>	      
+					</div>
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+				    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
+						<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
+						<a href="<c:url value='/admin/partner/activity/write/form' />" class="btn btn-default" role="button">기업 활동 글쓰기</a>
+						<a href="<c:url value='/admin/user/community/list' />" class="btn btn-default" role="button">입주기업 커뮤니티</a>   
+					</div>
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+						<a href="<c:url value='/admin/partner/file/list' />" class="btn btn-default" role="button">서식 자료실</a>
+						<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">서식 자료실 글쓰기</a>
+					</div>
 						
                         <table class="table board-table">
                             <thead>
@@ -126,7 +130,7 @@
 			// CKEditor init start
 			CKEDITOR.replace('post_editor', {
 				height: 450,
-				filebrowserUploadUrl: '<c:url value="/admin/partner-notice/upload/image" />',
+				filebrowserUploadUrl: '<c:url value="/admin/file/upload/image" />',
 						
 				format_tags: 'p;h1;h2;h3;pre',
 	
@@ -159,10 +163,10 @@
 			
 			// Validation start
 			if(title.trim() === '' || title.length > 200) {
-				alert('질문을 200자 이내로 작성해주세요.');
+				alert('제목은 200자 이내로 작성해주세요.');
 				return false;
 			} else if(content.trim() === '') {
-				alert('답변 내용을 작성해주세요.');
+				alert('내용을 작성해주세요.');
 				return false;
 			}
 			// Validation end
@@ -176,7 +180,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/file/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -210,7 +214,7 @@
 				$.ajax({
 					type : 'POST',
 					cache: false,
-					url : '<c:url value="/admin/partner/notice/post/write" />',
+					url : '<c:url value="/admin/partner/file/post/write" />',
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -218,7 +222,7 @@
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
-							location.href = '<c:url value="/admin/partner/notice/list" />';	
+							location.href = '<c:url value="/admin/partner/file/list" />';	
 						} else {
 							alert('작성 실패, 관리자에게 문의해주세요.');
 						}

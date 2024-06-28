@@ -71,7 +71,7 @@ public class NewsletterController {
 	
 	
 	// # 뉴스레터 게시글 서치
-	@RequestMapping(value="post/list")
+	@RequestMapping(value="/post/list")
 	@ResponseBody
 	public Map<String, Object> searchNewsletterPostListByKeyword(Model model,
 			@RequestParam(value="curPage", defaultValue="1") int curPage,

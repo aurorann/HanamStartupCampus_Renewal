@@ -11,14 +11,12 @@
 
     <!-- Common start -->
 
-    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/vendor/bootstrap/css/bootstrap.min.css' />">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/slick.css' />">
      
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/global.css' />">
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/main.css' />">
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub.css' />">
-    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/plugin/swiper-bundle.css' />">
-    
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/plugin/swiper-bundle.css' />">    
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/slick.css' />">
     
     

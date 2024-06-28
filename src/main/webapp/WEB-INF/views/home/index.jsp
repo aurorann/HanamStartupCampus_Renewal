@@ -52,88 +52,44 @@
         <section class="news">
             <div class="in_1400">
                 <h3 class="main_title"><span>하남소식</span> 한눈에 보기</h3>
-                <ul class="tab_list">
-                    <li><a href="#" class="active">전체</a></li>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">정책·지원</a></li>
-                    <li><a href="#" class="more_btn">더보기</a></li>
-                </ul>
-
-                <div id="tab1" class="news_swiper">
-                    <ul class="swiper-wrapper">
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="tab_list">
+                    <button type="button" data-tab="new_tab1" class="active">공지사항</button>
+                    <button type="button" data-tab="new_tab2">정책·지원</button>
+                    <a href="<c:url value='/announce/notice/list' />" class="more_btn">더보기</a>
                 </div>
 
-                <div id="tab2" class="news_swiper">
+                <div id="new_tab1" class="news_swiper active">
                     <ul class="swiper-wrapper">
+                    	<!-- 
                         <li class="swiper-slide">
                             <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
+                                <strong class="board_label  board_label_Ggongo">주요공고</strong>
+                                <h4>
+                                    2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고
+                                    <img src="<c:url value='/resources/img/new.png' />" alt="새공고">
+                                </h4>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17 ~ 2024.05.17</time>
                             </a>
                         </li>
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
-                        <li class="swiper-slide">
-                            <a href="#">
-                                <strong class="board_label">주요공고</strong>
-                                <h4>2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고</h4>
-                                <p>2024 하남스타트업캠퍼스 멘토링 프로그램 자문위원 모집 공고을 공고합니다.</p>
-                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17</time>
-                            </a>
-                        </li>
+                         -->
                     </ul>
-                </div>
-                
-                <!--news_swiper-->
+                </div><!--news_swiper 탭1-->
+                <div id="new_tab2" class="news_swiper">
+                    <ul class="swiper-wrapper">
+                    	<!-- 
+                        <li class="swiper-slide">
+                            <a href="#">
+                                <strong class="board_label board_label_Ggongo">주요공고</strong>
+                                <h4>
+                                    2024 하남스타트업 캠퍼스 맨토링 프로그램 자문위원 모집 공고2
+                                    <img src="<c:url value='/resources/img/new.png' />" alt="새공고">
+                                </h4>
+                                <time datetime="2024-05-17"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">2024.05.17 ~ 2024.05.17</time>
+                            </a>
+                        </li>
+                         -->
+                    </ul>
+                </div><!--news_swiper 탭2-->
             </div>
         </section><!--news-->
 
@@ -236,7 +192,7 @@
             </div>
         </section><!--business-->
 
-        <section class="question_bio in_1400">
+       <section class="question_bio in_1400">
             <div class="question">
                 <div class="main_title_wrap">
                     <h3 class="main_title">자주하는 <span>질문</span></h3>
@@ -252,22 +208,71 @@
             </div><!--question-->
 
             <div class="bio">
-                <div class="popup1">
-                    <strong>접수중</strong>
-                    <h4>미국 바이오 시장진출 역량강화 교육 및 컨설팅 프로그램 참여 기업 모집</h4>
-                    <p>
-                        <span>신청기간</span> &nbsp;:&nbsp; 23.09.18 ~ 23.09.27 18시<br>
-                        <span>모집대상</span> &nbsp;:&nbsp; 경기도 소재 바이오분야 중소기업<br>
-                        <span>모집 규모</span> &nbsp;:&nbsp; 총 10개 업체(참여 비용 없음)
-                    </p>
-                    <a href="#">더보기</a>
-                </div><!--popup1-->
-
-                <a href="#" class="popup2">
-                    <h4>바이오 정책·지원</h4>
-                    <p>(지원사업)2022년 바이오헬스 분야 해외 판로개척 희망기업 모집</p>
-                    <img src="<c:url value='/resources/img/popup2_ico.png' />" alt="바이오 정책·지원">
-                </a>
+                <div class="bio_title_wrap">
+                    <h3 class="main_title">바이오  <span>정책·지원</span></h3>
+                    <div class="swiper-button">
+                        <button class="swiper-button-prev"></button>
+                        <button class="swiper-button-next"></button>
+                        <a href="#" class="more_btn">더보기</a>
+                    </div>
+                </div>
+                 
+                <div class="bio_swiper">
+                    <div class="swiper-wrapper">
+                        <ul class="swiper-slide">
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_Ggongo">주요공고</strong>
+                                    <h4>미국 바이오 시장진출 역량강화 교육 및 컨설팅 프로그램 참여 기업 모집</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_Ggongi">주요공지</strong>
+                                    <h4>미국 바이오 시장진출 역량강화 교육 및 컨설팅 프로그램 참여 기업 모집</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_gongo">공고</strong>
+                                    <h4>미국 바이오 시장진출 역량강화 교육 및 컨설팅 프로그램 참여 기업 모집</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_gongo">공지</strong>
+                                    <h4>미국 바이오 시장진출 역량강화 교육 및 컨설팅 프로그램 참여 기업 모집</h4>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="swiper-slide">
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_Ggongo">주요공고</strong>
+                                    <h4>조규홍 복지장관 "미래 먹거리 바이오헬스산업, 규제혁신 적극 지원"</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_Ggongi">주요공지</strong>
+                                    <h4>조규홍 복지장관 "미래 먹거리 바이오헬스산업, 규제혁신 적극 지원"</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_gongo">공고</strong>
+                                    <h4>조규홍 복지장관 "미래 먹거리 바이오헬스산업, 규제혁신 적극 지원"</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <strong class="board_label board_label_gongo">공지</strong>
+                                    <h4>조규홍 복지장관 "미래 먹거리 바이오헬스산업, 규제혁신 적극 지원"</h4>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div><!--bio-->
         </section><!--question_bio-->
 
@@ -311,7 +316,7 @@
 
         <section class="ent_introduce in_1400">
             <div class="text_ent">
-                <img src="<c:url value='/resources/' />img/green_ico.png" alt="기업소개">
+                <img src="<c:url value='/resources/img/green_ico.png' />" alt="기업소개">
                 <p>
                     하남 스타트업 캠퍼스가 제공하는 창업공간과<br>
                     함께 하고 있는스타트업을 소개합니다.
@@ -321,6 +326,7 @@
             <div class="ent_introduce_swiper_wrap">
                 <div class="ent_introduce_swiper">
                     <ul class="swiper-wrapper" id="slider-div-sm2">
+                    <!-- 
                         <li class="swiper-slide"><a href="#"><img src="img/닉스(주)_logo.png" alt="닉스(주)"></a></li>
                         <li class="swiper-slide"><a href="#"><img src="img/(주)스카이런_logo.png" alt="(주)스카이런"></a></li>
                         <li class="swiper-slide"><a href="#"><img src="img/메이즈(주)_logo.png" alt="메이즈(주)"></a></li>
@@ -330,6 +336,7 @@
                         <li class="swiper-slide"><a href="#"><img src="img/(주)파인더스.png" alt="(주)파인더스"></a></li>
                         <li class="swiper-slide"><a href="#"><img src="img/(주)진케어.png" alt="(주)진케어"></a></li>
                         <li class="swiper-slide"><a href="#"><img src="img/주식회사 에틱스템.png" alt="주식회사 에틱스템"></a></li>
+                     -->
                     </ul>
                 </div>
                 <div class="swiper-button">
@@ -458,6 +465,7 @@
 			//getMediaPostList(1);
 			getPartnerMediaPostList(1);
 			getPartnerInformationList();
+			getNewsletterPostList();
 
 			setFacilitySlider();
 			initSlider("slider-div-sm0");
@@ -558,8 +566,7 @@
 		}
 
 		function getNoticePostList(curPage) {
-			$
-					.ajax({
+			$.ajax({
 						'type' : 'GET',
 						cache : false,
 						url : '<c:url value="/announce/notice/post/list" />',
@@ -570,41 +577,47 @@
 						},
 						success : function(res) {
 							var fixedPost = res.Fixedpost;
-							var commonPost = res.post;
+							var commonPost = res.Commonpost;
 
 							var htmlArr = [];
 
 							fixedPost
 									.every(function(el) {
-										if (htmlArr.length >= 10)
+										if (htmlArr.length >= 9)
 											return false;
-										var titleString = (el.title.length > 15) ? el.title
-												.slice(0, 15)
+										var titleString = (el.title.length > 40) ? el.title
+												.slice(0, 40)
 												+ "..."
 												: el.title;
 
 										var fixedLabel = "";
 										switch (el.level) {
 										case "100":
-											fixedLabel = '<span class="pink-label">공지</span>'
+											fixedLabel = '<strong class="board_label board_label_Ggongi">주요공지</strong>'
 											break;
 										case "101":
-											fixedLabel = '<span class="yellow-label">공고</span>'
+											fixedLabel = '<strong class="board_label  board_label_Ggongo">주요공고</strong>'
 											break;
 										}
 
-										var fixedHTML = '<tr >'
-												+ '<td style="width:20%;">'
-												+ fixedLabel
-												+ '</td>'
-												+ '<td style="width:60%;"><span class="board-title" onclick="location.href = \'<c:url value="/announce/notice/view" />/'
+										var fixedHTML = '<li class="swiper-slide">'
+					                            + '<a href = \'<c:url value="/announce/notice/view" />/'
 												+ el.seqId
 												+ '\'">'
-												+ titleString
-												+ '</span></td>'
-												+ '<td style="width:20%;"><small>'
-												+ el.contractStartAt
-												+ '</small></td>' + '</tr>';
+					                            + fixedLabel
+					                            + '<h4>'
+					                            + titleString
+					                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고">'
+					                            + '</h4>'
+					                            + '<time datetime="2024-05-17">'
+					                            + '<img src="<c:url value='/resources/img/calendar_ico.png' />\" alt="달력">'
+				                                + el.contractStartAt
+				                                + '~'
+				                                + el.contractEndAt
+					                            + '</time>'
+					                            + '</a>'
+					                        	+ '</li>';
+		
 										htmlArr.push(fixedHTML);
 
 										return true;
@@ -612,44 +625,48 @@
 
 							commonPost
 									.every(function(el) {
-										if (htmlArr.length >= 7)
+										if (htmlArr.length >= 9)
 											return false;
 										if (el.level === "100"
 												|| el.level === "101")
 											return true;
-										var titleString = (el.title.length > 15) ? el.title
-												.slice(0, 15)
+										var titleString = (el.title.length > 40) ? el.title
+												.slice(0, 40)
 												+ "..."
 												: el.title;
 
 										var commonLabel = "";
 										switch (el.level) {
 										case "102":
-											commonLabel = '<span class="white-label-odd">일반</span>'
+											commonLabel = '<strong class="board_label board_label_gongo">공지</strong>'
 											break;
 										case "103":
-											commonLabel = '<span class="white-label-odd">일반</span>'
+											commonLabel = '<strong class="board_label board_label_gongo">공고</strong>'
 											break;
 										}
 
-										var commonHTML = '<tr onclick="location.href = \'<c:url value="/announce/notice/view" />/'
-												+ el.seqId
-												+ '\'">'
-												+ '<td style="width:20%;">'
-												+ commonLabel
-												+ '</td>'
-												+ '<td style="width:60%;"><span class="board-title">'
-												+ titleString
-												+ '</span></td>'
-												+ '<td style="width:20%;"><small>'
-												+ el.contractStartAt
-												+ '</small></td>' + '</tr>';
-
+										var commonHTML = '<li class="swiper-slide">'
+				                            + '<a href = \'<c:url value="/announce/notice/view" />/'
+											+ el.seqId
+											+ '\'">'
+				                            + commonLabel
+				                            + '<h4>'
+				                            + titleString
+				                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고">'
+				                            + '</h4>'
+				                            + '<time datetime="2024-05-17">'
+				                            + '<img src="<c:url value='/resources/img/calendar_ico.png' />\" alt="달력">'
+			                                + el.contractStartAt
+			                                + '~'
+			                                + el.contractEndAt
+				                            + '</time>'
+				                            + '</a>'
+				                        	+ '</li>';
 										htmlArr.push(commonHTML);
 										return true;
 									});
 
-							$("div#tab1 .tab-table").html(htmlArr.join(""));
+							$("div#new_tab1 .swiper-wrapper").html(htmlArr.join(""));
 						},
 						error : function(error) {
 							alert('공지/공고를 불러오지 못했습니다, 관리자에게 문의해주세요.');
@@ -677,27 +694,32 @@
 									.every(function(el) {
 										if (htmlArr.length >= 7)
 											return false;
-										var titleString = (el.title.length > 15) ? el.title
-												.slice(0, 15)
+										var titleString = (el.title.length > 40) ? el.title
+												.slice(0, 40)
 												+ "..."
 												: el.title;
 
-										var commonHTML = '<tr>'
-												+ '<td style="width:20%;"><span class="white-label-odd">소식</span></td>'
-												+ '<td style="width:60%;"><span class="board-title" onclick="location.href = \'<c:url value="/announce/agency/view" />/'
-												+ el.seqId
-												+ '\'">'
-												+ titleString
-												+ '</span></td>'
-												+ '<td style="width:20%;"><small>'
-												+ el.createdAt
-												+ '</small></td>' + '</tr>';
+										var commonHTML = '<li class="swiper-slide">'
+				                            + '<a href = \'<c:url value="/announce/notice/view" />/'
+											+ el.seqId
+											+ '\'">'
+				                            + '<strong class="board_label board_label_gongo">소식</strong>'
+				                            + '<h4>'
+				                            + titleString
+				                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고">'
+				                            + '</h4>'
+				                            + '<time datetime="2024-05-17">'
+				                            + '<img src="<c:url value='/resources/img/calendar_ico.png' />\" alt="달력">'
+			                                + el.createdAt
+				                            + '</time>'
+				                            + '</a>'
+				                        	+ '</li>';
 
 										htmlArr.push(commonHTML);
 										return true;
 									});
 
-							$("div#tab2 .tab-table").html(htmlArr.join(""));
+							$("div#new_tab2 .swiper-wrapper").html(htmlArr.join(""));
 						},
 						error : function(error) {
 							alert('바이오 정책 · 지원을 불러오지 못했습니다, 관리자에게 문의해주세요.');
@@ -770,7 +792,6 @@
 												+ el.name
 												+ '">'
 												+ '</a></li>';
-
 										htmlArr.push(commonHTML);
 										return true;
 									});
@@ -821,6 +842,35 @@
 						},
 						error : function(error) {
 							alert('입주기업 소개 영상을 불러오지 못했습니다, 관리자에게 문의해주세요.');
+						}
+					});
+		}
+		
+
+		function getNewsletterPostList(curPage) {
+			$.ajax({
+						'type' : 'GET',
+						cache : false,
+						url : '<c:url value="/newsletter/post/list" />',
+						success : function(res) {
+							var commonPost = res.post[0];
+
+							var commonHTML = '<div class="main_title_wrap">'
+				                    + '<h3 class="main_title">뉴스레터</h3>'
+				                    + '<a href="<c:url value='/newsletter/list' />" class="more_btn">더보기'
+				                    + '</a>'
+				                	+ '</div>'
+				                	+ '<a href="<c:url value='/newsletter/view/' />/'
+									+ commonPost.seqId
+									+ '">'
+				                	+ '뉴스레터_bg'
+				                	+ '</a>';
+
+							$("div.letter").html(commonHTML);
+
+						},
+						error : function(error) {
+							alert('뉴스레터 정보를 불러오지 못했습니다, 관리자에게 문의해주세요.');
 						}
 					});
 		}

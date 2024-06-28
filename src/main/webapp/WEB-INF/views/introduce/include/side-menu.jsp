@@ -27,6 +27,7 @@
                     <li data-location-sub='조직도'><a href="<c:url value='/introduce/contract' />">조직도</a></li>
                     <li data-location-sub='오시는 길'><a href="<c:url value='/introduce/direction' />">오시는 길</a></li>
                     <li data-location-sub='입주신청'><a href="<c:url value='/introduce/join' />">입주신청</a></li>
+                    <li data-location-sub='홍보 리플렛'><a href="<c:url value='/introduce/leaflet' />">홍보 리플렛</a></li>
 	            </ul>
 	        </aside>
             

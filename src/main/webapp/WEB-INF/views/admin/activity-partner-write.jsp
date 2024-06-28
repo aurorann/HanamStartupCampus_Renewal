@@ -39,71 +39,77 @@
 		<!-- # include: side-menu end -->
 		<main>
             <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
-                    <div class="col-lg-12 r-contents">
-                    	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-	                   		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
-	                   		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-							<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 공지사항</a>
-					    </div>
-					    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-					    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
-							<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
-							<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">기업 활동 글쓰기</a>
-							<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">알림공간 글쓰기</a>	      
-					    </div>
-							<form id="galleryForm" onsubmit="return false" enctype="multipart/form-data">
-	                        	<table class="table board-table">
-		                            <thead>
-		                                <tr>
-		                                    <td>
-		                                        <div class="board-title">
-													<div class="title-label">
-		                                                <h5>제목</h5>
-		                                                <input type="text" class="board-input" name="title" id="post_title">
-		                                            </div>
-		                                            
-		                                            <div class="title-label">
-		                                            	<h5>대표 이미지</h5>
-		                                                <input type="file"
-															class="board-input" id="representImageFile" name="representImageFile"
-															accept=".jpg,.png,.gif" />
-														<h5>첨부 파일</h5>
-														<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-		                                            </div>
-		                                            
-		                                        </div>
-		                                    </td>
-		                                </tr>
-		                            </thead>
-		                            <tbody>
-		                            	<tr>
-										    <td>
-										    	<div class="gallery-represent-wrapper">
-										    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
-										    	</div>
-										    </td>
-										</tr>
-		                                <tr>
-		                                    <td class="board-contents">
-		                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
-		                                    </td>
-		                                </tr>
-		                            </tbody>
-		                        </table>
-							</form>
+				<div class="col-lg-12 r-contents">
+					    
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+                   		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
+                   		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
+						<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 공지사항</a>
+						<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">입주기업 공지사항 글쓰기</a>	      
+				    </div>
+				    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+				    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
+						<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
+						<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">기업 활동 글쓰기</a>
+						<a href="<c:url value='/admin/user/community/list' />" class="btn btn-default" role="button">입주기업 커뮤니티</a>
+				    </div>
+				    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+						<a href="<c:url value='/admin/partner/file/list' />" class="btn btn-default" role="button">서식 자료실</a>
+						<a href="<c:url value='/admin/partner/file/write/form' />" class="btn btn-default" role="button">서식 자료실 글쓰기</a>
+				    </div>
+					<form id="galleryForm" onsubmit="return false" enctype="multipart/form-data">
+                       	<table class="table board-table">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <div class="board-title">
+											<div class="title-label">
+                                                <h5>제목</h5>
+                                                <input type="text" class="board-input" name="title" id="post_title">
+                                            </div>
+                                            
+                                            <div class="title-label">
+                                            	<h5>대표 이미지</h5>
+                                                <input type="file"
+													class="board-input" id="representImageFile" name="representImageFile"
+													accept=".jpg,.png,.gif" />
+												<h5>첨부 파일</h5>
+												<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+                                            </div>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<tr>
+								    <td>
+								    	<div class="gallery-represent-wrapper">
+								    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
+								    	</div>
+								    </td>
+								</tr>
+                                <tr>
+                                    <td class="board-contents">
+                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+					</form>
     					
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
-						      <div class="btn-group" role="group">
-						        <button type="button" class="btn btn-default" onclick="writeNewPost();">게시글 작성</button>
-						      </div>
-						      
-						      
-						    </div>
+					<!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" onclick="writeNewPost();">게시글 작성</button>
+						</div>
+					  
+					  
+					</div>
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->

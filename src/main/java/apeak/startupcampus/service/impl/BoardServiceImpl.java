@@ -34,8 +34,10 @@ import apeak.startupcampus.model.dao.AgencyMapper;
 import apeak.startupcampus.model.dao.BioInfoMapper;
 import apeak.startupcampus.model.dao.CommunityPartnerMapper;
 import apeak.startupcampus.model.dao.FaqMapper;
+import apeak.startupcampus.model.dao.FilePartnerMapper;
 import apeak.startupcampus.model.dao.MediaMapper;
 import apeak.startupcampus.model.dao.MediaPartnerMapper;
+import apeak.startupcampus.model.dao.NewsPartnerMapper;
 import apeak.startupcampus.model.dao.NoticeMapper;
 import apeak.startupcampus.model.dao.NoticePartnerMapper;
 import apeak.startupcampus.model.dao.PartnerMapper;
@@ -50,6 +52,7 @@ import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
+import apeak.startupcampus.model.dto.BoardPartnerNewsDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
 import apeak.startupcampus.model.dto.NewsletterDTO;
 import apeak.startupcampus.model.dto.PartnerDTO;
@@ -109,6 +112,12 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	
 	@Resource(name = "communityPartnerMapper")
 	private CommunityPartnerMapper communityPartnerMapper;
+	
+	@Resource(name = "filePartnerMapper")
+	private FilePartnerMapper filePartnerMapper;
+	
+	@Resource(name = "newsPartnerMapper")
+	private NewsPartnerMapper newsPartnerMapper;
 
 	// 파일 세이브 경로 (globals.properties)
 	@Value("#{globals['path.root']}")
@@ -159,6 +168,16 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	@Value("#{globals['url.newsletter']}")
 	private String NEWSLETTER_URL;
 	
+	@Value("#{globals['path.file']}")
+	private String FILE_PATH;
+	@Value("#{globals['url.file']}")
+	private String FILE_URL;
+	
+	@Value("#{globals['path.news']}")
+	private String NEWS_PATH;
+	@Value("#{globals['url.news']}")
+	private String NEWS_URL;
+	
 	// [일부 웹페이지 수정 로직]
 	public Map<String, Object> getPageContent(String level) throws Exception {
 		Map<String, Object> resultMap = webpageMapper.selectPageContent(level);
@@ -189,6 +208,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		LOGGER.debug(searchOption.toString());
 
 		resultMap.put("Fixedpost", noticeMapper.selectFixedNoticePostList(searchOption));
+		resultMap.put("Commonpost", noticeMapper.selectCommonNoticePostList(searchOption));
 		resultMap.put("post", noticeMapper.selectNoticePostList(searchOption));
 
 		return resultMap;
@@ -713,7 +733,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		galleryDTO.setRepresentImage(fileName);
 
 		int insertCount = activityPartnerMapper.insertActivityPartnerPostOneForPartner(galleryDTO);
-		return getBoardWriteResultMap(insertCount, "기업 활동");
+		return getBoardWriteResultMap(insertCount, "기업 소식");
 	}
 	
 
@@ -971,7 +991,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 		
 		int insertCount = activityPartnerMapper.updateActivityPartnerPostOne(galleryDTO);
-		return getBoardEditResultMap(insertCount, "기업 활동");
+		return getBoardEditResultMap(insertCount, "기업 소식");
 	}
 	
 	public Map<String, Object> editActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO,HttpServletRequest request) throws Exception {
@@ -1245,6 +1265,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		} else if (boardType.equals("newsletter")) {
 			savePathContext = NEWSLETTER_PATH;
 			dirUrl = NEWSLETTER_URL;
+		} else if (boardType.equals("file")) {
+			savePathContext = FILE_PATH;
+			dirUrl = FILE_URL;
 		}
 
 		MultipartFile pFile = multiReq.getFile("upload");
@@ -1371,11 +1394,11 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		String writerName = boardDTO.getWriterName();
 		// 작성자 NAME 등록
 		try {
-			if(writerName == null) {
-				boardDTO.setWriterName(null);
-			}else {
+			if ("setName".equals(writerName)) {
 				boardDTO.setWriterName(
 						((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getName());
+			}else {
+				boardDTO.setWriterName(null);
 			}
 		} catch (Exception e) {
 			LOGGER.debug("NO AUTH FOUND");
@@ -1496,12 +1519,19 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			postCnt = activityPartnerMapper.selectActivityPartnerPostCount(searchOption);
 			pageSize = 9;
 			break;
+		case "partner-news":
+			postCnt = newsPartnerMapper.selectNewsPartnerPostCount(searchOption);
+			pageSize = 9;
+			break;
 		case "newsletter":
 			postCnt = newsletterMapper.selectNewsletterPostCount(searchOption);
 			pageSize = 9;
 			break;
 		case "partner-community":
 			postCnt = communityPartnerMapper.selectCommunityPartnerPostCount(searchOption);
+			break;
+		case "file":
+			postCnt = filePartnerMapper.selectFilePartnerPostCount(searchOption);
 			break;
 		}
 
@@ -1557,6 +1587,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			} else if (boardType.equals("newsletter")) {
 				savePathContext = NEWSLETTER_PATH;
 				dirUrl = NEWSLETTER_URL;
+			} else if (boardType.equals("file")) {
+				savePathContext = FILE_PATH;
+				dirUrl = FILE_URL;
 			}
 
 			List<MultipartFile> fileList = mtfRequest.getFiles("file");
@@ -1618,4 +1651,113 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 		return rJsonStr;
 	}
+	
+
+	// [서식 자료실] 관련 서비스 메서드
+	public Map<String, Object> writeFilePartnerPost(BoardDTO boardDTO) throws Exception {
+		setWriterInfo(boardDTO);
+		int insertCount = filePartnerMapper.insertFilePartnerPostOne(boardDTO);
+		return getBoardWriteResultMap(insertCount, "서식 자료실");
+	}
+	
+	// # 서식 자료실 게시글 리스트 조회
+	public Map<String, Object> getFilePartnerPostList(Map<String, Object> searchOption) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", "success");
+		resultMap.put("searchOption", getBoardSearchOption(searchOption));
+
+		LOGGER.debug(searchOption.toString());
+
+		resultMap.put("post", filePartnerMapper.selectFilePartnerPostList(searchOption));
+
+		return resultMap;
+	}
+	
+	// # 서식 자료실 게시글 조회
+	public Map<String, Object> getFilePartnerPost(int seqId) throws Exception {
+		int rowCount = filePartnerMapper.updateFilePartnerPostViewCount(seqId);
+		if (rowCount > 0) {
+			return filePartnerMapper.selectFilePartnerPostOne(seqId);
+		} else {
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("error", "POST_NOT_FOUND");
+			return resultMap;
+		}
+	}
+	
+
+	// 서식 자료실 게시글 수정
+	public Map<String, Object> editFilePartnerPost(BoardDTO boardDTO,HttpServletRequest request) throws Exception {
+		setWriterInfo(boardDTO);
+		
+		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
+		Map<String, Object> oldPost = filePartnerMapper.selectFilePartnerPostOne(boardDTO.getSeqId());
+		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
+		
+		if(!boardDTO.getFilePath().equals(oldPaths)) {
+			String path = request.getSession().getServletContext().getRealPath("/");
+			
+			String oldList[] = oldPaths.split(":");
+			
+			for(String oldPath:oldList) {			
+				File oldFile = new File(path+File.separator+oldPath);
+				oldFile.delete();
+			}
+		}
+		
+		int insertCount = filePartnerMapper.updateFilePartnerPostOne(boardDTO);
+		return getBoardEditResultMap(insertCount, "입주기업 알림공간");
+	}
+	
+	// 서식 자료실 게시글 삭제
+	public Map<String, Object> deleteFilePartnerPost(int seqId) throws Exception {
+		int insertCount = filePartnerMapper.deleteFilePartnerPostOne(seqId);
+		return getBoardDeleteResultMap(insertCount, "입주기업 알림공간");
+	}
+	
+	
+	// # 기업 소식 게시글 리스트 조회
+	public Map<String, Object> getNewsPartnerPostList(Map<String, Object> searchOption) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", "success");
+		resultMap.put("searchOption", getBoardSearchOption(searchOption));
+
+		LOGGER.debug(searchOption.toString());
+
+		resultMap.put("post", newsPartnerMapper.selectNewsPartnerPostList(searchOption));
+
+		return resultMap;
+	}
+
+	// # 기업 소식 게시글 조회
+	public Map<String, Object> getNewsPartnerPost(int seqId) throws Exception {
+		int rowCount = newsPartnerMapper.updateNewsPartnerPostViewCount(seqId);
+		if (rowCount > 0) {
+			return newsPartnerMapper.selectNewsPartnerPostOne(seqId);
+		} else {
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("error", "POST_NOT_FOUND");
+			return resultMap;
+		}
+	}
+	
+	// # 기업 소식 게시글 작성
+	public Map<String, Object> writeNewsPartnerPostForPartner(BoardPartnerNewsDTO partnerNewsDTO) throws Exception {
+		setWriterInfo(partnerNewsDTO);
+
+		MultipartFile newImage = partnerNewsDTO.getRepresentImageFile();
+		String fileName = saveNewMultipartImage(newImage, PARTNER_PATH + File.separator + "partner-news");
+		partnerNewsDTO.setRepresentImage(fileName);
+
+		int insertCount = newsPartnerMapper.insertNewsPartnerPostOne(partnerNewsDTO);
+		return getBoardWriteResultMap(insertCount, "기업 소식");
+	}
+	
+	
+	
+	
+	
+	
 }

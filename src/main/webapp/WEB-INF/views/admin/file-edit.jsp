@@ -33,11 +33,6 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
    
 
 	<div class="sub_container in_1400">
@@ -54,7 +49,8 @@
 					    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
                     		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
                     		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-							<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">입주기업 알림공간</a>
+							<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 알림공간</a>
+							<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">서식 자료실</a>
 					    </div>
 					    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 					    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
@@ -126,7 +122,7 @@
 						      	<button type="button" class="btn btn-default" onclick="editPost();">게시글 수정</button>
 						      </div>
 						      <div class="btn-group" role="group" style="margin-top: 10px">
-						      	<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/admin/partner/notice/view' />/${SEQ_ID}';">돌아가기</button>
+						      	<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/admin/partner/file/view' />/${SEQ_ID}';">돌아가기</button>
 						      </div>
 							
 						    </div>
@@ -249,7 +245,7 @@
 				$.ajax({
 					type : 'POST',
 					cache: false,
-					url : '<c:url value="/admin/partner/notice/post/edit" />/${SEQ_ID}',
+					url : '<c:url value="/admin/partner/file/post/edit" />/${SEQ_ID}',
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -257,7 +253,7 @@
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
-							location.href = '<c:url value="/admin/partner/notice/view" />/${SEQ_ID}';	
+							location.href = '<c:url value="/admin/partner/file/view" />/${SEQ_ID}';	
 						} else {
 							alert('게시글을 수정할 수 없습니다, 관리자에게 문의해주세요.');
 						}

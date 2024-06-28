@@ -25,7 +25,7 @@ sub_bnr
     margin-bottom:55px;
 }
 .sub_bnr h2{
-    font-weight:700;
+    font-weight:600;
     font-size:50px;
     color:#fff;
 }
@@ -40,14 +40,15 @@ container
 
 /*aside 왼쪽메뉴*/
 .sub_container aside{
-    width:240px;
-    margin-top:3px;
+    max-width:240px;
+    width:20%;
+    margin-top:10px;
 }
 .sub_container aside h3{
-    font-weight:700;
+    font-weight:600;
     font-size:25px;
     color:#4e4e4e;
-    padding-bottom:10px;
+    padding-bottom:12px;
     border-bottom:2px solid #4f4f4f; 
 }
 .sub_container aside ul li a{
@@ -59,7 +60,7 @@ container
     background-repeat:no-repeat;
     background-position:93% center;
 
-    font-size: 15px;
+    font-size:15px;
     font-weight:500;
     color:#848484;
 }
@@ -72,8 +73,9 @@ container
 
 /*sub_title*/
 .sub_container main{
-    width:1100px;
-    margin-left:60px;
+    max-width:1100px;
+    width:75%;
+    margin-left:5%;
 }
 .sub_title{
     display:flex; flex-wrap:wrap;
@@ -82,7 +84,7 @@ container
     border-bottom:2px solid #000;
 }
 .sub_title h3{
-    font-weight:700;
+    font-weight:600;
     font-size:35px;
     line-height:100%;
 }

@@ -32,20 +32,14 @@
 	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
-    <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
+    <!-- # common: header-menu end -->  
    
 
-    <div class="sub-contents">
-        <div class="inner">
-            <!-- # include: side-menu start -->
-            <%@ include file="./include/side-menu.jsp"%>
-            <!-- # include: side-menu end -->
-            
+    <div class="sub_container in_1400">
+		<!-- # include: side-menu start -->
+		<%@ include file="./include/side-menu.jsp"%>
+		<!-- # include: side-menu end -->
+		<main>
             <div class="right-contents col-lg-9">
                     <!-- # include: title-box start -->
 	                <%@ include file="./include/title-box.jsp"%>
@@ -94,7 +88,7 @@
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
-        </div>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
@@ -120,7 +114,7 @@
 			// CKEditor init start
 			CKEDITOR.replace('post_editor', {
 				height: 450,
-				filebrowserUploadUrl: '<c:url value="/partner/community/upload/image" />',
+				filebrowserUploadUrl: '<c:url value="/user/community/upload/image" />',
 						
 				format_tags: 'p;h1;h2;h3;pre',
 	
@@ -177,7 +171,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/partner/community/upload/file" />', 
+					url: '<c:url value="/user/community/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -208,11 +202,13 @@
 				writerName: writerName
 			}
 			
+			console.log(data);
+			
 			if(confirm('게시글을 작성하시겠습니까?')) {
 				$.ajax({
 					type : 'POST',
 					cache: false,
-					url : '<c:url value="/partner/community/post/write" />',
+					url : '<c:url value="/user/community/post/write" />',
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -220,7 +216,7 @@
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
-							location.href = '<c:url value="/partner/community/list" />';	
+							location.href = '<c:url value="/user/community/list" />';	
 						} else {
 							alert('작성 실패, 관리자에게 문의해주세요.');
 						}

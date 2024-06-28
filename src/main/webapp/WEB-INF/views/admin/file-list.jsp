@@ -39,22 +39,27 @@
 		<!-- # include: side-menu end -->
 		<main>
             <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
 				<div class="col-lg-12 r-contents">
 					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                   		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
-                   		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-						<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">입주기업 알림공간</a>
-				    </div>
-				    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+						<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
+						<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
+						<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 공지사항</a>
+						<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">입주기업 공지사항 글쓰기</a>	      
+					</div>
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 				    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
 						<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
 						<a href="<c:url value='/admin/partner/activity/write/form' />" class="btn btn-default" role="button">기업 활동 글쓰기</a>
-						<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">알림공간 글쓰기</a>	      
-				    </div>
+						<a href="<c:url value='/admin/user/community/list' />" class="btn btn-default" role="button">입주기업 커뮤니티</a>   
+					</div>
+					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
+						<a href="javascript:void(0);" class="btn btn-defaul you-are-here" role="button">서식 자료실</a>
+						<a href="<c:url value='/admin/partner/file/write/form' />" class="btn btn-default" role="button">서식 자료실 글쓰기</a>
+					</div>
  
                     <div class="sm-main-box pink-bar flex-end">
                         <h3><strong>총 게시물</strong>&nbsp;|&nbsp;<span id="post_count">0건</span></h3>
@@ -76,7 +81,7 @@
         
                     </div>
 
-                    <ul class="board-box common-notice">
+                    <ul class="board-box common-file">
 
                     </ul>
 
@@ -106,7 +111,7 @@
 		function getPostList(curPage) {
 			$.ajax({
 				type : 'GET',
-				url : '<c:url value="/admin/partner/notice/post/list" />',
+				url : '<c:url value="/admin/partner/file/post/list" />',
 				data: {
 					curPage: (curPage) ? curPage : _VARS.searchOption.curPage,
 					keyword: _VARS.searchOption.keyword,
@@ -138,7 +143,7 @@
 								var commonHTML = '<li class="board-item">' +
 			                    '<strong class="item-nmb">' + el.seqId + '</strong>' +
 		                            '<div class="item-title">' +
-		                            '<span><a href="<c:url value='/admin/partner/notice/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
+		                            '<span><a href="<c:url value='/admin/partner/file/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
 		                            '</div>' +
 		                            '<div class="item-info">' +
 		                            	'<h5 class="item-view"><strong>작성자</strong> <span>' + el.writerName + '</span></h5>' +
@@ -151,7 +156,7 @@
 		                return true;
 					});
 					
-					$("ul.board-box.common-notice").html(commonArr.join(""));
+					$("ul.board-box.common-file").html(commonArr.join(""));
 					
 					$('nav[aria-label]').html(pageHTML);
 					

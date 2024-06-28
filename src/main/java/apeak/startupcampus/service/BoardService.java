@@ -13,6 +13,7 @@ import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
+import apeak.startupcampus.model.dto.BoardPartnerNewsDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
 import apeak.startupcampus.model.dto.NewsletterDTO;
 import apeak.startupcampus.model.dto.PartnerDTO;
@@ -173,6 +174,22 @@ public interface BoardService  {
 	public Map<String, Object> getCommunityPartnerPost(int seqId) throws Exception;
 	public Map<String, Object> deleteCommunityPartnerPost(int seqId) throws Exception;
 	public Map<String, Object> editCommunityPartnerPost(BoardDTO boardDTO, HttpServletRequest request) throws Exception;
+	
+	// # 서식 자료실 관련
+	public Map<String, Object> writeFilePartnerPost(BoardDTO boardDTO) throws Exception;
+	public Map<String, Object> getFilePartnerPostList(Map<String, Object> searchOption) throws Exception;
+	public Map<String, Object> getFilePartnerPost(int seqId) throws Exception;
+	public Map<String, Object> editFilePartnerPost(BoardDTO boardDTO, HttpServletRequest request) throws Exception;
+	public Map<String, Object> deleteFilePartnerPost(int seqId) throws Exception;
+
+	
+	// [기업 소식] 관련 서비스 메서드
+	// # 기업 소식 게시글 리스트 조회
+	public Map<String, Object> getNewsPartnerPostList(Map<String, Object> searchOption) throws Exception;
+	// # 기업 소식 게시글 조회	
+	public Map<String, Object> getNewsPartnerPost(int seqId) throws Exception;
+	// # 기업 소식 게시글 작성
+	public Map<String, Object> writeNewsPartnerPostForPartner(BoardPartnerNewsDTO partnerNewsDTO) throws Exception;
 
 	
 

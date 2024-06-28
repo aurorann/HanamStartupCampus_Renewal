@@ -44,7 +44,7 @@
 			]]>
 	</select>
 	
-	<!-- 게시글 리스트 조회 -->
+	<!-- 인덱스 고정 게시글 리스트 조회 -->
 	<select id="selectFixedNoticePostList" parameterType="map" resultType="boardNoticeDTO">
 			<![CDATA[
 				SELECT
@@ -53,8 +53,25 @@
 				FROM
 					board_notice
 				WHERE
-					level = '100'
-					OR level = '101'
+					level in('100', '101') 
+					AND CONTRACT_END_AT >= current_date()
+				ORDER BY
+					LEVEL ASC,			
+					SEQ_ID DESC
+			]]>
+	</select>
+	
+	<!-- 인덱스 일반 게시글 리스트 조회 -->
+	<select id="selectCommonNoticePostList" parameterType="map" resultType="boardNoticeDTO">
+			<![CDATA[
+				SELECT
+					SEQ_ID, `LEVEL`, TITLE, VIEW_COUNT,
+					CONTRACT_START_AT, CONTRACT_END_AT
+				FROM
+					board_notice
+				WHERE
+					level in('102', '103') 
+					AND CONTRACT_END_AT >= current_date()
 				ORDER BY
 					LEVEL ASC,			
 					SEQ_ID DESC

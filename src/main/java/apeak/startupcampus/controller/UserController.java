@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import apeak.startupcampus.common.Utils;
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
+import apeak.startupcampus.model.dto.BoardPartnerActivityDTO;
+import apeak.startupcampus.model.dto.BoardPartnerNewsDTO;
 import apeak.startupcampus.model.dto.UserDTO;
 import apeak.startupcampus.service.BoardService;
 import apeak.startupcampus.service.UserService;
@@ -201,73 +203,73 @@ public class UserController {
 	
 	
 	/*
-	 * 기업 활동 관련
+	 * 기업 소식 관련
 	 * */
 	
-	// 기업 활동 게시글 작성폼 이동
+	// 기업 소식 게시글 작성폼 이동
 	@RequestMapping(value = "/partner/activity/write/form")
 	public String goToActivityPartnerWriteForm(Model model) {
-		Utils.setPageViewLocation(model, locationMain, "기업 활동 업로드");
+		Utils.setPageViewLocation(model, locationMain, "기업 소식 업로드");
 		return "user/activity-partner-write";
 	}
 	
-	// 기업 활동 게시글 수정폼 이동
+	// 기업 소식 게시글 수정폼 이동
 	@RequestMapping(value="/partner/activity/edit/form/{seqId}")
 	public String goToActivityPartnerEditView(
 			@PathVariable("seqId")int seqId, Model model) throws Exception {
 		String locationSub = null;
 		model.addAllAttributes(boardService.getActivityPartnerPost(seqId));
 		
-		Utils.setPageViewLocation(model, locationMain, "기업 활동 업로드");
+		Utils.setPageViewLocation(model, locationMain, "기업 소식 업로드");
 		return "user/activity-partner-edit";
 	}
 	
-	// 기업 활동 게시글 작성하기
+	// 기업 소식 게시글 작성하기
 	@RequestMapping(value="/partner/activity/post/write", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> writeActivityPartnerPosting(
-			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletResponse res
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
-		return boardService.writeActivityPartnerPostForPartner(gallaryDTO);
+		return boardService.writeActivityPartnerPostForPartner(partnerActivityDTO);
 	}
 	
-	// 기업 활동 게시글 수정하기
+	// 기업 소식 게시글 수정하기
 	@RequestMapping(value="/partner/activity/post/edit/{seqId}", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> editActivityPartnerPost(
-			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletRequest req, HttpServletResponse res
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 		
 		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		gallaryDTO.setWriterId(userDTO.getSeqId());
+		partnerActivityDTO.setWriterId(userDTO.getSeqId());
 		
-		return boardService.editActivityPartnerPostForPartner(gallaryDTO, req);
+		return boardService.editActivityPartnerPostForPartner(partnerActivityDTO, req);
 	}
 	
 	// 기업 활동 게시글 삭제하기
 	@RequestMapping(value="/partner/activity/post/remove/{seqId}", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> removeActivityPartnerPost(
-			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletRequest req, HttpServletResponse res, Authentication auth
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 		
 		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		gallaryDTO.setWriterId(userDTO.getSeqId());
+		partnerActivityDTO.setWriterId(userDTO.getSeqId());
 		
-		return boardService.deleteActivityPartnerPostForPartner(gallaryDTO, req);
+		return boardService.deleteActivityPartnerPostForPartner(partnerActivityDTO, req);
 	}
 	
 	
 	// [입주기업 커뮤니티] 관련 메서드
 	// # 입주기업 커뮤니티 리스트 뷰
 	@RequestMapping(value = "/community/list")
-	public String goToPartnerNoticeList(Model model, @RequestParam(value = "curPage", defaultValue = "1") int curPage,
+	public String goToPartnerCommunityList(Model model, @RequestParam(value = "curPage", defaultValue = "1") int curPage,
 			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
 		LOGGER.debug("LIST ARRIVED");
@@ -395,10 +397,132 @@ public class UserController {
 		return boardService.saveBoardFile(boardType, multiReq);
 	}
 	
+	// 서식 자료실 리스트 뷰
+//	@RequestMapping(value="/file/list")
+//	public String goToJoin(Model model) {
+//		Utils.setPageViewLocation(model, locationMain, "서식 자료실");
+//		return "user/file-list";
+//	}
 	
+	// 서식 자료실 리스트 뷰
 	@RequestMapping(value="/file/list")
-	public String goToJoin(Model model) {
+	public String goToFileBoard(Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if(curPage == 0) {
+			curPage = 1;
+		}
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "file");
+		LOGGER.debug(searchOption.toString());
+		
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+		
 		Utils.setPageViewLocation(model, locationMain, "서식 자료실");
+		model.addAllAttributes(resultMap);
 		return "user/file-list";
 	}
+	
+	// 서식 자료실 게시글 뷰
+	@RequestMapping(value="/file/view/{seqId}")
+	public String goToFileView(@PathVariable("seqId")int seqId, Authentication auth, Model model) throws Exception {
+		Map<String, Object> resultMap = boardService.getFilePartnerPost(seqId);
+		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		LOGGER.debug(userDTO.toString());
+		if(resultMap.get("WRITER_ID").equals(userDTO.getSeqId())) {
+			resultMap.put("IS_AUTHOR", true);
+		} else {
+			resultMap.put("IS_AUTHOR", false);
+		}
+		model.addAllAttributes(resultMap);
+		Utils.setPageViewLocation(model, locationMain, "서식 자료실");
+		return "user/file-view";
+	}
+	
+	// 서식 자료실 게시글 서치
+	@RequestMapping(value="/file/post/list")
+	@ResponseBody
+	public Map<String, Object> searchFileListByKeyword(Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "file");
+		Map<String, Object> resultMap = boardService.getFilePartnerPostList(searchOption);
+		String locationSub = "서식 자료실";
+		return resultMap;
+	}
+	
+	
+	// 기업 소식 게시글 작성하기
+	@RequestMapping(value="/partner/news/post/write", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> writeNewsPartnerPosting(
+			@ModelAttribute BoardPartnerNewsDTO partnerNewsDTO,
+			HttpServletResponse res
+			) throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		return boardService.writeNewsPartnerPostForPartner(partnerNewsDTO);
+	}
+	
+	
+	// 기업 소식 게시글 작성폼 이동
+	@RequestMapping(value = "/partner/news/write/form")
+	public String goToNewsPartnerWriteForm(Model model) {
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "user/news-partner-write";
+	}
+	
+	// 기업 활동 게시글 수정폼 이동
+	@RequestMapping(value="/partner/news/edit/form/{seqId}")
+	public String goToNewsPartnerEditView(
+			@PathVariable("seqId")int seqId, Model model) throws Exception {
+		String locationSub = null;
+		model.addAllAttributes(boardService.getNewsPartnerPost(seqId));
+		
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "user/news-partner-edit";
+	}
+	
+	// 기업 활동 게시글 수정하기
+	@RequestMapping(value="/partner/news/post/edit/{seqId}", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> editNewsPartnerPost(
+			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			HttpServletRequest req, HttpServletResponse res
+			) throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		
+		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		gallaryDTO.setWriterId(userDTO.getSeqId());
+		
+		return boardService.editActivityPartnerPost(gallaryDTO, req);
+	}
+	
+	// 기업 활동 게시글 삭제하기
+	@RequestMapping(value="/partner/news/post/remove/{seqId}", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> removeNewsPartnerPost(
+			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			HttpServletRequest req, HttpServletResponse res, Authentication auth
+			) throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		
+		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		gallaryDTO.setWriterId(userDTO.getSeqId());
+		
+		return boardService.deleteActivityPartnerPost(gallaryDTO, req);
+	}
+	
+	
 }

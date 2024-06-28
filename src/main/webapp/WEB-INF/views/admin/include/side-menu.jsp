@@ -35,7 +35,7 @@
 					<li data-location-sub='팝업 관리'><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
 					<li data-location-sub='입주기업 관련'><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
 					<li data-location-sub='패밀리사이트'><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
-					<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/write/form' />">뉴스레터</a></li>
+					<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/list' />">뉴스레터</a></li>
 <!-- 					<li><a href="javascript:void(0);" onclick="logout_side.submit();">로그아웃</a></li> -->
 	            </ul>
 	        </aside>

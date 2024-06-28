@@ -118,4 +118,10 @@ public class IntroduceController {
 		return "introduce/join";
 	}
 	
+	@RequestMapping(value="/leaflet")
+	public String goToLeaflet(Model model) {
+		Utils.setPageViewLocation(model, locationMain, "홍보 리플렛");
+		return "introduce/leaflet";
+	}
+	
 }

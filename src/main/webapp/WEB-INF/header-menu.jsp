@@ -71,7 +71,7 @@
 			                    <li data-location-sub='입주기업 커뮤니티'><a href="<c:url value='/user/community/list' />">입주기업 커뮤니티</a></li>
 			                    <li data-location-sub='서식 자료실'><a href="<c:url value='/user/file/list' />">서식 자료실</a></li>
 			                    <li data-location-sub='회의실 예약 및 현황'><a href="<c:url value='/book/place' />">회의실 예약 및 현황</a></li>
-			                    <li data-location-sub='기업 활동 업로드'><a href="<c:url value='/user/partner/activity/write/form' />">기업활동 업로드</a></li>
+			                    <li data-location-sub='기업 소식 업로드'><a href="<c:url value='/user/partner/activity/write/form' />">기업소식 업로드</a></li>
 			                </ul>
 			            </li>
 			            </sec:authorize>
@@ -85,7 +85,7 @@
 								<li data-location-sub='팝업 관리'><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
 								<li data-location-sub='입주기업 관련'><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
 								<li data-location-sub='패밀리사이트'><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
-								<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/write/form' />">뉴스레터</a></li>
+								<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/list' />">뉴스레터</a></li>
 			                </ul>
 			            </li>
 			            </sec:authorize>

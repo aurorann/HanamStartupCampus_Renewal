@@ -48,7 +48,7 @@
                         <h3><strong>총 게시물</strong>&nbsp;|&nbsp;<span id="post_count">0건</span></h3>
         
                         <div>
-                        	<form id="searchForm" action="<c:url value='/admin/partner/notice/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">								
+                        	<form id="searchForm" action="<c:url value='/user/community/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">								
 	                            <select name="searchType">
 	                                <option value="NONE">선택</option>
 	                                <option value="title">제목</option>
@@ -69,7 +69,7 @@
                     </ul>
 
 					<sec:authorize ifAnyGranted="ROLE_USER">
-						<button type="button" class="search-btn mg-top-30" onclick="location.href='/startupcampus/partner/community/write/form'" style="margin-right: 10px;">글쓰기</button>
+						<button type="button" class="search-btn mg-top-30" onclick="location.href='/startupcampus/user/community/write/form'" style="margin-right: 10px;">글쓰기</button>
 					</sec:authorize>
 
                     <div class="page-wrap">
@@ -98,7 +98,7 @@
 		function getPostList(curPage) {
 			$.ajax({
 				type : 'GET',
-				url : '<c:url value="/partner/community/post/list" />',
+				url : '<c:url value="/user/community/post/list" />',
 				data: {
 					curPage: (curPage) ? curPage : _VARS.searchOption.curPage,
 					keyword: _VARS.searchOption.keyword,
@@ -132,7 +132,7 @@
 								var commonHTML = '<li class="board-item">' +
 			                    '<strong class="item-nmb">' + el.seqId + '</strong>' +
 		                            '<div class="item-title">' +
-		                            '<span><a href="<c:url value='/partner/community/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
+		                            '<span><a href="<c:url value='/user/community/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
 		                            '</div>' +
 		                            '<div class="item-info">' +
 		                            	'<h5 class="item-view"><strong>작성자</strong> <span>' + writerName + '</span></h5>' +

@@ -1,8 +1,8 @@
 /*
 공통
 */
-@import 'default.css';
-@import 'font.css';
+@import url('default.css');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
 
 .in_1400{
     max-width:1400px;
@@ -17,7 +17,7 @@
 }
 .main_title{
     font-size:30px;
-    font-weight: 700;
+    font-weight:600;
     line-height:100%;
 }
 .main_title span{ color:#1976d3; }
@@ -30,7 +30,7 @@
     display:inline-block;
     width:40px;
     height:40px;
-    border:1px solid #8f8f8f;
+    border:1px solid #c7c7c7;
     border-radius:10px;
     text-indent:-9999px;
 
@@ -44,6 +44,35 @@
     background-image:url('../img/puls_wh_ico.png');
     border-color:#1976d3;
 }
+
+/*슬라이더 버튼*/
+.swiper-button button{
+    display:inline-block;
+    vertical-align: middle;
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background-color:#fff;
+    background-repeat:no-repeat;
+    background-position:center;
+    transition:all .3s ease-in-out;
+    border:1px solid #c7c7c7;
+}
+.swiper-button button:hover{
+    border-color:#1976d3;
+    background-color:#1976d3;
+    background-image:url('../img/arrow_wh_ico.png');
+}
+.swiper-button button:hover{
+    border-color:#1976d3;
+    background-color:#1976d3;
+    background-image:url('../img/arrow_wh_ico.png');
+}
+.swiper-button button{ background-image:url('../img/arrow_dk_ico.png'); }
+.swiper-button-next{ transform:rotate(180deg); }
+.swiper-button a{ vertical-align:middle; }
+
+/*주요공고Ggongo / 주요공지Ggongi / 공고,공지gongo*/
 .board_label{
     display:block;
     width:70px;
@@ -53,6 +82,18 @@
 
     font-size:13px;
     font-weight:500;
+}
+.board_label_Ggongo{ 
+    color:#dc4e45;
+    border:1px solid #dc4e45;
+}
+.board_label_Ggongi{ 
+    color:#47954b;
+    border:1px solid #47954b;
+}
+.board_label_gongo{ 
+    color:#747474;
+    border:1px solid #747474;
 }
 
 
@@ -96,19 +137,44 @@ header>div nav .dep01>li>a{
     background-color:#1976d3;
     border-radius:10px;
     margin-left:25px;
+
+    font-size:15px;
+    font-weight:400;
     color:#fff;
 }
 
 /*하위메뉴*/
-header>div nav .dep02{ display:none; z-index:111; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:100%; height:250px; background:#fafafa; border-left:1px solid #eeeeee; }
+header>div nav .dep02{
+    z-index:111;
+    display:none;
+    width:100%;
+    height:325px;
+    background:#fafafa;
+    border-left:1px solid #eeeeee;
+    position:absolute; top:100%; left:50%;
+    transform:translateX(-50%);
+}
 header>div nav li:last-of-type .dep02{ border-right:1px solid #eeeeee; }
 header>div nav .dep02 li{ text-align:center; }
-header>div nav .dep02 li:first-of-type{ padding-top: 13px; }
-header>div nav .dep02 li:not(:last-of-type){ margin-bottom: 3px; }
-header>div nav .dep02 li a { font-size:12px; color:#4b4b4b; font-weight:500; }
-header>div nav .dep02 li a:hover{ font-weight:700; color:#1976d3; }
+header>div nav .dep02 li:first-of-type{ padding-top:20px; }
+header>div nav .dep02 li:not(:last-of-type){ margin-bottom:13px; }
+header>div nav .dep02 li a {
+    font-size:14px;
+    font-weight:300;
+    color:#4b4b4b;
+    font-weight:500;
+}
+header>div nav .dep02 li a:hover{ color:#1976d3; }
 
-header>div .menu_dummy{ display:none; z-index:2; position:absolute; top:100%; left:0; background:#fafafa; width:100%; height:250px; box-shadow:0 0px 10px rgba(0,0,0,0.1); }
+header>div .menu_dummy{
+    z-index:2;
+    display:none;
+    width:100%;
+    height:325px;
+    background:#fafafa;
+    position:absolute; top:100%; left:0;
+    box-shadow:0 0px 10px rgba(0,0,0,0.1);
+}
 
 /*
 ft
@@ -155,6 +221,7 @@ footer .ico_wrap a:last-of-type:hover{ background-image:url(../img/instagram_wh_
 .bottom_ft>div .text_wrap p{
     font-weight:300;
     font-size:14px;
+    line-height:23px;
     margin-bottom:35px;
 }
 .bottom_ft>div .text_wrap .tel{

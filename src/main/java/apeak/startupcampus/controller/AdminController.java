@@ -569,17 +569,17 @@ public class AdminController {
 	}
 	
 	/*
-	 * 기업 활동 관련
+	 * 기업 소식 관련
 	 * */
 	
-	// 기업 활동 게시글 작성폼 이동
+	// 기업 소식 게시글 작성폼 이동
 	@RequestMapping(value = "/partner/activity/write/form")
 	public String goToActivityPartnerWriteForm(Model model) {
 		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
 		return "admin/activity-partner-write";
 	}
 	
-	// 기업 활동 게시글 수정폼 이동
+	// 기업 소식 게시글 수정폼 이동
 	@RequestMapping(value="/partner/activity/edit/form/{seqId}")
 	public String goToActivityPartnerEditView(
 			@PathVariable("seqId")int seqId, Model model) throws Exception {
@@ -816,6 +816,60 @@ public class AdminController {
 		return boardService.editNewsletterPost(newsletterDTO,request);
 	}
 	
+	// # 뉴스레터 리스트 뷰
+	@RequestMapping(value="/newsletter/list")
+	public String goToNewsletterList(Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if(curPage == 0) {
+			curPage = 1;
+		}
+		searchOption.put("boardType", "newletter");
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		LOGGER.debug(searchOption.toString());
+		
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+		
+		Utils.setPageViewLocation(model, locationMain, "뉴스레터");
+		model.addAllAttributes(resultMap);
+		return "admin/newsletter-list";
+	}
+	
+	// # 뉴스레터 게시글 뷰
+	@RequestMapping(value="/newsletter/view/{seqId}")
+	public String goToNewsletterView(
+			@PathVariable("seqId")int seqId, Model model) throws Exception {
+		model.addAllAttributes(boardService.getNewsletterPost(seqId));
+		Utils.setPageViewLocation(model, locationMain, "뉴스레터");
+		
+		return "admin/newsletter-view";
+	}
+	
+	
+	// # 뉴스레터 게시글 서치
+	@RequestMapping(value="/newsletter/post/list")
+	@ResponseBody
+	public Map<String, Object> searchNewsletterPostListByKeyword(Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "newsletter");
+		
+		Map<String, Object> resultMap = boardService.getNewsletterPostList(searchOption);
+		
+		return resultMap;
+	}
+	
 
 	// 입주기업 소개 영상 게시글 삭제하기
 	@RequestMapping(value = "/newsletter/post/remove/{seqId}", method = RequestMethod.POST)
@@ -853,15 +907,15 @@ public class AdminController {
 
 		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
 		model.addAllAttributes(resultMap);
-		return "admin/notice-partner-list";
+		return "admin/file-list";
 	}
 
 	// # 서식 자료실 게시글 뷰
 	@RequestMapping(value = "/partner/file/view/{seqId}")
 	public String goToFilePartnerListView(@PathVariable("seqId") int seqId, Model model) throws Exception {
-		model.addAllAttributes(boardService.getNoticePartnerPost(seqId));
+		model.addAllAttributes(boardService.getFilePartnerPost(seqId));
 		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
-		return "admin/notice-partner-view";
+		return "admin/file-view";
 	}
 
 	// 서식 자료실 게시글 작성폼 이동
@@ -875,9 +929,9 @@ public class AdminController {
 	@RequestMapping(value = "/partner/file/edit/form/{seqId}")
 	public String goToFilePartnerEditView(@PathVariable("seqId") int seqId, Model model) throws Exception {
 		String locationSub = null;
-		model.addAllAttributes(boardService.getNoticePartnerPost(seqId));
+		model.addAllAttributes(boardService.getFilePartnerPost(seqId));
 		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
-		return "admin/notice-partner-edit";
+		return "admin/file-edit";
 	}
 
 	
@@ -893,8 +947,8 @@ public class AdminController {
 		searchOption.put("curPage", curPage);
 		searchOption.put("searchType", searchType);
 		searchOption.put("keyword", keyword);
-		searchOption.put("boardType", "partner-notice");
-		Map<String, Object> resultMap = boardService.getNoticePartnerPostList(searchOption);
+		searchOption.put("boardType", "file");
+		Map<String, Object> resultMap = boardService.getFilePartnerPostList(searchOption);
 		String locationSub = "입주기업 관련";
 
 		return resultMap;
@@ -909,7 +963,7 @@ public class AdminController {
 			throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 
-		return boardService.writeNoticePartnerPost(boardDTO);
+		return boardService.writeFilePartnerPost(boardDTO);
 	}
 
 	// 서식 자료실 게시글 수정하기
@@ -919,7 +973,7 @@ public class AdminController {
 			throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 
-		return boardService.editNoticePartnerPost(boardDTO,request);
+		return boardService.editFilePartnerPost(boardDTO,request);
 	}
 
 	// 서식 자료실 게시글 삭제하기
@@ -928,10 +982,168 @@ public class AdminController {
 	public Map<String, ?> removeFilePartnerPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
 			throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
-		return boardService.deleteNoticePartnerPost(seqId);
+		return boardService.deleteFilePartnerPost(seqId);
 	}
 	
 	
+	// [입주기업 커뮤니티] 관련 메서드
+	// 입주기업 커뮤니티 게시글 서치
+	@RequestMapping(value = "/user/community/post/list")
+	@ResponseBody
+	public Map<String, Object> searchCommunityPostListByKeyword(Model model,
+			@RequestParam(value = "curPage", defaultValue = "1") int curPage,
+			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-community");
+		Map<String, Object> resultMap = boardService.getCommunityPartnerPostList(searchOption);
+		String locationSub = "입주기업 관련";
+
+		return resultMap;
+	}
+	
+	// # 입주기업 커뮤니티 리스트 뷰
+	@RequestMapping(value = "/user/community/list")
+	public String goToPartnerCommunityList(Model model, @RequestParam(value = "curPage", defaultValue = "1") int curPage,
+			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if (curPage == 0) {
+			curPage = 1;
+		}
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-community");
+		LOGGER.debug(searchOption.toString());
+
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		model.addAllAttributes(resultMap);
+		return "admin/community-partner-list";
+	}
+	
+	// # 입주기업 커뮤니티 게시글 뷰
+	@RequestMapping(value = "/user/community/view/{seqId}")
+	public String goToCommunityPartnerListView(@PathVariable("seqId") int seqId, Model model) throws Exception {
+		//model.addAllAttributes(boardService.getCommunityPartnerPost(seqId));
+		
+		Map<String, Object> resultMap = boardService.getCommunityPartnerPost(seqId);
+		model.addAllAttributes(resultMap);
+		
+		String roleName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		if(!roleName.equals("anonymousUser")) {
+			int viewerId = ((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeqId();
+			model.addAttribute("VIEWER_ID", viewerId);
+			LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
+		}
+		
+		Utils.setPageViewLocation(model, locationMain, "입주기업 커뮤니티");
+		return "admin/community-partner-view";
+	}
+
+	// 입주기업 커뮤니티 게시글 삭제하기
+	@RequestMapping(value = "user/community/post/remove/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> removeCommunityPartnerPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		return boardService.deleteCommunityPartnerPost(seqId);
+	}
+	
+
+	// 입주기업 커뮤니티 게시글 작성폼 이동
+	@RequestMapping(value = "/community/write/form")
+	public String goToCommunityPartnerWriteForm(Model model) {
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "admin/community-partner-write";
+	}
+	
+
+	// 입주기업 커뮤니티 게시글 작성하기
+	@RequestMapping(value = "/community/post/write", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> writeCommunityPartnerPosting(@ModelAttribute BoardDTO boardDTO, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		return boardService.writeCommunityPartnerPost(boardDTO);
+	}
+	
+	
+	
+	//[기업 소식] 메소드
+	// # 기업 소식 리스트 뷰
+	@RequestMapping(value="/partner/news/list")
+	public String goToPartnerNewsBoard(
+			Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if(curPage == 0) {
+			curPage = 1;
+		}
+		
+		String locationSub = "입주기업 관련";
+		
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-news");
+		LOGGER.debug(searchOption.toString());
+		
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+		
+		Utils.setPageViewLocation(model, locationMain, locationSub);
+		model.addAllAttributes(resultMap);
+		return "admin/news-partner-list";
+	}
+	
+	@RequestMapping(value="/partner/news/post/list")
+	@ResponseBody
+	public Map<String, Object> searchPartnerNewsPostListByKeyword(Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-news");
+		
+		Map<String, Object> resultMap = boardService.getNewsPartnerPostList(searchOption);
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/partner/news/view/{seqId}")
+	public String goToPartnerNewsView(
+			@PathVariable("seqId")int seqId, Model model) throws Exception {
+		Map<String, Object> resultMap = boardService.getNewsPartnerPost(seqId);
+		model.addAllAttributes(resultMap);
+		
+		String roleName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		if(!roleName.equals("anonymousUser")) {
+			int viewerId = ((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeqId();
+			model.addAttribute("VIEWER_ID", viewerId);
+			LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
+		}
+		
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		
+		return "admin/news-partner-view";
+	}
+
 	
 	
 	

@@ -49,7 +49,8 @@
 						<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
                     		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
                     		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-							<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">입주기업 알림공간</a>
+							<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 알림공간</a>
+							<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">서식 자료실</a>
 					    </div>
 					    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 					    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
@@ -104,9 +105,9 @@
                         </tbody>
                     </table>
 
-                    <button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/partner/notice/list" />'" style="margin-right: 10px;">목록</button>
+                    <button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/partner/file/list" />'" style="margin-right: 10px;">목록</button>
                     <sec:authorize ifAnyGranted="ROLE_ADMIN">
-						<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/partner/notice/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
+						<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/partner/file/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
 
 						<button type="button" class="search-btn mg-top-30" onclick="deleteNoticePost(${SEQ_ID});" style="margin-right: 10px;">삭제</button>
 					</sec:authorize>
@@ -135,14 +136,14 @@
 					$.ajax({
 						type : 'POST',
 						cache: false,
-						url : '<c:url value="/admin/partner/notice/post/remove" />/' + seqId,
+						url : '<c:url value="/admin/partner/file/post/remove" />/' + seqId,
 						headers : {
 							'${_csrf.headerName}' : '${_csrf.token}'
 						},
 						success : function(result) {
 							if(result.count > 0) {
 								alert(result.message);
-								location.href = '<c:url value="/admin/partner/notice/list" />';	
+								location.href = '<c:url value="/admin/partner/file/list" />';	
 							} else {
 								alert('작성 실패, 관리자에게 문의해주세요.');
 							}
