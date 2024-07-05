@@ -33,60 +33,51 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
 	<div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			 <!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
-                    <div class="col-lg-12 r-contents">
+                    <div class="container_wrap">
+		                <ul class="mgr_btns mgr_btns1">
+		                    <li><button class="active" onclick="location.href='javascript:void(0);' ">캠퍼스 개요 수정</button></li>
+		                    <li><button onclick="location.href='<c:url value='/admin/webpage/introduce/contract/edit/form' />' ">조직도 수정</button></li>
+		                </ul>
+		                <!-- 
                     	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 					      <a href="<c:url value='/admin/introduce/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
 					      <a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">캠퍼스 개요 수정</a>
 					      <a href="<c:url value='/admin/webpage/introduce/contract/edit/form' />" class="btn btn-default" role="button">조직도 수정</a>
 					    </div>
-                    
-						<div class="col-lg-12" style="margin:0; padding:0;">
-	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;캠퍼스 개요 수정</h3>
-	                    </div>
-						
-                        <table class="table board-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <div class="board-title">
-											<input type="hidden" id="level" value="${LEVEL}"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="board-contents">
-                                        <textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                  	   -->
+                  	   
+		                <div class="board_write_wrap">
+		                    <div class="board_write_post board-contents">
+		                    	<input type="hidden" id="level" value="${LEVEL}"/>
+								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+		                    </div>
+		                </div>
+
     
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
+                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button>
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 						      <div class="btn-group" role="group">
 						      	<button type="button" class="btn btn-default" onclick="editPost();">페이지 수정</button>
 						      </div>
 						</div>
+						 -->
+                        <div class="board_wrap_btn"><a href="#" onclick="editPost();">페이지 수정</a></div>
     
                     </div><!-- r-contents div 끝 -->
-                </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->

@@ -1,0 +1,30 @@
+.history dl{
+    display:flex; justify-content:center;
+    width:100%;
+}
+.history dl:not(:last-of-type){ margin-bottom:45px; }
+.history dl dt{
+    font-size:40px;
+    font-weight:500;
+    line-height:100%;
+    color:#1976d3;
+}
+.history dl dd{
+    width:50%;
+    margin-left:5%;
+    padding-bottom:40px;
+}
+.history dl:not(:last-of-type) dd{ border-bottom:1px solid #c7c7c7; }
+.history ul li{
+    display:flex;
+    font-size:15px;
+    font-weight:500;
+    line-height:23px;
+}
+.history ul li:not(:last-of-type){ margin-bottom:17px; }
+.history ul li span{
+    display:inline-block;
+    width:60px;
+    font-size:18px;
+    font-weight:700;
+}

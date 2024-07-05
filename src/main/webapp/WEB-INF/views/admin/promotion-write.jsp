@@ -46,7 +46,7 @@
                     <div class="col-lg-12 r-contents">
                     	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
 					      <a href="<c:url value='/admin/announce/notice/write/form' />" class="btn btn-default" role="button">공고 글쓰기</a>
-					      <a href="<c:url value='/admin/announce/agency/write/form' />" class="btn btn-default you-are-here" role="button">사업공고 글쓰기</a>
+					      <a href="<c:url value='/admin/announce/announcement/write/form' />" class="btn btn-default you-are-here" role="button">사업공고 글쓰기</a>
 					      <a href="javascript:void(0);" class="btn btn-default" role="button">보도자료 글쓰기</a>
 					      <a href="<c:url value='/admin/announce/faq/write/form' />" class="btn btn-default" role="button">자주 묻는 질문 글쓰기</a>
 					    </div>

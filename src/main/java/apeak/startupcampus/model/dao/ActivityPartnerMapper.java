@@ -20,19 +20,24 @@ import java.util.Map;
 
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
+import apeak.startupcampus.model.dto.BoardPartnerActivityDTO;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 @Mapper("activityPartnerMapper")
 public interface ActivityPartnerMapper {
 	List<BoardGalleryDTO> selectActivityPartnerPostList(Map<String, Object> searchOption) throws Exception;
+	List<BoardGalleryDTO> selectApproveActivityPartnerPostList(Map<String, Object> searchOption) throws Exception;
 	Map<String, Object> selectActivityPartnerPostOne(int seqId) throws Exception;
 	int updateActivityPartnerPostViewCount(int seqId) throws Exception;
 	
 	int selectActivityPartnerPostCount(Map<String, Object> searchOption) throws Exception;
+	int selectApproveActivityPartnerPostCount(Map<String, Object> searchOption) throws Exception;
 	
 	int insertActivityPartnerPostOne(BoardDTO boardDTO) throws Exception;
 	int updateActivityPartnerPostOne(BoardDTO boardDTO) throws Exception;
 	int deleteActivityPartnerPostOne(int seqId) throws Exception;
+	
+	int updateApproveActivityPartnerPost(Map<String, Object> approveOption) throws Exception;
 	
 	int insertActivityPartnerPostOneForPartner(BoardDTO boardDTO) throws Exception;
 	int updateActivityPartnerPostOneForPartner(BoardDTO boardDTO) throws Exception;

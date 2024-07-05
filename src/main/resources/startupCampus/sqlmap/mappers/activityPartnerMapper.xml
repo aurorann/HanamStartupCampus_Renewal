@@ -25,15 +25,46 @@
 		<include refid="search" />
 	</select>
 	
+	<!-- 게시허용 게시글 리스트 카운트 -->
+	<select id="selectApproveActivityPartnerPostCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT
+				count(*)
+			FROM
+				board_activity_partner
+			WHERE
+				1 = 1 AND VIEW_APPROVE = 'Y'
+		]]>
+		<include refid="search" />
+	</select>
+	
 	<!-- 게시글 리스트 조회 -->
-	<select id="selectActivityPartnerPostList" parameterType="map" resultType="boardGalleryDTO">
+	<select id="selectActivityPartnerPostList" parameterType="map" resultType="boardPartnerActivityDTO">
 			<![CDATA[
 				SELECT
-					SEQ_ID, REPRESENT_IMAGE, TITLE, left(CONTENT, 600) AS CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+					SEQ_ID, REPRESENT_IMAGE, TITLE, left(CONTENT, 600) AS CONTENT, VIEW_COUNT, VIEW_APPROVE, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
 				FROM
 					board_activity_partner
 				WHERE
 					1 = 1
+			]]>
+			<include refid="search" />
+			<![CDATA[
+				ORDER BY
+					SEQ_ID DESC
+				LIMIT #{index}, #{size}
+			]]>
+	</select>
+	
+	<!-- 게시허용 게시글 리스트 조회 -->
+	<select id="selectApproveActivityPartnerPostList" parameterType="map" resultType="boardPartnerActivityDTO">
+			<![CDATA[
+				SELECT
+					SEQ_ID, REPRESENT_IMAGE, TITLE, left(CONTENT, 600) AS CONTENT, VIEW_COUNT, VIEW_APPROVE, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+				FROM
+					board_activity_partner
+				WHERE
+					1 = 1 AND VIEW_APPROVE = 'Y'
 			]]>
 			<include refid="search" />
 			<![CDATA[
@@ -77,7 +108,7 @@
 			SEQ_ID = #{value}
 	</update>
 
-	<insert id="insertActivityPartnerPostOne" parameterType="boardGalleryDTO">
+	<insert id="insertActivityPartnerPostOne" parameterType="boardPartnerActivityDTO">
 		INSERT INTO
 			board_activity_partner
 		(
@@ -95,6 +126,15 @@
 			WRITER_ID = #{writerId}, WRITER_IP = #{writerIp}, REPRESENT_IMAGE = #{representImage},
 			TITLE = #{title}, CONTENT = #{content},
 			FILE_NAME = #{fileName}, FILE_PATH = #{filePath} 
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<update id="updateApproveActivityPartnerPost" parameterType="boardPartnerActivityDTO">
+		UPDATE
+			board_activity_partner
+		SET
+			VIEW_APPROVE = #{viewApprove}
 		WHERE
 			SEQ_ID = #{seqId}
 	</update>

@@ -28,7 +28,10 @@
 	<!-- # common: header-menu start -->
 	<%@ include file="/WEB-INF/header-menu.jsp"%>
 	<!-- # common: header-menu end -->
-
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->   
 
 	<div class="sub_container in_1400">
 		<!-- # include: side-menu start -->

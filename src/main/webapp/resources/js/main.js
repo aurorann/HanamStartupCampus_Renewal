@@ -16,46 +16,49 @@ $(function(){
         loop:true,
         observer: true,
         observeParents: true,
+        autoplay: {
+            delay:4000,
+            disableOnInteraction:false,
+        },
     }
     var swiper = new Swiper("#new_tab1", newsSwiperOptions);
     var swiper = new Swiper("#new_tab2", newsSwiperOptions);
     var swiper = new Swiper("#new_tab3", newsSwiperOptions);
 
-    /*business_swiper*/
+    /*business_swiper 사업안내*/
     var swiper = new Swiper(".business_swiper", {
-        slidesPerView: 4,
-        spaceBetween: 40,
+        slidesPerView: 3,
+        spaceBetween: 35,
         loop:true,
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".business_next",
+            prevEl: ".business_prev",
         },
     });
 
-    /*ent_introduce_swiper*/
+    /*guide_swiper 시설안내*/
+    var swiper = new Swiper(".guide_swiper", {
+        slidesPerView: 1,
+        effect:'fade',
+        loop:true,
+        autoplay: {
+            delay:3000,
+            disableOnInteraction:false,
+        },
+    });
+
+    /*ent_introduce_swiper 기업소개*/
     var swiper = new Swiper(".ent_introduce_swiper", {
         slidesPerView: 5,
         spaceBetween: 30,
         loop:true,
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".ent_introduce_next",
+            prevEl: ".ent_introduce_prev",
         },
         autoplay: {
             delay:2500,
             disableOnInteraction:false,
-        },
-    });
-
-    /*bio_swiper*/
-    var swiper = new Swiper(".bio_swiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop:true,
-        effect:'fade',
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
         },
     });
     

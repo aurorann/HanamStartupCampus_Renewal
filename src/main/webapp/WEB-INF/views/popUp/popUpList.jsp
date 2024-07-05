@@ -64,6 +64,9 @@
                         </nav>
                     </div>
                     
+                    <div class="pagination_wrap" id="pager">
+					</div>
+                    
                     <button class="btn btn-primary" style="float: right;" onclick="location.href='<c:url value='/popUp/insertPopUpForm' />'">신규 작성</button>
 
                 </div><!-- r-contents div 끝 -->
@@ -122,7 +125,11 @@
 						}
 						if(pager.curRange!=pager.rangeCnt){pagerContent+="<li class='page-item' ><a class='page-link' href='javascript:search("+(pager.endPage+1)+")'>></a></li>"}
 						
-						$("#pager").html(pagerContent);
+						
+						var pageHTML = newPagenation(pager);
+						
+						
+						$("#pager").html(pageHTML);
 					},
 					error:function(request,status,error){
 					   alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리

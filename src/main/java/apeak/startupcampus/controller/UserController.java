@@ -468,11 +468,11 @@ public class UserController {
 	@RequestMapping(value="/partner/news/post/write", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> writeNewsPartnerPosting(
-			@ModelAttribute BoardPartnerNewsDTO partnerNewsDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletResponse res
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
-		return boardService.writeNewsPartnerPostForPartner(partnerNewsDTO);
+		return boardService.writeNewsPartnerPostForPartner(partnerActivityDTO);
 	}
 	
 	
@@ -498,15 +498,15 @@ public class UserController {
 	@RequestMapping(value="/partner/news/post/edit/{seqId}", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> editNewsPartnerPost(
-			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletRequest req, HttpServletResponse res
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 		
 		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		gallaryDTO.setWriterId(userDTO.getSeqId());
+		partnerActivityDTO.setWriterId(userDTO.getSeqId());
 		
-		return boardService.editActivityPartnerPost(gallaryDTO, req);
+		return boardService.editActivityPartnerPost(partnerActivityDTO, req);
 	}
 	
 	// 기업 활동 게시글 삭제하기

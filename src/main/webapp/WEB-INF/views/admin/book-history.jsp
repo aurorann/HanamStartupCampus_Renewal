@@ -31,36 +31,48 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
 	<div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
                 <!-- # include: title-box start -->
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
-                	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                   		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
-                   		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약 및 현황</a>
-						<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 알림공간</a>
-				    </div>
-				    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-				    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
-						<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
-						<a href="<c:url value='/admin/partner/activity/write/form' />" class="btn btn-default" role="button">기업 활동 글쓰기</a>
-						<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">알림공간 글쓰기</a>	      
-				    </div>
+				<div class="container_wrap">
+				    <%@ include file="./include/inside-menu.jsp"%>
                 	<br/>
+				    <!-- 
                 	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
                 		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 캘린더</a>
                    		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약현황</a>      
 				    </div>
-                
+				     -->
+					<ul class="mgr_btns mgr_btns1" id="you-are-here">
+					    <li><button onclick="location.href='<c:url value='/admin/book/place' />' ">회의실 예약 캘린더</button></li>
+					    <li><button class="active" onclick="location.href='<c:url value='/admin/book/history' />' ">회의실 예약현황</button></li>
+					</ul>
+					
+                    <div class="search_wrap">
+	                    <form class="search_form" id="searchForm">
+	                        <select name="placeId">
+                                <option value="1">회의실 1</option>
+                                <option value="2">회의실 2</option>
+	                        </select>
+                            <input type="text" class="datepicker-here" id="dateString"
+                            	data-min-view="months" data-view="months"
+								autocomplete="on" data-format='yyyy-mm' data-language="kor"/>
+	                        <button type="submit" class="serch_btn" onclick="getBookListMonthly();">검색</button>
+	                    </form>
+	                </div><!--search_wrap-->
+
+                	
                     <div class="sm-main-box pink-bar flex-end">
                         <div>
                             <select id="placeId">                                
@@ -76,7 +88,7 @@
                         </div>
         
                     </div>
-
+					 
                     <table class="table col-lg-12 mg-top-30">
                         <thead>
                             <tr>
@@ -97,7 +109,6 @@
                     </table>
 
                 </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->
@@ -110,6 +121,10 @@
 			$("#dateString").val(moment().format("yyyy-MM"));
 			getBookListMonthly();
 		});
+		
+		var insideMenu = '회의실 예약 및 현황';
+		
+		$("ul#you-are-here li button[data-location-insub= '" + insideMenu + "'").addClass("active");
 		
 		$.fn.datepicker.language['kor'] = {
 			days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],

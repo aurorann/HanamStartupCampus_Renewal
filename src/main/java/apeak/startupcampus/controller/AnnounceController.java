@@ -28,7 +28,6 @@ public class AnnounceController {
 	
 	private String locationMain = "알림마당";
 	
-	
 	// # 공지사항 리스트 뷰
 	@RequestMapping(value="/{boardType}/list")
 	public String goToAnnounceBoard(@PathVariable("boardType") String boardType, Model model,
@@ -44,9 +43,11 @@ public class AnnounceController {
 		searchOption.put("searchType", searchType);
 		searchOption.put("keyword", keyword);
 		searchOption.put("boardType", boardType);
+		LOGGER.debug("searchOption ARRIVED");
 		LOGGER.debug(searchOption.toString());
 		
 		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug("resultMap ARRIVED");
 		LOGGER.debug(resultMap.toString());
 		
 		String locationSub = null;
@@ -62,6 +63,12 @@ public class AnnounceController {
 				break;
 			case "faq":
 				locationSub = "자주 묻는 질문";
+				break;
+			case "announcement":
+				locationSub = "사업공고";
+				break;
+			case "press":
+				locationSub = "보도자료";
 				break;
 		}
 		
@@ -81,6 +88,10 @@ public class AnnounceController {
 				model.addAllAttributes(boardService.getNoticePost(seqId));
 				locationSub = "공지사항";
 				break;
+			case "announcement":
+				model.addAllAttributes(boardService.getAnnouncementPost(seqId));
+				locationSub = "사업공고";
+				break;
 			case "agency":
 				model.addAllAttributes(boardService.getAgencyPost(seqId));
 				locationSub = "사업공고";
@@ -92,6 +103,10 @@ public class AnnounceController {
 			case "faq":
 				model.addAllAttributes(boardService.getFaqPost(seqId));
 				locationSub = "자주 묻는 질문";
+				break;
+			case "press":
+				model.addAllAttributes(boardService.getPressPost(seqId));
+				locationSub = "보도자료";
 				break;
 		}
 		Utils.setPageViewLocation(model, locationMain, locationSub);
@@ -105,19 +120,26 @@ public class AnnounceController {
 			@RequestParam(value="curPage", defaultValue="1") int curPage,
 			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
 			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		LOGGER.debug("POST LIST ARRIVED");
+
 		Map<String, Object> searchOption = new HashMap<String, Object>();
 		searchOption.put("curPage", curPage);
 		searchOption.put("searchType", searchType);
 		searchOption.put("keyword", keyword);
 		searchOption.put("boardType", boardType);
-		
+		LOGGER.debug("searchOption ARRIVED");
+		LOGGER.debug(searchOption.toString());
+
 		Map<String, Object> resultMap = null;
 		String locationSub = null;
 		switch(boardType) {
 			case "notice":
-				LOGGER.debug("get Notice List");
 				resultMap = boardService.getNoticePostList(searchOption);
 				locationSub = "공지사항";
+				break;
+			case "announcement":
+				resultMap = boardService.getAnnouncementPostList(searchOption);
+				locationSub = "사업공고";
 				break;
 			case "agency":
 				resultMap = boardService.getAgencyPostList(searchOption);
@@ -131,7 +153,14 @@ public class AnnounceController {
 				resultMap = boardService.getFaqPostList(searchOption);
 				locationSub = "자주 묻는 질문";
 				break;
+			case "press":
+				resultMap = boardService.getPressPostList(searchOption);
+				locationSub = "보도자료";
+				break;
 		}
+		LOGGER.debug("resultMap 결과");
+		LOGGER.debug(resultMap.toString());
+
 		
 		return resultMap;
 	}

@@ -5,15 +5,9 @@
 	<footer class="footer">
 	    <div class="top_ft">
 	        <div class="in_1400">
-	            <div class="link_wrap">
-	                <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
-	                <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
-	                <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
-	            </div>
-	            <div class="ico_wrap">
-	                <a href="https://www.youtube.com/channel/UCIT4wZzDZCF2J9ppP6b-6Eg"><img src="<c:url value='/resources/img/youtube_ico.png' />" alt="하남스타트업캠퍼스유튜브"></a>
-	                <a href="https://www.instagram.com/hanamstartup"><img src="<c:url value='/resources/img/instagram_ico.png' />" alt="하남스타트업캠퍼스인스타그램"></a>
-	            </div>
+	            <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
+	            <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
+	            <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
 	        </div>
 	    </div><!--top_ft-->
 	
@@ -60,6 +54,7 @@
 		    }
 
 	        $(function(){
+	        	/*
 		        $('#slider-div').slick({
 		            slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
 		            infinite : true, 	//무한 반복 옵션	 
@@ -95,7 +90,9 @@
 		            ]
 		
 		        });
-	        
+	        	*/
+	        	
+	        	
 		        $(".r-modal, .close, .gray-btn").on('click',function(){
 		  	      $(".r-modal").fadeOut(300);
 		  	      $(".modal-con").fadeOut(300);

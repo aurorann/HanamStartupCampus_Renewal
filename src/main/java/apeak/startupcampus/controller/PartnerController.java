@@ -196,7 +196,7 @@ public class PartnerController {
 		searchOption.put("curPage", curPage);
 		searchOption.put("searchType", searchType);
 		searchOption.put("keyword", keyword);
-		searchOption.put("boardType", "partner-activity");
+		searchOption.put("boardType", "approve-partner-activity");
 		
 		Map<String, Object> resultMap = boardService.getActivityPartnerPostList(searchOption);
 		

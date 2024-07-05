@@ -16,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -30,6 +32,7 @@ import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
+import apeak.startupcampus.model.dto.BoardPartnerActivityDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
 import apeak.startupcampus.model.dto.BookListDTO;
 import apeak.startupcampus.model.dto.BookPlaceDTO;
@@ -125,6 +128,9 @@ public class AdminController {
 		case "notice":
 			model.addAllAttributes(boardService.getNoticePost(seqId));
 			break;
+		case "announcement":
+			model.addAllAttributes(boardService.getAnnouncementPost(seqId));
+			break;
 		case "agency":
 			model.addAllAttributes(boardService.getAgencyPost(seqId));
 			break;
@@ -155,6 +161,9 @@ public class AdminController {
 		switch (boardType) {
 		case "notice":
 			resultMap = boardService.writeNoticePost(noticeDTO);
+			break;
+		case "announcement":
+			resultMap = boardService.writeAnnouncementPost(noticeDTO);
 			break;
 		case "agency":
 			resultMap = boardService.writeAgencyPost(agencyDTO);
@@ -218,6 +227,9 @@ public class AdminController {
 			break;
 		case "promotion":
 			resultMap = boardService.deletePromotionPost(seqId,request);
+			break;
+		case "announcement":
+			resultMap = boardService.deleteAnnouncementPost(seqId,request);
 			break;
 		}
 
@@ -590,33 +602,56 @@ public class AdminController {
 		return "admin/activity-partner-edit";
 	}
 	
-	// 기업 활동 게시글 작성하기
+	// 기업 소식 게시글 작성하기
 	@RequestMapping(value="/partner/activity/post/write", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> writeActivityPartnerPosting(
-			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletResponse res
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
-		return boardService.writeActivityPartnerPost(gallaryDTO);
+		return boardService.writeActivityPartnerPost(partnerActivityDTO);
 	}
 	
-	// 기업 활동 게시글 수정하기
+	// 기업 소식 게시글 수정하기
 	@RequestMapping(value="/partner/activity/post/edit/{seqId}", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> editActivityPartnerPost(
-			@ModelAttribute BoardGalleryDTO gallaryDTO,
+			@ModelAttribute BoardPartnerActivityDTO partnerActivityDTO,
 			HttpServletRequest req, HttpServletResponse res
 			) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
 		
 		UserDTO userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		gallaryDTO.setWriterId(userDTO.getSeqId());
+		partnerActivityDTO.setWriterId(userDTO.getSeqId());
 		
-		return boardService.editActivityPartnerPost(gallaryDTO, req);
+		return boardService.editActivityPartnerPost(partnerActivityDTO, req);
 	}
 	
-	// 기업 활동 게시글 삭제하기
+	
+	// 기업 소식 게시글 게시 수정하기
+	@RequestMapping(value="/partner/activity/edit/approve", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> updateApproveActivityPartnerPost(
+			@RequestParam(value="seqId") int seqId,
+			@RequestParam(value="viewApprove") String viewApprove
+			) throws Exception {
+		System.out.println(seqId);
+		System.out.println(viewApprove);
+		
+		Map<String, Object> approveOption = new HashMap<String, Object>();
+		
+		approveOption.put("seqId", seqId);
+		approveOption.put("viewApprove", viewApprove);
+
+		
+		//return viewApprove;
+		
+		return boardService.editApproveActivityPartnerPost(approveOption);
+	}
+	
+	
+	// 기업 소식 게시글 삭제하기
 	@RequestMapping(value="/partner/activity/post/remove/{seqId}", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> removeActivityPartnerPost(
@@ -630,6 +665,77 @@ public class AdminController {
 		
 		return boardService.deleteActivityPartnerPost(gallaryDTO, req);
 	}
+
+	
+	// # 기업 활동 리스트 뷰
+	@RequestMapping(value="/partner/activity/list")
+	public String goToPartnerActivityBoard(
+			Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if(curPage == 0) {
+			curPage = 1;
+		}
+		
+		String locationSub = "입주기업 관련";
+		
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-activity");
+		LOGGER.debug(searchOption.toString());
+		
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+		
+		Utils.setPageViewLocation(model, locationMain, locationSub);
+		model.addAllAttributes(resultMap);
+		return "admin/activity-partner-list";
+	}
+	
+	
+	@RequestMapping(value="/partner/activity/post/list")
+	@ResponseBody
+	public Map<String, Object> searchPartnerActivityPostListByKeyword(Model model,
+			@RequestParam(value="curPage", defaultValue="1") int curPage,
+			@RequestParam(value="searchType", defaultValue="NONE") String searchType,
+			@RequestParam(value="keyword", defaultValue="") String keyword ) throws Exception {
+		LOGGER.debug("POST LIST ARRIVED");
+
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("boardType", "partner-activity");
+		
+		Map<String, Object> resultMap = boardService.getActivityPartnerPostList(searchOption);
+		
+		return resultMap;
+	}
+	
+	
+	@RequestMapping(value="/partner/activity/view/{seqId}")
+	public String goToPartnerActivityView(
+			@PathVariable("seqId")int seqId, Model model) throws Exception {
+		Map<String, Object> resultMap = boardService.getActivityPartnerPost(seqId);
+		model.addAllAttributes(resultMap);
+		
+		String roleName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		if(!roleName.equals("anonymousUser")) {
+			int viewerId = ((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeqId();
+			model.addAttribute("VIEWER_ID", viewerId);
+			LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
+		}
+		
+		Utils.setPageViewLocation(model, locationMain, "기업 소식");
+		
+		return "admin/activity-partner-view";
+	}
+
 
 	// [패밀리사이트] 관련 메서드
 	// # 패밀리사이트 리스트 뷰
@@ -1045,7 +1151,7 @@ public class AdminController {
 			LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
 		}
 		
-		Utils.setPageViewLocation(model, locationMain, "입주기업 커뮤니티");
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
 		return "admin/community-partner-view";
 	}
 

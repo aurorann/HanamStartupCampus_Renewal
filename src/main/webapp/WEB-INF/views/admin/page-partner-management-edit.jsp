@@ -29,41 +29,39 @@
 
 <body class="animsition restyle-index">
 	
-	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
 	<div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
 			<!-- # include: title-box start -->
 			<%@ include file="./include/title-box.jsp"%>
 			<!-- # include: title-box end -->
     
-				<div class="col-lg-12 r-contents">
-					    
-					<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                   		<a href="<c:url value='/admin/partner/list' />" class="btn btn-default" role="button">입주기업 정보 관리</a>
-                   		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-						<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 공지사항</a>
-						<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">입주기업 공지사항 글쓰기</a>	      
-				    </div>
-				    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-				    	<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">기업 실적 수정</a>
-						<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
-						<a href="<c:url value='/admin/partner/activity/write/form' />" class="btn btn-default" role="button">기업 활동 글쓰기</a>
-						<a href="<c:url value='/admin/user/community/list' />" class="btn btn-default" role="button">입주기업 커뮤니티</a>
-				    </div>
-				    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-						<a href="<c:url value='/admin/partner/file/list' />" class="btn btn-default" role="button">서식 자료실</a>
-						<a href="<c:url value='/admin/partner/file/write/form' />" class="btn btn-default" role="button">서식 자료실 글쓰기</a>
-				    </div>
-                    
+				<div class="container_wrap">
+				    <%@ include file="./include/inside-menu.jsp"%>
+				    
+		                <div class="board_write_wrap">
+		                    <div class="board_write_title">
+		                        <div class="titleWrap">
+									<input type="hidden" id="level" value="${LEVEL}"/>
+		                        </div>
+		                    </div>
+		                    <div class="board_write_post board-contents">
+								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+		                    </div>
+		                </div>
+				    
+				    
+                    	<!-- 
 						<div class="col-lg-12" style="margin:0; padding:0;">
 	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;기업 실적 수정</h3>
 	                    </div>
@@ -87,8 +85,9 @@
                                 </tr>
                             </tbody>
                         </table>
-    
+    					 -->
                         <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
+                        <!-- 
                         <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
 						    margin-top: 30px;
 						">
@@ -96,9 +95,11 @@
 						      	<button type="button" class="btn btn-default" onclick="editPost();">페이지 수정</button>
 						      </div>
 						</div>
+						 -->
+						<div class="board_wrap_btn"><a href="#" onclick="editPost();">페이지 수정</a></div>
+						
     
                     </div><!-- r-contents div 끝 -->
-                </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->
@@ -108,6 +109,12 @@
 	<!-- extension start -->
 	<script  src="<c:url value='/resources/vendor/ckeditor/ckeditor.js' />"></script>
 	<script >
+	
+	
+	var insideMenu = '기업 실적 수정';
+	
+	$("ul#you-are-here li button[data-location-insub= '" + insideMenu + "'").addClass("active");
+	
 		$.fn.datepicker.language['kor'] = {
 			days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
 			daysShort: ['일', '월', '화', '수', '목', '금', '토'],

@@ -1,0 +1,41 @@
+/*
+container_txt 콘텐츠제목
+*/
+.container_txt .board_label{ margin-bottom:10px; }
+.container_txt h3{
+    font-size:30px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+.container_txt ul{ margin-bottom:20px; }
+.container_txt ul li{
+    display:inline-block;
+    font-size:14px;
+    font-weight:500;
+}
+.container_txt ul li:not(:first-of-type){ margin-left:20px; }
+.container_txt ul li span{ font-weight:600; margin-left:5px; }
+
+/*
+content_wrap 콘텐츠
+*/
+.content_wrap{
+    border-top:1px solid #797979;
+    border-bottom:1px solid #797979;
+    padding:35px 0;
+    margin-bottom:50px;
+}
+.content_text, .conts_text{ padding:0px 35px; }
+.content_text p{
+    font-size:18px;
+    line-height:26px;
+    margin-top:20px;
+}
+.content_text .file_wrap{ margin-top:95px; }
+.file_wrap li{ margin:4px 0; }
+.file_wrap li a{ font-size:15px; color:#000; }
+.file_wrap li a img{
+    margin-right:10px;
+    vertical-align:middle;
+}
+.conts_text .file_wrap{ margin-bottom:20px; }

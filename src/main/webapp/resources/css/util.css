@@ -15,7 +15,7 @@ body, html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family:'KoPubWorld_Dotum_M';
+/*     font-family:'KoPubWorld_Dotum_M'; */
 }
 
 .hidden {
@@ -37,7 +37,7 @@ a:hover {text-decoration: none;}
 .laber {color:#666;}
 
 /* ------------------------------------ */
-h1,h2,h3,h4,h5,h6,p {margin: 0px;font-size:10px;}
+/* h1,h2,h3,h4,h5,h6,p {margin: 0px;font-size:10px;} */
 
 ul, li {
 	margin: 0px;
@@ -61,7 +61,7 @@ button {
 	border: none;
 	background: transparent;
     cursor: pointer;
-    font-family:"KoPubWorld_Dotum_M";
+/*     font-family:"KoPubWorld_Dotum_M"; */
 }
 button:focus {outline: none;}
 
@@ -81,7 +81,7 @@ iframe {border: none;}
 select{
     width: 200px;
     padding: .5em;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     font-size: 1.5em;
     color: #515151;
     background: #fff url(../img/arrow-down.png)no-repeat 95% 50%;
@@ -96,7 +96,7 @@ select{
 input[type=text], input[type=date] {
 	width: 200px;
     padding: .5em;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     font-size: 1.5em;
     color: #515151;
     background: #fff;
@@ -111,7 +111,7 @@ input[type=text], input[type=date] {
 input[type=number] {
 	width: 200px;
     padding: .5em;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     font-size: 1.5em;
     color: #515151;
     background: #fff;
@@ -124,7 +124,7 @@ input[type=number] {
 } 
 
 .search-btn {
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     font-size: 1.5em;
     padding: .7em 1.5em;
     background: #2f5ebd;
@@ -139,7 +139,7 @@ input[type=number] {
 }
 
 .default-btn {
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     font-size: 1.3em;
     padding: .2em 1.5em;
     background: #ed5f5f;
@@ -152,7 +152,7 @@ input[type=number] {
 }
 
 .gray-btn {
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     font-size: 1.3em;
     padding: .2em 1.5em;
     background: #c7c7c7;
@@ -185,7 +185,7 @@ input[type=number] {
 	color:#000;
 	padding:10px;
     border:1px solid #ddd;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     text-align:center;
     font-weight:normal;
     height:10px;
@@ -197,7 +197,7 @@ input[type=number] {
 	padding:10px 0;
 	text-align:center;
     border:1px solid #ddd;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
 }
 
 .table-sm {
@@ -212,7 +212,7 @@ input[type=number] {
 	color:#000;
 	padding:5px;
     border:1px solid #ddd;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     text-align:center;
 }
 
@@ -222,7 +222,7 @@ input[type=number] {
 	padding:5px 0;
 	text-align:center;
     border:1px solid #ddd;
-    font-family: 'KoPubWorld_Dotum_M';
+/*     font-family: 'KoPubWorld_Dotum_M'; */
     background:#fff;
     padding:10px;
 }

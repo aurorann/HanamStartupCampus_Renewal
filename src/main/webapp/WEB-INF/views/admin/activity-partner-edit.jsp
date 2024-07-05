@@ -31,29 +31,63 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <!-- # include: location start -->
-    <%@ include file="./include/location.jsp"%>
-    <!-- # include: location end -->
-    
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
-    
-                    <div class="col-lg-12 r-contents">
-
-						<div class="col-lg-12" style="margin:0; padding:0;">
-	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;기업 활동 수정</h3>
-	                    </div>
-						<form id="galleryForm" onsubmit="return false">
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
+   
+				<div class="container_wrap">
+			    <%@ include file="./include/inside-menu.jsp"%>
+						
+					<form id="galleryForm" onsubmit="return false">
+		                <div class="board_write_wrap">
+		                    <div class="board_write_title">
+		                        <div class="titleWrap">
+		                            <label for="title">제목</label>
+		                            <input type="text" id="post_title" value="${TITLE}">
+		                        </div>
+								<div class="fileWrap">
+									<label for="file">파일찾기</label>
+						            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+						            <br/><br/><small>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</small>
+	                                <c:if test="${not empty FILE_NAME}">
+										<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+										<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+										<tr>
+											<td class="board-contents" style="padding: 10px;">
+												<c:forEach items="${fileNames}" varStatus="status">
+													<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
+													<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
+													<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+														<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+														<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+													</form><br/>
+												</c:forEach>
+											</td>
+										</tr>
+									</c:if>
+								            
+								</div>
+		                    </div>
+		                    <div class="board_write_content">
+					    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/upload/partner/partner-activity' />/${REPRESENT_IMAGE}" />
+		                    </div>
+		                    <div class="board_write_post board-contents">
+								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+		                    </div>
+		                </div>
+						
+							<!-- 
                         	<table class="table board-table">
 	                            <thead>
 	                                <tr>
@@ -109,6 +143,7 @@
 	                                </tr>
 	                            </tbody>
                         	</table>
+                        	 -->
     					</form>
                         <c:forEach items="${fileNames}" varStatus="status">
 
@@ -120,6 +155,7 @@
                         
                         </c:forEach>
                         <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
+                        <!-- 
                         <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 							<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 								<div class="btn-group" role="group">
@@ -130,7 +166,11 @@
 							     </div>
 							</div>
 						</div>
-    
+						 -->
+						<div class="board_wrap_btn">
+							<a href="#" onclick="editPost();">게시글 수정</a>
+							<a href="#" onclick="location.href='<c:url value='/admin/partner/activity/view' />/${SEQ_ID}';">돌아가기</a>
+						</div>
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
         </main>
@@ -198,6 +238,11 @@
 			} );
 			// CKEditor init end
 		})
+		
+		
+		var insideMenu = '기업 소식';
+		
+		$("ul#you-are-here li button[data-location-insub= '" + insideMenu + "'").addClass("active");
 		
 		function editPost() {
 			var title = document.querySelector('#post_title').value;

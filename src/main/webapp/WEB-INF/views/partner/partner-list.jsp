@@ -28,30 +28,32 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
+
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
-				<div class="col-lg-12 r-contents">
-					<div class="ent-title mg-top-30">
-                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />" alt="소제목 아이콘">&nbsp;&nbsp;입주기업 소개</h3>
-                        <p>하남 스타트업 캠퍼스의 입주 기업을 소개합니다.</p>
-                    </div>
- 
-                    <div class="col-lg-12" id="partner-list">
-                        <!-- 회사 시작 -->
-						<!-- 회사 끝 -->
-                    </div>
-                </div>
-			</div><!-- right-contents div 끝 -->
+			<div class="col-lg-12 r-contents">
+				<div class="ent-title mg-top-30">
+					<h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />" alt="소제목 아이콘">&nbsp;&nbsp;입주기업 소개</h3>
+					<p>하남 스타트업 캠퍼스의 입주 기업을 소개합니다.</p>
+				</div>
+
+				<div class="col-lg-12" id="partner-list">
+					<!-- 회사 시작 -->
+					<!-- 회사 끝 -->
+				</div>
+			</div>
 		</main>
     </div>
 	<!-- footer start -->

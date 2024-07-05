@@ -44,13 +44,13 @@
                         <h3><strong>총 게시물</strong>&nbsp;|&nbsp;<span id="post_count">0건</span></h3>
         
                         <div>
-                        	<form id="searchForm" action="<c:url value='/newsletter/list' />" method="get" onsubmit="return searchNoticeList(this)">								
+                        	<form id="searchForm" action="<c:url value='/announce/notice/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">								
 	                            <select name="searchType">
 	                                <option value="NONE">선택</option>
 	                                <option value="title">제목</option>
 	                                <option value="content">내용</option>
 	                                <option value="titleAndContent">제목 및 내용</option>
- 	                            </select>
+	                            </select>
 	    
 	                            <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
 	                            <button type="submit" class="search-btn">검색</button>
@@ -59,17 +59,17 @@
         
                     </div>
 
-					<div class="hongbo-body"> 
-	                    <ul class="hongbo-list"> 
-							<!-- item area -->
-	                    </ul> 
-                    </div>
+                    <ul class="board-box fixed-notice">
 
-	             	<div class="page-wrap">
-	                 	<nav aria-label="Page navigation example">
-	                    
-	                  	</nav>
-	                </div>
+                    </ul>
+                    <ul class="board-box common-notice" style="margin: 0 0 0 0;">
+                        
+                    </ul>
+                    <div class="page-wrap">
+                        <nav aria-label="Page navigation example">
+                           
+                         </nav>
+                       </div>
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->
         </main>
@@ -92,13 +92,15 @@
 			$.ajax({
 				type : 'GET',
 				cache: false,
-				url : '<c:url value="/newsletter/post/list" />',
+				url : '<c:url value="/announce/notice/post/list" />',
 				data: {
 					curPage: (curPage) ? curPage : _VARS.searchOption.curPage,
 					keyword: _VARS.searchOption.keyword,
 					searchType: _VARS.searchOption.searchType
 				},
 				success : function(res) {
+					console.log(res);
+					var fixedPost = res.Fixedpost;
 					var commonPost = res.post;
 					var searchOption = res.searchOption.searchOption;
 					var page = JSON.parse(res.searchOption.page);
@@ -114,35 +116,80 @@
 					
 					$("#post_count").text(page.listCnt + "건");
 					
+					var fixedArr = [];
 					var commonArr = [];
 					
-					commonPost.every(function(el) {
-						var titleString = (el.title.length > 28) ?
-								el.title.slice(0, 28) + "..."
+					fixedPost.every(function(el) {
+						var titleString = (el.title.length > 40) ?
+								el.title.slice(0, 40) + "..."
 								: el.title;
 						
-						var commonHTML = '<li class="hongbo-item">' +
-	                            '<a href="<c:url value='/newsletter/view' />/' + el.seqId + '" class="hongbo-img">' +
-	                                '<div class="ent-logo">' +
-	                                    '<div class="ent-logo-detail">' +
-	                                 	  '<img src="<c:url value='/upload/newsletter/newsletter' />/' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
-	                                    '</div>' +
-	                                '</div>' +
-	                            '</a>' +
-	                            '<div class="caption">' + 
-	                                '<a href="<c:url value='/newsletter/view' />/' + el.seqId + '">' +
-	                                '<strong>' + titleString + '</strong>' +
-	                                '<small>| ' + el.createdAt + ' |</small>' +
-	                                '<span>조회수 ' + el.viewCount + '</span>' +
-	                                '</a>' +
+						var fixedHTML = '<li class="board-item">' +
+		                    '<strong class="item-nmb">' + el.seqId + '</strong>' +
+		                    '<div class="item-label">';
+		                switch(el.level) {
+		                	case "100" :
+		                		fixedHTML += '<span class="pink-label">주요공지</span>' 	
+		                		break;
+							case "101" :
+								fixedHTML += '<span class="yellow-label">주요공고</span>'
+		                		break;
+		                }
+		                
+		                fixedHTML += '</div>' +
+	                            '<div class="item-title">' +
+	                            '<span><a href="<c:url value='/announce/notice/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
+	                            '</div>' +
+	                            '<div class="item-info">' +
+	                                '<h5 class="item-view"><strong>조회수</strong> <span>' + el.viewCount + '</span></h5>' +
+	                                '<h5 class="item-start"><strong>게시일</strong> <span>' + el.contractStartAt.slice(5) + '</span></h5>' +
+									'<h5 class="item-end"><strong>종료일</strong> <span>' + el.contractEndAt.slice(5) + '</span></h5>' +
 	                            '</div>' +
 	                        '</li>';
-	                        
+	                    fixedArr.push(fixedHTML);
+	                    
+	                    return true;
+					});
+					
+					commonPost.every(function(el) {
+						var titleString = (el.title.length > 40) ?
+								el.title.slice(0, 40) + "..."
+								: el.title;
+						
+						var commonHTML = '<li class="board-item">' +
+		                    '<strong class="item-nmb">' + el.seqId + '</strong>' +
+		                    '<div class="item-label">';
+		                switch(el.level) {
+			                case "100" :
+			                	commonHTML += '<span class="pink-label">주요공지</span>' 	
+		                		break;
+							case "101" :
+								commonHTML += '<span class="yellow-label">주요공고</span>'
+		                		break;
+		                	case "102" :
+		                		commonHTML += '<span class="white-label">공지</span>' 	
+		                		break;
+							case "103" :
+								commonHTML += '<span class="white-label">공고</span>'
+		                		break;
+		                }
+		                
+		                commonHTML += '</div>' +
+	                            '<div class="item-title">' +
+	                            '<span><a href="<c:url value='/announce/notice/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
+	                            '</div>' +
+	                            '<div class="item-info">' +
+	                                '<h5 class="item-view"><strong>조회수</strong> <span>' + el.viewCount + '</span></h5>' +
+	                                '<h5 class="item-start"><strong>게시일</strong> <span>' + el.contractStartAt.slice(5) + '</span></h5>' +
+									'<h5 class="item-end"><strong>종료일</strong> <span>' + el.contractEndAt.slice(5) + '</span></h5>' +
+	                            '</div>' +
+	                        '</li>';
 	                    commonArr.push(commonHTML);
 		                return true;
 					});
 					
-					$("ul.hongbo-list").html(commonArr.join(""));
+					$("ul.board-box.fixed-notice").html(fixedArr.join(""));
+					$("ul.board-box.common-notice").html(commonArr.join(""));
 					
 					$('nav[aria-label]').html(pageHTML);
 					

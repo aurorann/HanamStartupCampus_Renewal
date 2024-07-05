@@ -1,0 +1,135 @@
+/*
+table 게시판
+*/
+table{ table-layout: fixed; }
+.board_wrap{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:50px;
+}
+.board_hd tr th{
+    text-align:center;
+    line-height:55px;
+    background-color:#f4f4f4;
+    border-bottom:1px solid #797979;
+
+    font-size:18px;
+    font-weight:700;
+}
+.board_body tr td,
+.board_body_fixed tr td{
+    line-height:65px;
+    border-bottom:1px solid #c7c7c7;
+    font-size:18px;
+    font-weight:500;
+}
+.board_body_fixed tr td{ border-bottom:1px solid #797979; }
+
+
+.board_body tr>*:not(.board_title),
+.board_body_fixed tr>*:not(.board_title){ text-align:center; }
+
+.board_body .board_title:hover a,
+.board_body_fixed .board_title:hover a{ text-decoration:underline; }
+
+.board_body .board_title a,
+.board_body_fixed .board_title a{
+    display:block;
+    font-size:18px;
+    font-weight:500;
+    color:#000;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.board_title a .board_label{ margin-right:10px; }
+
+
+/*체크박스 있을때 넓이*/
+.board_numb{ width:9%; }
+.board_title{ width:55%; }
+.board_view,
+.board_start,
+.board_end{ width:10%; }
+.board_check{ width:6%; }
+/*체크박스 없을때
+.board_numb{ width:10%; }
+.board_title{ width:55%; }
+.board_view,
+.board_start,
+.board_end{ width:11.66%; }
+*/
+
+/*
+게시판 글쓰기
+*/
+.board_write_wrap{
+    border:1px solid #c7c7c7;
+    margin:20px 0 50px;
+}
+.board_write_wrap>div,
+.board_write_content{ padding:20px; }
+
+.board_write_title{ border-bottom:1px solid #c7c7c7; }
+.board_write_title>div{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.board_write_title>div:not(.labelWrap) label{
+    font-size:15px;
+    font-weight:600;
+    color:#848484;
+    text-align:left;
+}
+.board_write_title>div:not(:last-of-type){ margin-bottom:15px; }
+.board_write_title .titleWrap input,
+.board_write_title .fileWrap input{
+    line-height:30px;
+    border:1px solid #c7c7c7;
+    padding:0 10px;
+    margin-left:10px;
+}
+.board_write_title .labelWrap input{ margin-right:5px; }
+.board_write_title .labelWrap label{ margin-right:10px; }
+.board_write_title .titleWrap input{ width:60%; }
+.board_write_title .fileWrap input{ width:30%; }
+
+.board_write_title>p{
+    font-size:15px;
+    font-weight:500;
+    color:#dc4e45;
+    text-align:center;
+    margin-top:30px;
+}
+
+/*board_write_content*/
+.board_write_content{
+    border-bottom:1px solid #c7c7c7;
+    display:flex;
+    justify-content:center;
+}
+.board_write_content .youtube_link{
+    position:relative;
+    width:100%;
+    padding:25% 0;
+}
+.board_write_content .youtube_link iframe{
+    position:absolute; left:0; top:0;
+    width:100%;
+    height:100%;
+}
+.board_write_title .fileWrap label:last-of-type{ margin-left:30px; }
+.board_write_title .fileWrap button{
+    height:30px;
+    padding:0 10px;
+    background-color:#333333;
+    margin-left:5px;
+    font-size:12px;
+    color:#fff;
+}
+
+.board_write_wrap .file_wrap{ padding:13px 20px; border-bottom:1px solid #c7c7c7; }
+.board_write_post textarea{ width:100%; height:500px; }

@@ -26,74 +26,63 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->   
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
+		
 		<main>
-            <div class="right-contents col-lg-9">
-        		<!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
-                    
-                    <table class="table board-table">
-                        <thead>
-                            <tr>
-                                <td>
-                                    <div class="board-title">
-                                        <span data-post-element="level" class="white-label">자주 묻는 질문</span>
-                                        <h1 class="title-text" data-post-element="title">${TITLE}</h1>
-
-                                        <div class="start-end-label">
-                                            <h5>등록일 <small data-post-element="contractStartAt">${CREATED_AT}</small></h5>
-                                            <h5>조회수 <small data-post-element="viewCount">${VIEW_COUNT}</small></h5>
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="board-contents" data-post-element="content">
-                                    <!-- board content -->
-                                    ${CONTENT}
-                                </td>
-                            </tr>
-                            <c:if test="${not empty FILE_NAME}">
-								<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
-								<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
-								<tr>
-									<td class="board-contents" style="padding: 10px;">
-										<c:forEach items="${fileNames}" varStatus="status">
-											<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
-											<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
-											<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
-												<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-											</form><br/>
-										</c:forEach>
-									</td>
-								</tr>
-							</c:if>
-                        </tbody>
-                    </table>
-
-                    <button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/announce/faq/list" />'" style="margin-right: 10px;">목록</button>
-                    <sec:authorize ifAnyGranted="ROLE_ADMIN">
-						<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/announce/faq/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
-
-						<button type="button" class="search-btn mg-top-30" onclick="deleteNoticePost(${SEQ_ID});" style="margin-right: 10px;">삭제</button>
-					</sec:authorize>
-
-                </div><!-- r-contents div 끝 -->
+            <div class="container_txt">
+                <div class="board_label board_label_gongo" data-post-element="level">자주 묻는 질문</div>
+                <h3 data-post-element="title">${TITLE}</h3>
+                <ul>
+                    <li>등록일<span data-post-element="contractStartAt">${CREATED_AT}</span></li>
+                    <li>조회수<span data-post-element="viewCount">${VIEW_COUNT}</span></li>
+                </ul>
             </div>
-        </main>
+            
+            <div class="container_wrap">
+                <div class="content_wrap">
+                    <div class="content_text">
+						${CONTENT}
+						
+						<c:if test="${not empty FILE_NAME}">
+							<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+							<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+							<ul class="file_wrap">
+								<c:forEach items="${fileNames}" varStatus="status">
+									<a href="#">
+										<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
+										${fileNames[status.index]}
+									</a>
+									<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+										<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+										<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+									</form><br/>
+								</c:forEach>
+							</ul>
+						</c:if>
+                    </div>
+                </div><!--content_wrap 콘텐츠-->
+            </div><!--container_wrap-->
+            
+            <div class="back_btn"><a href="<c:url value="/announce/faq/list" />">목록</a></div>
+
+			<sec:authorize ifAnyGranted="ROLE_ADMIN">
+						<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/announce/faq/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
+						<button type="button" class="search-btn mg-top-30" onclick="deleteNoticePost(${SEQ_ID});" style="margin-right: 10px;">삭제</button>
+			</sec:authorize>
+		</main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>

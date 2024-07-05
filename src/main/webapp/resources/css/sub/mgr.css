@@ -1,0 +1,44 @@
+/*
+관리자 페이지
+*/
+.container_wrap .mgr_btns{
+    display:table;
+    table-layout:fixed;
+    width:100%;
+    border:1px solid #797979;
+    margin-bottom:10px;
+}
+.container_wrap .mgr_btns li{ display:table-cell; }
+.container_wrap .mgr_btns li:not(:first-of-type){ border-left:1px solid #797979; }
+.container_wrap .mgr_btns li button{
+    display:block;
+    width:100%;
+    line-height:40px;
+
+    font-size:14px;
+    font-weight:600;
+    transition:all .2s ease-in-out;
+}
+.container_wrap .mgr_btns li button:hover{ background-color:#ededed; }
+.container_wrap .mgr_btns li button.active{
+    background-color:#1976d3;
+    color:#fff;
+}
+/*
+.container_wrap .mgr_btns{
+    display:flex; flex-wrap:wrap;
+    border:1px solid #797979;
+    margin-bottom:10px;
+}
+.container_wrap .mgr_btns li:not(:first-of-type){ border-left:1px solid #797979; }
+
+
+.mgr_btns1 li{ width:33.33%; }
+.mgr_btns2 li{ width:25%; }
+.mgr_btns3 li{ width:50%; }
+
+.container_wrap .mgr_btns li button:hover{ background-color:#ededed; }
+.container_wrap .mgr_btns li button.active{
+    background-color:#1976d3;
+    color:#fff;
+}*/

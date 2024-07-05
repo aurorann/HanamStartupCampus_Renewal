@@ -14,6 +14,7 @@
 	<!-- # include: script start -->
     <%@ include file="./include/script.jsp"%>
     <!-- # include: script end -->
+    
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
@@ -22,57 +23,61 @@
 
 <body class="animsition restyle-index">
 	
-	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
-
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
+    
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
                 <!-- # include: title-box start -->
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
+                <div class="container_wrap">
                     
-                    <div class="sm-main-box pink-bar flex-end">
-                        <h3><strong>총 게시물</strong>&nbsp;|&nbsp;<span id="post_count">0건</span></h3>
-        
-                        <div>
-                        	<form id="searchForm" action="<c:url value='/partner/activity/list' />" method="get" onsubmit="return searchNoticeList(this)">								
-	                            <select name="searchType">
-	                                <option value="NONE">선택</option>
-	                                <option value="title">제목</option>
-	                                <option value="content">내용</option>
-	                                <option value="titleAndContent">제목 및 내용</option>
- 	                            </select>
-	    
-	                            <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
-	                            <button type="submit" class="search-btn">검색</button>
-                            </form>
-                        </div>
-        
-                    </div>
+	                <div class="search_wrap">
+	                    <ul class="page_info">
+	                        <li>전체 <p><span class="page_count" id="post_count">0</span>건</p></li>
+	                        <li id="page_count">페이지 <p><span class="page_count">0</span>/</p></li>
+	                    </ul>
+	
+	                    <form class="search_form" id="searchForm" action="<c:url value='/partner/activity/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">
+	                        <select name="searchType">
+	                            <option value="NONE">--선택--</option>
+	                            <option value="title">제목</option>
+	                            <option value="content">내용</option>
+	                            <option value="titleAndContent">제목 및 내용</option>
+	                        </select>
+	                        <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+	                        <button type="submit" class="serch_btn">검색</button>
+	                    </form>
+	                </div><!--search_wrap-->
+	                
 
-					<div class="hongbo-body"> 
-	                    <ul class="hongbo-list"> 
-							<!-- item area -->
-	                    </ul> 
-                    </div>
+	                <div class="content_wrap">
+	                    <ul class="gallery_wrap">
+	                    	<!-- 
+	                        <li>
+	                            <a href="#">
+	                                <div class="img_box"><img src="img/sub_img/letter_img1.png" alt="6월호"></div>
+	                                <h3>(2024년 6월호)하남스타트업캠퍼스 온라인 뉴스레터</h3>
+	                                <time datetime="2024-06-12"><img src="img/calendar_ico.png" alt="달력">2024.06.12</time>
+	                            </a>
+	                        </li>
+	                         -->
+	                    </ul>
+	                </div><!--gallery_wrap 게시판-->
 
-	             	<div class="page-wrap">
-	                 	<nav aria-label="Page navigation example">
-	                    
-	                  	</nav>
-	                </div>
+	               <div class="pagination_wrap"></div><!--paging-->
                 </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
-		</main>
+        </main>
     </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
@@ -99,7 +104,9 @@
 					searchType: _VARS.searchOption.searchType
 				},
 				success : function(res) {
+					console.log(res);
 					var commonPost = res.post;
+					var approvePost = res.Approvepost;
 					var searchOption = res.searchOption.searchOption;
 					var page = JSON.parse(res.searchOption.page);
 					
@@ -110,41 +117,37 @@
 					SEARCH_OPTION.curPage = searchOption.curPage;
 					_VARS.page = page;
 					
-					var pageHTML = pagenation(page);
+					var pageHTML = newPagenation(page);
 					
-					$("#post_count").text(page.listCnt + "건");
+					$("#post_count").text(page.listCnt);
 					
-					var commonArr = [];
+					var pageCountHTML = '페이지 <p><span class="page_count">' + page.curPage + '</span>/' + page.pageCnt +'</p>';
+					$("#page_count").html(pageCountHTML);
 					
-					commonPost.every(function(el) {
-						var titleString = (el.title.length > 28) ?
-								el.title.slice(0, 28) + "..."
+					var approveArr = [];
+					
+					approvePost.every(function(el) {
+						var titleString = (el.title.length > 35) ?
+								el.title.slice(0, 35) + "..."
 								: el.title;
-						
-						var commonHTML = '<li class="hongbo-item">' + // style="height: 360px;"
-                           '<a href="<c:url value='/partner/activity/view' />/' + el.seqId + '" class="hongbo-img">' +
-                               '<div class="ent-logo">' +
-                                   '<div class="ent-logo-detail">' +
-                                 	  '<img src="<c:url value='/upload/partner/partner-activity' />/' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
-                                   '</div>' +
-                               '</div>' +
-                           '</a>' +
-                           '<div class="caption">' + 
-                               '<a href="<c:url value='/partner/activity/view' />/' + el.seqId + '">' +
-                               '<strong>' + titleString + '</strong>' +
-                               // '<a style="font-size: 1.7em;color: #696969;" href="<c:url value='/upload/partner/partner-activity' />' + el.writerId + '"/' + el.writerId + '</a>' +
-                               '<small>| ' + el.createdAt + ' |</small>' +
-                               '</a>' +
-                           '</div>' +
-                     	 '</li>';
+                     	 
+ 						var approveHTML = '<li>'+
+                    	'<a href="<c:url value='/partner/activity/view' />/' + el.seqId + '" class="hongbo-img">' +
+                            '<div class="img_box">' +
+                            	'<img src="<c:url value='/upload/partner/partner-activity' />/' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
+                            '</div>'+
+                            '<h3>' + titleString + '</h3>'+
+                            '<time datetime="2024-06-12"><img src="<c:url value='/resources/img/calendar_ico.png' />" alt="달력">' + el.createdAt + '</time>'+
+                    	'</a>'+
+						'</li>';
 	                        
-	                    commonArr.push(commonHTML);
+                     	approveArr.push(approveHTML);
 		                return true;
 					});
 					
-					$("ul.hongbo-list").html(commonArr.join(""));
+					$("div.content_wrap ul").html(approveArr.join(""));
 					
-					$('nav[aria-label]').html(pageHTML);
+					$('div.pagination_wrap').html(pageHTML);
 					
 					history.replaceState(null, null, getQueryString(SEARCH_OPTION));
 				},

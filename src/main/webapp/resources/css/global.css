@@ -4,6 +4,8 @@
 @import url('default.css');
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
 
+
+
 .in_1400{
     max-width:1400px;
     width:90%;
@@ -13,7 +15,7 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 .main_title{
     font-size:30px;
@@ -26,19 +28,45 @@
     font-weight:300;
     margin-bottom:50px;
 }
+.news_swiper .swiper-wrapper li a time,
+.gallery_wrap li a time{
+    display:block;
+
+    font-size:14px;
+    font-weight:400;
+    color:#3e3e3e;
+}
+.news_swiper .swiper-wrapper li a time img,
+.gallery_wrap li a time img{
+    vertical-align:middle;
+    margin-right:7px;
+}
+
+/*버튼*/
+.pagination_wrap ol li a,
 .more_btn{
     display:inline-block;
     width:40px;
     height:40px;
     border:1px solid #c7c7c7;
     border-radius:10px;
+    transition:all .3s ease-in-out;
+}
+.news .tab_list button.active,
+.news .tab_list button:hover,
+.pagination_wrap ol li a.active,
+.pagination_wrap ol li a:hover{
+    background-color:#1976d3;
+    color:#fff;
+    border-color:#1976d3;
+}
+.more_btn{
     text-indent:-9999px;
-
-    background-image:url('../img/puls_dk_ico.png');
+    background-image:url('../img/puls_ico.png');
     background-repeat:no-repeat;
     background-position:center;
     transition:all .3s ease-in-out;
-    }
+}
 .more_btn:hover{
     background-color:#1976d3;
     background-image:url('../img/puls_wh_ico.png');
@@ -58,23 +86,14 @@
     transition:all .3s ease-in-out;
     border:1px solid #c7c7c7;
 }
-.swiper-button button:hover{
-    border-color:#1976d3;
-    background-color:#1976d3;
-    background-image:url('../img/arrow_wh_ico.png');
-}
-.swiper-button button:hover{
-    border-color:#1976d3;
-    background-color:#1976d3;
-    background-image:url('../img/arrow_wh_ico.png');
-}
-.swiper-button button{ background-image:url('../img/arrow_dk_ico.png'); }
-.swiper-button-next{ transform:rotate(180deg); }
+.swiper-button button:hover{ background-image:url('../img/arrow_wh_ico.png'); }
+.swiper-button button:hover{ background-image:url('../img/arrow_wh_ico.png'); }
+.swiper-button button{ background-image:url('../img/arrow_ico.png'); }
 .swiper-button a{ vertical-align:middle; }
 
 /*주요공고Ggongo / 주요공지Ggongi / 공고,공지gongo*/
 .board_label{
-    display:block;
+    display:inline-block;
     width:70px;
     line-height:25px;
     text-align:center;
@@ -83,33 +102,25 @@
     font-size:13px;
     font-weight:500;
 }
-.board_label_Ggongo{ 
-    color:#dc4e45;
-    border:1px solid #dc4e45;
-}
-.board_label_Ggongi{ 
-    color:#47954b;
-    border:1px solid #47954b;
-}
-.board_label_gongo{ 
-    color:#747474;
-    border:1px solid #747474;
-}
+.board_label_Ggongo{ color:#dc4e45; border:1px solid #dc4e45; }
+.board_label_Ggongi{ color:#47954b; border:1px solid #47954b; }
+.board_label_gongo{ color:#747474; border:1px solid #747474; }
 
 
 
 /*
 hd
 */
-header{ position:relative; background-color: #fff; }
+header{
+    position:relative;
+    background-color: #fff;
+    box-shadow:0 0px 10px rgba(0, 0, 0, 0.1);;
+}
 header>div{
     display:flex; flex-wrap:wrap;
     align-items:center;
 }
-header>div h1{
-    display:block;
-    height:52px;
-}
+header>div h1{ display:block; height:52px; }
 header>div h1 a img{ display: block; }
 
 header>div nav{ margin:0 auto; }
@@ -145,10 +156,10 @@ header>div nav .dep01>li>a{
 
 /*하위메뉴*/
 header>div nav .dep02{
-    z-index:111;
+    z-index:9999;
     display:none;
     width:100%;
-    height:325px;
+    height:335px;
     background:#fafafa;
     border-left:1px solid #eeeeee;
     position:absolute; top:100%; left:50%;
@@ -159,7 +170,7 @@ header>div nav .dep02 li{ text-align:center; }
 header>div nav .dep02 li:first-of-type{ padding-top:20px; }
 header>div nav .dep02 li:not(:last-of-type){ margin-bottom:13px; }
 header>div nav .dep02 li a {
-    font-size:14px;
+    font-size:15px;
     font-weight:300;
     color:#4b4b4b;
     font-weight:500;
@@ -167,10 +178,10 @@ header>div nav .dep02 li a {
 header>div nav .dep02 li a:hover{ color:#1976d3; }
 
 header>div .menu_dummy{
-    z-index:2;
+    z-index:20;
     display:none;
     width:100%;
-    height:325px;
+    height:335px;
     background:#fafafa;
     position:absolute; top:100%; left:0;
     box-shadow:0 0px 10px rgba(0,0,0,0.1);
@@ -187,30 +198,14 @@ footer{ background-color:#333333; }
     display:flex; flex-wrap:wrap;
     padding:18px 0;
 }
-footer .link_wrap a{
+.top_ft a{
     font-weight:700;
     font-size:15px;
     color:#7e7e7e;
     transition:all .2s ease-in-out;
 }
-footer .link_wrap a:not(:first-of-type){ margin-left:25px; }
-footer .link_wrap a:hover{ color:#fff; }
-footer .ico_wrap{ margin-left:auto; }
-footer .ico_wrap a{
-    display:inline-block;
-    width:27px; height:27px;
-    background-repeat:no-repeat;
-    background-position:center;
-    text-indent:-9999px;
-    transition:all .2s ease-in-out;
-}
-footer .ico_wrap a:first-of-type{ background-image:url('../img/youtube_ico.png'); }
-footer .ico_wrap a:last-of-type{
-    background-image:url('../img/instagram_ico.png');
-    margin-left:10px;
-}
-footer .ico_wrap a:first-of-type:hover{ background-image:url(../img/youtube_wh_ico.png); }
-footer .ico_wrap a:last-of-type:hover{ background-image:url(../img/instagram_wh_ico.png); }
+.top_ft a:not(:first-of-type){ margin-left:25px; }
+.top_ft a:hover{ color:#fff; }
 
 /*bottom_ft*/
 .bottom_ft>div{
@@ -224,10 +219,7 @@ footer .ico_wrap a:last-of-type:hover{ background-image:url(../img/instagram_wh_
     line-height:23px;
     margin-bottom:35px;
 }
-.bottom_ft>div .text_wrap .tel{
-    font-weight:300;
-    font-size:14px;
-}
+.bottom_ft>div .text_wrap .tel{ font-weight:300; font-size:14px; }
 .bottom_ft>div .text_wrap .tel span{ margin-left:30px; }
 
 .family_btn{
@@ -258,7 +250,6 @@ footer .ico_wrap a:last-of-type:hover{ background-image:url(../img/instagram_wh_
 .family_btn button.active::after{ transform:rotate(180deg); }
 
 .family_btn ul{
-    z-index:3;
     display:none;
     position:absolute; left:0; bottom:40px;
     width:100%;
@@ -270,4 +261,113 @@ footer .ico_wrap a:last-of-type:hover{ background-image:url(../img/instagram_wh_
     font-size:14px;
     font-weight:300;
     color:#fff;
+}
+
+/*
+로그인페이지
+*/
+.login_wrap{
+    margin:200px 0 50px;
+    border:1px solid #c7c7c7;
+}
+.login_wrap .top_login{
+    text-align:center;
+    padding:40px 0;
+    background-color:#f6f6f6;
+}
+.login_wrap .top_login h3{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+.login_wrap .top_login h3 img{
+    vertical-align:middle;
+    margin-right:10px;
+}
+.login_wrap .top_login p{ font-size:15px; }
+
+.login_wrap form{
+    padding:35px 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.login_wrap form>div:first-of-type{ margin-bottom:15px; }
+.login_wrap form>div label{
+    display:inline-block;
+    width:80px;
+    font-size:18px;
+    font-weight:700;
+}
+.login_wrap form>div input{
+    width:230px;
+    height:40px;
+    border:1px solid #c7c7c7;
+    padding:0 15px;
+}
+
+/*
+검색modal
+*/
+.search_modal{
+    display:none;
+    z-index:19;
+    max-width:650px;
+    width:50%;
+    position:fixed; left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    background-color:#fff;
+}
+.top_search_modal{
+    border-bottom:1px solid #c7c7c7;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+}
+.top_search_modal h3{
+    font-size:22px;
+    font-weight:500;
+    color:#848484;
+}
+.btm_search_modal{ padding:40px 20px; }
+.btm_search_modal strong{
+    display:block;
+    font-size:30px;
+    font-weight:700;
+    margin-bottom:10px;
+    text-align:center;
+}
+.btm_search_modal p{
+    font-size:15px;
+    text-align:center;
+    margin-bottom:40px;
+}
+.btm_search_modal form{
+    padding:20px;
+    background-color:#f6f6f6;
+}
+.btm_search_modal form input{
+    border:1px solid #c7c7c7;
+    width:77%;
+    height:40px;
+    padding:0 15px;
+}
+.btm_search_modal form button{
+    width:20%;
+    height:40px;
+    background-color:#1976d3;
+    border-radius:8px;
+    margin-left:2%;
+
+    font-size:15px;
+    color:#fff;
+}
+
+.modal_dummy{
+    display:none;
+    z-index:18;
+    position:fixed; left:0; top:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }

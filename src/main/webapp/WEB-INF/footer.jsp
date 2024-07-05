@@ -5,15 +5,9 @@
 	<footer class="footer">
 	    <div class="top_ft">
 	        <div class="in_1400">
-	            <div class="link_wrap">
-	                <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
-	                <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
-	                <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
-	            </div>
-	            <div class="ico_wrap">
-	                <a href="https://www.youtube.com/channel/UCIT4wZzDZCF2J9ppP6b-6Eg"><img src="<c:url value='/resources/img/youtube_ico.png' />" alt="하남스타트업캠퍼스유튜브"></a>
-	                <a href="https://www.instagram.com/hanamstartup"><img src="<c:url value='/resources/img/instagram_ico.png' />" alt="하남스타트업캠퍼스인스타그램"></a>
-	            </div>
+	            <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
+	            <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
+	            <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
 	        </div>
 	    </div><!--top_ft-->
 	
@@ -66,6 +60,19 @@
 		        $("div.menu-desktop.gnb ul li[data-location-main='${locationMain}']").addClass("nav-pink");
 		        $("aside.left-menu ul li[data-location-sub='${locationSub}'] a").addClass("active");
 		        
+		        //관리자 메뉴 inside menu active
+		        
+		        
+		        //var pathname = window.location.pathname;
+				
+				//$("div.inside-menu a").each(function() {
+					//const href = $(this).attr('href');
+					//if (href.startsWith(pathname) || href.includes(pathname)) {
+						//$(this).addClass("you-are-here");
+					//}
+				//});
+		        
+				
 		        $.ajax({
 		    		type : 'GET',
 		    		cache: false,

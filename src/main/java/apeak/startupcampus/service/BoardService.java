@@ -13,6 +13,7 @@ import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
+import apeak.startupcampus.model.dto.BoardPartnerActivityDTO;
 import apeak.startupcampus.model.dto.BoardPartnerNewsDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
 import apeak.startupcampus.model.dto.NewsletterDTO;
@@ -24,12 +25,19 @@ public interface BoardService  {
 	public Map<String, Object> getPageContent(String level) throws Exception;
 	public Map<String, Object> editPageContent(BoardWebpageDTO noticeDTO, HttpServletRequest request) throws Exception;
 	
-	// [공고] 관련 서비스 메서드
-	// # 공고 게시글 리스트 조회
+	// [공지사항] 관련 서비스 메서드
+	// # 공지사항 게시글 리스트 조회
 	public Map<String, Object> getNoticePostList(Map<String, Object> searchOption) throws Exception;
 	
-	// # 공고 게시글 조회	
+	// # 공지사항 게시글 조회	
 	public Map<String, ?> getNoticePost(int seqId) throws Exception;
+	
+	// [공고] 관련 서비스 메서드
+	// # 공고 게시글 리스트 조회
+	public Map<String, Object> getAnnouncementPostList(Map<String, Object> searchOption) throws Exception;
+	
+	// # 공고 게시글 조회	
+	public Map<String, ?> getAnnouncementPost(int seqId) throws Exception;
 	
 	// [바이오 정책 · 지원] 관련 서비스 메서드
 	// # 바이오 정책 · 지원 게시글 리스트 조회
@@ -99,19 +107,15 @@ public interface BoardService  {
 	 * 게시글 작성 메서드
 	 */
 	public Map<String, Object> writeNoticePost(BoardNoticeDTO noticeDTO) throws Exception;
+	public Map<String, Object> writeAnnouncementPost(BoardNoticeDTO noticeDTO) throws Exception;
 	public Map<String, Object> writeAgencyPost(BoardAgencyDTO agencyDTO) throws Exception;
 	public Map<String, Object> writeFaqPost(BoardFaqDTO faqDTO) throws Exception;
-	
 	public Map<String, Object> writeMediaPost(BoardMediaDTO mediaDTO) throws Exception;
-	
 	public Map<String, Object> writePressPost(BoardGalleryDTO galleryDTO) throws Exception;
 	public Map<String, Object> writePromotionPost(BoardGalleryDTO galleryDTO) throws Exception;
 	public Map<String, Object> writeBioInfoPost(BoardGalleryDTO galleryDTO) throws Exception;
-	
 	public Map<String, Object> writeMediaPartnerPost(BoardMediaDTO mediaDTO) throws Exception;
-	
 	public Map<String, Object> writeNewsletterPost(NewsletterDTO newsletterDTO) throws Exception;
-	
 	public Map<String, Object> writeCommunityPartnerPost(BoardDTO boardDTO) throws Exception;
 
 	
@@ -119,28 +123,24 @@ public interface BoardService  {
 	 * 게시글 수정 메서드
 	 */
 	public Map<String, Object> editNoticePost(BoardNoticeDTO noticeDTO, HttpServletRequest request) throws Exception;
+	public Map<String, Object> editAnnouncementPost(BoardNoticeDTO noticeDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> editAgencyPost(BoardAgencyDTO agencyDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> editFaqPost(BoardFaqDTO faqDTO, HttpServletRequest request) throws Exception;
-	
 	public Map<String, Object> editMediaPost(BoardMediaDTO mediaDTO) throws Exception;
-	
 	public Map<String, Object> editPressPost(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> editPromotionPost(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> editBioInfoPost(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
-	
 	public Map<String, Object> editMediaPartnerPost(BoardMediaDTO mediaDTO, HttpServletRequest request) throws Exception;
-	
 	public Map<String, Object> editNewsletterPost(NewsletterDTO newsletterDTO, HttpServletRequest request) throws Exception;
 	
 	/*
 	 * 게시글 삭제 메서드
 	 */
 	public Map<String, Object> deleteNoticePost(int seqId, HttpServletRequest request) throws Exception;
+	public Map<String, Object> deleteAnnouncementPost(int seqId, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deleteAgencyPost(int seqId, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deleteFaqPost(int seqId, HttpServletRequest request) throws Exception;
-	
 	public Map<String, Object> deleteMediaPost(int seqId) throws Exception;
-	
 	public Map<String, Object> deletePressPost(int seqId, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deletePromotionPost(int seqId, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deleteBioInfoPost(int seqId, HttpServletRequest request) throws Exception;
@@ -160,12 +160,13 @@ public interface BoardService  {
 	public Map<String, Object> editNoticePartnerPostForPartner(BoardDTO boardDTO) throws Exception;
 	public Map<String, Object> deleteNoticePartnerPostForPartner(BoardDTO boardDTO) throws Exception;
 	
-	public Map<String, Object> writeActivityPartnerPost(BoardGalleryDTO galleryDTO) throws Exception;
-	public Map<String, Object> editActivityPartnerPost(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
+	public Map<String, Object> writeActivityPartnerPost(BoardPartnerActivityDTO partnerActivityDTO) throws Exception;
+	public Map<String, Object> editActivityPartnerPost(BoardPartnerActivityDTO partnerActivityDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deleteActivityPartnerPost(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
-	public Map<String, Object> writeActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO) throws Exception;
-	public Map<String, Object> editActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
+	public Map<String, Object> writeActivityPartnerPostForPartner(BoardPartnerActivityDTO partnerActivityDTO) throws Exception;
+	public Map<String, Object> editActivityPartnerPostForPartner(BoardPartnerActivityDTO partnerActivityDTO, HttpServletRequest request) throws Exception;
 	public Map<String, Object> deleteActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception;
+	public Map<String, Object> editApproveActivityPartnerPost(Map<String, Object> approveOption) throws Exception;
 	
 	public Map<String, Object> deleteNewsletterPost(int seqId) throws Exception;
 	
@@ -189,7 +190,7 @@ public interface BoardService  {
 	// # 기업 소식 게시글 조회	
 	public Map<String, Object> getNewsPartnerPost(int seqId) throws Exception;
 	// # 기업 소식 게시글 작성
-	public Map<String, Object> writeNewsPartnerPostForPartner(BoardPartnerNewsDTO partnerNewsDTO) throws Exception;
+	public Map<String, Object> writeNewsPartnerPostForPartner(BoardPartnerActivityDTO partnerActivityDTO) throws Exception;
 
 	
 

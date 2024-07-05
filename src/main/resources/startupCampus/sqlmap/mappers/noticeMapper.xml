@@ -30,11 +30,12 @@
 			<![CDATA[
 				SELECT
 					SEQ_ID, `LEVEL`, TITLE, VIEW_COUNT,
-					CONTRACT_START_AT, CONTRACT_END_AT
+					CONTRACT_START_AT, CONTRACT_END_AT, CREATED_AT
 				FROM
 					board_notice
 				WHERE
 					1 = 1
+					AND level in('100', '103') 
 			]]>
 			<include refid="search" />
 			<![CDATA[
@@ -49,12 +50,14 @@
 			<![CDATA[
 				SELECT
 					SEQ_ID, `LEVEL`, TITLE, VIEW_COUNT,
-					CONTRACT_START_AT, CONTRACT_END_AT
+					CONTRACT_START_AT, CONTRACT_END_AT, CREATED_AT
 				FROM
 					board_notice
 				WHERE
-					level in('100', '101') 
-					AND CONTRACT_END_AT >= current_date()
+					level in('100') 
+				]]>
+				<include refid="search" />
+				<![CDATA[
 				ORDER BY
 					LEVEL ASC,			
 					SEQ_ID DESC
@@ -66,12 +69,14 @@
 			<![CDATA[
 				SELECT
 					SEQ_ID, `LEVEL`, TITLE, VIEW_COUNT,
-					CONTRACT_START_AT, CONTRACT_END_AT
+					CONTRACT_START_AT, CONTRACT_END_AT, CREATED_AT
 				FROM
 					board_notice
 				WHERE
-					level in('102', '103') 
-					AND CONTRACT_END_AT >= current_date()
+					level in('103') 
+				]]>
+				<include refid="search" />
+				<![CDATA[
 				ORDER BY
 					LEVEL ASC,			
 					SEQ_ID DESC
@@ -90,6 +95,7 @@
 				AND (TITLE LIKE CONCAT('%', #{keyword}, '%')
 					OR CONTENT LIKE CONCAT('%', #{keyword}, '%'))
 			</if>
+			<!-- 
 			<if test="searchType == 'agency'.toString()">
 				AND AGENCY_NAME LIKE CONCAT('%', #{keyword}, '%')
 			</if>
@@ -99,6 +105,7 @@
 			<if test="searchType == 'announcement'.toString()">
 				AND (LEVEL = '101' OR LEVEL = '103')
 			</if>
+			 -->
 		</if>
 	</sql>
 	
@@ -106,7 +113,7 @@
 		SELECT
 			SEQ_ID, `LEVEL`, TITLE, CONTENT, VIEW_COUNT,
 			CONTRACT_START_AT, CONTRACT_END_AT,
-			FILE_PATH,FILE_NAME 
+			FILE_PATH,FILE_NAME, CREATED_AT
 		FROM
 			board_notice
 		WHERE

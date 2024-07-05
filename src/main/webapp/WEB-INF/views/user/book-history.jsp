@@ -31,61 +31,69 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
+		
 		<main>
             <div class="right-contents col-lg-9">
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
-
-                <div class="col-lg-12 r-contents">
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
+    
+                <div class="container_wrap">
                 	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
                 		<a href="<c:url value='/book/place' />" class="btn btn-default" role="button">회의실 예약 캘린더</a>
                    		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약현황</a>      
 				    </div>
-                
-                    <div class="sm-main-box pink-bar flex-end">
-                        <div>
+	                <div class="search_wrap">
+	                    <div class="search_form" id="searchForm">
                             <select id="placeId">                                
                                 <option value="1">회의실 1</option>
                                 <option value="2">회의실 2</option>
                             </select>
-
-                            <input type="text" class="datepicker-here" id="dateString"
+                            
+                            <input type="text" class="datepicker-here" id="dateString" name="keyword"
                             	data-min-view="months" data-view="months"
 								autocomplete="on" data-format='yyyy-mm' data-language="kor"/>
 								
-                            <button type="button" class="search-btn" onclick="getBookListMonthly();">검색</button>
-                        </div>
-        
-                    </div>
-
-                    <table class="table col-lg-12 mg-top-30">
-                        <thead>
-                            <tr>
+                            <button type="submit" class="search-btn serch_btn" onclick="getBookListMonthly();">검색</button>
+	                    </div>
+	                </div><!--search_wrap-->
+	                
+	                <table class="board_wrap">
+	                    <thead class="board_hd">
+	                        <tr>
                                 <th width="10%">시설명</th>
                                 <th width="25%">입주사</th>
                                 <th width="25%">예약기간</th>
                                 <th width="40%">시설 사용 용도</th>
-                            </tr>
-                        </thead>
-                        <tbody id="book-list">
-                            <!-- <tr>
-                                <td>소회의실1</td>
-                                <td>홍길동</td>
-                                <td>2020.01.15 11:00 ~ 2020.01.05 13:00</td>
-                                <td><span class="blue-label">예약 완료</span></td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-
-                </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
+	                        </tr>
+	                    </thead>
+	
+	                    <tbody class="board_body" id="book-list">
+	                    	<!-- 
+	                        <tr>
+	                            <td class="board_numb">1</td>
+	                            <td class="board_title">
+	                                <a href="#">신규 고정 공지사항 게시판입니다.</a>
+	                            </td>
+	                            <td class="board_view">관리자1</td>
+	                            <td class="board_start">2024.04.05</td>
+	                            <td class="board_end">200</td>
+	                            <td class="board_check"><input type="checkbox"></td>
+	                        </tr>
+	                         -->
+	                    </tbody>
+	                </table><!--board_wrap 게시판-->
+                </div>
+			</div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->

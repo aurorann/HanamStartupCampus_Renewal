@@ -26,17 +26,20 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
+
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-        		<!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
                 <div class="col-lg-12 r-contents">
                     
@@ -81,7 +84,6 @@
 					</sec:authorize>
 
                 </div><!-- r-contents div 끝 -->
-            </div>
 		</main>
     </div>
 	<!-- footer start -->

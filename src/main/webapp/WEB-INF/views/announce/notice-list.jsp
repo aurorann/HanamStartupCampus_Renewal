@@ -14,6 +14,7 @@
 	<!-- # include: script start -->
     <%@ include file="./include/script.jsp"%>
     <!-- # include: script end -->
+    
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
@@ -22,56 +23,77 @@
 
 <body class="animsition restyle-index">
 	
-	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
-
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->   
+    
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
                 <!-- # include: title-box start -->
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
+                <div class="container_wrap">
+	                <div class="search_wrap">
+	                    <ul class="page_info">
+	                        <li>전체 <p><span class="page_count" id="post_count">0</span>건</p></li>
+	                        <li id="page_count">페이지 <p><span class="page_count">0</span>/0</p></li>
+	                    </ul>
+	
+	                    <form class="search_form" id="searchForm" action="<c:url value='/announce/notice/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">
+	                        <select name="searchType">
+	                            <option value="NONE">--선택--</option>
+	                            <option value="title">제목</option>
+	                            <option value="content">내용</option>
+	                            <option value="titleAndContent">제목 및 내용</option>
+	                        </select>
+	                        <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+	                        <button type="submit" class="serch_btn">검색</button>
+	                    </form>
+	                </div><!--search_wrap-->
+	                
+	                <table class="board_wrap">
+	                    <thead class="board_hd">
+	                        <tr>
+	                            <th class="board_numb">번호</th>
+	                            <th class="board_title">제목</th>
+	                            <th class="board_start">게시일</th>
+	                            <th class="board_end">조회수</th>
+	                        </tr>
+	                    </thead>
+	
+	                    <tbody class="board_body_fixed fixed-notice">
+	                    	<!-- 
+	                        <tr>
+	                            <td class="board_numb">1</td>
+	                            <td class="board_title">
+	                                <a href="#">신규 고정 공지사항 게시판입니다.</a>
+	                            </td>
+	                            <td class="board_view">관리자1</td>
+	                            <td class="board_start">2024.04.05</td>
+	                            <td class="board_end">200</td>
+	                            <td class="board_check"><input type="checkbox"></td>
+	                        </tr>
+	                         -->
+	                    </tbody>
+	                    <tbody class="board_body common-notice">
+	                    </tbody>
+	                </table><!--board_wrap 게시판-->
                     
-                    <div class="sm-main-box pink-bar flex-end">
-                        <h3><strong>총 게시물</strong>&nbsp;|&nbsp;<span id="post_count">0건</span></h3>
-        
-                        <div>
-                        	<form id="searchForm" action="<c:url value='/announce/notice/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">								
-	                            <select name="searchType">
-	                                <option value="NONE">선택</option>
-	                                <option value="title">제목</option>
-	                                <option value="content">내용</option>
-	                                <option value="titleAndContent">제목 및 내용</option>
-	                            </select>
-	    
-	                            <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
-	                            <button type="submit" class="search-btn">검색</button>
-                            </form>
-                        </div>
-        
-                    </div>
-
-                    <ul class="board-box fixed-notice">
-
-                    </ul>
-                    <ul class="board-box common-notice" style="margin: 0 0 0 0;">
-                        
-                    </ul>
-                    <div class="page-wrap">
-                        <nav aria-label="Page navigation example">
-                           
-                         </nav>
-                       </div>
+                    <div class="pagination_wrap">
+					</div>
+					<sec:authorize ifAnyGranted="ROLE_ADMIN">
+						<a href='<c:url value="/admin/community/write/form" />' class="write_btn">글쓰기</a>
+					</sec:authorize>
+					
                 </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->
@@ -112,9 +134,12 @@
 					SEARCH_OPTION.curPage = searchOption.curPage;
 					_VARS.page = page;
 					
-					var pageHTML = pagenation(page);
+					var pageHTML = newPagenation(page);
 					
-					$("#post_count").text(page.listCnt + "건");
+					$("#post_count").text(page.listCnt);
+					
+					var pageCountHTML = '페이지 <p><span class="page_count">' + page.curPage + '</span>/' + page.pageCnt +'</p>';
+					$("#page_count").html(pageCountHTML);
 					
 					var fixedArr = [];
 					var commonArr = [];
@@ -124,28 +149,29 @@
 								el.title.slice(0, 40) + "..."
 								: el.title;
 						
-						var fixedHTML = '<li class="board-item">' +
-		                    '<strong class="item-nmb">' + el.seqId + '</strong>' +
-		                    '<div class="item-label">';
+						var fixedHTML =
+                        '<tr>' +
+                            '<td class="board_numb">' + el.seqId + '</td>' +
+                            '<td class="board_title">' +
+                                '<a href="<c:url value='/announce/notice/view' />/' + el.seqId + '">';
+                                
 		                switch(el.level) {
 		                	case "100" :
-		                		fixedHTML += '<span class="pink-label">주요공지</span>' 	
+		                		fixedHTML += '<div class="board_label board_label_Ggongi">주요공지</div>' 	
 		                		break;
 							case "101" :
-								fixedHTML += '<span class="yellow-label">주요공고</span>'
+								fixedHTML += '<div class="board_label board_label_Ggongo">주요공고</div>'
 		                		break;
 		                }
 		                
-		                fixedHTML += '</div>' +
-	                            '<div class="item-title">' +
-	                            '<span><a href="<c:url value='/announce/notice/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
-	                            '</div>' +
-	                            '<div class="item-info">' +
-	                                '<h5 class="item-view"><strong>조회수</strong> <span>' + el.viewCount + '</span></h5>' +
-	                                '<h5 class="item-start"><strong>게시일</strong> <span>' + el.contractStartAt.slice(5) + '</span></h5>' +
-									'<h5 class="item-end"><strong>종료일</strong> <span>' + el.contractEndAt.slice(5) + '</span></h5>' +
-	                            '</div>' +
-	                        '</li>';
+		                fixedHTML += 
+                                    titleString +
+                                '</a>' +
+                            '</td>' +
+                            '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>' +
+                            '<td class="board_end">' + el.viewCount + '</td>' +
+                        '</tr>';
+	                        
 	                    fixedArr.push(fixedHTML);
 	                    
 	                    return true;
@@ -156,42 +182,44 @@
 								el.title.slice(0, 40) + "..."
 								: el.title;
 						
-						var commonHTML = '<li class="board-item">' +
-		                    '<strong class="item-nmb">' + el.seqId + '</strong>' +
-		                    '<div class="item-label">';
+						var commonHTML =
+                        '<tr>' +
+	                        '<td class="board_numb">' + el.seqId + '</td>' +
+	                        '<td class="board_title">' +
+	                            '<a href="<c:url value='/announce/notice/view' />/' + el.seqId + '">';
+						
+						
 		                switch(el.level) {
 			                case "100" :
-			                	commonHTML += '<span class="pink-label">주요공지</span>' 	
+			                	commonHTML += '<div class="board_label board_label_Ggongi">주요공지</div>'
 		                		break;
 							case "101" :
-								commonHTML += '<span class="yellow-label">주요공고</span>'
+								commonHTML += '<div class="board_label board_label_Ggongo">주요공고</div>'
 		                		break;
 		                	case "102" :
-		                		commonHTML += '<span class="white-label">공지</span>' 	
+		                		commonHTML += '<div class="board_label board_label_gongo">공고</div>'
 		                		break;
 							case "103" :
-								commonHTML += '<span class="white-label">공고</span>'
+								commonHTML += '<div class="board_label board_label_gongo">공지</div>'
 		                		break;
 		                }
 		                
-		                commonHTML += '</div>' +
-	                            '<div class="item-title">' +
-	                            '<span><a href="<c:url value='/announce/notice/view' />/' + el.seqId + '">' + titleString + '</a></span>' +
-	                            '</div>' +
-	                            '<div class="item-info">' +
-	                                '<h5 class="item-view"><strong>조회수</strong> <span>' + el.viewCount + '</span></h5>' +
-	                                '<h5 class="item-start"><strong>게시일</strong> <span>' + el.contractStartAt.slice(5) + '</span></h5>' +
-									'<h5 class="item-end"><strong>종료일</strong> <span>' + el.contractEndAt.slice(5) + '</span></h5>' +
-	                            '</div>' +
-	                        '</li>';
+		                commonHTML += 
+                            	titleString+
+                            '</a>' +
+                        '</td>' +
+                        '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>' +
+                        '<td class="board_end">' + el.viewCount + '</td>' +
+                    '</tr>';
+
 	                    commonArr.push(commonHTML);
 		                return true;
 					});
 					
-					$("ul.board-box.fixed-notice").html(fixedArr.join(""));
-					$("ul.board-box.common-notice").html(commonArr.join(""));
+					$("tbody.fixed-notice").html(fixedArr.join(""));
+					$("tbody.board_body.common-notice").html(commonArr.join(""));
 					
-					$('nav[aria-label]').html(pageHTML);
+					$('div.pagination_wrap').html(pageHTML);
 					
 					history.replaceState(null, null, getQueryString(SEARCH_OPTION));
 				},

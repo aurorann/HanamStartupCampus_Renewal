@@ -25,37 +25,32 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-
-    <div class="sub-contents">
-        <div class="col-lg-12 r-contents">
-
-            <div class="ent-title">
-                <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png'/>">&nbsp;&nbsp;입주기업 전용 로그인이 필요한 페이지입니다.</h3>
-                <p>발급 받으신 아이디와 비밀번호를 입력해 주세요.</p>
+    
+    <main class="in_1400">
+        <div class="login_wrap">
+            <div class="top_login">
+                <h3><img src="<c:url value='/resources/img/login_ico.png' /> " alt="로그인">입주기업 전용 로그인이 필요한 페이지입니다.</h3>
+                <p>발급 받으신 아이디와 비밀번호를 입력해 주세요. </p>
             </div>
+            <form id="loginForm" method="post" action="<c:url value='/user/login' />">
+            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            	<div class="input-box">
+                    <label for="id">아이디</label>
+                    <input type="text" name="accountId">
+                </div>
+                <div class="input-box">
+                    <label for="pw">비밀번호</label>
+                    <input type="password" name="accountPw">
+                </div>
+            </form>
+        </div>
 
-            <div class="gray-box">
-	            <form id="loginForm" method="post" action="<c:url value='/user/login' />">
-	            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	            	<div class="input-box">
-	                    <label for="id">아이디</label>
-	                    <input type="text" name="accountId">
-	                </div>
-	                <div class="input-box">
-	                    <label for="pw">비밀번호</label>
-	                    <input type="password" name="accountPw">
-	                </div>
-	            </form>
-            </div>
+        <div class="login_btn">
+        	<a onclick="loginForm.submit();" href="javascript:void(0);" class="search-btn" style="float: none;display:block; width:200px; margin:0 auto;">로그인</a>
+        </div>
+    </main>
 
-            <div class="mg-top-60" style="text-align:center; width:100%;">
-                <ul>
-                    <li><a onclick="loginForm.submit();" href="javascript:void(0);" class="search-btn" style="float: none;display:block; width:200px; margin:0 auto;">로그인</a></li>
-                </ul>
-            </div>
 
-        </div><!-- right-contents div 끝 -->
-    </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
 	<!-- footer end -->

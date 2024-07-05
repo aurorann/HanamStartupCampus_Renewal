@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import apeak.startupcampus.common.PagingUtil;
 import apeak.startupcampus.model.dao.ActivityPartnerMapper;
 import apeak.startupcampus.model.dao.AgencyMapper;
+import apeak.startupcampus.model.dao.AnnouncementMapper;
 import apeak.startupcampus.model.dao.BioInfoMapper;
 import apeak.startupcampus.model.dao.CommunityPartnerMapper;
 import apeak.startupcampus.model.dao.FaqMapper;
@@ -52,6 +53,7 @@ import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardMediaDTO;
 import apeak.startupcampus.model.dto.BoardNoticeDTO;
+import apeak.startupcampus.model.dto.BoardPartnerActivityDTO;
 import apeak.startupcampus.model.dto.BoardPartnerNewsDTO;
 import apeak.startupcampus.model.dto.BoardWebpageDTO;
 import apeak.startupcampus.model.dto.NewsletterDTO;
@@ -118,6 +120,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	
 	@Resource(name = "newsPartnerMapper")
 	private NewsPartnerMapper newsPartnerMapper;
+	
+	@Resource(name = "announcementMapper")
+	private AnnouncementMapper announcementMapper;
 
 	// 파일 세이브 경로 (globals.properties)
 	@Value("#{globals['path.root']}")
@@ -197,8 +202,8 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return getBoardEditResultMap(insertCount, "웹페이지 컨텐츠");
 	}
 
-	// [공고] 관련 서비스 메서드
-	// # 공고 게시글 리스트 조회
+	// [공지사항] 관련 서비스 메서드
+	// # 공지사항 게시글 리스트 조회
 	public Map<String, Object> getNoticePostList(Map<String, Object> searchOption) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
@@ -214,11 +219,40 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return resultMap;
 	}
 
-	// # 공고 게시글 조회
+	// # 공지사항 게시글 조회
 	public Map<String, ?> getNoticePost(int seqId) throws Exception {
 		int rowCount = noticeMapper.updateNoticePostViewCount(seqId);
 		if (rowCount > 0) {
 			return noticeMapper.selectNoticePostOne(seqId);
+		} else {
+			Map<String, String> resultMap = new HashMap<String, String>();
+			resultMap.put("error", "POST_NOT_FOUND");
+			return resultMap;
+		}
+	}
+	
+	// [공고] 관련 서비스 메서드
+	// # 공고 게시글 리스트 조회
+	public Map<String, Object> getAnnouncementPostList(Map<String, Object> searchOption) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("result", "success");
+		resultMap.put("searchOption", getBoardSearchOption(searchOption));
+		
+		LOGGER.debug(searchOption.toString());
+		
+		resultMap.put("Fixedpost", announcementMapper.selectFixedAnnouncementPostList(searchOption));
+		resultMap.put("Commonpost", announcementMapper.selectCommonAnnouncementPostList(searchOption));
+		resultMap.put("post", announcementMapper.selectAnnouncementPostList(searchOption));
+		
+		return resultMap;
+	}
+	
+	// # 공고 게시글 조회
+	public Map<String, ?> getAnnouncementPost(int seqId) throws Exception {
+		int rowCount = announcementMapper.updateAnnouncementPostViewCount(seqId);
+		if (rowCount > 0) {
+			return announcementMapper.selectAnnouncementPostOne(seqId);
 		} else {
 			Map<String, String> resultMap = new HashMap<String, String>();
 			resultMap.put("error", "POST_NOT_FOUND");
@@ -260,7 +294,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 		resultMap.put("result", "success");
 		resultMap.put("searchOption", getBoardSearchOption(searchOption));
-
+		LOGGER.debug("게시글 리스트 조회");
 		LOGGER.debug(searchOption.toString());
 
 		resultMap.put("post", faqMapper.selectFaqPostList(searchOption));
@@ -478,6 +512,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		LOGGER.debug(searchOption.toString());
 
 		resultMap.put("post", activityPartnerMapper.selectActivityPartnerPostList(searchOption));
+		resultMap.put("Approvepost", activityPartnerMapper.selectApproveActivityPartnerPostList(searchOption));
 
 		return resultMap;
 	}
@@ -637,12 +672,17 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	
 
 	/*
-	 * 게시글 작성 메서드 category: notice, agency, faq
+	 * 게시글 작성 메서드 category: notice, agency, faq, announcement
 	 */
 	public Map<String, Object> writeNoticePost(BoardNoticeDTO noticeDTO) throws Exception {
 		setWriterInfo(noticeDTO);
 		int insertCount = noticeMapper.insertNoticePostOne(noticeDTO);
-		return getBoardWriteResultMap(insertCount, "공고");
+		return getBoardWriteResultMap(insertCount, "공지사항");
+	}
+	public Map<String, Object> writeAnnouncementPost(BoardNoticeDTO noticeDTO) throws Exception {
+		setWriterInfo(noticeDTO);
+		int insertCount = announcementMapper.insertAnnouncementPostOne(noticeDTO);
+		return getBoardWriteResultMap(insertCount, "사업공고");
 	}
 
 	public Map<String, Object> writeAgencyPost(BoardAgencyDTO agencyDTO) throws Exception {
@@ -714,25 +754,25 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return getBoardWriteResultMap(insertCount, "소개 영상");
 	}
 	
-	public Map<String, Object> writeActivityPartnerPost(BoardGalleryDTO galleryDTO) throws Exception {
-		setWriterInfo(galleryDTO);
+	public Map<String, Object> writeActivityPartnerPost(BoardPartnerActivityDTO partnerActivityDTO) throws Exception {
+		setWriterInfo(partnerActivityDTO);
 
-		MultipartFile newImage = galleryDTO.getRepresentImageFile();
+		MultipartFile newImage = partnerActivityDTO.getRepresentImageFile();
 		String fileName = saveNewMultipartImage(newImage, PARTNER_PATH + File.separator + "partner-activity");
-		galleryDTO.setRepresentImage(fileName);
+		partnerActivityDTO.setRepresentImage(fileName);
 
-		int insertCount = activityPartnerMapper.insertActivityPartnerPostOne(galleryDTO);
-		return getBoardWriteResultMap(insertCount, "기업 활동");
+		int insertCount = activityPartnerMapper.insertActivityPartnerPostOne(partnerActivityDTO);
+		return getBoardWriteResultMap(insertCount, "기업 소식");
 	}
 	
-	public Map<String, Object> writeActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO) throws Exception {
-		setWriterInfo(galleryDTO);
+	public Map<String, Object> writeActivityPartnerPostForPartner(BoardPartnerActivityDTO partnerActivityDTO) throws Exception {
+		setWriterInfo(partnerActivityDTO);
 
-		MultipartFile newImage = galleryDTO.getRepresentImageFile();
+		MultipartFile newImage = partnerActivityDTO.getRepresentImageFile();
 		String fileName = saveNewMultipartImage(newImage, PARTNER_PATH + File.separator + "partner-activity");
-		galleryDTO.setRepresentImage(fileName);
+		partnerActivityDTO.setRepresentImage(fileName);
 
-		int insertCount = activityPartnerMapper.insertActivityPartnerPostOneForPartner(galleryDTO);
+		int insertCount = activityPartnerMapper.insertActivityPartnerPostOneForPartner(partnerActivityDTO);
 		return getBoardWriteResultMap(insertCount, "기업 소식");
 	}
 	
@@ -741,7 +781,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 
 	/*
-	 * 게시글 수정 메서드 category: notice, agency, faq
+	 * 게시글 수정 메서드 category: notice, agency, faq, announcement
 	 */
 	public Map<String, Object> editNoticePost(BoardNoticeDTO noticeDTO, HttpServletRequest request) throws Exception {
 		setWriterInfo(noticeDTO);
@@ -762,6 +802,28 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 		
 		int insertCount = noticeMapper.updateNoticePostOne(noticeDTO);
+		return getBoardEditResultMap(insertCount, "공지사항");
+	}
+	
+	public Map<String, Object> editAnnouncementPost(BoardNoticeDTO noticeDTO, HttpServletRequest request) throws Exception {
+		setWriterInfo(noticeDTO);
+		
+		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
+		Map<String, Object> oldPost = announcementMapper.selectAnnouncementPostOne(noticeDTO.getSeqId());
+		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
+		
+		if(!noticeDTO.getFilePath().equals(oldPaths)) {
+			String path = request.getSession().getServletContext().getRealPath("/");
+			
+			String oldList[] = oldPaths.split(":");
+			
+			for(String oldPath:oldList) {			
+				File oldFile = new File(path+File.separator+oldPath);
+				oldFile.delete();
+			}
+		}
+		
+		int insertCount = announcementMapper.updateAnnouncementPostOne(noticeDTO);
 		return getBoardEditResultMap(insertCount, "공고");
 	}
 
@@ -966,20 +1028,20 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return getBoardEditResultMap(insertCount, "소개 영상");
 	}
 	
-	public Map<String, Object> editActivityPartnerPost(BoardGalleryDTO galleryDTO,HttpServletRequest request) throws Exception {
-		setWriterInfo(galleryDTO);
+	public Map<String, Object> editActivityPartnerPost(BoardPartnerActivityDTO partnerActivityDTO,HttpServletRequest request) throws Exception {
+		setWriterInfo(partnerActivityDTO);
 
-		MultipartFile newImage = galleryDTO.getRepresentImageFile();
+		MultipartFile newImage = partnerActivityDTO.getRepresentImageFile();
 		if (newImage != null && !newImage.isEmpty()) {
 			String fileName = saveNewMultipartImage(newImage, PARTNER_PATH + File.separator + "partner-activity");
-			galleryDTO.setRepresentImage(fileName);
+			partnerActivityDTO.setRepresentImage(fileName);
 		}
 
 		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
-		Map<String, Object> oldPost = activityPartnerMapper.selectActivityPartnerPostOne(galleryDTO.getSeqId());
+		Map<String, Object> oldPost = activityPartnerMapper.selectActivityPartnerPostOne(partnerActivityDTO.getSeqId());
 		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
 		
-		if(!galleryDTO.getFilePath().equals(oldPaths)) {
+		if(!partnerActivityDTO.getFilePath().equals(oldPaths)) {
 			String path = request.getSession().getServletContext().getRealPath("/");
 			
 			String oldList[] = oldPaths.split(":");
@@ -990,24 +1052,24 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			}
 		}
 		
-		int insertCount = activityPartnerMapper.updateActivityPartnerPostOne(galleryDTO);
+		int insertCount = activityPartnerMapper.updateActivityPartnerPostOne(partnerActivityDTO);
 		return getBoardEditResultMap(insertCount, "기업 소식");
 	}
 	
-	public Map<String, Object> editActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO,HttpServletRequest request) throws Exception {
-		setWriterInfo(galleryDTO);
+	public Map<String, Object> editActivityPartnerPostForPartner(BoardPartnerActivityDTO partnerActivityDTO,HttpServletRequest request) throws Exception {
+		setWriterInfo(partnerActivityDTO);
 
-		MultipartFile newImage = galleryDTO.getRepresentImageFile();
+		MultipartFile newImage = partnerActivityDTO.getRepresentImageFile();
 		if (newImage != null && !newImage.isEmpty()) {
 			String fileName = saveNewMultipartImage(newImage, PARTNER_PATH + File.separator + "partner-activity");
-			galleryDTO.setRepresentImage(fileName);
+			partnerActivityDTO.setRepresentImage(fileName);
 		}
 
 		//첨부파일이 변경되었는지 확인하고 변경되었다면 기존 파일은 삭제한다.
-		Map<String, Object> oldPost = activityPartnerMapper.selectActivityPartnerPostOne(galleryDTO.getSeqId());
+		Map<String, Object> oldPost = activityPartnerMapper.selectActivityPartnerPostOne(partnerActivityDTO.getSeqId());
 		String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
 		
-		if(!galleryDTO.getFilePath().equals(oldPaths)) {
+		if(!partnerActivityDTO.getFilePath().equals(oldPaths)) {
 			String path = request.getSession().getServletContext().getRealPath("/");
 			
 			String oldList[] = oldPaths.split(":");
@@ -1018,8 +1080,14 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			}
 		}
 		
-		int insertCount = activityPartnerMapper.updateActivityPartnerPostOneForPartner(galleryDTO);
+		int insertCount = activityPartnerMapper.updateActivityPartnerPostOneForPartner(partnerActivityDTO);
 		return getBoardEditResultMap(insertCount, "기업 활동");
+	}
+	
+	
+	public Map<String, Object> editApproveActivityPartnerPost(Map<String, Object> approveOption) throws Exception {
+		int insertCount = activityPartnerMapper.updateApproveActivityPartnerPost(approveOption);
+		return getBoardEditResultMap(insertCount, "기업 소식");
 	}
 
 
@@ -1038,6 +1106,30 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		
 			String path = request.getSession().getServletContext().getRealPath("/");
 				
+			String oldList[] = oldPaths.split(":");
+			
+			for(String oldPath:oldList) {			
+				File oldFile = new File(path+File.separator+oldPath);
+				oldFile.delete();
+			}
+		}
+		
+		
+		return getBoardDeleteResultMap(insertCount, "공지사항");
+	}
+	
+	public Map<String, Object> deleteAnnouncementPost(int seqId,HttpServletRequest request) throws Exception {
+		
+		Map<String, Object> oldPost = announcementMapper.selectAnnouncementPostOne(seqId);
+		
+		int insertCount = announcementMapper.deleteAnnouncementPostOne(seqId);
+		
+		if(insertCount>0) {
+			
+			String oldPaths = String.valueOf(oldPost.get("FILE_PATH"));
+			
+			String path = request.getSession().getServletContext().getRealPath("/");
+			
 			String oldList[] = oldPaths.split(":");
 			
 			for(String oldPath:oldList) {			
@@ -1246,7 +1338,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		String savePathContext = null;
 		String dirUrl = null;
 
-		if (boardType.equals("notice") || boardType.equals("agency") || boardType.equals("faq")) {
+		if (boardType.equals("notice") || boardType.equals("agency") || boardType.equals("faq") || boardType.equals("announcement")) {
 			savePathContext = BOARD_PATH;
 			dirUrl = BOARD_URL;
 		} else if (boardType.equals("press") || boardType.equals("promotion") || boardType.equals("bio-info")) {
@@ -1480,7 +1572,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 	public Map<String, Object> getBoardSearchOption(Map<String, Object> searchOption) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
+		LOGGER.debug("getBoardSearchOption 결과");
 		ObjectMapper objMapper = new ObjectMapper();
 
 		int postCnt = 0;
@@ -1488,6 +1580,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		switch ((String) searchOption.get("boardType")) {
 		case "notice":
 			postCnt = noticeMapper.selectNoticePostCount(searchOption);
+			break;
+		case "announcement":
+			postCnt = announcementMapper.selectAnnouncementPostCount(searchOption);
 			break;
 		case "agency":
 			postCnt = agencyMapper.selectAgencyPostCount(searchOption);
@@ -1517,6 +1612,10 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			break;
 		case "partner-activity":
 			postCnt = activityPartnerMapper.selectActivityPartnerPostCount(searchOption);
+			pageSize = 9;
+			break;
+		case "approve-partner-activity":
+			postCnt = activityPartnerMapper.selectApproveActivityPartnerPostCount(searchOption);
 			pageSize = 9;
 			break;
 		case "partner-news":
@@ -1568,7 +1667,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			String savePathContext = null;
 			String dirUrl = null;
 
-			if (boardType.equals("notice") || boardType.equals("agency") || boardType.equals("faq")) {
+			if (boardType.equals("notice") || boardType.equals("agency") || boardType.equals("faq") || boardType.equals("announcement")) {
 				savePathContext = BOARD_PATH;
 				dirUrl = BOARD_URL;
 			} else if (boardType.equals("press") || boardType.equals("promotion") || boardType.equals("bio-info")) {
@@ -1707,13 +1806,13 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 		
 		int insertCount = filePartnerMapper.updateFilePartnerPostOne(boardDTO);
-		return getBoardEditResultMap(insertCount, "입주기업 알림공간");
+		return getBoardEditResultMap(insertCount, "서식 자료실");
 	}
 	
 	// 서식 자료실 게시글 삭제
 	public Map<String, Object> deleteFilePartnerPost(int seqId) throws Exception {
 		int insertCount = filePartnerMapper.deleteFilePartnerPostOne(seqId);
-		return getBoardDeleteResultMap(insertCount, "입주기업 알림공간");
+		return getBoardDeleteResultMap(insertCount, "서식 자료실");
 	}
 	
 	
@@ -1744,14 +1843,14 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	}
 	
 	// # 기업 소식 게시글 작성
-	public Map<String, Object> writeNewsPartnerPostForPartner(BoardPartnerNewsDTO partnerNewsDTO) throws Exception {
-		setWriterInfo(partnerNewsDTO);
+	public Map<String, Object> writeNewsPartnerPostForPartner(BoardPartnerActivityDTO partnerActivityDTO) throws Exception {
+		setWriterInfo(partnerActivityDTO);
 
-		MultipartFile newImage = partnerNewsDTO.getRepresentImageFile();
+		MultipartFile newImage = partnerActivityDTO.getRepresentImageFile();
 		String fileName = saveNewMultipartImage(newImage, PARTNER_PATH + File.separator + "partner-news");
-		partnerNewsDTO.setRepresentImage(fileName);
+		partnerActivityDTO.setRepresentImage(fileName);
 
-		int insertCount = newsPartnerMapper.insertNewsPartnerPostOne(partnerNewsDTO);
+		int insertCount = activityPartnerMapper.insertActivityPartnerPostOne(partnerActivityDTO);
 		return getBoardWriteResultMap(insertCount, "기업 소식");
 	}
 	

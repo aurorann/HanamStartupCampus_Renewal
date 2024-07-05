@@ -21,5 +21,15 @@ $(function(){
 			$('.family_btn ul').stop().slideUp(300);
 		}
 	 });
+
+	/*search 검색*/
+	$('.util a:first-of-type').click(function(){
+		$('.search_modal').show();
+		$('.modal_dummy').show();
+	});
 	
+	$('.top_search_modal button, .modal_dummy').click(function(){
+		$('.search_modal').hide();
+		$('.modal_dummy').hide();
+	});
 });
