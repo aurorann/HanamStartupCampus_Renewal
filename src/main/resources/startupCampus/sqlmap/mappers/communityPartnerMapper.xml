@@ -28,22 +28,27 @@
 	</select>
 	
 	<!-- 게시글 리스트 조회 -->
-	<select id="selectCommunityPartnerPostList" parameterType="map" resultType="boardDTO">
+	<select id="selectCommunityPartnerPostList" parameterType="map" resultType="boardCommunityDTO">
 			<![CDATA[
 				SELECT
-					board_community_partner.SEQ_ID AS SEQ_ID, WRITER_ID, WRITER_IP, WRITER_NAME,
-					TITLE, CONTENT, VIEW_COUNT, board_community_partner.CREATED_AT, board_community_partner.UPDATED_AT
+					pcp.SEQ_ID AS SEQ_ID, pcp.WRITER_ID, pcp.WRITER_IP, pcp.WRITER_NAME, pcp.TITLE, pcp.CONTENT,
+					pcp.VIEW_COUNT, pcp.CREATED_AT, pcp.UPDATED_AT,
+					COALESCE(bcc.commentCnt, 0) AS commentCnt
 				FROM
-					board_community_partner
-					LEFT JOIN user_info
-					ON	user_info.SEQ_ID = board_community_partner.WRITER_ID
+					board_community_partner pcp
+					LEFT JOIN user_info ui ON ui.SEQ_ID = pcp.WRITER_ID
+					LEFT JOIN (
+					  SELECT POST_ID, COUNT(*) AS commentCnt
+					  FROM board_community_comment
+					  GROUP BY POST_ID
+					) bcc ON bcc.POST_ID = pcp.SEQ_ID
 				WHERE
 					1 = 1
 			]]>
 			<include refid="search" />
 			<![CDATA[
 				ORDER BY
-					board_community_partner.SEQ_ID DESC
+					pcp.SEQ_ID DESC
 				LIMIT #{index}, #{size}
 			]]>
 	</select>

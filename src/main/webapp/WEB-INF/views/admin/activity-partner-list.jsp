@@ -89,11 +89,11 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_start">등록일</th>
-	                            <th class="board_end">조회수</th>
-	                            <th class="board_check">게시허용</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_title" style="width:62%">제목</th>
+	                            <th class="board_start" style="width:10%">등록일</th>
+	                            <th class="board_end" style="width:10%">조회수</th>
+	                            <th class="board_check" style="width:10%">게시</th>
 	                        </tr>
 	                    </thead>
 	
@@ -170,10 +170,11 @@
 					$("#page_count").html(pageCountHTML);					
 					var commonArr = [];
 					
-					commonPost.every(function(el) {
+					commonPost.every(function(el, index) {
 						var titleString = (el.title.length > 28) ?
 								el.title.slice(0, 28) + "..."
 								: el.title;
+						var toggleNo = index + 1;
 								
 								var commonHTML = '<tr>'
 									+ '<td class="board_numb">' + el.seqId + '</td>'
@@ -183,7 +184,8 @@
 									+ '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>'
 									+ '<td class="board_end">' + el.viewCount + '</td>'
 									+ '<td class="board_check">'
-									+ '<input type="checkbox" id="viewApprove" data-approve="'+ el.viewApprove + '" value="' + el.seqId + '"' + (el.viewApprove === "Y" ? ' checked' : '') + '/>'
+									+ '<input type="checkbox" id="onoff' + toggleNo + '" class="viewApprove" data-approve="'+ el.viewApprove + '" value="' + el.seqId + '"' + (el.viewApprove === "Y" ? ' checked' : '') + '/>'
+									+ '<label for="onoff' + toggleNo + '"></label>'
 									+ '</td>'
 									+ '</tr>';
 		                        
@@ -225,7 +227,7 @@
 		}
 		
 		
-		$(document).on('change','input[id="viewApprove"]', function(){
+		$(document).on('change','input[class="viewApprove"]', function(){
 			var seqId = this.value;
 			var viewApprove;
 			//alert(seqId);

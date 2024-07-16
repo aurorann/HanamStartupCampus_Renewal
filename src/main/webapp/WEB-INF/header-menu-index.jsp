@@ -27,14 +27,14 @@
 			            <li>
 			                <a href="<c:url value='/program/supporting' />">주요사업</a>
 			                <ul class="dep02">
-	                            <li data-location-sub='스타트업 사업화 패키지 지원사업'><a href="<c:url value='/program/supporting' />" class="dep01_name">스타트업 사업화 패키지 지원사업</a></li>
+	                            <li data-location-sub='스타트업 사업화 패키지 지원사업'><a href="<c:url value='/program/supporting' />" class="dep01_name">스타트업 사업화 패키지<br>지원사업</a></li>
 								<li data-location-sub='액셀러레이팅 프로그램'><a href="<c:url value='/program/accelerating' />">액셀러레이팅 프로그램</a></li>
 								<li data-location-sub='스타트업 전문교육'><a href="<c:url value='/program/training' />">스타트업 전문교육</a></li>
 								<li data-location-sub='하남도시공사 창업경진대회'><a href="<c:url value='/program/competition' />">하남도시공사 창업경진대회</a></li>
-								<li data-location-sub='투자유치 역량 강화 프로그램'><a href="<c:url value='/program/empowering' />">투자유치 역량 강화 프로그램</a></li>
+								<li data-location-sub='투자유치 역량 강화 프로그램'><a href="<c:url value='/program/empowering' />">투자유치 역량 강화<br>프로그램</a></li>
 								<li data-location-sub='네트워킹 데이'><a href="<c:url value='/program/networking' />">네트워킹 데이</a></li>
 								<li data-location-sub='멘토링 프로그램'><a href="<c:url value='/program/mentoring' />">멘토링 프로그램</a></li>
-								<li data-location-sub='스타트업캠퍼스 멤버쉽 프로그램'><a href="<c:url value='/program/membership' />">스타트업캠퍼스 멤버쉽 프로그램</a></li>
+								<li data-location-sub='스타트업캠퍼스 멤버쉽 프로그램'><a href="<c:url value='/program/membership' />">스타트업캠퍼스 멤버쉽<br>프로그램</a></li>
 			                </ul>
 			            </li>
 			            <li>
@@ -86,7 +86,7 @@
 								<li data-location-sub='팝업 관리'><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
 								<li data-location-sub='입주기업 관련'><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
 								<li data-location-sub='패밀리사이트'><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
-								<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/list' />">뉴스레터</a></li>
+								<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/write/form' />">뉴스레터</a></li>
 			                </ul>
 			            </li>
 			            </sec:authorize>
@@ -96,7 +96,8 @@
 		        <sec:authorize access="isAnonymous()">
 			    <div class="util">
 			        <a href="javascript:openModal('all-search');"><img src="<c:url value='/resources/img/search_ico.png' />" alt="검색"></a>
-			        	<a href="<c:url value='/user/login/form'/>">로그인</a>
+	                <button class="mobile_btn"><img src="<c:url value='/resources/img/mobile_btn.png' />" alt="모바일버튼"></button>
+			        <a href="<c:url value='/user/login/form'/>">로그인</a>
 	        	</div>
 		        </sec:authorize>
 		        
@@ -106,6 +107,7 @@
 				</form>
 			    <div class="util">
 			        <a href="javascript:openModal('all-search');"><img src="<c:url value='/resources/img/search_ico.png' />" alt="검색"></a>
+	                <button class="mobile_btn"><img src="<c:url value='/resources/img/mobile_btn.png' />" alt="모바일버튼"></button>
 		        	<a href="javascript:void(0);" onclick="logout.submit();">로그아웃</a>
 				</div>
 		        </sec:authorize>
@@ -116,6 +118,7 @@
 				</form>
 			    <div class="util">
 			        <a href="javascript:openModal('all-search');"><img src="<c:url value='/resources/img/search_ico.png' />" alt="검색"></a>
+	                <button class="mobile_btn"><img src="<c:url value='/resources/img/mobile_btn.png' />" alt="모바일버튼"></button>
 		        	<a href="javascript:void(0);" onclick="logout.submit();">로그아웃</a>
 				</div>
 		        </sec:authorize>
@@ -125,6 +128,91 @@
 
         </header>
 	
+
+	    <div class="mobile_menu">
+	        <div>
+	            <button>캠퍼스 소개</button>
+	            <ul>
+	                <li data-location-sub='인사말'><a href="<c:url value='/introduce/greeting' />" class="dep01_name">인사말</a></li>
+	                <li data-location-sub='시설안내'><a href="<c:url value='/introduce/facility' />">시설안내</a></li>
+	                <li data-location-sub='캠퍼스 개요'><a href="<c:url value='/introduce/profile' />">캠퍼스 개요</a></li>
+	                <li data-location-sub='조직도'><a href="<c:url value='/introduce/contract' />">조직도</a></li>
+	                <li data-location-sub='오시는 길'><a href="<c:url value='/introduce/direction' />">오시는 길</a></li>
+	                <li data-location-sub='입주신청'><a href="<c:url value='/introduce/join' />">입주신청</a></li>
+	                <li data-location-sub='홍보 리플렛'><a href="<c:url value='/introduce/leaflet' />">홍보 리플렛</a></li>
+	            </ul>
+	        </div>
+	        <div>
+	            <button>주요사업</button>
+	            <ul>
+					<li data-location-sub='스타트업 사업화 패키지 지원사업'><a href="<c:url value='/program/supporting' />" class="dep01_name">스타트업 사업화 패키지 지원사업</a></li>
+					<li data-location-sub='액셀러레이팅 프로그램'><a href="<c:url value='/program/accelerating' />">액셀러레이팅 프로그램</a></li>
+					<li data-location-sub='스타트업 전문교육'><a href="<c:url value='/program/training' />">스타트업 전문교육</a></li>
+					<li data-location-sub='하남도시공사 창업경진대회'><a href="<c:url value='/program/competition' />">하남도시공사 창업경진대회</a></li>
+					<li data-location-sub='투자유치 역량 강화 프로그램'><a href="<c:url value='/program/empowering' />">투자유치 역량 강화 프로그램</a></li>
+					<li data-location-sub='네트워킹 데이'><a href="<c:url value='/program/networking' />">네트워킹 데이</a></li>
+					<li data-location-sub='멘토링 프로그램'><a href="<c:url value='/program/mentoring' />">멘토링 프로그램</a></li>
+					<li data-location-sub='스타트업캠퍼스 멤버쉽 프로그램'><a href="<c:url value='/program/membership' />">스타트업캠퍼스 멤버쉽 프로그램</a></li>
+	            </ul>
+	        </div>
+	        <div>
+	            <button>기업소개</button>
+	            <ul>
+	                <li data-location-sub='기업 실적'><a href="<c:url value='/partner/management' />" class="dep01_name">기업실적</a></li>
+	                <li data-location-sub='입주기업 소개'><a href="<c:url value='/partner/list' />">입주기업</a></li>
+	                <li data-location-sub='졸업기업 소개'><a href="<c:url value='/partner/graduate/list' />">졸업기업</a></li>
+	                <li data-location-sub='기업소식'><a href="<c:url value='/partner/activity/list' />">기업소식</a></li>
+	                <li data-location-sub='소개 영상'><a href="<c:url value='/partner/media/list' />">소개영상</a></li>
+	            </ul>
+	        </div>
+	        <div>
+	            <button>알림마당</button>
+	            <ul>
+	                <li data-location-sub='공지사항'><a href="<c:url value='/announce/notice/list' />" class="dep01_name">공지사항</a></li>
+	                <li data-location-sub='사업공고'><a href="<c:url value='/announce/announcement/list' />">사업공고</a></li>
+	                <li data-location-sub='보도자료'><a href="<c:url value='/announce/press/list' />">보도자료</a></li>
+	                <li data-location-sub='자주 묻는 질문'><a href="<c:url value='/announce/faq/list' />">자주하는 질문</a></li>
+	            </ul>
+	        </div>
+	        <div>
+	            <button>뉴스레터</button>
+	            <ul>
+	                <li data-location-sub='뉴스레터'><a href="<c:url value='/newsletter/list' />" class="dep01_name">뉴스레터</a></li>
+	                <li data-location-sub='구독신청'><a href="https://page.stibee.com/subscriptions/197616">구독신청</a></li>
+	            </ul>
+	        </div>
+	        <sec:authorize ifAnyGranted="ROLE_USER">
+	        <div>
+	            <button>입주기업 전용공간</button>
+	            <ul>
+	                <li data-location-sub='마이페이지'><a href="<c:url value='/user/mypage' />" class="dep01_name">마이페이지</a></li>
+	                <li data-location-sub='입주기업 공지사항'><a href="<c:url value='/user/partner/notice/list' />">공지사항</a></li>
+	                <li data-location-sub='입주기업 커뮤니티'><a href="<c:url value='/user/community/list' />">입주기업 커뮤니티</a></li>
+	                <li data-location-sub='서식 자료실'><a href="<c:url value='/user/file/list' />">서식 자료실</a></li>
+	                <li data-location-sub='회의실 예약 및 현황'><a href="<c:url value='/book/place' />">회의실 예약 및 현황</a></li>
+	                <li data-location-sub='기업 소식 업로드'><a href="<c:url value='/user/partner/activity/write/form' />">기업소식 업로드</a></li>
+	            </ul>
+	        </div>
+	        </sec:authorize>
+            <sec:authorize ifAnyGranted="ROLE_ADMIN">
+            <div>
+	            <button>관리자 메뉴</button>
+                <ul>
+					<li data-location-sub='캠퍼스 소개'><a href="<c:url value='/admin/webpage/introduce/profile/edit/form' />">캠퍼스 소개</a></li>
+					<li data-location-sub='알림마당'><a href="<c:url value='/admin/announce/notice/write/form' />">알림마당</a></li>
+					<li data-location-sub='팝업 관리'><a href="<c:url value='/popUp/popUpList' />">팝업 관리</a></li>
+					<li data-location-sub='입주기업 관련'><a href="<c:url value='/admin/partner/notice/list' />">입주기업 관련</a></li>
+					<li data-location-sub='패밀리사이트'><a href="<c:url value='/admin/family-site/list' />">패밀리사이트</a></li>
+					<li data-location-sub='뉴스레터'><a href="<c:url value='/admin/newsletter/list' />">뉴스레터</a></li>
+                </ul>
+            </div>
+            </sec:authorize>
+	    </div><!-- mobile_menu -->
+
+
+
+
+
 	    <div class="search_modal">
 	        <div class="top_search_modal">
 	            <h3>전체 검색</h3>
@@ -133,13 +221,23 @@
 	        <div class="btm_search_modal">
 	            <strong>통합검색</strong>
 	            <p>통합 검색 결과를 알 수 있습니다. 궁금하신 내용을 입력해 주세요</p>
-	            <form>
+	            <form action="<c:url value='/search/total/list' />" method="get" onsubmit="return goToTotalSearchView(this);">
+	                <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
+	                <button type="submit" class="search-btn">검색</button>
+	            </form>
+	        </div>
+	    </div><!--search_modal-->
+	    
+	    <div class="modal_dummy"></div><!--modal_dummy 검색뒷배경-->
+	    
+	    <div class="search_slide">
+	        <div class="btm_search_slide">
+	            <form action="<c:url value='/search/total/list' />" method="get" onsubmit="return goToTotalSearchView(this);">
 	                <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
 	                <button type="submit" class="search_btn">검색</button>
 	            </form>
 	        </div>
-	    </div><!--search_modal-->
-	    <div class="modal_dummy"></div><!--modal_dummy 검색뒷배경-->
+	    </div><!--search_slide-->
 	    
 	    
 	    

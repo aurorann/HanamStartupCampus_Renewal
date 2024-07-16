@@ -58,8 +58,9 @@
 		                        </div>
 								<div class="fileWrap">
 									<form id="fileForm" method="post" enctype="multipart/form-data">
+										<div class="not_box"></div>
 										<label for="file">파일찾기</label>
-							            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+							            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block; width: 300px;"/>
 									</form>
 								</div>
 		                    </div>

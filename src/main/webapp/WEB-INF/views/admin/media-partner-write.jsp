@@ -60,15 +60,16 @@
 	                                    	미리보기
 	                                    </button>
 									<form id="fileForm" method="post" enctype="multipart/form-data">
+										<div class="not_box"></div>
 			                            <label for="file">파일찾기</label>
-										<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+										<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block; width: 300px"/>
 									</form>
 		                        </div>
 		                    </div>
 		                    <div class="board_write_content">
-					    		<iframe id="embededYoutubePlayer" src="https://www.youtube.com/embed//" frameborder="0" allowfullscreen="">
-					    		</iframe>
-					    		<tr><td> ※ 유튜브 재생영상 미리보기</td></tr>
+		                    	<div class="youtube_link">
+						    		<iframe id="embededYoutubePlayer" src="https://www.youtube.com/embed//" frameborder="0" allowfullscreen=""></iframe>
+					    		</div>
 		                    </div>
 		                    <div class="board_write_post board-contents">
 		                        <textarea name="content fomr-control" id="post_editor" name="content"></textarea>

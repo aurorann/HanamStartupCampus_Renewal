@@ -47,14 +47,6 @@
 			<!-- # include: title-box end -->
     
                     <div class="container_wrap">
-                    	<!-- 
-						<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-					      <a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">공지사항 글쓰기</a>
-					      <a href="<c:url value='/admin/announce/announcement/write/form' />" class="btn btn-default" role="button">사업공고 글쓰기</a>
-					      <a href="<c:url value='/admin/announce/press/write/form' />" class="btn btn-default" role="button">보도자료 글쓰기</a>
-					      <a href="<c:url value='/admin/announce/faq/write/form' />" class="btn btn-default" role="button">자주 묻는 질문 글쓰기</a>
-					    </div>
-					     -->
 		                <ul class="mgr_btns mgr_btns2">
 		                    <li><button class="active" onclick="location.href='javascript:void(0);' ">공지사항 글쓰기</button></li>
 		                    <li><button onclick="location.href='<c:url value='/admin/announce/announcement/write/form' />' ">사업공고 글쓰기</button></li>
@@ -65,17 +57,9 @@
 		                <div class="board_write_wrap">
 		                    <div class="board_write_title">
 		                        <div class="labelWrap">
-		                        	<!-- 
-		                            <input type="radio" id="Ggongo" name="notice_level" value="101" checked="checked">
-		                            <label for="Ggongo" class="board_label board_label_Ggongo">주요공고</label>
-		                             -->
 		                            <input type="radio" id="Ggongi" name="notice_level" value="100" checked="checked">
 		                            <label for="Ggongi" class="board_label board_label_Ggongi">주요공지</label>
-		                            <!-- 
-		                            <input type="radio" id="gongo" name="notice_level" value="103">
-		                            <label for="gongo" class="board_label board_label_gongo">공고</label>
-		                             -->
-		                            <input type="radio" id="gongi" name="notice_level" value="103">
+		                            <input type="radio" id="gongi" name="notice_level" value="102">
 		                            <label for="gongi" class="board_label board_label_gongo">공지</label>
 		                        </div>
 		                        <div class="titleWrap">
@@ -87,6 +71,7 @@
 										<label for="startEnd">게시일 / 종료일</label>
 										<input type="text" class="board-input datepicker-here" id="post_date_string" autocomplete="off" data-range="true"
 												data-multiple-dates-separator=" ~ " data-format='yyyy-mm-dd' data-language="kor" class="datepicker-here" />
+			                            <div class="not_box"></div>
 										<label for="file">파일찾기</label>
 										<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
 									</form>
@@ -98,76 +83,6 @@
 								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
 		                    </div>
 		                </div>
-		                <!-- 
-                        <table class="table board-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <div class="board-title">
-                                            <div class="bd-example">			
-												<div class="form-check form-check-inline">
-												  <input class="form-check-input" type="radio" name="notice_level" id="noticeLevel100" value="100" checked="checked">
-												  <label class="pink-label" for="noticeLevel0">주요공지</label>
-												</div>
-												<div class="form-check form-check-inline">
-												  <input class="form-check-input" type="radio" name="notice_level" id="noticeLevel101" value="101">
-												  <label class="yellow-label" for="noticeLevel1">주요공고</label>
-												</div>
-												<div class="form-check form-check-inline">
-												  <input class="form-check-input" type="radio" name="notice_level" id="noticeLevel102" value="102">
-												  <label class="white-label" for="noticeLevel2">공지</label>
-												</div>
-												<div class="form-check form-check-inline">
-												  <input class="form-check-input" type="radio" name="notice_level" id="noticeLevel103" value="103">
-												  <label class="white-label" for="noticeLevel3">공고</label>
-												</div>
-											</div>
-											
-											<div class="title-label">
-                                                <h5>제목</h5>
-                                                <input type="text" class="board-input" id="post_title">
-                                            </div>
-											
-											<form id="fileForm" method="post" enctype="multipart/form-data">
-                                            <div class="start-end-label">
-                                                <h5>게시일 / 종료일
-                                                <input type="text" class="board-input datepicker-here" id="post_date_string" autocomplete="off" data-range="true"
-													data-multiple-dates-separator=" ~ " data-format='yyyy-mm-dd'
-													data-language="kor"
-													class="datepicker-here" />
-													
-												첨부 파일 : 
-                                                 
-                                                	<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-                                                
-                                                </h5>
-                                                 -->
-                                                <!-- <h5>종료일 <input type='text' class="form-control" id='to' name="to" autocomplete="off" /></h5> -->
-                                                <!-- 
-                                            </div>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="board-contents">
-                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                         -->
-    
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button>
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
-						      <div class="btn-group" role="group">
-						        <button type="button" class="btn btn-default" onclick="writeNewPost()">게시글 작성</button>
-						      </div>
-							
-						    </div>
-						 -->
                         <div class="board_wrap_btn"><a href="#" onclick="writeNewPost();">게시글 작성</a></div>
     
                     </div><!-- r-contents div 끝 -->

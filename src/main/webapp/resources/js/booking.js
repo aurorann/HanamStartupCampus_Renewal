@@ -190,7 +190,7 @@ $(document).ready(function(){
 		 * @return {object} 
 		 */
 		
-		var $bookTimeTables = $("table.reservation-table.time-contents tbody tr");
+		var $bookTimeTables = $("table.reservation-table.time-contents tbody.time tr");
 		$bookTimeTables.each(function(index, time) {
 			time.onclick = selectTimeTable;
 		});
@@ -252,12 +252,12 @@ $(document).ready(function(){
 		
 		var bookList = window._VARS.BOOK_LIST_MONTHLY;
 		var $bookListWrapper = $("div.book-list-wrapper");
-		var $bookListTitle = $("h3.book-list-title strong", $bookListWrapper);
+		var $bookListTitle = $("h3.book-list-title", $bookListWrapper);
 		var $bookList = $("ul.book-list-text-body", $bookListWrapper);
 		var timeNameArr = _VARS.NAME_ARRAY.TIME_NAME;
 		var bookListHTML = "";
 		var $calendar = $("table.reservation-table.calendar-contents");
-		var $bookTimeTables = $("table.reservation-table.time-contents tbody tr");
+		var $bookTimeTables = $("table.reservation-table.time-contents tbody.time tr");
 		var $day = $(dayDOM);
 		var selectedDate = $day.attr("data-date-string");
 		var selectedDateFormat = $day.attr("data-date-format-string");
@@ -276,15 +276,25 @@ $(document).ready(function(){
 		$("#bookForm").val($day.attr("data-date-string"));
 
 		$bookTimeTables.attr("class", "");
+		
+		bookListHTML =
+					    '<li>' +
+							'<span class="time"style="width:20%">예약 시간</span>' +
+					        '<span class="name"style="width:20%">시설 사용자</span>' +
+							'<span class="description"style="width:40%">시설 사용 용도</span>' +
+							'<span class="delete"style="width:20%"></span>' +
+					    '</li>';
+			
+			
 		if(bookList.every(function(book, index) {
 			if(book.bookDate === selectedDate) {
 				bookListHTML += 
 					'<li>'+
-					'<span class="time">' + timeNameArr[book.startIndex].split(" ~ ")[0] + ' ~ ' + timeNameArr[book.endIndex].split(" ~ ")[1] + '</span>'+
-	                '<span class="name">' + book.userName + '</span>'+
-					'<span class="description">' + filterXSS(book.description) + '</span>';
+					'<span class="time"style="width:20%">' + timeNameArr[book.startIndex].split(" ~ ")[0] + ' ~ ' + timeNameArr[book.endIndex].split(" ~ ")[1] + '</span>'+
+	                '<span class="name"style="width:20%">' + book.userName + '</span>'+
+					'<span class="description"style="width:40%">' + filterXSS(book.description) + '</span>';
 				if(_VARS.USER_ID === book.userId || _VARS.IS_ADMIN) {
-					bookListHTML += '<span class="delete"><button class="btn btn-primary" onclick="_VARS.SECURED_FUNCTION(' 
+					bookListHTML += '<span class="delete check_delete"><button onclick="_VARS.SECURED_FUNCTION(' 
 						+ book.seqId + ', \'' + book.bookDate + '\', \''+ timeNameArr[book.startIndex].split(" ~ ")[0] + '\', \'' 
 						+ timeNameArr[book.endIndex].split(" ~ ")[1] +'\');">예약 취소</span>';
 				}
@@ -317,7 +327,7 @@ $(document).ready(function(){
 			alert("올바른 예약 정보가 아닙니다. 예약 일시를 확인해주세요.");
 			return false;
 		} else {
-			var $bookTimeTable = $("table.reservation-table.time-contents tbody");
+			var $bookTimeTable = $("table.reservation-table.time-contents tbody.time");
 			var bookForm = _VARS.BOOK_FORM;
 			
 			if(bookForm.START_TIME === undefined) {
@@ -370,7 +380,7 @@ $(document).ready(function(){
 	}
 	
 	function emptyBookConfirm() {
-		$("div.reservation-all h3 strong span").text("선택된 예약 시간 없음");
+		$("div.reservation-all").text("선택된 예약 시간 없음");
 	}
 	
 	function isBookFormReady() {
@@ -381,7 +391,7 @@ $(document).ready(function(){
 			alert("올바른 예약 정보가 아닙니다. 예약 일시를 확인해주세요.");
 			return false;
 		} else {
-			var $bookConfirm = $("div.reservation-all h3 strong span");
+			var $bookConfirm = $("div.reservation-all");
 			
 			if(bookForm.START_TIME !== undefined && bookForm.END_TIME === undefined) {
 				var timeName = timeNameArr[bookForm.START_TIME].split(" ~ ");

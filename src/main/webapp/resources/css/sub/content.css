@@ -15,16 +15,8 @@ container_txt 콘텐츠제목
 }
 .container_txt ul li:not(:first-of-type){ margin-left:20px; }
 .container_txt ul li span{ font-weight:600; margin-left:5px; }
+.container_txt ul li .txt_blue{ color:#1976d3; }
 
-/*
-content_wrap 콘텐츠
-*/
-.content_wrap{
-    border-top:1px solid #797979;
-    border-bottom:1px solid #797979;
-    padding:35px 0;
-    margin-bottom:50px;
-}
 .content_text, .conts_text{ padding:0px 35px; }
 .content_text p{
     font-size:18px;
@@ -32,10 +24,61 @@ content_wrap 콘텐츠
     margin-top:20px;
 }
 .content_text .file_wrap{ margin-top:95px; }
-.file_wrap li{ margin:4px 0; }
-.file_wrap li a{ font-size:15px; color:#000; }
+
+.file_wrap{ margin-bottom:20px; }
+.file_wrap li:not(:first-of-type){ margin:5px 0; }
+.file_wrap li a{
+    font-size:15px;
+    color:#000;
+    text-decoration:underline;
+}
 .file_wrap li a img{
     margin-right:10px;
     vertical-align:middle;
 }
-.conts_text .file_wrap{ margin-bottom:20px; }
+.file_wrap li a::after{
+    content:'';
+    display:inline-block;
+    width:17px;
+    height:14px;
+    margin-left:15px;
+    vertical-align:middle;
+    background:url('../../img/sub_img/download_ico.png') no-repeat center;
+}
+
+
+
+@media screen and (max-width:1280px){
+    .container_txt h3{ font-size:28px; }
+}
+
+@media screen and (max-width:1024px){
+    .content_text, .conts_text{ padding:0 30px; }
+
+    .container_txt h3{
+        font-size:26px;
+        margin-bottom:18px; 
+        line-height:25px;
+    }
+    .content_text .file_wrap{ margin-top:90px; }
+}
+
+@media screen and (max-width:800px){
+    .content_text, .conts_text{ padding:0 25px; }
+    .content_text .file_wrap{ margin-top:90px; }
+}
+
+@media screen and (max-width:600px){
+    .container_txt h3{ font-size:24px; }
+    .content_text .file_wrap{ margin-top:85px; }
+}
+
+@media screen and (max-width:480px){
+    .file_wrap li a{ font-size:14px; }
+    .file_wrap li a img{ width:6%; }
+    
+    .container_txt ul{ display:flex; flex-flow:column; }
+    .container_txt ul li:not(:first-of-type){ margin-left:0; }
+    .container_txt ul li:not(:last-of-type){ margin-bottom:5px; }
+    .content_text .file_wrap{ margin-top:75px; }
+}

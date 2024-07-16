@@ -1,0 +1,97 @@
+.container_wrap{ padding-top:35px; border-top:1px solid #797979; }
+.content_text{ padding-bottom:35px; }
+
+.content_comment{
+    border-top:1px solid #797979;
+    border-bottom:1px solid #797979;
+    margin-bottom:50px;
+    padding:35px;
+}
+.talk1 time, .talk2_btns{ margin-left:auto; }
+
+/*댓글달기*/
+.comment_write strong{
+    display:block;
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:13px;
+}
+.comment_write strong img{ margin-right:10px; vertical-align:middle; }
+.comment_write form{ display:flex; }
+.comment_write form input{
+    width:100%;
+    height:40px;
+    border:1px solid #c7c7c7;
+    padding:0 10px;
+    font-size:14px;
+}
+.comment_write form button{
+    display:inline-block;
+    width:100px;
+    height:40px;
+    margin-left:7px;
+
+    font-size:15px;
+    color:#fff;
+}
+.comment_write form button{ background-color:#1976d3; }
+.comment_wwrite form button{ background-color:#333333; }
+
+.comment_wwrite{
+    display:none;
+    padding:20px 25px 20px 55px;
+    background:url('../../img/sub_img/arrow_comment.png') no-repeat 2.5% 24%;
+}
+.comment_talk+.comment_wwrite{ border-top:1px solid #c7c7c7; }
+
+/*댓글*/
+.comment_talk_box>div>div{ display:flex; }
+.comment_talk_wrap .talk1{ margin-bottom:20px; }
+.comment_talk .talk2{ align-items:flex-end; }
+.comment_talk_wrap h4{ font-size:18px; font-weight:600; }
+.comment_talk_wrap .talk2 p{
+    width:80%;
+    font-size:15px;
+    line-height:25px;
+}
+.comment_talk_wrap time,
+.comment_talk_wrap button{
+    font-size:15px;
+    color:#3e3e3e;
+}
+.talk2_btns .delet2_btn{ margin-left:10px; }
+
+.comment_talk{ padding:20px 0; }
+.comment_talk_box:not(:first-of-type) .comment_talk{ border-top:1px solid #c7c7c7; }
+.comment_talk_box .comment_ttalk{ border-top:1px solid #c7c7c7; }
+.comment_talk_box:first-of-type{ margin-top:35px; border-top:1px solid #c7c7c7; }
+.comment_ttalk{
+    padding:20px 25px 20px 55px;
+    background:url('../../img/sub_img/arrow_comment.png') no-repeat 2.5% 24% #f4f4f4;
+}
+
+
+
+@media screen and (max-width:1280px){
+    .comment_talk_wrap h4{ font-size:18px; }
+}
+
+@media screen and (max-width:1024px){
+    .container_wrap{ padding-top:30px; }
+
+    .content_comment{ padding:30px; }
+    .comment_talk_box:first-of-type{ margin-top:30px; }
+    .comment_talk_wrap h4{ font-size:17px; }
+    .comment_talk_wrap .talk2 p{ font-size:15px; }
+    .comment_talk_wrap .talk1{ margin-bottom:15px; }
+    
+    .comment_ttalk{ padding:20px 25px 20px 50px; background-position:3.5% 24%; } 
+}
+
+@media screen and (max-width:800px){
+    .container_wrap{ padding-top:25px; }
+    .content_text{ padding-bottom:30px; }
+    .comment_talk_wrap .talk2 p{ width:77%; }
+    .comment_ttalk{ padding:18px 25px 18px 50px; background-position:4.5% 24%; }
+    .content_comment{ padding:25px; }
+}

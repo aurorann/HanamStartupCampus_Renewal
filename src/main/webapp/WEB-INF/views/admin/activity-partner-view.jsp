@@ -66,15 +66,17 @@
 							<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
 							<ul class="file_wrap">
 								<c:forEach items="${fileNames}" varStatus="status">
-									<a href="#">
-										<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
-										${fileNames[status.index]}
-									</a>
-									<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
-										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-										<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
-										<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-									</form><br/>
+									<li>
+										<a href="#">
+											<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
+											<span id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();">${fileNames[status.index]}</span>
+										</a>
+										<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+											<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+										</form><br/>
+									</li>
 								</c:forEach>
 							</ul>
 						</c:if>

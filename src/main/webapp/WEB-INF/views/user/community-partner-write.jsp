@@ -29,65 +29,90 @@
 
 <body class="animsition restyle-index">
 	
-	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->  
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
-                    <div class="col-lg-12 r-contents">
-                        <table class="table board-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <div class="board-title">
-											<div class="title-label">
-                                                <h5>제목</h5>
-                                                <input type="text" class="board-input" id="post_title">
-                                                <input type="checkbox" id="anonymous_writer"> <h5>익명</h5>
-                                            </div>
-                                            <form id="fileForm" method="post" enctype="multipart/form-data">
-                                            <div class="start-end-label">
-                                            	<h5>첨부 파일</h5>
-                                            	<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-                                            </div>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="board-contents">
-                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
-						      <div class="btn-group" role="group">
-						        <button type="button" class="btn btn-default" onclick="writeNewPost();">게시글 작성</button>
-						      </div>
-						      
-						      
-						    </div>
-    
-                    </div><!-- r-contents div 끝 -->
-                </div><!-- right-contents div 끝 -->
+			<div class="container_wrap">
+			
+				<div class="board_write_wrap">
+              		<div class="board_write_title">
+						<div class="titleWrap">
+							<label for="title">제목</label>
+                      		<input type="text" id="post_title">
+						</div>
+						<div class="fileWrap">
+                            <input type="checkbox" id="anonym">
+                            <label for="anonym">익명</label>
+							<form id="fileForm" method="post" enctype="multipart/form-data">								
+								<label for="file">파일찾기</label>
+						           <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block; width: 300px"/>
+							</form>
+						</div>
+              		</div>
+					<div class="board_write_post board-contents">
+						<textarea class="fomr-control" id="post_editor" name="content"></textarea>
+    				</div>
+				</div>
+			
+			
+				<!-- 
+                 <table class="table board-table">
+                     <thead>
+                         <tr>
+                             <td>
+                                 <div class="board-title">
+				<div class="title-label">
+                                         <h5>제목</h5>
+                                         <input type="text" class="board-input" id="post_title">
+                                         <input type="checkbox" id="anonymous_writer"> <h5>익명</h5>
+                                     </div>
+                                     <form id="fileForm" method="post" enctype="multipart/form-data">
+                                     <div class="start-end-label">
+                                     	<h5>첨부 파일</h5>
+                                     	<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+                                     </div>
+                                     </form>
+                                 </div>
+                             </td>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td class="board-contents">
+                                 <textarea class="fomr-control" id="post_editor" name="content"></textarea>
+                             </td>
+                         </tr>
+                     </tbody>
+                 </table>
+				-->
+				
+				
+				<!-- 
+				<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default" onclick="writeNewPost();">게시글 작성</button>
+					</div>
+				</div>
+				 -->
+				<div class="board_wrap_btn"><a href="#" onclick="writeNewPost();">게시글 작성</a></div>
+				
+				
+
+			</div><!-- r-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->
@@ -146,9 +171,9 @@
 			var content = CKEDITOR.instances.post_editor.getData();
 			var writerName;
 			
-			if (!document.querySelector('#anonymous_writer').checked) {
+			if (!document.querySelector('#anonym').checked) {
 				  writerName = "setName";
-			}else if(document.querySelector('#anonymous_writer').checked){
+			}else if(document.querySelector('#anonym').checked){
 					writerName = null;
 			}
 			

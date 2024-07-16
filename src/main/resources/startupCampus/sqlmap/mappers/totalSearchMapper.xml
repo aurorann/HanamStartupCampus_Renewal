@@ -14,7 +14,18 @@
 	
 	<!-- 게시글 리스트 카운트 -->
 	<select id="selectTotalPostListByKeyword" parameterType="String" resultType="boardDTO">
-		(SELECT
+		(
+		SELECT
+			'NOTICE' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_notice
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+					LIMIT 0, 10
+		<!-- 
+		)UNION ALL(
+		SELECT
 			'MEDIA' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
 			FROM board_media
 			WHERE
@@ -24,21 +35,22 @@
 			LIMIT 0, 10	
 		)UNION ALL(
 		SELECT
-			'NOTICE' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
-			FROM board_notice
-			WHERE
-						TITLE LIKE CONCAT('%', #{value}, '%')
-				OR CONTENT LIKE CONCAT('%', #{value}, '%')
-					ORDER BY CREATED_AT DESC
-					LIMIT 0, 10
-		)UNION ALL(
-		SELECT
 			'AGENCY' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
 			FROM board_agency
 			WHERE
 						TITLE LIKE CONCAT('%', #{value}, '%')
 				OR CONTENT LIKE CONCAT('%', #{value}, '%')
 		        OR AGENCY_NAME LIKE CONCAT('%', #{value}, '%')
+					ORDER BY CREATED_AT DESC
+				LIMIT 0, 10
+		 -->		
+		)UNION ALL(
+		SELECT
+			'ANNOUNCEMENT' AS WRITER_IP, TITLE, left(CONTENT, 400)  AS CONTENT, CREATED_AT, SEQ_ID
+			FROM board_announcement
+			WHERE
+						TITLE LIKE CONCAT('%', #{value}, '%')
+				OR CONTENT LIKE CONCAT('%', #{value}, '%')
 					ORDER BY CREATED_AT DESC
 				LIMIT 0, 10
 		)UNION ALL(
@@ -59,6 +71,7 @@
 				OR CONTENT LIKE CONCAT('%', #{value}, '%')
 					ORDER BY CREATED_AT DESC
 			LIMIT 0, 10
+		<!-- 
 		)UNION ALL(
 		SELECT
 			'PROMOTION' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID
@@ -77,6 +90,7 @@
 				OR CONTENT LIKE CONCAT('%', #{value}, '%')
 					ORDER BY CREATED_AT DESC
 			LIMIT 0, 10
+		 -->
 		)UNION ALL(
 		SELECT
 			'PARTNER-MEDIA' AS WRITER_IP, TITLE, left(CONTENT, 400) AS CONTENT, CREATED_AT, SEQ_ID

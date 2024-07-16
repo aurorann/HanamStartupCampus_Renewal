@@ -17,6 +17,9 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub1-1.css' />">
+
 </head>
 
 
@@ -41,8 +44,23 @@
 				<!-- # include: title-box start -->
 				<%@ include file="./include/title-box.jsp"%>
 				<!-- # include: title-box end -->
+				<!-- 
 				<a href="<c:url value='/resources/download/hanam_leaflet_1p.jpg' />" download>하남 리플렛 1p</a>
 				<a href="<c:url value='/resources/download/hanam_leaflet_2p.jpg' />" download>하남 리플렛 2p</a>
+				 -->
+	            <div class="conts_text">
+	                <ul class="file_wrap">
+	                    <li>
+	                        <a href="<c:url value='/resources/download/hanam_leaflet_1p.jpg' />" download><img src="<c:url value="/resources/img/sub_img/file_ico.png" />" alt="파일">하남 스타트업 캠퍼스 리플렛 1P</a>
+	                    </li>
+	                    <li>
+	                        <a href="<c:url value='/resources/download/hanam_leaflet_2p.jpg' />" download><img src="<c:url value="/resources/img/sub_img/file_ico.png" />" alt="파일">하남 스타트업 캠퍼스 리플렛 2P</a>
+	                    </li>
+	                </ul>
+	
+	                <img src="<c:url value='/resources/img/sub_img/leaflet_img1.png' />" alt="홍보리플렛">
+	                <img src="<c:url value='/resources/img/sub_img/leaflet_img2.png' />" alt="홍보리플렛">
+	            </div><!--conts_text-->
 			
 			</div><!-- right-contents div 끝 -->
 		</main>

@@ -65,11 +65,11 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_view">작성자</th>
-	                            <th class="board_start">게시일</th>
-	                            <th class="board_end">조회수</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_view" style="width:62%">제목</th>
+	                            <th class="board_start" style="width:10%">작성자</th>
+	                            <th class="board_end" style="width:10%">게시일</th>
+	                            <th class="board_end" style="width:10%">조회수</th>
 	                        </tr>
 	                    </thead>
 	
@@ -89,10 +89,9 @@
 	                    </tbody>
 	                </table><!--board_wrap 게시판-->
 
-					<button type="submit" class="search-btn" onclick="location.href='<c:url value="/user/partner/notice/write/form" />';" style="margin-top: 20px;">글쓰기</button>
+					<!-- <button type="submit" class="search-btn" onclick="location.href='<c:url value="/user/partner/notice/write/form" />';" style="margin-top: 20px;">글쓰기</button> -->
                     <div class="pagination_wrap">
-
-					</div>
+					</div><!-- Paging -->
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->
         </main>

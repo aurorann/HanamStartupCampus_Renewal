@@ -23,120 +23,108 @@
 </head>
 
 <style>
-label{
-	margin-top: 10px;
-	font-size: 13px;
+.datepicker-dropdown {
+  width: 300px;
 }
-.text-primary{ 
-	font-size: 20px;
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    background-clip: padding-box;
 }
 </style>
 <body class="animsition restyle-index">
 	
-	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
+				<div class="container_wrap">
 					<form id="product_insert_form" method="POST" enctype="multipart/form-data" action="<c:url value='/popUp/insertPopUp?${_csrf.parameterName}=${_csrf.token}' />" onsubmit="return insertPopup(this);">
-							<div class="row">
-								<div class="col-lg-4">
-									<input type="hidden">
-									<div class="card">
-										<div class="card-header py-3">
-											<h6 class="m-0 font-weight-bold text-primary">팝업 정보</h6>
-										</div>
-										<div class="card-body">
-											<div class="form-group">
-																						
-												<input type="hidden" name="prevDisplay" value="Y">
-									
-												
-												<label for="title">팝업명</label> 
-												
-												<input class="form-control mb-4" data-valid="title" type="text" id="title" name="title" required="required" value=""> 
-												
-												<label for="link">팝업 링크</label>
-												
-												<input type="text" name="link" id="link" class="form-control mb-4" value="">
-												
-												<label for="contents_width" style="display: block;">팝업 크기</label>
-												
-												<input type="number" name="contentsWidth" id="contents_width" min="100" class="form-control mb-4" max="1920" style="width: 30%;display: inline-block; cursor: pointer" value="" required="required" placeholder="너비">
-												
-												,
-												
-												<input type="number" name="contentsHeight" id="contents_height" min="100" class="form-control mb-4" max="1080" style="width: 30%;display: inline-block;" value="" required="required" placeholder="높이">
-												
-												<input type="button" class="btn btn-primary" style="margin-left: 10px;" id="resize" value="적용">
-												
-												<label for="display_position_x" style="display: block;">팝업 위치</label>
-												
-												<input type="number" name="displayPositionX" id="display_position_x" min="0" max="1920" class="form-control mb-4" value="" style="width: 30%;display: inline-block;" required="" placeholder="X좌표">
-												
-												,
-												
-												<input type="number" name="displayPositionY" id="display_position_y" min="0" max="1080" class="form-control mb-4" value="" style="width: 30%;display: inline-block;" required="" placeholder="Y좌표">
-				
-												<label for="display_date" style="display: block;">표출 기한</label>
-												
-												<input type="text" name="displayDate" id="display_date" class="form-control mb-4" readonly="readonly" required="required" value="" style="cursor: pointer; background-color: white;">
-				
+                    <div class="col-lg-4">
+                        <input type="hidden">
+                        <div class="card1">
+                            <h3>팝업 정보</h3>
+                            <div class="card-body1">
+                                <label for="title">팝업명</label>
+                                <input class="form-control mb-4" data-valid="title" type="text" id="title" name="title" required="required" style="width:63%; max-width:180px;">
+                                
+                                <label for="link">팝업 링크</label>
+                                <input type="text" name="link" id="link" class="form-control mb-4" style="width:63%; max-width:180px;">
+                                
+                                <label for="contents_width" style="display: block;">팝업 크기</label>
+                                <input type="number" name="contentsWidth" id="contents_width" min="100" class="form-control mb-4" max="1920" value required="required" placeholder="너비">
+                                <input type="number" name="contentsHeight" id="contents_height" min="100" class="form-control mb-4" max="1080" value required="required" placeholder="높이">
+                                <input type="button" class="btn btn-primary" id="resize" value="적용">
+                                
+                                <label for="display_position_x" style="display: block;">팝업 위치</label>
+                                <input type="number" name="displayPositionX" id="display_position_x" min="0" max="1920" class="form-control mb-4" required placeholder="X좌표">
+                                <input type="number" name="displayPositionY" id="display_position_y" min="0" max="1080" class="form-control mb-4" required placeholder="Y좌표">
+                                
+                                <label for="display_date" style="display: block;">표출 기한</label>
+                                <input type="text" name="displayDate" id="display_date" class="form-control mb-4" readonly="readonly" required="required" style="width:63%; max-width:180px;">
+                                
+                                <div class="card2">
+                                    <h3>표시 여부</h3>
+                                    <div class="card-body2">
+                                        <div>
+                                            <input type="radio" name="displayYn" id="display_y" value="Y" checked="checked">
+                                            <label class="form-check-label" for="display_y">표출</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="displayYn" id="display_n" value="N">
+                                            <label class="form-check-label" for="display_n">감추기</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--col-lg-4-->
+					
+					<div class="col-lg-8">
+						<h3>팝업 내용</h3>
+						<div class="card-body">
+							<textarea name="contents" placeholder="팝업 내용" data-valid="spec" id="insert_popup_editor" style="width: 500px; height: 450px; display: none;" class="input-sm form-full" aria-required="true"></textarea>
+						</div>
+					</div>
+					<div class="col-lg-12 mt-4">
+						<button type="button" class="btn btn-danger float-left" id="cancel" style="margin-right: 10px;">작성 취소</button>
+															
+						<button type="submit" class="btn btn-primary float-right" style="float: right;">작성하기</button>
+						<button type="button" class="btn btn-primary float-right" style="margin-right: 10px;float: right;" id="sample">미리 보기</button>
+					</div>
 
-												<div class="card" style="margin-top: 20px;">
-													<div class="card-header py-3">
-														<h6 class="m-0 font-weight-bold text-primary">표시 여부</h6>
-													</div>
-													<div class="card-body">
-														<div class="form-check form-check-inline mr-4">
-															<input type="radio" name="displayYn" id="display_y" value="Y" checked="checked" > <label class="form-check-label" for="display_y">표출</label>
-														</div>
-														<div class="form-check form-check-inline mr-4">
-															<input type="radio" name="displayYn" id="display_n" value="N" > <label class="form-check-label" for="display_n">감추기</label>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-8">
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="card">
-												<div class="card-header py-3">
-													<h6 class="m-0 font-weight-bold text-primary" style="margin-bottom: 15px;">팝업 내용</h6>
-												</div>
-												<div class="card-body">
-													<textarea name="contents" placeholder="팝업 내용" data-valid="spec" id="insert_popup_editor" style="width: 500px; height: 450px; display: none;" class="input-sm form-full" aria-required="true"></textarea>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-12 mt-4">
-									<button type="button" class="btn btn-danger float-left" id="cancel" style="margin-right: 10px;">작성 취소</button>
-																		
-									<button type="submit" class="btn btn-primary float-right" style="float: right;">작성하기</button>
-									<button type="button" class="btn btn-primary float-right" style="margin-right: 10px;float: right;" id="sample">미리 보기</button>
-								</div>
-							</div>
-						</form>
+				</form>
+			</div>
 
-                </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
+<!-- container_wrap div 끝 -->
         </main>
     </div>
 	<!-- footer start -->
@@ -150,6 +138,10 @@ label{
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
 	<script src="<c:url value='/resources/js/bootstrap-datepicker.kr.js' />"></script>
+	<!-- 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	 -->
 	
 	<script>
 	

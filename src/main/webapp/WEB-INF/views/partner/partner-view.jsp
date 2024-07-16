@@ -40,50 +40,36 @@
 			<!-- # include: title-box start -->
 			<%@ include file="./include/title-box.jsp"%>
 			<!-- # include: title-box end -->
+			
+            <div class="container_txt">
+                <h3>${NAME}</h3>
+                <ul>
+                    <li>대표자<span class="txt_blue">${CEO_NAME}</span></li>
+                    <li>입주실<span class="txt_blue">${ROOM_NAME}</span></li>
+                    <li>웹사이트<span><a href="${HOMEPAGE}" class="txt_blue">${HOMEPAGE}</a></span></li>
+                    <li>연락처<span class="txt_blue">${CONTRACT}</span></li>
+                </ul>
+            </div><!--container_txt-->
 
-                <div class="col-lg-12 r-contents">
-                    
-                    <table class="table board-table">
-                        <thead>
-                            <tr>
-                                <td>
-                                    <div class="board-title">
-                                        <h1 class="title-text" data-post-element="title">${NAME}</h1>
-
-                                        <div class="start-end-label">
-                                            <h5>대표자 <small >${CEO_NAME}</small></h5>
-                                            <h5>입주실 <small >${ROOM_NAME}</small></h5>
-                                            <h5 onclick="location.href='${HOMEPAGE}'" style="cursor: pointer;">웹사이트 <small >${HOMEPAGE}</small></h5>
-                                            <h5>연락처 <small >${CONTRACT}</small></h5>
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        	<tr>
-							    <td>
-							    	<div class="gallery-represent-wrapper">
-							    		<img id="representImageExample" src="<c:url value='/upload/partner-represent' />/${PROFILE_IMAGE}" onerror="this.src='<c:url value='/resources/img/default.png' />';" />
-							    	</div>
-							    </td>
-							</tr>
-                            <tr>
-                                <td class="board-contents" data-post-element="content">
-                                    <!-- board content -->
-                                    ${INTRODUCE}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/partner/list" />'" style="margin-right: 10px;">목록</button>
-                    <sec:authorize ifAnyGranted="ROLE_ADMIN">
-						<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/partner/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
-					</sec:authorize>
-
-                </div><!-- r-contents div 끝 -->
+            <div class="container_wrap">
+                <div class="content_wrap">
+                    <div class="content_text">
+			    		<img id="representImageExample" src="<c:url value='/upload/partner-represent' />/${PROFILE_IMAGE}" onerror="this.src='<c:url value='/resources/img/default.png' />';" />
+			    		${INTRODUCE}
+                    </div>
+                </div><!--content_wrap-->
+            </div><!--container_wrap-->
+            
+            <div class="page_btn_wrap">
+            	<div class="back_btn">
+            		<a href="<c:url value="/partner/list" />">목록</a>
+            	</div>
+            	<sec:authorize ifAnyGranted="ROLE_ADMIN">
+	            	<div class="function_btns">
+						<a href="<c:url value="/admin/partner/edit/form/" />${SEQ_ID}" class="modify_btn">수정</a>
+	                </div>
+            	</sec:authorize>
+            </div>
 		</main>
     </div>
 	<!-- footer start -->

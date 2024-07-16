@@ -19,6 +19,9 @@
 <!-- # include: stylesheet start -->
 <%@ include file="./include/stylesheet.jsp"%>
 <!-- # include: stylesheet end -->
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub1-5.css' />">
+
 </head>
 
 
@@ -43,17 +46,7 @@
 				<%@ include file="./include/title-box.jsp"%>
 				<!-- # include: title-box end -->
 
-				<div class="col-lg-12 r-contents">
-
-					<div class="col-lg-12" style="margin: 0; padding: 0;">
-						<h3 class="m-title">
-							<img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;오시는
-							길
-						</h3>
-					</div>
-
-					<div class="col-lg-12" style="margin: 0; padding: 0;">
-
+				<div class="container_wrap">
 
 						<div id="daumRoughmapContainer1589243645354"
 							class="root_daum_roughmap root_daum_roughmap_landing"
@@ -69,8 +62,52 @@
                                 "mapHeight" : "360", 
                             }).render();
                         </script>
+                        
+		                <div class="group">
+		                    <h3>교통 안내</h3>
+		
+		                    <table>
+		                        <tbody>
+		                            <tr>
+		                                <td>상세주소</td>
+		                                <td>
+		                                    [12902] 경기도 하남시 미사강변한강로 177 KDB산업은행 IT센터 3층 하남스타트업캠퍼스<br>
+		                                    <strong>대표 전화번호</strong> 031)790-9591 / <strong>대표 FAX</strong> 031)795-3310
+		                                </td>
+		                            </tr>
+		                            <tr>
+		                                <td><img src="<c:url value="/resources/img/sub_img/car_ico.png" />" alt="자가용 이용 시">자가용 이용 시</td>
+		                                <td>올림픽대로 > 미사IC > 미사대로에서 700m > KDB산업은행 IT센터</td>
+		                            </tr>
+		                            <tr>
+		                                <td><img src="<c:url value="/resources/img/sub_img/bus_ico.png" />" alt="대중교통(버스) 이용 시">대중교통(버스)<br>이용 시</td>
+		                                <td>
+		                                    <strong>1. 서울 방면</strong> : 노선버스 1-4, 83, 89, 3000 / 마을버스 3, 3-1, 10 승차<br>
+		                                    <strong>2. 하남시청 방면</strong> : 노선버스 9304, 81 / 마을버스 10, 50 승차
+		                                    <br>
+		                                    <br>
+		                                    <strong>※ KDB산업은행 IT센터 앞 정류장</strong> : 미사강변 한신더휴(28091, 28531) 하차
+		                                </td>
+		                            </tr>
+		                            <tr>
+		                                <td><img src="<c:url value="/resources/img/sub_img/subway_ico.png" />" alt="지하철 이용 시">지하철 이용 시</td>
+		                                <td>
+		                                    <strong style="color:#01a34c;">잠실역</strong> : 광역환승센터 지하 정류장(24050)에서 9302 승차<br>
+		                                    <strong style="color:#01a34c;">강변역</strong> : 테크노마트 앞 강변역 정류장(05267)에서 9304 승차
+		                                    <br>
+		                                    <br>
+		                                    <strong style="color:#8936e0;">강동역</strong> : 강동역(중) 정류장(25012)에서 1-4 승차<br>
+		                                    <strong style="color:#8936e0;">상일동역</strong> : 상일동역 8번 출구 정류장(25134)에서 81, 83 승차<br>
+		                                    <strong style="color:#8936e0;">미사역</strong> : 미사역 4번 출구 정류장(28530)에서 10, 3, 3-1, 1-4, 89, 83 승차
+		                                </td>
+		                            </tr>
+		                        </tbody>
+		                    </table>
+		                </div><!--group-->
+                        
+                        
 
-
+						<!-- 
 						<table class="table map-table">
 							<tbody>
 								<tr>
@@ -112,7 +149,7 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
+						-->
 				</div>
 				<!-- r-contents div 끝 -->
 			</div>

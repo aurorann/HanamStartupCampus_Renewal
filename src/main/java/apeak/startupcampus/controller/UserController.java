@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import apeak.startupcampus.common.Utils;
+import apeak.startupcampus.model.dto.BoardCommentDTO;
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
 import apeak.startupcampus.model.dto.BoardPartnerActivityDTO;
@@ -329,7 +330,7 @@ public class UserController {
 		return resultMap;
 	}
 	
-	// # 입주기업 커뮤니티 게시글 뷰
+	// # 입주기업 커뮤니티 게시글/댓글 뷰
 	@RequestMapping(value = "/community/view/{seqId}")
 	public String goToCommunityPartnerListView(@PathVariable("seqId") int seqId, Model model) throws Exception {
 		//model.addAllAttributes(boardService.getCommunityPartnerPost(seqId));
@@ -337,11 +338,23 @@ public class UserController {
 		Map<String, Object> resultMap = boardService.getCommunityPartnerPost(seqId);
 		model.addAllAttributes(resultMap);
 		
+		Map<String, Object> comment = boardService.getCommunityPostCommentList(seqId);
+		LOGGER.debug("댓글 가져오기");
+		LOGGER.debug(comment.toString());
+		model.addAllAttributes(comment);
+		
+
+		Map<String, Object> commentCnt = boardService.getCommunityPostCommentCnt(seqId);
+		LOGGER.debug("댓글 갯수");
+		LOGGER.debug(commentCnt.toString());
+		model.addAllAttributes(commentCnt);
+
 		String roleName = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		if(!roleName.equals("anonymousUser")) {
 			int viewerId = ((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeqId();
 			model.addAttribute("VIEWER_ID", viewerId);
+			LOGGER.debug("VIEWER_ID" + viewerId);
 			LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
 		}
 		
@@ -378,6 +391,86 @@ public class UserController {
 
 		return boardService.editCommunityPartnerPost(boardDTO,request);
 	}
+	
+	
+	// # 입주기업 커뮤니티 게시글 댓글 관련 메소드
+	
+	// 입주기업 커뮤니티 게시글 댓글 작성하기
+	@RequestMapping(value="/community/comment/post/{seqId}", method=RequestMethod.POST)
+	public String writeCommunityCommentPosting(
+			@ModelAttribute BoardCommentDTO commentDTO,
+			HttpServletResponse res, Model model
+			) throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		
+		model.addAllAttributes(boardService.writeCommunityCommentPost(commentDTO));
+
+	    int postId = commentDTO.getPostId();
+	    model.addAttribute("postId", postId);
+	    return "redirect:/user/community/view/" + postId;
+	}
+	
+	// 입주기업 커뮤니티 게시글 댓글 삭제하기
+	@RequestMapping(value = "/community/comment/post/remove/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> removeCommunityCommentPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		return boardService.deleteCommunityCommentPost(seqId);
+	}
+	
+	
+	
+	/*
+	@RequestMapping(value = "/community/commentlist/view/{seqId}")
+	public String goToCommunityPostCommentList(@PathVariable("seqId") int seqId, Model model) throws Exception {
+		
+		//Map<String, Object> resultMap = boardService.getCommunityPostCommentList(seqId);
+		LOGGER.debug("댓글 가져오기");
+		//LOGGER.debug(resultMap.toString());
+		
+		String roleName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		if(!roleName.equals("anonymousUser")) {
+			int viewerId = ((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeqId();
+			model.addAttribute("VIEWER_ID", viewerId);
+			//LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
+		}
+		
+		Utils.setPageViewLocation(model, locationMain, "입주기업 커뮤니티");
+		return "user/community-partner-view";
+	}
+	
+	
+	@RequestMapping(value = "/community/commentlist/view/{seqId}")
+	public Map<String, ?> goToCommunityPostCommentList(@RequestParam(value = "curPage", defaultValue = "1") int curPage,
+			@RequestParam(value = "searchType", defaultValue = "NONE") String searchType,
+			@RequestParam(value = "keyword", defaultValue = "") String keyword,
+			@PathVariable("seqId") int seqId) throws Exception {
+		LOGGER.debug("LIST ARRIVED");
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		if (curPage == 0) {
+			curPage = 1;
+		}
+		searchOption.put("curPage", curPage);
+		searchOption.put("searchType", searchType);
+		searchOption.put("keyword", keyword);
+		searchOption.put("seqId", seqId);
+		searchOption.put("boardType", "partner-community-comment");
+		LOGGER.debug(searchOption.toString());
+
+		Map<String, Object> resultMap = boardService.getBoardSearchOption(searchOption);
+		LOGGER.debug(resultMap.toString());
+
+		return resultMap;
+	}
+	*/
+	
+	
+	
+	
+	
+	
 	
 	
 	// 공통: 게시글 이미지를 업로드한다.

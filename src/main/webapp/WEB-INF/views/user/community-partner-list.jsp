@@ -68,11 +68,11 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_view">작성자</th>
-	                            <th class="board_start">종료일</th>
-	                            <th class="board_end">조회수</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_title" style="width:62%">제목</th>
+	                            <th class="board_view" style="width:10%">작성자</th>
+	                            <th class="board_start" style="width:10%">종료일</th>
+	                            <th class="board_end" style="width:10%">조회수</th>
 	                        </tr>
 	                    </thead>
 	
@@ -92,13 +92,15 @@
 	                    </tbody>
 	                </table><!--board_wrap 게시판-->
 
-					<sec:authorize ifAnyGranted="ROLE_USER">
-						<button type="button" class="search-btn mg-top-30" onclick="location.href='/startupcampus/user/community/write/form'" style="margin-right: 10px;">글쓰기</button>
-					</sec:authorize>
-
                     <div class="pagination_wrap">
+					</div><!-- Paging -->
+					
 
-					</div>
+					<sec:authorize ifAnyGranted="ROLE_USER">
+						<!-- <button type="button" class="search-btn mg-top-30" onclick="location.href='/startupcampus/user/community/write/form'" style="margin-right: 10px;">글쓰기</button> -->
+						<a href='<c:url value="/user/community/write/form" />' class="write_btn">글쓰기</a>
+					</sec:authorize>
+					
                 </div>
 			</div><!-- right-contents div 끝 -->
         </main>
@@ -127,6 +129,7 @@
 					searchType: _VARS.searchOption.searchType
 				},
 				success : function(res) {
+					console.log(res);
 					var commonPost = res.post;
 					var searchOption = res.searchOption.searchOption;
 					var page = JSON.parse(res.searchOption.page);
@@ -157,7 +160,9 @@
 								var commonHTML = '<tr>'
 									+ '<td class="board_numb">' + el.seqId + '</td>'
 									+ '<td class="board_title">'
-									+ '<a href="<c:url value='/user/community/view' />/' + el.seqId + '">' + titleString + '</a>'
+									+ '<a href="<c:url value='/user/community/view' />/' + el.seqId + '">' + titleString 
+									+ '<span>('+ el.commentCnt +')</span>'
+									+ '</a>'
 									+ '</td>'
 									+ '<td class="board_view">' + writerName + '</td>'
 									+ '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>'

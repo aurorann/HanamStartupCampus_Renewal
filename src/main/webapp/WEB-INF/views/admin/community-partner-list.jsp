@@ -88,11 +88,11 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_view">작성자</th>
-	                            <th class="board_start">등록일</th>
-	                            <th class="board_end">조회수</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_title" style="width:62%">제목</th>
+	                            <th class="board_view" style="width:10%">작성자</th>
+	                            <th class="board_start" style="width:10%">등록일</th>
+	                            <th class="board_end" style="width:10%">조회수</th>
 	                        </tr>
 	                    </thead>
 	
@@ -173,18 +173,16 @@
 						var titleString = (el.title.length > 28) ?
 								el.title.slice(0, 28) + "..."
 								: el.title;
-						var writer = el.writerName
-						
-						if(writer == null){
-							writer = "익명"
-						}
+								var writerName = el.writerName || "익명"; 
 		                        
 								var commonHTML = '<tr>'
 									+ '<td class="board_numb">' + el.seqId + '</td>'
 									+ '<td class="board_title">'
-									+ '<a href="<c:url value='/admin/user/community/view' />/' + el.seqId + '">' + titleString + '</a>'
+									+ '<a href="<c:url value='/admin/user/community/view' />/' + el.seqId + '">' + titleString
+									+ '<span>('+ el.commentCnt +')</span>'
+									+ '</a>'
 									+ '</td>'
-									+ '<td class="board_view">' + writer + '</td>'
+									+ '<td class="board_view">' + writerName + '</td>'
 									+ '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>'
 									+ '<td class="board_end">' + el.viewCount + '</td>'
 									+ '</tr>';

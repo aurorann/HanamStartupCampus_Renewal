@@ -79,12 +79,30 @@
                 </div><!--content_wrap 콘텐츠-->
             </div><!--container_wrap-->
             
+            
+            <div class="page_btn_wrap">
+            	<div class="back_btn">
+            		<a href="<c:url value="/partner/media/list" />">목록</a>
+            	</div>
+            	
+            	<sec:authorize ifAnyGranted="ROLE_ADMIN">
+	            	<div class="function_btns">
+						<a href="<c:url value="/admin/partner/media/edit/form/" />${SEQ_ID}" class="modify_btn">수정</a>
+	                    <a href="#" class="delet_btn" onclick="deleteNoticePost(${SEQ_ID})">삭제</a>
+	                </div>
+            	</sec:authorize>
+            </div>
+            
+            
+            <!-- 
             <div class="back_btn"><a href="<c:url value="/partner/media/list" />">목록</a></div>
 
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
 				<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/partner/media/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
 				<button type="button" class="search-btn mg-top-30" onclick="deleteNoticePost(${SEQ_ID});" style="margin-right: 10px;">삭제</button>
 			</sec:authorize>
+			 -->
+			 
 		</main>
     </div>
 	<!-- footer start -->

@@ -67,16 +67,8 @@
 		                        <div class="labelWrap">
 		                            <input type="radio" id="Ggongo" name="notice_level" value="101" checked="checked">
 		                            <label for="Ggongo" class="board_label board_label_Ggongo">주요공고</label>
-		                            <!-- 
-		                            <input type="radio" id="Ggongi" name="notice_level" value="100" checked="checked">
-		                            <label for="Ggongi" class="board_label board_label_Ggongi">주요공지</label>
-		                             -->
-		                            <input type="radio" id="gongo" name="notice_level" value="102">
+		                            <input type="radio" id="gongo" name="notice_level" value="103">
 		                            <label for="gongo" class="board_label board_label_gongo">공고</label>
-		                            <!-- 
-		                            <input type="radio" id="gongi" name="notice_level" value="103">
-		                            <label for="gongi" class="board_label board_label_gongo">공지</label>
-		                             -->
 		                        </div>
 		                        <div class="titleWrap">
 		                            <label for="title">제목</label>
@@ -87,6 +79,7 @@
 										<label for="startEnd">게시일 / 종료일</label>
 										<input type="text" class="board-input datepicker-here" id="post_date_string" autocomplete="off" data-range="true"
 												data-multiple-dates-separator=" ~ " data-format='yyyy-mm-dd' data-language="kor" class="datepicker-here" />
+			                            <div class="not_box"></div>
 										<label for="file">파일찾기</label>
 										<input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
 									</form>
@@ -224,6 +217,7 @@
 			    xhr.withCredentials = true;
 			} );
 			// CKEditor init end
+			
 		})
 		
 		

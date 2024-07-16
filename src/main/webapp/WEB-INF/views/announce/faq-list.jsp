@@ -63,10 +63,10 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_end">등록일</th>
-	                            <th class="board_view">조회수</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_title" style="width:72%">제목</th>
+	                            <th class="board_end" style="width:10%">등록일</th>
+	                            <th class="board_view" style="width:10%">조회수</th>
 	                        </tr>
 	                    </thead>
 	
@@ -89,6 +89,11 @@
                     <div class="pagination_wrap">
 
 					</div>
+					
+					
+					<sec:authorize ifAnyGranted="ROLE_ADMIN">
+						<a href='<c:url value="/admin/announce/faq/write/form" />' class="write_btn">글쓰기</a>
+					</sec:authorize>
                 </div><!-- r-contents div 끝 -->
 		</main>
     </div>
@@ -147,7 +152,7 @@
 							+ '<td class="board_numb">' + el.seqId + '</td>'
 							+ '<td class="board_title">'
 							+ '<a href="<c:url value='/announce/faq/view' />/' + el.seqId + '">'
-							+ '<div class="board_label board_label_gongo">자주 묻는 질문</div>' + titleString + '</a>'
+							+ '<div class="board_label board_label_gongo">질문</div>' + titleString + '</a>'
 							+ '</td>'
 							+ '<td class="board_end">' + el.createdAt.slice(5) + '</td>'
 							+ '<td class="board_view">' + el.viewCount + '</td>'

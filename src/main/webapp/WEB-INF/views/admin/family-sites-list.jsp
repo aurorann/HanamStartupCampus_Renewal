@@ -36,43 +36,51 @@
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
-					<table class="table table-hover">
-						<thead>
-							<tr>
+                <div class="container_wrap">
+	                <table class="mgr_table">
+	                    <thead>
+	                        <tr>
 								<th width="30%">패밀리사이트 이름</th>
 								<th width="50%">사이트 주소</th>
 								<th width="20%">관리 기능</th>
-							</tr>
-						</thead>
-						<tbody id="family-site-list" style="color: #666">
+	                        </tr>
+	                    </thead>
+	
+	                    <tbody class="board_body family-site-list titleWrap">
 							<c:forEach items="${siteList}" var="item">
 								<tr class="site-${item.seqId}-el }">
 									<td><input class="site-name" value="${item.name}" /></td>
 									<td><input class="site-address" value="${item.pageAddress}" style="width: 90%;"/></td>
 									<td>
-										<button type="button" class="search-btn" onclick="editFamilySite(${item.seqId})" style="margin-right: 10px; font-size: 0.5em; float: none;">수정</button>
-		                    			<button type="button" class="search-btn" onclick="removeFamilySite(${item.seqId})" style="font-size: 0.5em; float: none;">삭제</button>
+										
+										<button type="button" onclick="editFamilySite(${item.seqId})">수정</button>
+		                    			<button type="button" onclick="removeFamilySite(${item.seqId})">삭제</button>
+		                    			<!-- 
+		                    			<a href="#" onclick="editFamilySite(${item.seqId})" style="width:70px">수정</a>
+		                    			<a href="#" onclick="removeFamilySite(${item.seqId})" style="width:70px">삭제</a>
+		                    			 -->
 									</td>
 								</tr>
 							</c:forEach>
-							<tr><td colspan="3" style="border-left: 0px; border-right: 0px;"></td></tr>
+							<tr>
+								<td colspan="3" style="border-left: 0px; border-right: 0px;"></td>
+							</tr>
 							<tr id="new-site">
-									<td><input class="site-name" /></td>
-									<td><input class="site-address"  style="width: 90%;"/></td>
-									<td>
-		                    			<button type="button" class="search-btn" onclick="addNewFamilySite()" style=" font-size: 0.5em; float: none;">새 사이트 추가</button>
-									</td>
-								</tr>
-						</tbody>
-					</table>
+								<td><input class="site-name" /></td>
+								<td><input class="site-address"  style="width: 90%;"/></td>
+								<td>
+	                    			<button type="button" class="search-btn" onclick="addNewFamilySite()">새 사이트 추가</button>
+	                    			<!-- <a href="#" onclick="addNewFamilySite()">새 사이트 추가</a> -->
+								</td>
+							</tr>
+	                    </tbody>
+	                </table><!--board_wrap 게시판-->
+					
                 </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->

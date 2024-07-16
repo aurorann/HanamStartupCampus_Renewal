@@ -52,6 +52,7 @@
   height: 100%;
   z-index: 1;
   display: flex;
+  align-items:center;
   transition-property: transform;
   transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
   /*box-sizing: content-box;*/
@@ -271,7 +272,6 @@
 }
 .swiper-button-prev.swiper-button-disabled,
 .swiper-button-next.swiper-button-disabled {
-  opacity: 0.35;
   cursor: auto;
   pointer-events: none;
 }
@@ -310,9 +310,9 @@
   display: none;
 }
 /* Navigation font start */
-/*
-.swiper-button-prev:after,
-.swiper-button-next:after {
+
+.main_prev:after,
+.main_next:after{
   font-family: swiper-icons;
   font-size: var(--swiper-navigation-size);
   text-transform: none !important;
@@ -320,11 +320,11 @@
   font-variant: initial;
   line-height: 1;
 }
-.swiper-button-prev:after,
-.swiper-rtl .swiper-button-next:after {
+.main_prev:after,
+.main_next:after {
   content: 'prev';
 }
-*/
+
 .swiper-button-next,
 .swiper-rtl .swiper-button-prev {
   right: var(--swiper-navigation-sides-offset, 10px);
@@ -359,7 +359,6 @@
 }
 */
 .swiper-pagination {
-  position: absolute; bottom:80px !important;
   text-align: center;
   transition: 300ms opacity;
   transform: translate3d(0, 0, 0);

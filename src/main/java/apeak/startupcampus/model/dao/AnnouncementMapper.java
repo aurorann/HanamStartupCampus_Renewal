@@ -40,6 +40,9 @@ public interface AnnouncementMapper {
 	int updateAnnouncementPostOne(BoardNoticeDTO noticeDTO) throws Exception;
 	
 	int deleteAnnouncementPostOne(int seqId) throws Exception;
+	
+	void updateAnnouncementPostLevel();
+	
 
 	/*List<UserDTO> selectBookList() throws Exception;
 	

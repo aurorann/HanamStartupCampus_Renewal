@@ -42,7 +42,7 @@
 			<!-- # include: title-box end -->
 
             <div class="container_txt">
-                <div class="board_label board_label_gongo" data-post-element="level">자주 묻는 질문</div>
+                <div class="board_label board_label_gongo" data-post-element="level">질문</div>
                 <h3 data-post-element="title">${TITLE}</h3>
                 <ul>
                     <li>등록일<span data-post-element="contractStartAt">${CREATED_AT}</span></li>
@@ -60,15 +60,17 @@
 							<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
 							<ul class="file_wrap">
 								<c:forEach items="${fileNames}" varStatus="status">
-									<a href="#">
-										<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
-										${fileNames[status.index]}
-									</a>
-									<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
-										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-										<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
-										<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-									</form><br/>
+									<li>
+										<a href="#">
+											<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
+											<span id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();">${fileNames[status.index]}</span>
+										</a>
+										<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+											<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+										</form><br/>
+									</li>
 								</c:forEach>
 							</ul>
 						</c:if>
@@ -76,12 +78,25 @@
                 </div><!--content_wrap 콘텐츠-->
             </div><!--container_wrap-->
             
+            <div class="page_btn_wrap">
+            	<div class="back_btn">
+            		<a href="<c:url value="/announce/faq/list" />">목록</a>
+            	</div>
+            	<sec:authorize ifAnyGranted="ROLE_ADMIN">
+	            	<div class="function_btns">
+						<a href="<c:url value="/admin/announce/faq/edit/form/" />${SEQ_ID}" class="modify_btn">수정</a>
+	                    <a href="#" class="delet_btn" onclick="deleteNoticePost(${SEQ_ID})">삭제</a>
+	                </div>
+            	</sec:authorize>
+            </div>
+            <!-- 
             <div class="back_btn"><a href="<c:url value="/announce/faq/list" />">목록</a></div>
 
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
 						<button type="button" class="search-btn mg-top-30" onclick="location.href='<c:url value="/admin/announce/faq/edit/form/" />${SEQ_ID}';" style="margin-right: 10px;">수정</button>
 						<button type="button" class="search-btn mg-top-30" onclick="deleteNoticePost(${SEQ_ID});" style="margin-right: 10px;">삭제</button>
 			</sec:authorize>
+			 -->
 		</main>
     </div>
 	<!-- footer start -->

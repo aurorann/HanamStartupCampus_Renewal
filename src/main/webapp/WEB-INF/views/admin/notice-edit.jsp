@@ -48,13 +48,13 @@
 			<!-- # include: title-box end -->
     
 				<div class="container_wrap">
-
+						<h3 class="mgr_title">공지사항 수정</h3>
 		                <div class="board_write_wrap">
 		                    <div class="board_write_title">
 		                        <div class="labelWrap">
 		                            <input type="radio" id="Ggongi" name="notice_level" value="100">
 		                            <label for="Ggongi" class="board_label board_label_Ggongi">주요공지</label>
-		                            <input type="radio" id="gongi" name="notice_level" value="103">
+		                            <input type="radio" id="gongi" name="notice_level" value="102">
 		                            <label for="gongi" class="board_label board_label_gongo">공지</label>
 		                        </div>
 								<input type="hidden" id="post_id" value="${SEQ_ID}"/>
@@ -69,6 +69,7 @@
 													data-multiple-dates-separator=" ~ " data-format='yyyy-mm-dd'
 													data-language="kor" value="${CONTRACT_START_AT} ~ ${CONTRACT_END_AT}"
 													class="datepicker-here" />
+				                            <div class="not_box"></div>
 											<label for="file">파일찾기</label>
 								            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
 									</form>
@@ -82,8 +83,10 @@
 									<ul class="file_wrap">
 										<c:forEach items="${fileNames}" varStatus="status">
 											<li>
-												<a href="#"><img src="<c:url value='/resources/img/sub_img/file_ico.png' />" alt="파일">
-													<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
+												<a href="#">
+													<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" alt="파일">
+													<div id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">
+													${fileNames[status.index]}</div>
 												</a>
 												<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
 													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

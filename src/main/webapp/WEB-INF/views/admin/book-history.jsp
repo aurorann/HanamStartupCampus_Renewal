@@ -17,6 +17,9 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub-pvt5.css' />">
+
 </head>
 
 <!-- Extention Start -->
@@ -53,15 +56,23 @@
                 		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 캘린더</a>
                    		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약현황</a>      
 				    </div>
-				     -->
+				    
 					<ul class="mgr_btns mgr_btns1" id="you-are-here">
 					    <li><button onclick="location.href='<c:url value='/admin/book/place' />' ">회의실 예약 캘린더</button></li>
 					    <li><button class="active" onclick="location.href='<c:url value='/admin/book/history' />' ">회의실 예약현황</button></li>
 					</ul>
+					 -->
+					<div class="pvt_wrap">
+						<ul class="pvt_btns mgr_btns mgr_btns1" id="you-are-here">
+						    <li><button onclick="location.href='<c:url value='/admin/book/place' />' ">회의실 예약 캘린더</button></li>
+						    <li><button class="active" onclick="location.href='javascript:void(0);' ">회의실 예약현황</button></li>
+						</ul>
+					</div>
+					
 					
                     <div class="search_wrap">
-	                    <form class="search_form" id="searchForm">
-	                        <select name="placeId">
+	                    <div class="search_form" id="searchForm">
+	                        <select id="placeId">
                                 <option value="1">회의실 1</option>
                                 <option value="2">회의실 2</option>
 	                        </select>
@@ -69,10 +80,10 @@
                             	data-min-view="months" data-view="months"
 								autocomplete="on" data-format='yyyy-mm' data-language="kor"/>
 	                        <button type="submit" class="serch_btn" onclick="getBookListMonthly();">검색</button>
-	                    </form>
+	                    </div>
 	                </div><!--search_wrap-->
 
-                	
+                	<!-- 
                     <div class="sm-main-box pink-bar flex-end">
                         <div>
                             <select id="placeId">                                
@@ -86,16 +97,15 @@
 								
                             <button type="button" class="search-btn" onclick="getBookListMonthly();">검색</button>
                         </div>
-        
                     </div>
-					 
-                    <table class="table col-lg-12 mg-top-30">
+					  -->
+                    <table>
                         <thead>
                             <tr>
-                                <th width="10%">시설명</th>
+                                <th width="15%">시설명</th>
                                 <th width="25%">입주사</th>
                                 <th width="25%">예약기간</th>
-                                <th width="40%">시설 사용 용도</th>
+                                <th width="35%">시설 사용 용도</th>
                             </tr>
                         </thead>
                         <tbody id="book-list">
@@ -196,7 +206,7 @@
 							}
 						})
 
-						var dateTimeString = "<strong>" + book.bookDate + "</strong>   " + sTime + " ~ " + eTime; 
+						var dateTimeString = book.bookDate + "   " + sTime + " ~ " + eTime; 
 						var html = '<tr>' +
 	                        '<td>회의실 ' + book.placeId + '</td>' +
 	                        '<td>' + book.userName + '</td>' +

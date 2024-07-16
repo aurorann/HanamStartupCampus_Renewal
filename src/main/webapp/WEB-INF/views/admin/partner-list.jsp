@@ -22,6 +22,11 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub-ent.css' />">
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/mgr.css' />">
+
 </head>
 
 
@@ -44,13 +49,14 @@
 		<!-- # include: title-box start -->
 		<%@ include file="./include/title-box.jsp"%>
 		<!-- # include: title-box end -->
-    
-				<div class="container_wrap">
-			    <%@ include file="./include/inside-menu.jsp"%>
-			
-				<div class="col-lg-12" id="partner-list">
-				    <!-- 회사 시작 -->
-					<!-- 회사 끝 -->
+	  
+			<div class="container_wrap">
+		    <%@ include file="./include/inside-menu.jsp"%>
+				<div class="content_wrap">
+					<div class="ent_introduce_list" id="partner-list">
+					    <!-- 회사 시작 -->
+						<!-- 회사 끝 -->
+				    </div>
 			    </div>
 			</div>
         </main>
@@ -76,43 +82,46 @@
 					var commonArr = [];
 					
 					commonPost.every(function(el) {
-						var urlString = (el.homepage.length > 25) ?
-								el.homepage.slice(0, 22) + "..."
+						var urlString = (el.homepage.length > 18) ?
+								el.homepage.slice(0, 18) + "..."
 								: el.homepage;
 								
-						var businessString = (el.businessName.length > 18) ?
-								el.businessName.slice(0, 16) + "..."
+						var businessString = (el.businessName.length > 12) ?
+								el.businessName.slice(0, 12) + "..."
 								: el.businessName;
 						
-						var commonHTML = '<div class="col-lg-4 col-md-4 col-sm-6 ent-box" style="font-size: 0.93em;"' + 
-						//'style="cursor: pointer;" onclick="location.href=\'<c:url value='/admin/partner/edit/form' />/' + el.seqId + '\'"' +
-						'>' +
-							'<h3 class="b-title"><strong>계정명 : ' + el.accountId + '</strong></h3>' +
-	                        '<table class="table">' +
-	                        	'<thead style="opacity: 0; border: 0 none; height: 0;"><tr style="margin: 0; padding: 0; border: 0 none; height: 0px;"><th width="30%" style="margin: 0; padding: 0; border: 0 none; height: 0px;"></th><th width="70%" style="margin: 0; padding: 0; border: 0 none; height: 0px;"></th></tr></thead>'+
-	                            '<tbody><tr><td colspan="2"><div class="ent-logo">' +
-	                            '<div class="ent-logo-detail">' +
-	                            '<img src="<c:url value='/upload/partner-represent' />/' + el.profileImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'" alt="기업 대표 이미지"></div></div></td></tr>';
-						(el.activate === "PARTNER")
-							? commonHTML += '<tr><th colspan="2" style="background: #edb234;">입주기업(공개)</th><tr>'
-							: (el.activate === "GRADUATE")
-								? commonHTML += '<tr><th colspan="2" style="background: #99cbff;">졸업기업(공개)</th><tr>'
-								: commonHTML += '<tr><th colspan="2" style="background: darkgray;">공실(비공개)</th><tr>'; 
-	                    commonHTML += '<tr><th>기업명</th>' +
-			                        '<td>' + el.name + '</td></tr>' +
-			                        '<tr><th>업종구분</th>' +
-	                                '<td>' + businessString + '</td></tr>' +
-			                        '<tr><th>대표자</th>' +
-	                                '<td>' + el.ceoName + '</td></tr>' +
-	                                '<tr><th>호수</th>' +
-	                                '<td>' + el.roomName + '</td></tr>' +
-	                                '<tr><th>웹사이트</th>' +
-	                                '<td>' + urlString + '</td></tr>' +
-	                                '<tr><th>연락처</th>' +
-	                                '<td>' + el.contract + '</td></tr>' +
-	                                '<tr><td colspan="2" style="padding: 0px;">' +
-	                                '<button type="button" class="default-btn" style="width: 100%;height: 45px;" onclick="location.href=\'<c:url value='/admin/partner/edit/form' />/' + el.seqId + '\'"' + '>수정하기</button></td></tr>' +
-	                            '</tbody></table></div>';
+						var commonHTML = 
+										'<div class="ent_introduce_wrap">' +
+				                            '<strong>계정명 : ' + el.accountId + '</strong>' +
+				                            '<a href="<c:url value='/admin/partner/edit/form' />/' + el.seqId + '\">' +
+				                                '<div class="img_box"><img src="<c:url value='/upload/partner-represent' />/' + el.profileImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'" alt="기업 대표 이미지" style="width:100px;"></div>';
+		
+				                                (el.activate === "PARTNER")
+				    							? commonHTML += '<div class="in_open">입주기업(공개)</div>'
+				    							: (el.activate === "GRADUATE")
+				    								? commonHTML += '<div class="out_open">졸업기업(공개)</div>'
+				    								: commonHTML += '<div class="room_nopen">졸업기업(비공개)</div>'; 
+				    								
+				    		commonHTML += 
+				                                '<div class="text_box">' +
+				                                    '<h3>' + el.name + '</h3>' +
+				                                    '<ul>' +
+				                                        '<li><span>대표자</span>' + el.ceoName + '</li>' +
+				                                        '<li><span>업종구분</span>' + businessString + '</li>' +
+				                                        '<li><span>호수</span>' + el.roomName + '</li>' +
+				                                        '<li><span>웹사이트</span>' + urlString + '</li>' +
+				                                        '<li><span>연락처</span>' + el.contract + '</li>' +
+				                                    '</ul>' +
+				                                '</div>' +
+				                            '</a>' +
+				                            '<button onclick="location.href=\'<c:url value='/admin/partner/edit/form' />/' + el.seqId + '\'"' + '>수정하기</button>' +
+				                        '</div>';
+	                            
+	                            
+	                            
+	                            
+	                            
+	                            
 	                        
 	                    commonArr.push(commonHTML);
 		                return true;

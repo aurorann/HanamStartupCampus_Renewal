@@ -56,32 +56,32 @@
 		                            <input type="text" id="post_title" value="${TITLE}">
 		                        </div>
 								<div class="fileWrap">
-										<label for="startEnd">게시일 / 종료일</label>
-											<input type="text" class="board-input datepicker-here" id="post_date_string" autocomplete="off" data-range="true"
-													data-multiple-dates-separator=" ~ " data-format='yyyy-mm-dd' data-language="kor" class="datepicker-here" />
-											<label for="file">파일찾기</label>
-								            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-								            <br/><br/><small>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</small>
-                                <c:if test="${not empty FILE_NAME}">
-									<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
-									<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
-									<tr>
-										<td class="board-contents" style="padding: 10px;">
-											<c:forEach items="${fileNames}" varStatus="status">
-												<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
-												<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
+									<div class="not_box"></div>
+									<label for="file">파일찾기</label>
+						            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block; width: 300px;"/>
+								</div>
+	                        	<p>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</p>
+		                    </div>
+		                    
+							<c:if test="${not empty FILE_NAME}">
+								<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+								<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+									<ul class="file_wrap">
+										<c:forEach items="${fileNames}" varStatus="status">
+											<li>
+												<a href="#" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">
+													<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" alt="파일">
+													${fileNames[status.index]}
+												</a>
 												<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
 													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 													<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
 													<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-												</form><br/>
-											</c:forEach>
-										</td>
-									</tr>
-								</c:if>
-								            
-								</div>
-		                    </div>
+												</form>
+											</li>
+										</c:forEach>
+									</ul>
+							</c:if>  
 
 		                    <div class="board_write_post board-contents">
 								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>

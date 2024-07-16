@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import apeak.startupcampus.common.Utils;
 import apeak.startupcampus.model.dto.BoardAgencyDTO;
+import apeak.startupcampus.model.dto.BoardCommentDTO;
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
@@ -140,6 +141,9 @@ public class AdminController {
 		case "promotion":
 			model.addAllAttributes(boardService.getPromotionPost(seqId));
 			break;
+		case "press":
+			model.addAllAttributes(boardService.getPressPost(seqId));
+			break;
 		default:
 			model.addAllAttributes(boardService.getNoticePost(seqId));
 			boardType = "notice";
@@ -201,6 +205,12 @@ public class AdminController {
 			break;
 		case "promotion":
 			resultMap = boardService.editPromotionPost(galleryDTO,request);
+			break;
+		case "press":
+			resultMap = boardService.editPressPost(galleryDTO,request);
+			break;
+		case "announcement":
+			resultMap = boardService.editAnnouncementPost(noticeDTO,request);
 			break;
 		}
 
@@ -731,7 +741,7 @@ public class AdminController {
 			LOGGER.debug(resultMap.get("WRITER_ID") + " / " + viewerId);
 		}
 		
-		Utils.setPageViewLocation(model, locationMain, "기업 소식");
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
 		
 		return "admin/activity-partner-view";
 	}
@@ -873,6 +883,8 @@ public class AdminController {
 	public String uploadFile(@PathVariable("boardType") String boardType, MultipartHttpServletRequest multiReq,
 			HttpServletResponse res) throws Exception {
 		res.setContentType("application/json;charset=UTF-8");
+		System.out.println("Upload Controller");
+		System.out.println(boardType);
 		return boardService.saveBoardFile(boardType, multiReq);
 	}
 	
@@ -1143,6 +1155,17 @@ public class AdminController {
 		Map<String, Object> resultMap = boardService.getCommunityPartnerPost(seqId);
 		model.addAllAttributes(resultMap);
 		
+		Map<String, Object> comment = boardService.getCommunityPostCommentList(seqId);
+		LOGGER.debug("댓글 가져오기");
+		LOGGER.debug(comment.toString());
+		model.addAllAttributes(comment);
+		
+
+		Map<String, Object> commentCnt = boardService.getCommunityPostCommentCnt(seqId);
+		LOGGER.debug("댓글 갯수");
+		LOGGER.debug(commentCnt.toString());
+		model.addAllAttributes(commentCnt);
+
 		String roleName = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		if(!roleName.equals("anonymousUser")) {
@@ -1156,7 +1179,7 @@ public class AdminController {
 	}
 
 	// 입주기업 커뮤니티 게시글 삭제하기
-	@RequestMapping(value = "user/community/post/remove/{seqId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/community/post/remove/{seqId}", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, ?> removeCommunityPartnerPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
 			throws Exception {
@@ -1181,6 +1204,53 @@ public class AdminController {
 		res.setContentType("application/json;charset=UTF-8");
 		return boardService.writeCommunityPartnerPost(boardDTO);
 	}
+	
+
+	// 입주기업 커뮤니티 게시글 수정폼 이동
+	@RequestMapping(value = "/community/edit/form/{seqId}")
+	public String goToCommunityEditView(@PathVariable("seqId") int seqId, Model model) throws Exception {
+		String locationSub = null;
+		model.addAllAttributes(boardService.getCommunityPartnerPost(seqId));
+		Utils.setPageViewLocation(model, locationMain, "입주기업 관련");
+		return "admin/community-partner-edit";
+	}
+	
+	// 입주기업 커뮤니티 게시글 수정하기
+	@RequestMapping(value = "/community/post/edit/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> editCommunityPartnerPost(@ModelAttribute BoardDTO boardDTO, HttpServletResponse res,HttpServletRequest request)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+
+		return boardService.editCommunityPartnerPost(boardDTO,request);
+	}
+	
+	// 입주기업 커뮤니티 게시글 댓글 작성하기
+	@RequestMapping(value="/community/comment/post/{seqId}", method=RequestMethod.POST)
+	public String writeCommunityCommentPosting(
+			@ModelAttribute BoardCommentDTO commentDTO,
+			HttpServletResponse res, Model model
+			) throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		
+		model.addAllAttributes(boardService.writeCommunityCommentPost(commentDTO));
+
+	    int postId = commentDTO.getPostId();
+	    model.addAttribute("postId", postId);
+	    return "redirect:/admin/user/community/view/" + postId;
+	}
+	
+	
+	// 입주기업 커뮤니티 게시글 댓글 삭제하기
+	@RequestMapping(value = "/community/comment/post/remove/{seqId}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, ?> removeCommunityCommentPost(@PathVariable("seqId") int seqId, HttpServletResponse res)
+			throws Exception {
+		res.setContentType("application/json;charset=UTF-8");
+		return boardService.deleteCommunityCommentPost(seqId);
+	}
+	
+	
 	
 	
 	

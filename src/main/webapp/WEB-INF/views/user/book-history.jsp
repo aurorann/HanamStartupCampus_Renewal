@@ -17,6 +17,9 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub-pvt5.css' />">
+
 </head>
 
 <!-- Extention Start -->
@@ -48,10 +51,15 @@
 			<!-- # include: title-box end -->
     
                 <div class="container_wrap">
-                	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                		<a href="<c:url value='/book/place' />" class="btn btn-default" role="button">회의실 예약 캘린더</a>
-                   		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약현황</a>      
-				    </div>
+					<div class="pvt_wrap">
+						<ul class="pvt_btns mgr_btns mgr_btns1" id="you-are-here">
+						    <li><button onclick="location.href='<c:url value='/book/place' />' ">회의실 예약 캘린더</button></li>
+						    <li><button class="active" onclick="location.href='javascript:void(0);' ">회의실 예약현황</button></li>
+						</ul>
+					</div>
+					
+					
+				    
 	                <div class="search_wrap">
 	                    <div class="search_form" id="searchForm">
                             <select id="placeId">                                
@@ -67,17 +75,17 @@
 	                    </div>
 	                </div><!--search_wrap-->
 	                
-	                <table class="board_wrap">
-	                    <thead class="board_hd">
+	                <table>
+	                    <thead>
 	                        <tr>
-                                <th width="10%">시설명</th>
+                                <th width="15%">시설명</th>
                                 <th width="25%">입주사</th>
                                 <th width="25%">예약기간</th>
-                                <th width="40%">시설 사용 용도</th>
+                                <th width="35%">시설 사용 용도</th>
 	                        </tr>
 	                    </thead>
 	
-	                    <tbody class="board_body" id="book-list">
+	                    <tbody id="book-list">
 	                    	<!-- 
 	                        <tr>
 	                            <td class="board_numb">1</td>
@@ -177,7 +185,7 @@
 							}
 						})
 
-						var dateTimeString = "<strong>" + book.bookDate + "</strong>   " + sTime + " ~ " + eTime; 
+						var dateTimeString = book.bookDate + "   " + sTime + " ~ " + eTime; 
 						var html = '<tr>' +
 	                        '<td>회의실 ' + book.placeId + '</td>' +
 	                        '<td>' + book.userName + '</td>' +

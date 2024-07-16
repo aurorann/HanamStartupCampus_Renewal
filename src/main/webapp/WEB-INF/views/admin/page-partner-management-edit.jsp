@@ -59,43 +59,7 @@
 								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
 		                    </div>
 		                </div>
-				    
-				    
-                    	<!-- 
-						<div class="col-lg-12" style="margin:0; padding:0;">
-	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;기업 실적 수정</h3>
-	                    </div>
-						
-                        <table class="table board-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <div class="board-title">
-											<input type="hidden" id="level" value="${LEVEL}"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="board-contents">
-                                        <textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    					 -->
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <!-- 
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
-						      <div class="btn-group" role="group">
-						      	<button type="button" class="btn btn-default" onclick="editPost();">페이지 수정</button>
-						      </div>
-						</div>
-						 -->
+
 						<div class="board_wrap_btn"><a href="#" onclick="editPost();">페이지 수정</a></div>
 						
     

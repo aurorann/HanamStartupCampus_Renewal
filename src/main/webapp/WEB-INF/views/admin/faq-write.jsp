@@ -71,15 +71,16 @@
 		                        </div>
 								<div class="fileWrap">
 									<form id="fileForm" method="post" enctype="multipart/form-data">								
+			                            <div class="not_box"></div>
 										<label for="file">파일찾기</label>
-							            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
+							            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block; width: 300px"/>
 									</form>
 								</div>
 		                    </div>
 		                            
 
 		                    <div class="board_write_post board-contents">
-								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+								<textarea class="fomr-control" id="post_editor" name="content"></textarea>
 		                    </div>
 		                </div>
 		                
@@ -204,7 +205,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/faq/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},

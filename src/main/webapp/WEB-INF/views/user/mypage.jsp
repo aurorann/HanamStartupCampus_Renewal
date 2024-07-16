@@ -17,55 +17,53 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub-pvt1.css' />">
+
 </head>
 
 <body>
-	
-	
+
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
+                <div class="container_wrap">
                     <form id="pwChangeForm" action="<c:url value="/user/account/password/change" />">
-	                    <div class="ent-title">
-	                        <h3 class="m-title"><img src="<c:url value="/resources/img/sub-title.png" />">&nbsp;&nbsp;비밀번호 변경</h3>
-	                        <p>기존 비밀번호를 입력해 새 비밀번호를 등록하세요.</p>
-	                    </div>
-	                    <div class="gray-box">
-	                        <div class="input-box">
+		                <h3>비밀번호 변경</h3>
+		                <p>기존 비밀번호를 입력해 새 비밀번호를 등록하세요.</p>
+	                    <div class="password_wrap">
+	                        <div>
 	                            <label for="pw-before">기존 비밀번호</label>
 	                            <input type="password" id="oldPassword" name="oldPassword">
 	                        </div>
-	                        <div class="input-box">
+	                        <div>
 	                            <label for="pw-new">새 비밀번호</label>
 	                            <input type="password" id="newPassword" name="newPassword">
 	                        </div>
-	                        <div class="input-box">
+	                        <div>
 	                            <label for="pw-new-cf">비밀번호 확인</label>
 	                            <input type="password" id="newPasswordConfirm" >
 	                        </div>
 	                    </div>
-	                    
-	                    <div class="mg-top-60" style="text-align:center; width:100%;">
-			                <ul>
-			                    <li><a href="javascript:void(0);" onclick="changePassword()" class="search-btn" style="float: none;display:block; width:200px; margin:0 auto;">비밀번호 변경</a></li>
-			                </ul>
-			            </div>
+	                    <div class="pw_btn">
+							<a href="javascript:void(0);" onclick="changePassword()" class="search-btn">비밀번호 변경</a>
+						</div>
                     </form>
                 </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->

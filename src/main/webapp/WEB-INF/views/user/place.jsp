@@ -17,6 +17,9 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub-pvt5.css' />">
+
 </head>
 
 
@@ -41,12 +44,16 @@
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
-                	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약 캘린더</a>
-                   		<a href="<c:url value='/book/history' />" class="btn btn-default" role="button">회의실 예약현황</a>      
-				    </div>
-                
+               <div class="container_wrap">
+					<div class="pvt_wrap">
+						<ul class="pvt_btns mgr_btns mgr_btns1" id="you-are-here">
+						    <li><button class="active" onclick="location.href='javascript:void(0);' ">회의실 예약 캘린더</button></li>
+						    <li><button onclick="location.href='<c:url value='/book/history' />' ">회의실 예약현황</button></li>
+						</ul>
+					</div>
+					
+                	
+               		<!-- 
                     <div class="col-lg-5 mg-top-30">
                         <img src="<c:url value='/resources/img/room/book/corridor.jpg' />" style="max-width: 340px" alt="캠퍼스 내부 복도">
                     </div>
@@ -58,7 +65,53 @@
                             예약 현황을 확인해 보세요.</p>
                             <img src="<c:url value='/resources/img/sub/sub4-1.png' />">
                     </div>
-
+                     -->
+	                <div class="meeting1">
+	                    <div class="left_content">
+	                        <img src="<c:url value='/resources/img/sub_img/회의실_img.png' />" alt="회의장소 대관">
+	                    </div>
+	                    <div class="right_content">
+	                        <h3>입주기업을 위한 회의장소 대관</h3>
+	                        <p>
+	                            하남 스타트업 캠퍼스 입주 기업을 위한 회의 장소 대관 서비스를 제공합니다.<br>
+	                            신청하실 회의실과 시간을 선택해 장소를 대관하실 수 있습니다.<br>
+	                            예약 현황을 확인해 보세요.
+	                        </p>
+	                        <img src="<c:url value='/resources/img/sub_img/회의실.png' />" alt="회의실 예약 방법">
+	                    </div>
+	                </div><!--meeting1-->
+	                
+	                <div class="meeting2">
+	                    <div>
+	                        <div class="img_box"><img src="<c:url value='/resources/img/sub_img/회의실_img1.png' />" alt="회의실 1"></div>
+	                        <div class="text_box">
+	                            <h3>회의실 1</h3>
+	                            <ul>
+	                                <li><span>가로(m) x 세로(m)</span>6.420 x 4.200</li>
+	                                <li><span>면적(m²)</span>26.963</li>
+	                                <li><span>비고</span>8인석</li>
+	                            </ul>
+	                            <a href="<c:url value="/book/place/form/1" />" class="metting_btn">예약하기</a>
+	                        </div>
+	                    </div>
+	                    <div>
+	                        <div class="img_box"><img src="<c:url value='/resources/img/sub_img/회의실_img2.png' />" alt="회의실 2(외부회의실)"></div>
+	                        <div class="text_box">
+	                            <h3>회의실 2 (외부회의실)</h3>
+	                            <ul>
+	                                <li><span>가로(m) x 세로(m)</span>8.500 x 8.700</li>
+	                                <li><span>면적(m²)</span>73.949</li>
+	                                <li><span>비고</span>이용시 운영사무실과 별도 협의 필요</li>
+	                            </ul>
+	                            <a href="<c:url value="/book/place/form/2" />" class="metting_btn">예약하기</a>
+	                        </div>
+	                    </div>
+	                </div><!--meeting2-->
+	                
+                    
+                    
+                    
+					<!-- 
                     <div class="col-lg-12" style="margin:0; padding:0;">
 
                         <div class="col-lg-5 vartical-box pink-bar mg-top-60">
@@ -95,24 +148,8 @@
                             <button type="button" class="btn-pink mg-top-30" onclick="location.href='<c:url value="/book/place/form/2" />' ">예약하기</button>
 
                         </div>
-
-                        <%-- <div class="col-lg-4 vartical-box pink-bar mg-top-60">
-                            <div class="vartical-thumbnail">
-                                <img src="<c:url value='/resources/img/room/room_meeting1.png' />">
-                            </div>
-
-                            <h3 class="b-title">회의실 3</h3>
-                            
-                            <ul>
-                                <li>가로(m) x 세로(m)<span>3.110 x 4.200</span></li>
-                                <li>면적(m²)<span>13,062</span></li>
-                                <li>비고<span>6인석</span></li>
-                            </ul>
-
-                            <button type="button" class="btn-pink mg-top-30" onclick="location.href='<c:url value="/book/place/form/3" />' ">예약하기</button>
-
-                        </div> --%>
                     </div>
+                    -->
 
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->

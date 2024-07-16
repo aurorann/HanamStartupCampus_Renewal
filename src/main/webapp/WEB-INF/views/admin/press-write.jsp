@@ -64,26 +64,34 @@
 		                </ul>
 						
 						<form id="galleryForm" onsubmit="return false" enctype="multipart/form-data">
+			                 
 			                <div class="board_write_wrap">
 			                    <div class="board_write_title">
 			                        <div class="titleWrap">
 			                            <label for="title">제목</label>
-			                            <input type="text" id="post_title" name="title">
+			                            <input type="text" class="board-input" id="post_title" name="title">
 			                        </div>
-			                        <div class="fileWrap">
+									<div class="fileWrap">
 			                            <label for="imgFile">대표 이미지</label>
-										<input type="file" class="board-input" id="representImageFile" name="representImageFile"	accept=".jpg,.png,.gif" />
+										<input type="file"
+												class="board-input" id="representImageFile" name="representImageFile"
+												accept=".jpg,.png,.gif" />
+			                            <div class="not_box"></div>
 			                            <label for="file">파일찾기</label>
-										<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-			                        </div>
+			                            <input class="board-input" multiple="multiple" type="file" name="file" id="file" style="display: inline-block; width: 225px;"/>
+									</div>
 			                    </div>
+			                    
 			                    <div class="board_write_content">
-						    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
+									<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/example_img.png' />'" src="<c:url value='/resources/img/example_img.png' />" />
 			                    </div>
+				
 			                    <div class="board_write_post board-contents">
-			                        <textarea name="fomr-control" id="post_editor" name="content"></textarea>
+									<textarea class="fomr-control" id="post_editor" name="content"></textarea>
 			                    </div>
+			                    
 			                </div>
+			                
 		                </form>
 		
 		                <div class="board_wrap_btn"><a href="#" onclick="writeNewPost();">게시글 작성</a></div>
@@ -260,7 +268,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/press/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},
@@ -304,7 +312,7 @@
 					success : function(result) {
 						if(result.count > 0) {
 							alert(result.message);
-							location.href = '<c:url value="/gallery/press/list" />';	
+							location.href = '<c:url value="/announce/press/list" />';	
 						} else {
 							alert('작성 실패, 관리자에게 문의해주세요.');
 						}

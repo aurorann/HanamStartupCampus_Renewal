@@ -1,4 +1,59 @@
 /*
+공통
+*/
+.main_title_wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+.main_title{
+    font-size:30px;
+    font-weight:600;
+    line-height:100%;
+}
+.main_title span{ color:#1976d3; }
+.main_article{
+    font-size:18px;
+    font-weight:300;
+    margin-bottom:50px;
+}
+.news_swiper .swiper-wrapper li a time,
+.gallery_wrap li a time{
+    display:block;
+
+    font-size:14px;
+    font-weight:400;
+    color:#3e3e3e;
+}
+.news_swiper .swiper-wrapper li a time img,
+.gallery_wrap li a time img{
+    vertical-align:middle;
+    margin-right:7px;
+}
+
+/*슬라이더 버튼*/
+.swiper-button button{
+    display:inline-block;
+    vertical-align: middle;
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background-color:#fff;
+    background-repeat:no-repeat;
+    background-position:center;
+    transition:all .3s ease-in-out;
+    border:1px solid #c7c7c7;
+}
+.swiper-button button:hover{ background-image:url('../img/arrow_wh_ico.png'); }
+.swiper-button button:hover{ background-image:url('../img/arrow_wh_ico.png'); }
+.swiper-button button{ background-image:url('../img/arrow_ico.png'); }
+.swiper-button a{ vertical-align:middle; }
+
+
+
+
+/*
 main_swiper
 */
 .main_swiper{
@@ -7,35 +62,78 @@ main_swiper
     overflow:hidden;
 }
 
+.swiper-pagination{ position:absolute; bottom:80px !important; }
 .swiper-slide{
     background-repeat:no-repeat;
     background-position:center;
     background-size:cover;
 }
-.main_swiper .swiper-slide:nth-of-type(1){ background-image:url('../img/main_bg.png'); }
-.main_swiper .swiper-slide:nth-of-type(2){ background-image:url('../img/main_bg.png'); }
-.main_swiper .swiper-slide:nth-of-type(3){ background-image:url('../img/main_bg.png'); }
+.main_swiper .swiper-slide1{ background-image:url('../img/main_bg1.png'); }
+.main_swiper .swiper-slide2{ background-image:url('../img/main_bg2.png'); }
+.main_swiper .swiper-slide3{ background-image:url('../img/main_bg3.png'); }
+.main_swiper .main_prev,
+.main_swiper .main_next{
+    position:absolute; top:50%;
+    width:65px;
+    height:65px;
+    border-radius:100%;
+    background-color:rgba( 255, 255, 255, 0.3);
+}
+.main_swiper .main_prev{ left:5%; transform:translateY(-50%); }
+.main_swiper .main_next{ right:5%; transform:translateY(-50%) rotate(180deg); }
+.main_prev:after, .main_next:after{ font-size:20px !important; color:#fff !important; }
 
-.txt_title{
+/*slide 1 / 2 / 3*/
+.swiper-slide>div{
     position:absolute; left:50%; top:30%;
     transform: translateX(-50%);
 }
-.txt_title strong{
+
+.txt_title1 h2{
+    font-size:45px;
+    font-weight:300;
+    color:#fff;
+}
+.txt_title1 h2 span{ font-weight:600; color:#73fbfd; }
+.txt_title1 strong{
+    font-size:80px;
+    font-weight:600;
+    color:#fff;
+    white-space: nowrap;
+}
+.txt_title2 strong{
     font-size:29px;
     font-weight:500;
     color:#77c1ff;
 }
-.txt_title h2{
+.txt_title2 h2{
     font-size:90px;
     font-weight:600;
     color:#fff;
     line-height:100%;
     margin-bottom:15px;
+    white-space: nowrap;
 }
-.txt_title span{
+.txt_title2 span{
     font-size:25px;
     font-weight:500;
     color:#73fbfd;
+}
+.txt_title3 strong{
+    font-size:29px;
+    font-weight:500;
+    color:#77c1ff;
+}
+.txt_title3 h2{
+    font-size:60px;
+    font-weight:300;
+    color:#fff;
+    white-space: nowrap;
+}
+.txt_title3 h2 span{
+    display:block;
+    font-size:62px;
+    font-weight:600;
 }
 
 /*
@@ -87,30 +185,36 @@ news
     padding:15px;
 }
 .news_swiper.active{ display:block; }
-.news_swiper .swiper-wrapper li{ z-index: 999;}
+.news_swiper .swiper-wrapper li{ z-index:999; }
 .news_swiper .swiper-wrapper li a{
     display:block;
-    padding:40px;
+    height:225px;
+    padding:35px 35px 0 35px;
     background-color:#fff;
     border-radius:0 25px 0 0;
     box-shadow:0 0px 10px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s linear;
+    transition:box-shadow 0.2s linear;
 }
 .news_swiper .swiper-wrapper li a:hover{
     box-shadow:0 0px 10px rgba(0, 0, 0, 0.3);
 }
 .news_swiper .swiper-wrapper li a .board_label{ margin-bottom:10px; }
 .news_swiper .swiper-wrapper li a h4{
-    width:85%;
-    margin-bottom:30px;
-
     font-size:22px;
     font-weight:500;
     line-height:30px;
     color:#000;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
 }
 .news_swiper .swiper-wrapper li a h4 img{ vertical-align:middle; }
 .news_swiper .swiper-wrapper li a time{
+    position:absolute; left:35px; bottom:35px;
+    width:85%;
     padding-top:10px;
     border-top:1px solid #d9d9d9;
 }
@@ -120,7 +224,7 @@ companyletter
 */
 .company_letter{
     display:flex; flex-wrap:wrap;
-    padding:55px 0 100px;
+    padding:55px 0 110px;
 }
 .company_letter>div{ width:48.5%; }
 .company_letter .letter{ margin-left:3%; }
@@ -133,7 +237,7 @@ companyletter
 
 /*ent_introduce*/
 .ent_introduce{
-    position:absolute; left:0; top:-210px;
+    position:absolute; left:0; top:-246px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -178,6 +282,10 @@ companyletter
     border-color:#1976d3;
     background-image:url('../img/arrow_blue_ico.png');
 }
+.ent_introduce .swiper-button button:hover{
+    background-color:#1976d3;
+    background-image:url('../img/arrow_wh_ico.png');
+}
 .ent_introduce .swiper-button-prev{
     position:absolute; left:-65px; top:50%;
     transform:translateY(-50%) rotate(180deg);
@@ -188,15 +296,38 @@ companyletter
 }
 .ent_introduce .swiper-button a{ margin-left:13px; }
 
+
+
+
+
+.guide_swiper{ position:relative; }
+.guide_swiper .swiper-button button{
+    border-radius:100%;
+    border-color:#1976d3;
+    background-image:url('../img/arrow_blue_ico.png');
+}
+.guide_swiper .swiper-button button:hover{
+    background-color:#1976d3;
+    background-image:url('../img/arrow_wh_ico.png');
+}
+.guide_swiper .guide_prev{
+    position:absolute; left:-20px; top:50%;
+    transform:translateY(-50%) rotate(180deg);
+}
+.guide_swiper .guide_next{
+    position:absolute; right:-20px; top:50%;
+    transform:translateY(-50%);
+}
+
 /*
 business_Squide
 */
 .business_Squide{
-    padding:150px 0 55px;
-    background-color:#e2e9f4;
+    padding:170px 0 55px;
+    background-color:#dbe6f6;
 }
 .business_Squide>div{
-    display:flex;
+    display:flex; flex-wrap:wrap;
     position:relative;
 }
 .business_Squide .main_title{
@@ -242,10 +373,12 @@ business_Squide
 
 /*business_swiper 버튼*/
 .business_swiper .swiper-button{
-    width:145px;
     display:flex;
     position:absolute; right:0; top:0;
 }
+.business_swiper .swiper-button-prev:hover,
+.business_swiper .swiper-button-next:hover,
+.business_swiper .swiper-button a:hover{ background-color:#1976d3; }
 .business_swiper .swiper-button-prev,
 .business_swiper .swiper-button-next,
 .business_swiper .swiper-button a{
@@ -257,6 +390,8 @@ business_Squide
     background-repeat:no-repeat;
     background-position:center;
     background-color:#fff;
+
+    transition:all .3s ease-in-out;
 }
 .business_swiper .swiper-button-prev{
     transform:rotate(180deg);
@@ -265,11 +400,14 @@ business_Squide
     margin-left:8px;
     background-image:url('../img/arrow_ico.png');
 }
+.business_swiper .swiper-button-prev:hover,
+.business_swiper .swiper-button-next:hover{ background-image:url('../img/arrow_wh_ico.png'); }
 .business_swiper .swiper-button a{
     text-indent:-9999px;
     margin-left:15px;
     background-image:url('../img/puls_ico.png');
 }
+.business_swiper .swiper-button a:hover{ background-image:url('../img/puls_wh_ico.png'); }
 
 /*sns*/
 .sns_guide_wrap{
@@ -303,28 +441,32 @@ business_Squide
 .sns_wrap>div a:last-of-type{ margin-left:5px; }
 
 /*시설안내*/
-.guide_swiper{
+.guide_swiper_wraps{
     width:100%;
     padding:25px;
     background-color:#fff;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
 }
-.guide_swiper>div:first-of-type{
+.guide_swiper_wraps .text_box{
     display:flex;
     justify-content:space-between;
     margin-bottom:20px;
 }
-.guide_swiper h4{
+.guide_swiper_wraps .text_box h4{
     font-size:18px;
     line-height:100%;
 }
+.guide_swiper_wraps .text_box h4 br{ display:none; }
 .guide_swiper .swiper-wrapper{ overflow:hidden; }
 .guide_swiper .swiper-wrapper a{
     display:block;
     padding:30% 0;
     position:relative;
 }
-.guide_swiper .swiper-wrapper a img{ position:absolute; left:0; top:0; }
+.guide_swiper .swiper-wrapper a img{
+    position:absolute; left:50%; top:50%;
+    transform:translate(-50%,-50%);
+}
 
 /*
 perf
@@ -378,4 +520,328 @@ perf
     font-size:18px;
     font-weight:700;
     color:#000;
+}
+
+
+
+@media screen and (max-width:1400px){
+    .company_letter .company iframe,
+    .company_letter .letter>a{ height:330px; }
+}
+
+@media screen and (max-width:1280px){
+    /*공통*/
+    .main_title{ font-size:25px; }
+    .main_title_wrap{ margin-bottom:20px; }
+    .pagination_wrap ol li a, .more_btn{ width:35px; height:35px; }
+
+
+
+    .main_swiper{ height:500px; }
+    .swiper-pagination{ position:absolute; bottom:60px !important; }
+    .main_swiper .main_next{ right:4%; }
+    .main_swiper .main_prev{ left:4%; }
+    .txt_title1 h2{ font-size:38px; }
+    .txt_title1 strong{ font-size:68px; }
+    .txt_title2 strong{ font-size:25px; }
+    .txt_title2 h2{ font-size:75px; }
+    .txt_title2 span{ font-size:21px; }
+    .txt_title3 strong{ font-size:23px; }
+    .txt_title3 h2{ font-size:43px; }
+    .txt_title3 h2 span{ font-size:45px; }
+
+    .news{ padding:40px 0 32px; }
+    .news_swiper .swiper-wrapper li a{ height:205px; padding:30px 30px 0 30px; }
+    .news_swiper .swiper-wrapper li a time{ width:80%; left:30px; bottom:30px; }
+    .news .main_title{ margin-bottom:22px; }
+    .news .tab_list{ margin-bottom:23px; }
+    .news .tab_list button{
+        width:80px; height:35px;
+        line-height:35px;
+        font-size:14px;
+    }
+    .news .tab_list button:not(:first-of-type),
+    .news .tab_list a{ margin-left:8px; }
+    .news_swiper .swiper-wrapper li a h4{ font-size:18px; line-height:25px; }
+
+    .company_letter{ padding:40px 0 80px; }
+    .company_letter .company iframe,
+    .company_letter .letter>a{ height:265px; }
+
+    .ent_introduce{ padding:28px 40px; top:-188px; }
+    .ent_introduce .swiper-button-prev{ left:-57px; }
+    .ent_introduce .swiper-button-next{ right:-57px; }
+    .ent_introduce .text_ent img{ width:12%; }
+    .ent_introduce .text_ent p{ line-height:22px; }
+    .swiper-button button{ width:35px; height:35px; }
+
+    .business_Squide{ padding:130px 0 40px; }
+    .business_Squide .main_title{ margin-bottom:20px; }
+    .business_swiper .swiper-button{ top:7px; }
+    .business_swiper .swiper-button-prev,
+    .business_swiper .swiper-button-next,
+    .business_swiper .swiper-button a{
+        width:35px;
+        height:35px;
+        border-radius:8px;
+    }
+    .business_swiper h4{ font-size:17px; line-height:24px; }
+    .business_swiper .img_box{ margin-bottom:28px; }
+    
+    .sns_wrap{ margin-bottom:25px; text-indent:20px; }
+    .sns_wrap h4{ font-size:15px; margin:18px 0 6px; }
+    .sns_wrap p{ font-size:14px; }
+    .sns_wrap>div{ margin:0 15px 10px; }
+    .sns_wrap>div a img{ width:18%; }
+    .guide_swiper_wraps{ padding:20px; }
+    .guide_swiper_wraps .text_box{ margin-bottom:13px; }
+    .guide_swiper_wraps .text_box h4{ font-size:15px; }
+
+    .perf{ padding:40px 0; }
+    .perf .main_title{ margin-bottom:30px; }
+    .perf_list li a{ padding:35px 0; }
+    .perf_list li a img{ width:26%; margin-bottom:18px; }
+    .perf_list li a strong{ font-size:40px; }
+    .perf_list li a strong span{ font-size:25px; }
+    .perf_list li a h4{ font-size:15px; }
+}
+
+@media screen and (max-width:1024px){
+    /*공통*/
+    .main_title{ font-size:22px; }
+    .pagination_wrap ol li a, .more_btn{
+        width:32px; height:32px;
+        background-size:40%;
+        border-radius:8px;
+    }
+
+
+
+    .main_swiper{ height:450px; }
+    .main_swiper .main_prev, .main_swiper .main_next{ width:60px; height:60px; }
+    .txt_title1 h2{ font-size:34px; }
+    .txt_title1 strong{ font-size:60px; }
+    .txt_title2 strong{ font-size:21px; }
+    .txt_title2 h2{ font-size:63px; }
+    .txt_title2 span{ font-size:18px; }
+    .txt_title3 strong{ font-size:20px; }
+    .txt_title3 h2{ font-size:35.5px; }
+    .txt_title3 h2 span{ font-size:37px; }
+
+    .news{ padding:35px 0 28px; }
+    .news .main_title{ margin-bottom:20px; }
+    .news .tab_list button{
+        width:75px; height:32px;
+        line-height:32px;
+        font-size:13px;
+        border-radius:8px;
+    }
+    .news_swiper .swiper-wrapper li a{ height:200px; }
+    .news_swiper .swiper-wrapper li a time{ width:83%; }
+
+    .company_letter{ padding:35px 0 85px; }
+    .company_letter .company iframe, .company_letter .letter>a{ height:203px; }
+    .ent_introduce{ top:-175px; }
+    .ent_introduce .text_ent{ display:none; }
+    .ent_introduce .text_ent img{ width:5%; }
+    .ent_introduce_swiper_wrap{ width:100%; }
+    .swiper-button button{
+        width:32px;
+        height:32px;
+        background-size:20%;
+    }
+
+    .business_Squide{ padding:110px 0 35px; }
+    .business_Squide>div{ display:flex; }
+    .business_wrap,
+    .sns_guide_wrap{ width:100%; }
+    .business_swiper{ margin-bottom:20px; }
+    .business_swiper .img_box{ padding:35% 0; margin-bottom:20px; }
+    .business_swiper h4{ margin-bottom:20px; }
+    .business_swiper .swiper-button-prev,
+    .business_swiper .swiper-button-next,
+    .business_swiper .swiper-button a{ width:32px; height:32px; }
+    .business_swiper .swiper-button a{ background-size:40%; }
+    .business_swiper .swiper-button-prev,
+    .business_swiper .swiper-button-next{ background-size:20%; }
+    
+    .sns_guide_wrap{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+        margin-left:0;
+    }
+    .sns_wrap{
+        width:48.5%;
+        margin-bottom:0;
+        position:relative;
+    }
+    .sns_wrap>div{ margin:0;  position:absolute; right:20px; bottom:17px; }
+    .sns_wrap>div a img{ width:auto; }
+    .sns_wrap h4{ font-size:17px; }
+    .sns_wrap p{ font-size:16px; }
+    .guide_swiper_wraps{
+        width:48.5%;
+        margin-left:3%;
+        padding:20px;
+        display:flex; flex-wrap:wrap;
+        justify-content:space-between;
+    }
+    .guide_swiper_wraps .text_box{
+        height:100%;
+        margin-bottom:0;
+        display:flex;
+        flex-flow:column;
+    }
+    .guide_swiper_wraps .text_box h4{ font-size:17px; line-height:23px; }
+    .guide_swiper_wraps .text_box h4 br{ display:block; }
+    .guide_swiper{ width:50%; }
+    .guide_swiper .guide_prev{ left:-15px; }
+    .guide_swiper .guide_next{ right:-15px; }
+
+    .perf{ padding:35px 0; }
+    .perf_list li a{ padding:30px 0; }
+    .perf_list li a img{ margin-bottom:13px; }
+    .perf_list li a strong{ font-size:35px; }
+    .perf_list li a strong span{ font-size:21px; }
+    .perf_list li a h4{ font-size:14px; }
+}
+
+@media screen and (max-width:800px){
+    /*공통*/
+    .main_title{ font-size:20px; }
+
+
+
+    .main_swiper{ height:360px; }
+    .main_swiper .main_prev, .main_swiper .main_next{ width:50px; height:50px; }
+    .main_prev:after, .main_next:after{ font-size:16px !important; }
+    .main_swiper .main_next{ right:3%; }
+    .main_swiper .main_prev{ left:3%; }
+    .txt_title1 h2{ font-size:28px; }
+    .txt_title1 strong{ font-size:49px; }
+    .txt_title2 h2{ font-size:50px; margin-bottom:10px;}
+    .txt_title2 strong{ font-size:17px; }
+    .txt_title2 span{ font-size:15px; }
+    .txt_title3 strong{ font-size:17px; }
+    .txt_title3 h2{ font-size:30px; }
+    .txt_title3 h2 span{ font-size:31.5px; }
+
+    .news_swiper .swiper-wrapper li a{ height:180px; padding:25px 25px 0 25px; }
+    .news_swiper .swiper-wrapper li a h4{ font-size:16px; line-height:22px; }
+    .news_swiper .swiper-wrapper li a time{ width:80%; left:25px; bottom:25px; }
+
+    .company_letter{ padding:35px 0 70px; }
+    .company_letter .company iframe,
+    .company_letter .letter>a{ height:153px; }
+    .ent_introduce{ padding:22px 40px; top:-134px; }
+    
+    .business_Squide{ padding:80px 0 35px; }
+    .business_swiper .img_box{ padding:30% 0; }
+    .business_swiper h4{ font-size:16px; line-height:22px; }
+
+    .guide_swiper .swiper-wrapper a{ padding:20% 0; }
+    .guide_swiper_wraps{width:100%; margin:0 0 20px 0; }
+    .guide_swiper_wraps .text_box h4{
+        font-size:16px;
+        line-height:23px;
+        font-weight:600;
+    }
+    .guide_swiper .guide_prev{ left:-17px; }
+    .guide_swiper .guide_next{ right:-17px; }
+    .sns_guide_wrap{ flex-direction:column-reverse; }
+    .sns_wrap h4{ font-size:16px; font-weight:600; }
+    .sns_wrap p{ margin-bottom:20px; }
+    .sns_wrap{ width:100%; }
+
+    .perf_list li{ width:50%; }
+    .perf_list li a{ padding:35px 0; }
+    .perf_list li a img{ width:22%; }
+}
+
+@media screen and (max-width:600px){
+    /*공통*/
+    .main_title_wrap{ margin-bottom:15px; }
+    .pagination_wrap ol li a, .more_btn{ width:30px; height:30px; }
+
+
+
+    .main_swiper{ height:300px; }
+    .main_swiper .main_prev, .main_swiper .main_next{ width:45px; height:45px; }
+    .txt_title1 h2{ font-size:22px; }
+    .txt_title1 strong{ font-size:39px; }
+    .txt_title2 h2{ font-size:40px; margin-bottom:7px; }
+    .txt_title2 strong{ font-size:15px; }
+    .txt_title2 span{ font-size:12px; }
+    .txt_title3 strong{ font-size:14px; }
+    .txt_title3 h2{ font-size:24px; }
+    .txt_title3 h2 span{ font-size:25px; }
+
+    .news{ padding:29px 0 20px; }
+    .news .main_title{ margin-bottom:17px; }
+    .news .tab_list{ margin-bottom:15px; }
+    .news_swiper .swiper-wrapper li a time{ width:87%; }
+
+    .company_letter{ padding:28px 0 65px; }
+    .ent_introduce{ top:-145px; }
+    .business_Squide{ padding:90px 0 35px; }
+}
+
+@media screen and (max-width:480px){
+    .main_title{ font-size:19px; }
+    .main_title_wrap{ margin-bottom:12px; }
+
+
+
+    .main_swiper{ height:250px; }
+    .main_swiper .main_prev, .main_swiper .main_next{ width:40px; height:40px; }
+    .main_prev:after, .main_next:after{ font-size:13px !important; }
+    .txt_title1 h2{ font-size:17px; }
+    .txt_title1 strong{ font-size:28px; }
+    .txt_title2 h2{ font-size:30px; }
+    .txt_title2 span{ font-size:12.5px; }
+    .txt_title3 h2{ font-size:18px; }
+    .txt_title3 h2 span{ font-size:18.5px; }
+    .swiper-pagination{ bottom:40px !important; }
+
+    .news{ padding:25px 0 14px; }
+    .news .main_title{ margin-bottom:15px; }
+    .news .tab_list button{
+        width:70px;
+        height:30px; line-height:30px;
+        font-size:12px;
+    }
+    .news_swiper .swiper-wrapper li a h4{ margin-bottom:20px; }
+    .news_swiper .swiper-wrapper li a time{ width:80%; }
+    .news_swiper .swiper-wrapper li a time, .gallery_wrap li a time{ font-size:13px; }
+
+    .company_letter{ padding:20px 0 75px; }
+    .company_letter>div{ width:100%; }
+    .company_letter .company iframe,
+    .company_letter .letter>a{ height:170px; }
+    .company_letter .company{ margin-bottom:10px; }
+    .company_letter .letter{ margin-left:0; }
+
+    .ent_introduce{ top:-147px; }
+    .ent_introduce .swiper-button-next{ right:-50px;}
+    .ent_introduce .swiper-button-prev{ left:-51px; }
+
+    .business_Squide{ padding:90px 0 30px; }
+    .business_swiper .swiper-button-prev,
+    .business_swiper .swiper-button-next,
+    .business_swiper .swiper-button a{ width:30px; height:30px; }
+    .guide_swiper{ width:100%; }
+    .guide_swiper_wraps .text_box{
+        width:100%;
+        flex-flow:nowrap;
+        justify-content:space-between;
+        height:auto;
+        margin-bottom:20px;
+    }
+    .guide_swiper_wraps .text_box h4 br{ display:none; }
+    .guide_swiper .swiper-wrapper a{ padding:35% 0; }
+    .sns_wrap p{ margin-bottom:60px; }
+
+    .perf{ padding:30px 0; }
+    .perf_list li{ width:100%; }
 }

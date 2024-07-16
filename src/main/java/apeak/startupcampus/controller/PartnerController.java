@@ -42,14 +42,14 @@ public class PartnerController {
 	// # 입주기업 정보 리스트 뷰
 	@RequestMapping(value="/list")
 	public String goToPartnerInformationList(Model model) throws Exception {
-		Utils.setPageViewLocation(model, locationMain, "입주기업 소개");
+		Utils.setPageViewLocation(model, locationMain, "입주기업");
 		return "partner/partner-list";
 	}
 	
 	// # 입주기업 정보 리스트 뷰
 	@RequestMapping(value="/graduate/list")
 	public String goToGraduatePartnerInformationList(Model model) throws Exception {
-		Utils.setPageViewLocation(model, locationMain, "졸업기업 소개");
+		Utils.setPageViewLocation(model, locationMain, "졸업기업");
 		return "partner/graduate-partner-list";
 	}
 	
@@ -59,7 +59,7 @@ public class PartnerController {
 			@PathVariable("seqId") int seqId, Model model) throws Exception {
 		
 		model.addAllAttributes(partnerService.getPartnerInformation(seqId));
-		Utils.setPageViewLocation(model, locationMain, "입주기업 소개");
+		Utils.setPageViewLocation(model, locationMain, "입주기업");
 		
 		return "partner/partner-view";
 	}
@@ -69,7 +69,7 @@ public class PartnerController {
 			@PathVariable("seqId") int seqId, Model model) throws Exception {
 		
 		model.addAllAttributes(partnerService.getPartnerInformation(seqId));
-		Utils.setPageViewLocation(model, locationMain, "졸업기업 소개");
+		Utils.setPageViewLocation(model, locationMain, "졸업기업");
 		
 		return "partner/graduate-partner-view";
 	}

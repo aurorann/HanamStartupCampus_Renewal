@@ -31,35 +31,81 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
 	<div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
-    
-                    <div class="col-lg-12 r-contents">
-						<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-	                   		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">입주기업 정보 관리</a>
-	                   		<a href="<c:url value='/admin/book/place' />" class="btn btn-default" role="button">회의실 예약 및 현황</a>
-							<a href="<c:url value='/admin/partner/notice/list' />" class="btn btn-default" role="button">입주기업 알림공간</a>
-					    </div>
-					    <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-					    	<a href="<c:url value='/admin/webpage/partner/management/edit/form' />" class="btn btn-default" role="button">기업 실적 수정</a>
-							<a href="<c:url value='/admin/partner/media/write/form' />" class="btn btn-default" role="button">소개 영상 글쓰기</a>
-							<a href="<c:url value='/admin/partner/activity/write/form' />" class="btn btn-default" role="button">기업 활동 글쓰기</a>
-							<a href="<c:url value='/admin/partner/notice/write/form' />" class="btn btn-default" role="button">알림공간 글쓰기</a>	      
-					    </div>
-                    
-                    	<div class="col-lg-12" style="margin:0; padding:0;">
-	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;입주기업 정보 수정</h3>
-	                    </div>
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
+			
+				<div class="container_wrap">
+				    <%@ include file="./include/inside-menu.jsp"%>
+	                    
+	                    
 						<form id="galleryForm" onsubmit="return false">
+			                <div class="board_write_wrap">
+			                    <div class="board_write_title">
+			                        <div class="titleWrap search_form">
+										<label for="title">기업 입주 여부</label>
+											<select class="board-input" name="activate" id="activate" style="width: 180px">
+												<option value="PARTNER">입주기업 (공개)</option>
+												<option value="GRADUATE">졸업기업 (공개)</option>
+												<option value="EMPTY">공실 (비공개)</option>
+											</select>
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">입주기업명</label>
+			                            <input type="text" id="name" name="name" value="${NAME}">
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">업종구분</label>
+			                            <input type="text" id="businessName" name="businessName" value="${BUSINESS_NAME}">
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">기업 대표자명</label>
+			                            <input type="text" id="ceoName" name="ceoName" value="${CEO_NAME}">
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">입주실 이름</label>
+			                            <input type="text" id="roomName" name="roomName" value="${ROOM_NAME}">
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">웹사이트</label>
+			                            <input type="text" id="homepage" name="homepage" value="${HOMEPAGE}">
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">연락처</label>
+			                            <input type="text" id="contract" name="contract" value="${CONTRACT}">
+			                        </div>
+			                        <div class="titleWrap">
+			                            <label for="title">패스워드 초기화</label>
+			                            <input type="password" class="board-input" id="accountPw" name="accountPw" maxlength="100" required placeholder="공란인 경우, 기존 패스워드가 유지됩니다.">
+			                        </div>
+									<div class="fileWrap">
+			                            <label for="imgFile">입주기업 대표 이미지</label>
+										<input type="file" class="board-input" id="representImageFile" name="profileImageFile" accept=".jpg,.png,.gif" />
+										<input type="hidden" value="${PROFILE_IMAGE}" name="profileImage" />
+									</div>
+			                    </div>
+			                    
+			                    <div class="board_write_content">
+						    		<img id="representImageExample" src="<c:url value='/upload/partner-represent' />/${PROFILE_IMAGE}" onerror="this.src='<c:url value='/resources/img/default.png' />';" />
+			                    </div>
+				
+			                    <div class="board_write_post board-contents">
+									<textarea class="fomr-control" id="post_editor" name="introduce">${INTRODUCE}</textarea>
+			                    </div>
+			                    
+			                </div>
+						
+							<!-- 
 	                        <table class="table board-table">
 	                            <thead>
 	                                <tr>
@@ -128,26 +174,34 @@
 	                                </tr>
 	                            </tbody>
 	                        </table>
+							 -->
+
+
+
+
                         </form>
     
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
-						      <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-								    margin-top: 30px;
-								">
-								      <div class="btn-group" role="group">
-								      	<button type="button" class="btn btn-default" onclick="editPost();">정보 수정</button>
-								      </div>
-								      <div class="btn-group" role="group" style="margin-top: 10px">
-								      	<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/admin/partner/list' />';">돌아가기</button>
-								      </div>
-									
-								    </div>
-						      
-						      
-						    </div>
+    
+    					<!-- 
+                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+							<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default" onclick="editPost();">정보 수정</button>
+								</div>
+								<div class="btn-group" role="group" style="margin-top: 10px">
+									<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/admin/partner/list' />';">돌아가기</button>
+								</div>
+							</div>
+					    </div>
+					     -->
+					     
+						<div class="board_wrap_btn">
+							<a href="#" onclick="editPost();">게시글 수정</a>
+							<a href="#" onclick="location.href='<c:url value='/admin/partner/list' />/${SEQ_ID}';">돌아가기</a>
+						</div>
+					    
+					    
+					    
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
@@ -218,6 +272,10 @@
 			} );
 			// CKEditor init end
 		})
+		
+		var insideMenu = '입주기업 정보 관리';
+		
+		$("ul#you-are-here li button[data-location-insub= '" + insideMenu + "'").addClass("active");
 		
 		function editPost() {
 			var password = document.querySelector('#accountPw').value;

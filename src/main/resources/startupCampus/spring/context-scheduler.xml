@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+    <task:annotation-driven />
+    
+    <!-- 1️. 스케쥴러를 돌릴 서비스와 메서드 설정-->
+   <bean id="schedulerEvent" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject" ref="schedulerService"/>
+       <property name="targetMethod" value="updateLevel"/>
+       <property name="concurrent" value="false"/> <!--동시에 실행되지 않도록 false-->
+   </bean>
+   
+   <!-- 2️. 스케쥴러 시간 설정-->
+    <bean id="schedulerEventTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="schedulerEvent" />
+		<property name="cronExpression" value="0 0 12 * * ?" /> <!--10초마다 -->
+    </bean>
+    
+	<!-- 3️. 스케쥴러 등록-->
+    <bean id="Scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="schedulerEventTrigger" />
+            </list>
+        </property>
+    </bean>
+    
+    
+</beans>

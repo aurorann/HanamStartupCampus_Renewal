@@ -33,6 +33,10 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
    
 
     <div class="sub_container in_1400">
@@ -41,16 +45,55 @@
 		<!-- # include: side-menu end -->
 		<main>
             <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
-                    <div class="col-lg-12 r-contents">
-                    	
-                    	<div class="col-lg-12" style="margin:0; padding:0;">
-	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;자주 묻는 질문 수정</h3>
-	                    </div>
-						
+                    <div class="container_wrap">
+					<h3 class="mgr_title">자주하는질문 수정</h3>
+		                <div class="board_write_wrap">
+		                    <div class="board_write_title">
+								<input type="hidden" id="post_id" value="${SEQ_ID}"/>
+		                        <div class="titleWrap">
+		                            <label for="title">제목(질문)</label>
+		                            <input type="text" id="post_title" value="${TITLE}">
+		                        </div>
+								<div class="fileWrap">
+									<form id="fileForm" method="post" enctype="multipart/form-data">
+			                            <div class="not_box"></div>
+										<label for="file">파일찾기</label>
+							            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;width: 300px"/>
+									</form>
+								</div>
+								<p>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</p>
+		                    </div>
+								
+							<c:if test="${not empty FILE_NAME}">
+								<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+								<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+									<ul class="file_wrap">
+										<c:forEach items="${fileNames}" varStatus="status">
+											<li>
+												<a href="#">
+													<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" alt="파일">
+													<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
+												</a>
+												<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+													<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+													<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+												</form>
+											</li>
+										</c:forEach>
+									</ul>
+							</c:if>                           
+
+		                    <div class="board_write_post board-contents">
+								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+		                    </div>
+		                </div>
+
+						<!-- 
                         <table class="table board-table">
                             <thead>
                                 <tr>
@@ -97,8 +140,7 @@
                                 </tr>
                             </tbody>
                         </table>
-    
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
+    					
                         <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
 						    margin-top: 30px;
 						">
@@ -111,11 +153,16 @@
 								      <div class="btn-group" role="group" style="margin-top: 10px">
 								      	<button type="button" class="btn btn-default" onclick="location.href='<c:url value='/announce/faq/view' />/${SEQ_ID}';">돌아가기</button>
 								      </div>
-									
 								    </div>
-						      
-						      
 						    </div>
+						     -->
+						     
+						<div class="board_wrap_btn">
+							<a href="#" onclick="editPost();">게시글 수정</a>
+							<a href="#" onclick="location.href='<c:url value='/announce/faq/view' />/${SEQ_ID}';">돌아가기</a>
+						</div>
+						    
+						    
     
                     </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
@@ -200,7 +247,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/faq/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},

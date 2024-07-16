@@ -62,14 +62,15 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_start">게시일</th>
-	                            <th class="board_end">조회수</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_title" style="width:62%">제목</th>
+	                            <th class="board_start" style="width:10%">게시일</th>
+	                            <th class="board_end" style="width:10%">종료일</th>
+	                            <th class="board_end" style="width:10%">조회수</th>
 	                        </tr>
 	                    </thead>
 	
-	                    <tbody class="board_body_fixed fixed-notice">
+	                    <tbody class="board_body_fixed fixed-notice" style="border-bottom: 2px solid #000;  border-top: 2px solid #000;">
 	                    	<!-- 
 	                        <tr>
 	                            <td class="board_numb">1</td>
@@ -90,7 +91,7 @@
                     <div class="pagination_wrap">
 					</div>
 					<sec:authorize ifAnyGranted="ROLE_ADMIN">
-						<a href='<c:url value="/admin/community/write/form" />' class="write_btn">글쓰기</a>
+						<a href='<c:url value="/admin/announce/notice/write/form" />' class="write_btn">글쓰기</a>
 					</sec:authorize>
 					
                 </div><!-- r-contents div 끝 -->
@@ -159,16 +160,14 @@
 		                	case "100" :
 		                		fixedHTML += '<div class="board_label board_label_Ggongi">주요공지</div>' 	
 		                		break;
-							case "101" :
-								fixedHTML += '<div class="board_label board_label_Ggongo">주요공고</div>'
-		                		break;
 		                }
 		                
 		                fixedHTML += 
                                     titleString +
                                 '</a>' +
                             '</td>' +
-                            '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>' +
+                            '<td class="board_start">' + el.contractStartAt.slice(5) + '</td>' +
+                            '<td class="board_end">' + el.contractEndAt.slice(5) + '</td>' +
                             '<td class="board_end">' + el.viewCount + '</td>' +
                         '</tr>';
 	                        
@@ -193,14 +192,8 @@
 			                case "100" :
 			                	commonHTML += '<div class="board_label board_label_Ggongi">주요공지</div>'
 		                		break;
-							case "101" :
-								commonHTML += '<div class="board_label board_label_Ggongo">주요공고</div>'
-		                		break;
 		                	case "102" :
-		                		commonHTML += '<div class="board_label board_label_gongo">공고</div>'
-		                		break;
-							case "103" :
-								commonHTML += '<div class="board_label board_label_gongo">공지</div>'
+		                		commonHTML += '<div class="board_label board_label_gongo">공지</div>'
 		                		break;
 		                }
 		                
@@ -208,7 +201,8 @@
                             	titleString+
                             '</a>' +
                         '</td>' +
-                        '<td class="board_start">' + moment(el.createdAt).format("YYYY-MM-DD").slice(2) + '</td>' +
+                        '<td class="board_start">' + el.contractStartAt.slice(5) + '</td>' +
+                        '<td class="board_end">' + el.contractEndAt.slice(5) + '</td>' +
                         '<td class="board_end">' + el.viewCount + '</td>' +
                     '</tr>';
 

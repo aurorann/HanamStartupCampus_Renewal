@@ -7,7 +7,7 @@
 	        <div class="in_1400">
 	            <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
 	            <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
-	            <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
+	            <!-- <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a> -->
 	        </div>
 	    </div><!--top_ft-->
 	

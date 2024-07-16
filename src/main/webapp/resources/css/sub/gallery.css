@@ -1,10 +1,13 @@
+/*
+gallery_wrap
+*/
 .gallery_wrap{ display:flex; flex-wrap:wrap; }
 .gallery_wrap li{ width:32%; }
 .gallery_wrap li:not(:nth-of-type(3n+1)){ margin-left:2%; }
 .gallery_wrap li:not(:nth-of-type(-n+3)){ margin-top:45px; }
 .gallery_wrap .img_box{
     margin-bottom:10px;
-    height:280px;
+    height:195px;
     overflow:hidden;
     border:1px solid #c7c7c7;
     display:flex;
@@ -13,13 +16,60 @@
 .gallery_wrap li a .img_box img{ display:block; width:100%; }
 
 .gallery_wrap li a h3{
+    height:45px;
+    margin-bottom:20px;
     font-size:18px;
     font-weight:600;
     color:#000;
-    margin-bottom:10px;
 
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient:vertical;
 }
 .gallery_wrap li a:hover h3{ text-decoration:underline; }
+.gallery_wrap li a time{
+    display:block;
+    font-size:14px;
+    font-weight:400;
+    color:#3e3e3e;
+}
+.gallery_wrap li a time img{ margin-right:8px; vertical-align:middle; }
+
+
+
+@media screen and (max-width:1440px){
+    .gallery_wrap li a h3{ font-size:17px; margin-bottom:15px; }
+}
+
+@media screen and (max-width:1280px){
+    .gallery_wrap .img_box{ height:170px; }
+    .gallery_wrap li a h3{ height:40px; font-size:17px; }
+    .gallery_wrap li:not(:nth-of-type(-n+3)){ margin-top:40px; }
+}
+
+@media screen and (max-width:1024px){
+    .gallery_wrap .img_box{ height:135px; margin-bottom:8px; }
+    .gallery_wrap li a h3{ margin-bottom:13px; font-size:16px; }
+    .gallery_wrap li:not(:nth-of-type(-n+3)){ margin-top:35px; }
+}
+
+@media screen and (max-width:800px){
+    .gallery_wrap li{ width:48.5%; }
+    .gallery_wrap li:not(:nth-of-type(3n+1)){ margin-left:0; }
+    .gallery_wrap li:not(:nth-of-type(2n+1)){ margin-left:3%; }
+    .gallery_wrap li:not(:nth-of-type(-n+3)){ margin-top:0; }
+    .gallery_wrap li:not(:nth-of-type(-n+2)){ margin-top:35px; }
+    .gallery_wrap .img_box{ height:150px; } 
+}
+
+
+@media screen and (max-width:600px){
+    .gallery_wrap li{ width:100%; }
+    .gallery_wrap li:not(:last-of-type){ margin-bottom:15px; }
+    .gallery_wrap li:not(:nth-of-type(2n+1)){ margin-left:0; }
+    .gallery_wrap li:not(:nth-of-type(-n+2)){ margin-top:0; }
+    .gallery_wrap .img_box{ height:165px; } 
+}

@@ -21,7 +21,7 @@
 				board_announcement
 			WHERE
 				1 = 1
-				AND level in('101', '102') 
+				AND level in('101', '103') 
 		]]>
 		<include refid="search" />
 	</select>
@@ -36,7 +36,7 @@
 					board_announcement
 				WHERE
 					1 = 1
-					AND level in('101', '102') 
+					AND level in('101', '103') 
 			]]>
 			<include refid="search" />
 			<![CDATA[
@@ -72,7 +72,7 @@
 				FROM
 					board_announcement
 				WHERE
-					level in('102') 
+					level in('103') 
 					AND CONTRACT_END_AT >= current_date()
 				ORDER BY
 					LEVEL ASC,			
@@ -151,6 +151,18 @@
 			FILE_NAME = #{fileName}, FILE_PATH = #{filePath}
 		WHERE
 			SEQ_ID = #{seqId}
+	</update>
+	
+	<update id="updateAnnouncementPostLevel">
+		<![CDATA[
+
+		UPDATE
+			board_announcement
+		SET
+			level = '103'
+		WHERE
+			CONTRACT_END_AT < current_date()
+			]]>
 	</update>
 	
 	<delete id="deleteAnnouncementPostOne" parameterType="int">

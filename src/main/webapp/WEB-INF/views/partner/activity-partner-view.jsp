@@ -65,7 +65,7 @@
 								<c:forEach items="${fileNames}" varStatus="status">
 									<a href="#">
 										<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
-										${fileNames[status.index]}
+										<span id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();">${fileNames[status.index]}</span>
 									</a>
 									<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -79,6 +79,31 @@
                 </div><!--content_wrap 콘텐츠-->
             </div><!--container_wrap-->
             
+            
+            <div class="page_btn_wrap">
+            	<div class="back_btn">
+            		<a href="<c:url value="/partner/activity/list" />">목록</a>
+            	</div>
+            	
+            	<sec:authorize ifAnyGranted="ROLE_ADMIN">
+	            	<div class="function_btns">
+						<a href="<c:url value="/admin/partner/activity/edit/form/" />${SEQ_ID}" class="modify_btn">수정</a>
+						<input type='hidden' id="representImage" value='${REPRESENT_IMAGE}' />
+	                    <a href="#" class="delet_btn" onclick="deleteNoticePost(${SEQ_ID})">삭제</a>
+	                </div>
+            	</sec:authorize>
+            	
+            	<sec:authorize ifAnyGranted="ROLE_USER">
+            		<c:if test="${WRITER_ID eq VIEWER_ID}">
+		            	<div class="function_btns">
+							<a href="<c:url value="/user/partner/activity/edit/form/" />${SEQ_ID}" class="modify_btn">수정</a>
+							<input type='hidden' id="representImage" value='${REPRESENT_IMAGE}' />
+		                    <a href="#" class="delet_btn" onclick="deleteNoticePost(${SEQ_ID})">삭제</a>
+		                </div>
+	                </c:if>
+            	</sec:authorize>
+            </div>
+            <!-- 
             <div class="back_btn"><a href="<c:url value="/partner/activity/list" />">목록</a></div>
 
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
@@ -94,6 +119,7 @@
 				</c:if>
 				<input type='hidden' id="representImage" value='${REPRESENT_IMAGE}' />
 			</sec:authorize>
+			 -->
 		</main>
     </div>
 	<!-- footer start -->

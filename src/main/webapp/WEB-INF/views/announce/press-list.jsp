@@ -81,6 +81,10 @@
 
 					<div class="pagination_wrap">
 					</div>
+					
+					<sec:authorize ifAnyGranted="ROLE_ADMIN">
+						<a href='<c:url value="/admin/announce/press/write/form" />' class="write_btn">글쓰기</a>
+					</sec:authorize>
 	
                 </div><!-- r-contents div 끝 -->
         </main>
@@ -103,13 +107,14 @@
 			$.ajax({
 				type : 'GET',
 				cache: false,
-				url : '<c:url value="/gallery/press/post/list" />',
+				url : '<c:url value="/announce/press/post/list" />',
 				data: {
 					curPage: (curPage) ? curPage : _VARS.searchOption.curPage,
 					keyword: _VARS.searchOption.keyword,
 					searchType: _VARS.searchOption.searchType
 				},
 				success : function(res) {
+					console.log(res);
 					var commonPost = res.post;
 					var searchOption = res.searchOption.searchOption;
 					var page = JSON.parse(res.searchOption.page);
@@ -141,11 +146,12 @@
                             '<li>' +
                             '<a href="<c:url value='/announce/press/view' />/' + el.seqId + '">' +
                                 '<div class="img_box">'+
-	                                '<img src="<c:url value='/upload/gallery-represent/press' />/' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
+	                                //'<img src="<c:url value='/upload/gallery-represent/press' />/' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
+	                                '<img src="<c:url value='/upload/gallery-represent/press/' />' + el.representImage + '" onerror="this.src=\'<c:url value='/resources/img/default.png' />\'">' +
 	                                '</div>'+
                                 '<div class="card_text">' +
                                     '<h3>' + titleString + '</h3>' +
-                                    '<p>개인 간 차량 공차량 제어 및 관제 기술의 혁신을 추진할 계획이다. 타운카는 럭키박스솔루션과</p>' +
+                                    '<p>' + contentString + '</p>' +
                                 '</div>' +
                                 '<time datetime="">' + el.createdAt + '</time>' +
                             '</a>' +

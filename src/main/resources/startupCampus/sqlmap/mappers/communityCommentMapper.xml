@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apeak.startupcampus.model.dao.CommunityCommentMapper">
+	<!-- <resultMap type="bookListDTO" id="bookWithAccountId" autoMapping="true">
+		<id column="SEQ_ID" property="seqId"/>
+		<result column="PLACE_ID" property="placeId"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="STATUS" property="status"/>
+		<association property="userDTO" javaType="userDTO" autoMapping="true">
+			<result column="USER_ID" property="seqId"/>
+			<result column="ACCOUNT_ID" property="accountId"/>
+		</association>
+	</resultMap> -->
+	
+	<!-- 게시글 리스트 카운트 -->
+	<select id="selectCommunityCommentPostCount" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT
+				count(*)
+			FROM
+				board_community_comment
+				LEFT JOIN user_info
+					ON	user_info.SEQ_ID = board_community_comment.WRITER_ID
+			WHERE
+				1 = 1
+				AND POST_ID = #{seqId}
+		]]>
+	</select>
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectCommunityCommentPostList" parameterType="map" resultType="boardCommentDTO">
+			<![CDATA[
+				SELECT
+					board_community_comment.SEQ_ID AS SEQ_ID, WRITER_ID, WRITER_IP, WRITER_NAME,
+					CONTENT, POST_ID, COMMENT_GROUP, board_community_comment.CREATED_AT
+				FROM
+					board_community_comment
+					LEFT JOIN user_info
+					ON	user_info.SEQ_ID = board_community_comment.WRITER_ID
+				WHERE
+					1 = 1
+					AND POST_ID = #{seqId}
+				ORDER BY COMMENT_GROUP ASC , SEQ_ID ASC
+			]]>
+	</select>
+	
+	<select id="selectCommunityCommentPostOne" parameterType="int" resultType="map">
+		SELECT
+			board_community_comment.SEQ_ID, WRITER_ID, WRITER_NAME, CONTENT,
+			DATE_FORMAT(board_community_comment.CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+		FROM
+			board_community_comment
+			LEFT JOIN user_info
+			ON	user_info.SEQ_ID = board_community_comment.WRITER_ID
+		WHERE
+			board_community_comment.SEQ_ID = #{value}
+	</select>
+
+	<!-- 관리자용 -->
+	<insert id="insertCommunityCommentPostOne" parameterType="boardCommentDTO">
+		INSERT INTO
+			board_community_comment
+		(
+			WRITER_ID, WRITER_NAME, WRITER_IP, CONTENT, POST_ID
+		)
+		values (
+			#{writerId}, #{writerName}, #{writerIp}, #{content}, #{postId}
+		)
+	</insert>
+	
+	<update id="updateCommunityCommentPostOne" parameterType="boardCommentDTO">
+		UPDATE
+			board_community_comment
+		SET
+			TITLE = #{title}, CONTENT = #{content}, WRITER_NAME = #{writerName},
+		WHERE
+			SEQ_ID = #{seqId}
+	</update>
+	
+	<delete id="deleteCommunityCommentPostOne" parameterType="int">
+		DELETE FROM board_community_partner
+		WHERE SEQ_ID = #{value}
+	</delete>
+	<!-- 관리자용 -->
+	
+	<!-- 입주기업(유저)용 -->
+	<insert id="insertCommunityCommentPostOneForPartner" parameterType="boardCommentDTO">
+		INSERT INTO
+			board_community_comment
+		(
+			WRITER_ID, WRITER_NAME, WRITER_IP, CONTENT, POST_ID, COMMENT_GROUP
+		)
+		values (
+			#{writerId}, #{writerName}, #{writerIp}, #{content}, #{postId}, #{commentGroup}
+		)
+	</insert>
+	
+	<update id="updateCommunityCommentPostOneForPartner" parameterType="boardCommentDTO">
+		UPDATE
+			board_community_comment
+		SET
+			TITLE = #{title}, CONTENT = #{content},
+		WHERE
+			SEQ_ID = #{seqId}
+			AND WRITER_ID = #{writerId}
+	</update>
+	
+	<delete id="deleteCommunityCommentPostOneForPartner" parameterType="boardCommentDTO">
+		DELETE FROM board_community_comment
+		WHERE SEQ_ID = #{seqId}
+	</delete>
+	<!-- 입주기업(유저)용 -->
+	
+	<select id="selectCommunityCommentNextSeq" parameterType="int" resultType="int">
+		SELECT 
+			Auto_increment 
+		FROM
+			information_schema.tables 
+		WHERE
+			table_schema = 'startup_campus' and table_name = 'board_community_comment'
+	</select>
+
+</mapper>

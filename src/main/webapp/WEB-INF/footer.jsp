@@ -7,7 +7,7 @@
 	        <div class="in_1400">
 	            <a href="https://www.huic.co.kr/www/contents.do?key=78">개인정보처리방침</a>
 	            <a href="https://www.huic.co.kr/www/contents.do?key=205">이메일무단수집거부</a>
-	            <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a>
+	            <!-- <a href="https://www.huic.co.kr/www/selectBbsNttList.do?bbsNo=30&key=194">홈페이지개선요구</a> -->
 	        </div>
 	    </div><!--top_ft-->
 	
@@ -38,11 +38,8 @@
             </div>
         </div><!--bottom_ft-->
 	</footer>
-		<!-- 
 		<script src="<c:url value='/resources/js/animsition.min.js' />"></script>
-		<script src="<c:url value='/resources/js/main.js' />"></script>
 		<script src="<c:url value='/resources/js/cmmn.js'/>"></script>
-		 -->
 	
 		<script >
 	        function openModal(modalname){
@@ -56,9 +53,13 @@
 		  	      $(".r-modal").fadeOut(300);
 		  	      $(".modal-con").fadeOut(300);
 		  	    });
+
+		        
+		        
 		        
 		        $("div.menu-desktop.gnb ul li[data-location-main='${locationMain}']").addClass("nav-pink");
 		        $("aside.left-menu ul li[data-location-sub='${locationSub}'] a").addClass("active");
+		        $(".m-side-menu").text("${locationSub}");
 		        
 		        //관리자 메뉴 inside menu active
 		        

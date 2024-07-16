@@ -49,37 +49,45 @@
 			<div class="container_wrap">
 			    <%@ include file="./include/inside-menu.jsp"%>
 			    
-		                <div class="board_write_wrap">
-		                    <div class="board_write_title">
-		                        <div class="titleWrap">
-									<input type="hidden" id="post_id" value="${SEQ_ID}"/>
-		                            <label for="title">제목</label>
-		                            <input type="text" class="board-input" id="post_title" value="${TITLE}">
-		                        </div>
-								<div class="fileWrap">
-									<label for="file">파일찾기</label>
-						            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-						            <br/><br/><small>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</small>
-								</div>
-                                <c:if test="${not empty FILE_NAME}">
-									<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
-									<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
-										<c:forEach items="${fileNames}" varStatus="status">
-											<img src="<c:url value='/resources/img/sub/icon_file.gif' />" style="display: inline-table;">
-											<small id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">${fileNames[status.index]}</small>
-											<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
-												<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-											</form><br/>
-										</c:forEach>
-								</c:if>								
-		                    </div>
+                <div class="board_write_wrap">
+                    <div class="board_write_title">
+                        <div class="titleWrap">
+							<input type="hidden" id="post_id" value="${SEQ_ID}"/>
+                            <label for="title">제목</label>
+                            <input type="text" class="board-input" id="post_title" value="${TITLE}">
+                        </div>
+						<div class="fileWrap">
+							<div class="not_box"></div>
+							<label for="file">파일찾기</label>
+				            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block; width: 300px;"/>
+						</div>
+	                    <p>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</p>
+                    </div>
 
-		                    <div class="board_write_post board-contents">
-								<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
-		                    </div>
-		                </div>
+					<c:if test="${not empty FILE_NAME}">
+						<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+						<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+							<ul class="file_wrap">
+								<c:forEach items="${fileNames}" varStatus="status">
+									<li>
+										<a href="#" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">
+											<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" alt="파일">
+											${fileNames[status.index]}
+										</a>
+										<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+											<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+										</form>
+									</li>
+								</c:forEach>
+							</ul>
+					</c:if> 
+
+                    <div class="board_write_post board-contents">
+						<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+                    </div>
+                </div>
 			    
 			    
 			    
@@ -239,7 +247,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/file/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},

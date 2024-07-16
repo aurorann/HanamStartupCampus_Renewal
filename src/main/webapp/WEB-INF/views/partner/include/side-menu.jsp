@@ -22,8 +22,8 @@
 	            <h3>기업소개</h3>
 	            <ul>
 					<li data-location-sub='기업 실적'><a href="<c:url value='/partner/management' />">기업 실적</a></li>
-					<li data-location-sub='입주기업 소개'><a href="<c:url value='/partner/list' />">입주기업 소개</a></li>
-					<li data-location-sub='졸업기업 소개'><a href="<c:url value='/partner/graduate/list' />">졸업기업 소개</a></li>
+					<li data-location-sub='입주기업'><a href="<c:url value='/partner/list' />">입주기업</a></li>
+					<li data-location-sub='졸업기업'><a href="<c:url value='/partner/graduate/list' />">졸업기업</a></li>
 					<li data-location-sub='기업 소식'><a href="<c:url value='/partner/activity/list' />">기업 소식</a></li>
 					<li data-location-sub='소개 영상'><a href="<c:url value='/partner/media/list' />">소개 영상</a></li>
 	            </ul>

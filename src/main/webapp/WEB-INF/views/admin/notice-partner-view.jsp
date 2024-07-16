@@ -24,11 +24,13 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/mgr.css?ver=2' />">
+
 </head>
 
 
 <body class="animsition restyle-index">
-	
 	
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
@@ -59,7 +61,6 @@
                 </ul>
             </div>
             
-            <div class="container_wrap">
                 <div class="content_wrap">
                     <div class="content_text">
 						${CONTENT}
@@ -69,21 +70,22 @@
 							<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
 							<ul class="file_wrap">
 								<c:forEach items="${fileNames}" varStatus="status">
-									<a href="#">
-										<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
-										${fileNames[status.index]}
-									</a>
-									<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
-										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-										<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
-										<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
-									</form><br/>
+									<li>
+										<a href="#">
+											<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" alt="파일">
+											<span id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();">${fileNames[status.index]}</span>
+										</a>
+										<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+											<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+										</form><br/>
+									</li>
 								</c:forEach>
 							</ul>
 						</c:if>
                     </div>
                 </div><!--content_wrap 콘텐츠-->
-            </div><!--container_wrap-->
             
             <div class="page_btn_wrap">
             	<div class="back_btn">

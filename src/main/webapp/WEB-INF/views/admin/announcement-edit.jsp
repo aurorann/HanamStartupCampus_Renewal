@@ -47,13 +47,13 @@
 			<!-- # include: title-box end -->
     
 				<div class="container_wrap">
-				
+					<h3 class="mgr_title">사업공고 수정</h3>
 	                <div class="board_write_wrap">
 	                    <div class="board_write_title">
 	                        <div class="labelWrap">
-	                            <input type="radio" id="Ggongi" name="notice_level" value="101" checked>
-	                            <label for="Ggongi" class="board_label board_label_Ggongi">주요공고</label>
-	                            <input type="radio" id="gongi" name="notice_level" value="102">
+	                            <input type="radio" id="Ggongi" name="notice_level" value="101">
+	                            <label for="Ggongi" class="board_label board_label_Ggongo">주요공고</label>
+	                            <input type="radio" id="gongi" name="notice_level" value="103">
 	                            <label for="gongi" class="board_label board_label_gongo">공고</label>
 	                        </div>
 							<input type="hidden" id="post_id" value="${SEQ_ID}"/>
@@ -68,6 +68,7 @@
 												data-multiple-dates-separator=" ~ " data-format='yyyy-mm-dd'
 												data-language="kor" value="${CONTRACT_START_AT} ~ ${CONTRACT_END_AT}"
 												class="datepicker-here" />
+			                            <div class="not_box"></div>
 										<label for="file">파일찾기</label>
 							            <input type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
 								</form>
@@ -223,6 +224,9 @@
 			    xhr.withCredentials = true;
 			} );
 			// CKEditor init end
+
+			$('[name="notice_level"][value="${LEVEL}"]').attr("checked", "true");
+
 		})
 		
 		function editPost() {
@@ -264,7 +268,7 @@
 				$.ajax({
 					type: "POST", 
 					enctype: 'multipart/form-data', // 필수 
-					url: '<c:url value="/admin/notice/upload/file" />', 
+					url: '<c:url value="/admin/announcement/upload/file" />', 
 					headers : {
 						'${_csrf.headerName}' : '${_csrf.token}'
 					},

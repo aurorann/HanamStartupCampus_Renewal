@@ -17,6 +17,12 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub-pvt5.css' />">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/plugin/bootstrap.min.css' />">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/js/bootstrap.min.js' />">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/js/sub.js' />">
+	
 </head>
 
 
@@ -26,69 +32,60 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<div class="modal_dummy"></div><!--modal_dummy 검색뒷배경-->
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
     <div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
-                	<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-                		<a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">회의실 예약 캘린더</a>
-                   		<a href="<c:url value='/book/history' />" class="btn btn-default" role="button">회의실 예약현황</a>      
-				    </div>
-                	
-                    <div class="col-lg-5 mg-top-30">
-                        <div class="vartical-thumbnail">
-                            <img src="<c:url value='/resources/img/room/book/meeting02.jpg' />" style="max-width: 100%" alt="회의실 2">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-7 mg-top-30">
-                        <h3 class="b-title"><strong>회의실 1 예약하기</strong></h3>
-                        <div class="b-text">
-                            <ul>
-                                <li>
-                                    <span><strong>가로(m) x 세로(m)</strong></span>
-                                    <span>8.500 x 8.700</span>
-                                </li>
-                                <li>
-                                    <span><strong>면적(m²)</strong></span>
-                                    <span>73.949</span>
-                                </li>
-                                <li>
-                                    <span><strong>비고</strong></span>
-                                    <span>이용 시, 운영사무실과 별도 협의 필요</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 mg-top-60">
-
-                        <div class="col-lg-7" style="padding:0;">
-                            <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png'/>">&nbsp;&nbsp;대관 날짜 선택</h3>
-
-                            <div class="carendar-title">
-                                <div class="c-title-box">
-                                    <button class="calendar-previous-month" type="button"><img src="<c:url value='/resources/img/sub/arrow-c-left.png'/>"></button>
-                                    <h3 class="d-title calendar-current-month-container">2021년 1월</h3>
-                                    <button class="calendar-next-month" type="button"><img src="<c:url value='/resources/img/sub/arrow-c-right.png'/>"></button>
-                                </div>
-
-                                <ul>
-                                    <li>
-                                        <span class="blue-label"></span>&nbsp; 예약 가능
-                                    </li><li>
-                                        <span class="gray-label"></span>&nbsp; 예약 불가
-                                    </li>
-                                </ul>
+                <div class="container_wrap">
+					<div class="pvt_wrap">
+						<ul class="pvt_btns mgr_btns mgr_btns1" id="you-are-here">
+						    <li><button onclick="location.href='<c:url value='/book/place' />' ">회의실 예약 캘린더</button></li>
+						    <li><button class="active" onclick="location.href='<c:url value='/book/history' />' ">회의실 예약현황</button></li>
+						</ul>
+					</div>
+				    
+	                <div class="meeting3">
+	                    <div class="img_box"><img src="<c:url value='/resources/img/sub_img/회의실_img2.png' />" alt="회의실 2"></div>
+	                    <div class="text_box">
+	                        <h3>회의실 2</h3>
+	                        <ul>
+	                            <li><span>가로(m) x 세로(m)</span>8.500 x 8.700</li>
+	                            <li><span>면적(m²)</span>73.949</li>
+	                            <li><span>비고</span>이용 시, 운영사무실과 별도 협의 필요</li>
+	                        </ul>
+	                    </div>
+	                </div><!--meeting3-->
+	                
+                    <div class="calender_wrap">
+                        <div>
+                            <h3>대관 날짜 선택</h3>
+	                        <div class="" style="padding:0;">
+                            	<div class="carendar-title">
+	                                <div class="c-title-box">
+	                                    <button class="calendar-previous-month" type="button"><img src="<c:url value='/resources/img/sub_img/arrow-c-right.png'/>"></button>
+	                                    <h3 class="d-title calendar-current-month-container">2021년 1월</h3>
+	                                    <button class="calendar-next-month" type="button"><img src="<c:url value='/resources/img/sub_img/arrow-c-right.png'/>"></button>
+	                                </div>
+	                                <ul>
+	                                    <li>
+	                                        <span class="blue-label"></span>&nbsp; 예약 가능
+	                                    </li><li>
+	                                        <span class="gray-label"></span>&nbsp; 예약 불가
+	                                    </li>
+	                                </ul>
+								</div>
                             </div>
 
                             <table class="table reservation-table calendar-contents calendar-days">
@@ -205,20 +202,21 @@
                             </table>
                         </div> <!--col-lg-7 div 끝-->
 
-                        <div class="col-lg-5 time-select" style="">
-                            <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png'/>">&nbsp;&nbsp;대관 시간 선택</h3>
+                        <div>
+                            <h3>대관 시간 선택</h3>
+	                        <div class="col-lg-5 time-select" style="">
 
-                            <div class="carendar-title">
-                                <div>
-                                    <h3 class="d-title">시간대 선택</h3>
-                                </div>
-
-                                <ul style="width:100%;">
-                                    <li style="width:100%;">
-                                        * 일일 최대 ${maxDailyCnt}시간 예약 가능.
-                                    </li>
-                                </ul>
-                            </div>
+	                            <div class="carendar-title">
+	                                <div>
+	                                    <h3 class="d-title">시간대 선택</h3>
+	                                </div>
+	
+	                                <ul style="width:100%;">
+	                                    <li style="width:100%;">
+	                                        * 일일 최대 ${maxDailyCnt}시간 예약 가능.
+	                                    </li>
+	                                </ul>
+	                            </div>
 
                             <table class="table reservation-table time-contents">
                                 <thead>
@@ -226,7 +224,7 @@
                                         <th>시간 선택</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="time">
                                     <tr class="booked" data-start-time="09:00" data-end-time="10:00"  data-time-index=0 data-time-col-name="H09">
 									    <td>09:00 ~ 10:00</td>
 									</tr>
@@ -258,7 +256,7 @@
 									    <td>18:00</td>
 									</tr> -->
                                 </tbody>
-                                <thead>
+                                <tbody>
                                     <tr>
                                         <th>
                                             시설 사용 용도 <small style="float:right; color:#999999;"></small>
@@ -268,74 +266,68 @@
                                 </thead>
                             </table>
 
-                        </div><!--col-lg-5 div 끝-->
-                    	
-                    	<div class="col-lg-12 mg-top-30 book-list-wrapper" style="width:100%;">
-	                        <h3 class="book-list-title"><strong>사용 일정</strong></h3>
-	                        <div class="book-list-text">
-	                            <ul class="book-list-text-head">
-	                                <li>
-										<span class="time"><strong>예약 시간</strong></span>
-	                                    <span class="name"><strong>시설 사용자</strong></span>
-										<span class="description"><strong>시설 사용 용도</strong></span>
-	                                </li>
-	                            </ul>
-	                            <ul class="book-list-text-body">
-	                                <!-- <li>
-										<span class="time">09:00 ~ 18:00</span>
-	                                    <span class="name">일반 사용자</span>
-										<span class="description">내부 회의</span>
-	                                </li> -->
-	                            </ul>
-	                        </div>
-	                    </div>
-
-                        <div class="col-lg-12 mg-top-30 reservation-all">
-                            <h3 class="b-title"><strong>
-                                <span>선택된 예약 시간 없음.</span>
-                            </strong></h3>
+							</div><!--col-lg-5 div 끝-->
                         </div>
-
-                        <div class="reservation-btn">
-                            <ul>
-                                <li><a href="<c:url value="/book/place" />" class="gray-btn">뒤로</a></li>
-                                <li><a href="javascript:openModal('reservation-modal');" class="default-btn">예약하기</a></li>
+                     </div><!--calender_wrap-->
+                     
+                     
+                   	<div class="check_wrap book-list-wrapper">
+                        <h3 class="book-list-title check_title"><strong>사용 일정</strong></h3>
+                            <ul class="book-list-text-body">
+                                <li>
+									<span class="time"style="width:15%">예약 시간</span>
+                                    <span class="name"style="width:15%">시설 사용자</span>
+									<span class="description"style="width:50%">시설 사용 용도</span>
+									<span class="delete"style="width:19%"></span>
+                                </li>
                             </ul>
-        					
-                        </div>
-                          
-                        <div id="r-modal"></div>
-                        <div class="modal-con reservation-modal">
-                            <a href="javascript:;" class="close"><img src="<c:url value='/resources/img/close-btn.png'/>"></a>
-                            <div class="modal-title">
-                                <h3><img src="<c:url value='/resources/img/sub-title.png'/>">&nbsp;&nbsp;시설/공간 예약 확인</h3>
-                            </div>
-                            <div class="con">
-                                <p>장소, 날짜, 시간을 확인해 주세요. 해당 시설을 예약하시겠습니까?</p>
-                                <div class="reservation-all mg-top-30">
-                                    <h3 class="b-title"><strong>
-                                        <span>선택된 예약 시간 없음.</span>
-                                    </strong></h3>
-                                </div>
-                                <div class="reservation-btn">
-                                    <ul>
-                                        <li><a href="#" class="gray-btn">취소</a></li>
-                                        <li><a id="bookSubmit" href="javascript:void(0);" class="default-btn">예약하기</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                     </div><!--col-lg-12 div 끝-->
+                            <!-- 
+                            <ul class="book-list-text-body">
+                                <li>
+									<span class="time">09:00 ~ 18:00</span>
+                                    <span class="name">일반 사용자</span>
+									<span class="description">내부 회의</span>
+                                </li>
+                            </ul>
+                             -->
+	                        <div class="col-lg-12 mg-top-30 reservation-all check_article">
+								<!-- 선택된 예약 시간 없음 -->
+	                        </div>
+	
+	                        <div class="reservation-btn check_btns">
+	                        	<a href="<c:url value='/book/place' />">뒤로</a>
+	                            <a href="javascript:openModal('metting_modal');" class="metting_btn">예약하기</a>
+	                        </div>
+                    </div>
+                    
+				    <div class="metting_modal">
+				        <div class="top_metting_modal">
+				            <h3>시설/공간 예약 확인</h3>
+				            <button class=><img src="<c:url value='/resources/img/back_ico.png'/>" alt="뒤로가기"></button>            
+				        </div>
+				        <div class="btm_metting_modal">
+				            <p>장소, 날짜, 시간을 확인해 주세요. 해당 시설을 예약하시겠습니까?</p>
+				            <div class="reservation-all check_article">
+					            	회의실 1 / 2024년 6월 28일 / 13:00 ~ 14:00
+
+				            </div>
+				            <div class="check_btns">
+				                <a href="" class="gray-btn">취소</a>
+				                <a id="bookSubmit" href="javascript:void(0);" class="metting_btn">예약하기</a>
+				            </div>
+				        </div>
+				    </div><!--metting_modal-->
+
                 </div><!-- r-contents div 끝 -->
-            </div><!-- right-contents div 끝 -->
         </main>
-    </div>
+        </div>
 	<!-- footer start -->
 	<%@ include file="/WEB-INF/footer.jsp"%>
 	<!-- footer end -->
 	
 	<!-- extension start -->
 	<script src="<c:url value='/resources/js/booking.js'/>?ver=1.2"></script>
+	<script src="<c:url value='/resources/js/sub.js'/>"></script>
 	<!-- extension end -->
 	
 

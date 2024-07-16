@@ -36,9 +36,9 @@
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+	        <!-- # include: title-box start -->
+	        <%@ include file="./include/title-box.jsp"%>
+	        <!-- # include: title-box end -->
 
                 <div class="container_wrap">
                     
@@ -63,15 +63,15 @@
 	                <table class="board_wrap">
 	                    <thead class="board_hd">
 	                        <tr>
-	                            <th class="board_numb">번호</th>
-	                            <th class="board_title">제목</th>
-	                            <th class="board_view">시작일</th>
-	                            <th class="board_start">종료일</th>
-	                            <th class="board_end">조회수</th>
+	                            <th class="board_numb" style="width:8%">번호</th>
+	                            <th class="board_title" style="width:62%">제목</th>
+	                            <th class="board_view" style="width:10%">게시일</th>
+	                            <th class="board_start" style="width:10%">종료일</th>
+	                            <th class="board_end" style="width:10%">조회수</th>
 	                        </tr>
 	                    </thead>
 	
-	                    <tbody class="board_body fixed-announcement">
+	                    <tbody class="board_body_fixed fixed-announcement">
 	                    	<!-- 
 	                        <tr>
 	                            <td class="board_numb">1</td>
@@ -161,9 +161,6 @@
                                 '<a href="<c:url value='/announce/announcement/view' />/' + el.seqId + '">';
                                 
 		                switch(el.level) {
-		                	case "100" :
-		                		fixedHTML += '<div class="board_label board_label_Ggongi">주요공지</div>' 	
-		                		break;
 							case "101" :
 								fixedHTML += '<div class="board_label board_label_Ggongo">주요공고</div>'
 		                		break;
@@ -196,17 +193,11 @@
 						
 						
 		                switch(el.level) {
-			                case "100" :
-			                	commonHTML += '<div class="board_label board_label_Ggongi">주요공지</div>'
-		                		break;
 							case "101" :
 								commonHTML += '<div class="board_label board_label_Ggongo">주요공고</div>'
 		                		break;
-		                	case "102" :
+		                	case "103" :
 		                		commonHTML += '<div class="board_label board_label_gongo">공고</div>'
-		                		break;
-							case "103" :
-								commonHTML += '<div class="board_label board_label_gongo">공지</div>'
 		                		break;
 		                }
 		                
@@ -223,7 +214,7 @@
 		                return true;
 					});
 					
-					$("tbody.board_body.fixed-announcement").html(fixedArr.join(""));
+					$("tbody.fixed-announcement").html(fixedArr.join(""));
 					$("tbody.board_body.common-announcement").html(commonArr.join(""));
 					
 					$('div.pagination_wrap').html(pageHTML);

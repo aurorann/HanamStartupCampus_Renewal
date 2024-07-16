@@ -16,9 +16,6 @@
     <%@ include file="./include/script.jsp"%>
     <!-- # include: script end -->
     
-    <!-- Extention Start -->
-    <!-- Extention End -->
-    
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
@@ -41,70 +38,43 @@
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
     
-                    <div class="col-lg-12 r-contents">
-                    	<%-- <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group"  style="padding-bottom: 20px;">
-					      <a href="<c:url value='/admin/gallery/press/write/form' />" class="btn btn-default" role="button">보도자료 글쓰기</a>
-					      <a href="javascript:void(0);" class="btn btn-default you-are-here" role="button">홍보자료 글쓰기</a>
-					      <a href="<c:url value='/admin/gallery/bio-info/write/form' />" class="btn btn-default" role="button">바이오 소식 글쓰기</a>
-					    </div> --%>
-						<form id="galleryForm" onsubmit="return false">
-                        	<table class="table board-table">
-	                            <thead>
-	                                <tr>
-	                                    <td>
-	                                        <div class="board-title">
-												<div class="title-label">
-	                                                <h5>제목</h5>
-	                                                <input type="text" class="board-input" name="title" id="post_title">
-	                                            </div>
-	                                            <div class="title-label">
-	                                            	<h5>대표 이미지</h5>
-	                                                <input type="file"
-														class="board-input" id="representImageFile" name="representImageFile"
-														accept=".jpg,.png,.gif" />
-													<h5>첨부 파일</h5>
-													<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-
-	                                            </div>
-	                                        </div>
-	                                    </td>
-	                                </tr>
-	                            </thead>
-	                            <tbody>
-	                            	<tr>
-									    <td>
-									    	<div class="gallery-represent-wrapper">
-									    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
-									    	</div>
-									    </td>
-									</tr>
-	                                <tr>
-	                                    <td class="board-contents">
-	                                        <textarea class="fomr-control" id="post_editor" name="content"></textarea>
-	                                    </td>
-	                                </tr>
-	                            </tbody>
-                        	</table>
-                        </form>
-   					
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="
-						    margin-top: 30px;
-						">
-						      <div class="btn-group" role="group">
-						        <button type="button" class="btn btn-default" onclick="writeNewPost();">게시글 작성</button>
-						      </div>
-						      
-						      
-						    </div>
+				<div class="container_wrap">
+				    
+					<form id="galleryForm" onsubmit="return false" enctype="multipart/form-data">
+		                 
+		                <div class="board_write_wrap">
+		                    <div class="board_write_title">
+		                        <div class="titleWrap">
+		                            <label for="title">제목</label>
+		                            <input type="text" class="board-input" id="post_title" name="title">
+		                        </div>
+								<div class="fileWrap">
+		                            <label for="imgFile">대표 이미지</label>
+									<input type="file"
+											class="board-input" id="representImageFile" name="representImageFile"
+											accept=".jpg,.png,.gif" />
+		                            <label for="file">파일찾기</label>
+		                            <input class="board-input" multiple="multiple" type="file" name="file" id="file" style="display: inline-block; width: 225px;"/>
+								</div>
+		                    </div>
+		                    
+		                    <div class="board_write_content">
+								<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/example_img.png' />'" src="<c:url value='/resources/img/example_img.png' />" />
+		                    </div>
+			
+		                    <div class="board_write_post board-contents">
+								<textarea class="fomr-control" id="post_editor" name="content"></textarea>
+		                    </div>
+		                    
+		                </div>
+	                </form>
+	                
+	                <div class="board_wrap_btn"><a href="#" onclick="writeNewPost();">게시글 작성</a></div>
     
-                    </div><!-- r-contents div 끝 -->
-                </div><!-- right-contents div 끝 -->
+			</div><!-- r-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->

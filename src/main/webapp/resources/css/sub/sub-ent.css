@@ -1,0 +1,80 @@
+.container_wrap p{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.ent_introduce_list{
+    display:flex; flex-wrap:wrap;
+}
+.ent_introduce_wrap{ width:32%; }
+.ent_introduce_wrap:not(:nth-of-type(3n+1)){ margin-left:2%; }
+.ent_introduce_wrap:not(:nth-of-type(-n+3)){ margin-top:20px; }
+.ent_introduce_wrap a{ display:block; border:1px solid #c7c7c7; }
+.ent_introduce_wrap a .img_box{
+    height:100px;
+    padding:25% 15px;
+    border-bottom:1px solid #c7c7c7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/*text_box*/
+.ent_introduce_wrap a .text_box{
+    display:block;
+    padding:25px 30px;
+    color:#000;
+}
+.ent_introduce_wrap a .text_box h3{
+    font-size:25px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.ent_introduce_wrap a .text_box ul li{
+    margin-bottom:10px;
+    font-size:15px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+.ent_introduce_wrap a .text_box ul li span{
+    display:inline-block;
+    width:80px;
+    font-weight:500;
+}
+
+
+
+@media screen and (max-width:1280px){
+    .container_wrap p{ font-size:17px; }
+    
+    .ent_introduce_wrap a .text_box h3{ font-size:23px; }
+}
+
+@media screen and (max-width:1024px){
+    .container_wrap p{ font-size:16px; }
+
+    .ent_introduce_wrap:not(:nth-of-type(-n+3)){ margin-top:15px; }
+    .ent_introduce_wrap a .text_box{ padding:20px 25px; }
+    .ent_introduce_wrap a .text_box h3{ font-size:20px; }
+}
+
+@media screen and (max-width:800px){
+    .ent_introduce_wrap{ width:48.5%; }
+    .ent_introduce_wrap:not(:nth-of-type(3n+1)){ margin-left:0; }
+    .ent_introduce_wrap:not(:nth-of-type(2n+1)){ margin-left:3%; }
+    .ent_introduce_wrap:not(:nth-of-type(-n+3)){ margin-top:0; }
+    .ent_introduce_wrap:not(:nth-of-type(-n+2)){ margin-top:11px; }
+}
+
+@media screen and (max-width:480px){
+    .ent_introduce_wrap{ width:100%; }
+    .ent_introduce_wrap:not(:nth-of-type(2n+1)){ margin-left:0; }
+    .ent_introduce_wrap:not(:nth-of-type(-n+2)){ margin-top:0; }
+    .ent_introduce_wrap:not(:first-of-type){ margin-top:10px; }
+    .container_wrap p{ font-size:15px; }
+ }

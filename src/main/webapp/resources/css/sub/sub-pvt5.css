@@ -1,0 +1,539 @@
+/*입주기업 전용공간 버튼*/
+.pvt_wrap{ border-bottom:1px solid #797979; margin-bottom:35px; }
+.pvt_btns{
+    display:table;
+    table-layout:fixed;
+    width:100%;
+    border:1px solid #797979;
+    text-align:center;
+    margin-bottom:20px !important;
+}
+.pvt_btns li{ display:table-cell; }
+.pvt_btns li:last-of-type{ border-left:1px solid #797979; }
+.pvt_btns li button{
+    width:100%;
+    font-size:14PX;
+    font-weight:600;
+    line-height:40px;
+    transition:all .2s ease-in-out;
+}
+.pvt_btns li button.active{ background-color:#1976d3; color:#fff; }
+.pvt_btns li button:hover{ background-color:#ededed; }
+
+.pvt_btns li button:hover{ background-color:#ededed; }
+.pvt_btns li button.active{
+    background-color:#1976d3;
+    color:#fff;
+}
+
+/*meeting1*/
+.meeting1{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-bottom:65px;
+}
+.meeting1 .right_content h3{
+    display:block;
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+.meeting1 .right_content p{
+    font-size:15px;
+    font-weight:500;
+    line-height:23px;
+    margin-bottom:45px;
+}
+
+/*meeting2*/
+.meeting2>div{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    border:1px solid #c7c7c7;
+}
+.meeting2>div:first-of-type{ margin-bottom:20px; }
+
+.meeting2 .img_box,
+.meeting3 .img_box{ width:40%; }
+.meeting2 .img_box img,
+.meeting3 .img_box img{ display:block; }
+
+.meeting2 .text_box{ width:60%; padding-left:85px; }
+.meeting2 .text_box h3{
+    font-size:25px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+.meeting2 .text_box ul{ margin-bottom:35px; }
+.meeting2 .text_box ul li{ font-size:18px; }
+.meeting2 .text_box ul li:not(:last-of-type){ margin-bottom:10px; }
+.meeting2 .text_box ul li span{
+    display:inline-block;
+    width:170px;
+    font-weight:500;
+}
+.meeting2 .text_box a{ display:block; }
+
+/*
+회의실 예약현황
+*/
+.container_wrap table{ text-align:center; }
+.container_wrap table thead tr th:not(:first-of-type),
+.container_wrap table tbody tr td:not(:first-of-type){ border-left:1px solid #c7c7c7; }
+
+/*
+회의실 예약하기
+*/
+.meeting3{
+    display:flex;
+    flex-wrap:wrap;
+    margin-bottom:65px;
+}
+.meeting3 h3{
+    font-size:25px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+.meeting3 ul{ border-top:1px solid #c7c7c7; }
+.meeting3 ul li{
+    border-bottom:1px solid #c7c7c7;
+    font-size:18px;
+    padding:10px 0;
+}
+.meeting3 ul li span{
+    display:inline-block;
+    width:40%;
+    margin-right:5px;
+    font-weight:500;
+}
+
+.meeting3 .text_box{ width:60%; padding:40px 0 0 85px; }
+.meeting3 .text_box>div{ margin-top:45px; }
+.meeting3 ul li a{
+    display:block;
+    line-height:45px;
+    border-radius:8px;
+    background-color:#1976d3;
+    text-align:center;
+    font-size:15px;
+    color:#fff;
+}
+.meeting3 ul li input,
+.meeting3 ul li select{
+    width:30%;
+    height:40px;
+    border:1px solid #c7c7c7;
+    padding:0 10px;
+    font-size:15px;
+}
+.meeting3 ul li select{
+    background:url('../../img/sub_img/arrow_dk_ico.png') no-repeat 90% center;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none
+}
+
+/*calender_wrap*/
+.calender_wrap{
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    margin-bottom:65px;
+}
+.calender_wrap>div:first-of-type{ width:58%; }
+.calender_wrap>div:last-of-type{ width:40%; margin-left:2%; }
+.calender_wrap>div>h3{
+    font-size:22px;
+    font-weight:600;
+    line-height:100%;
+    color:#1976d3;
+    margin-bottom:25px;
+}
+.calender_wrap>div>h3::before{
+    content:'';
+    display:inline-block;
+    width:4px;
+    height:18px;
+    background-color:#1976d3;
+    margin-right:8px;
+    vertical-align:middle;
+}
+
+/*check_wrap*/
+.check_title{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+.check_wrap ul{ margin-bottom:45px; border-top:1px solid #797979; }
+.check_wrap ul li{
+    line-height:35px;
+    padding:10px 20px;
+    border-bottom:1px solid #c7c7c7;
+    font-size:15px;
+}
+.check_wrap ul li:first-of-type{ font-weight:600; }
+.check_wrap ul li span{ display:inline-block; }
+.check_wrap .check_delete{
+    display:inline-block;
+    padding:0 15px;
+    border-radius:8px;
+    background-color:#1976d3;
+
+    font-weight:500;
+    color:#fff;
+}
+.check_article{
+    text-align:center;
+    line-height:60px;
+    border-radius:10px;
+    background-color:#f6f6f6;
+    border:1px solid #c7c7c7;
+    margin-bottom:20px;
+
+    font-size:22px;
+    font-weight:600;
+    color:#1976d3;
+}
+
+/*예약modal*/
+.metting_modal{
+    display:none;
+    z-index:18;
+    max-width:650px;
+    width:70%;
+    position:fixed; left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    background-color:#fff;
+}
+.top_metting_modal{
+    border-bottom:1px solid #c7c7c7;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+}
+.top_metting_modal h3{
+    font-size:22px;
+    font-weight:500;
+    color:#848484;
+}
+
+/*btm_search_modal*/
+.btm_metting_modal{ padding:30px 20px; }
+.btm_metting_modal p:first-of-type{
+    font-size:15px;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+
+
+
+
+
+
+/*부트스트랩 캘린더 */
+.col-lg-7, .col-lg-5{ width:auto !important; padding:0 !important; }
+.carendar-title {
+    padding:20px;
+    background-color:#f4f4f4;
+    border-bottom:2px solid #000;
+    float:left;
+    width:100%;
+    text-align:center;
+}
+.c-title-box { display:flex; justify-content:space-between; }
+.c-title-box button:first-of-type{ transform:rotate(180deg); }
+.carendar-title ul {
+   text-align:right;
+   float:right;
+   width:75%;
+}
+.carendar-title ul li{
+    display:inline-block;
+    width:35%;
+    margin:20px 0 0 0;
+    font-size:18px;
+    font-weight:500;
+    color:#000;
+}
+.blue-label {
+    display:inline-block;
+    width:45px;
+    height:20px;
+    background:#80c8ff;
+    color:#fff;
+    border-radius:100px;
+    vertical-align:middle;
+}
+.gray-label {
+    display:inline-block;
+    width:45px;
+    height:20px;
+    background:#8a8a8a;
+    color:#fff;
+    border-radius:100px;
+    vertical-align:middle;
+}
+.calendar-contents td {
+    height:98px;
+    position:relative;
+    cursor:pointer;
+}
+.reservation-table {
+    height:630px;
+}
+.reservation-table h5 {
+    font-size:22px;
+    font-weight:600;
+    position:absolute;
+    top:0;
+    left:12px;
+}
+.reservation-table span {
+    position:absolute;
+    bottom:7px;
+    left:50%;
+    display:inline-block;
+    width:90%;
+    height:25px;
+    border-radius:50px;
+    margin-left:-45%;
+    color:#fff;
+}
+.reservation-table td {
+    cursor:pointer;
+}
+.reservation-table td:hover {
+    background:#f2f2f2;
+}
+.reservation-choice {
+    box-sizing:border-box!important;
+    border:3px solid #458cff!important;
+    background:#e6f4ff!important;
+}
+.reservation-off { background-color:#8a8a8a; }
+.reservation-on { background-color:#80c8ff; }
+
+.time-contents td{
+    height:54px;
+    font-size:22px;
+}
+.reservation-all {
+    background:#f9f9f9;
+    border:1px solid #ddd;
+    text-align:center;
+    width:100%;
+}
+.reservation-all h3 {
+    font-size:2.2em;
+    line-height:1.5em;
+}
+
+.reservation-btn ul {
+    width:100%;
+}
+.reservation-btn li {
+    width:50%;
+    float:left;
+    padding:30px;
+    text-align:center;
+}
+.reservation-btn ul li a {
+    padding:.5em 3em;
+    font-size:2em;
+    display:block;
+}
+.r-modal{
+  display:none;
+  position:fixed; 
+  width:100%; height:100%;
+  top:0; left:0; 
+  background:rgba(0,0,0,0.3);
+  z-index:2;
+}
+#r-modal{
+    display:none;
+    position:fixed; 
+    width:100%; height:100%;
+    top:0; left:0; 
+    background:rgba(0,0,0,0.3);
+    z-index:2;
+  }
+.modal-con{
+  display:none;
+  position:fixed;
+  top:40%; left:50%;
+  transform: translate(-50%,-50%);
+  max-width: 40%;
+  width:40%;
+  min-height: 30%;
+  background:#fff;
+  z-index:9999;
+}
+.modal-con .modal-title{
+  padding: 20px; 
+  border-bottom:1px solid #ddd;
+}
+
+.modal-con .modal-title h3 { font-size:2em; }
+.modal-con .con{ padding: 30px; }
+.modal-con .con p { font-size:1.6em; }
+.modal-con .close{
+  display:block;
+  position:absolute;
+  text-align:center; line-height: 30px;
+  right:20px; top:20px;
+}
+.table th {
+    position:relative;
+    background:#f9f9f9;
+	text-align:center;
+	font-size:20px;
+    font-weight:600;
+	color:#000;
+	padding:15px 20px;
+    text-align:center;
+    height:10px;
+}
+.table th small{ position:absolute; right:20px; top:15px; }
+
+textarea {
+    width:100%;
+    border:none;
+    padding:.5em;
+    resize:none;
+    border: 1px solid #eaeaea;
+    line-height: 1.25em;
+
+    font-family:'Pretendard GOV';
+    color: #707070;
+    font-weight:300;
+}
+textarea::placeholder{ font-size:15px; font-weight:500; }
+textarea:focus{ outline:none; }
+
+.d-title{ font-size:25px; font-weight:600; }
+
+.reservation-table td.not-current-month,
+.reservation-table tr.booked td{ background: #dedede; }
+
+
+
+@media screen and (max-width:1280px){
+    .meeting1 .right_content h3{ font-size:17px; }
+    .meeting1 .right_content p{ margin-bottom:40px; }
+
+    .meeting2 .text_box ul{ margin-bottom:30px; }
+    .meeting2 .text_box ul li,
+    .meeting3 ul li{ font-size:17px; }
+    .meeting2 .text_box h3,
+    .meeting3 h3{ font-size:23px; }
+
+    .calender_wrap>div>h3{ font-size:20px; } 
+    .d-title{ font-size:23px; }
+    .carendar-title ul li{ font-size:17px; }
+    .table th{ font-size:17px; }
+    .reservation-table h5{ font-size:20px; }
+    .reservation-table span{ font-size:15px; }
+    .time-contents td{ font-size:20px; }
+
+    .check_title{ font-size:17px; }
+    .check_article{ font-size:21px; }
+}
+
+@media screen and (max-width:1024px){
+    .meeting1 .right_content h3{ font-size:16px; }
+    .calender_wrap>div>h3{ font-size:19px; margin-bottom:20px; }
+    .calender_wrap>div>h3::before{
+        width:3px;
+        height:15px;
+        margin-left:6px;
+    }
+    
+    .meeting2>div{
+        flex-flow:column;
+        align-items:flex-start;
+        align-items:center;
+    }
+    .meeting2>div:last-of-type{ margin-left:0; }
+    .meeting2 .img_box, .meeting3 .img_box{
+        display:flex;
+        justify-content:center;
+        width:100%;
+    }
+    .meeting2 .img_box img, .meeting3 .img_box img{ width:100%; }
+    .meeting2 .text_box{ width:100%; padding:25px 30px 25px 30px; }
+    .meeting2 .text_box ul{ display:flex; flex-flow:column; }
+    .meeting2 .text_box ul li, .meeting3 ul li{ font-size:16px; }
+    .meeting2 .text_box ul li span{ width:87%; }
+
+    .meeting3{ border:1px solid #c7c7c7; margin-bottom:60px; }
+    .meeting3 .text_box{ width:100%; padding:25px 30px 25px 30px; }
+    .meeting3 .text_box>div{ margin-top:15px; }
+    .meeting3 ul li{ border-bottom:none; }
+    .meeting3 ul li:not(:last-of-type){ border-bottom:1px solid #c7c7c7; }
+
+    .calender_wrap{ margin-bottom:60px; }
+    .d-title{ font-size:21px; }
+    .carendar-title ul li{ width:40%; font-size:15px; }
+    .reservation-table span{ height:22px; }
+
+    .check_title{ font-size:16px; }
+    .check_wrap ul{ margin-bottom:40px; }
+}
+
+@media screen and (max-width:800px){
+    .meeting1{ margin-bottom:60px; }
+    .meeting1 .left_content img{ width:100%; margin-bottom:20px; }
+    .meeting1 .right_content p{ margin-bottom:30px; }
+
+    .calender_wrap>div:first-of-type{ width:100%; margin-bottom:20px; }
+    .calender_wrap>div:last-of-type{ width:100%; margin-left:0; }
+
+    .metting_modal{ width:90%; }
+    .top_metting_modal h3{ font-size:20px; }
+    .check_article{ font-size:20px; }
+    .check_wrap ul{ margin-bottom:35px; }
+}
+
+@media screen and (max-width:600px){
+    .check_article{ font-size:17px; }
+
+    .calender_wrap,
+    .meeting3{ margin-bottom:55px; }
+    .calender_wrap>div>h3{ font-size:18px; }
+    .carendar-title ul{ width:100%; }
+    .carendar-title ul li{ width:30%; }
+    .reservation-table span{ height:20px; font-size:14px; }
+
+    .check_wrap ul li span:not(.check_delete){ width:100% !important; }
+    .check_wrap .check_delete{ margin:5px 0 10px; }
+
+    .meeting2 .text_box ul li span{ width:45%; }
+    .meeting3 ul li span{ width:45%; }
+    .meeting2 .text_box h3, .meeting3 h3{ font-size:21px; }
+
+    .check_wrap ul{ margin-bottom:30px; }
+    .check_article{ margin-bottom:15px; }
+}
+
+@media screen and (max-width:480px){
+    .meeting2>div:first-of-type{ margin-bottom:10px; }
+    .meeting2 .text_box ul{ margin-bottom:20px; }
+    .meeting2 .text_box ul li, .meeting3 ul li{ font-size:15px; }
+    .meeting2 .text_box,
+    .meeting3 .text_box{ padding:20px 25px; }
+    .meeting2 .text_box ul li span{ width:100%; font-weight:600; }
+
+    .calender_wrap, .meeting3{ margin-bottom:50px; }
+    .meeting3 ul li span{ width:62%; }
+
+    .carendar-title ul li{ width:45%; }
+    .reservation-table span{ height:16px; }
+
+    .check_article{ font-size:15px; }
+    .check_wrap ul{ margin-bottom:25px; }
+}

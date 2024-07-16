@@ -36,47 +36,53 @@
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-                <!-- # include: title-box start -->
-                <%@ include file="./include/title-box.jsp"%>
-                <!-- # include: title-box end -->
+			<!-- # include: title-box start -->
+			<%@ include file="./include/title-box.jsp"%>
+			<!-- # include: title-box end -->
 
-                <div class="container_wrap">
-                    
-	                <div class="search_wrap">
-	                    <ul class="page_info">
-	                        <li>전체 <p><span class="page_count" id="post_count">0</span>건</p></li>
-	                        <li id="page_count">페이지 <p><span class="page_count">1</span>/</p></li>
-	                    </ul>
-	
-	                    <form class="search_form" id="searchForm" action="<c:url value='/newsletter/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">
-	                        <select name="searchType">
-	                            <option value="NONE">--선택--</option>
-	                            <option value="title">제목</option>
-	                            <option value="content">내용</option>
-	                            <option value="titleAndContent">제목 및 내용</option>
-	                        </select>
-	                        <input type="text" name="keyword" placeholder="검색어를 입력하세요">
-	                        <button type="submit" class="serch_btn">검색</button>
-	                    </form>
-	                </div><!--search_wrap-->
-	                
-
-	                <div class="content_wrap">
-	                    <ul class="gallery_wrap">
-	                    	<!-- 
-	                        <li>
-	                            <a href="#">
-	                                <div class="img_box"><img src="img/sub_img/letter_img1.png" alt="6월호"></div>
-	                                <h3>(2024년 6월호)하남스타트업캠퍼스 온라인 뉴스레터</h3>
-	                                <time datetime="2024-06-12"><img src="img/calendar_ico.png" alt="달력">2024.06.12</time>
-	                            </a>
-	                        </li>
-	                         -->
-	                    </ul>
-	                </div><!--gallery_wrap 게시판-->
-
-	               <div class="pagination_wrap"></div><!--paging-->
-                </div><!-- r-contents div 끝 -->
+			<div class="container_wrap">
+			    
+				<div class="search_wrap">
+					<ul class="page_info">
+					    <li>전체 <p><span class="page_count" id="post_count">0</span>건</p></li>
+					    <li id="page_count">페이지 <p><span class="page_count">1</span>/</p></li>
+					</ul>
+			
+				     <form class="search_form" id="searchForm" action="<c:url value='/newsletter/list' />" method="get" action="#" onsubmit="return searchNoticeList(this)">
+				        <select name="searchType">
+				            <option value="NONE">--선택--</option>
+				            <option value="title">제목</option>
+				            <option value="content">내용</option>
+				            <option value="titleAndContent">제목 및 내용</option>
+				        </select>
+				        <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+				        <button type="submit" class="serch_btn">검색</button>
+				    </form>
+				</div><!--search_wrap-->
+			
+			
+				<div class="content_wrap">
+					<ul class="gallery_wrap">
+				    <!-- 
+					<li>
+					    <a href="#">
+					        <div class="img_box"><img src="img/sub_img/letter_img1.png" alt="6월호"></div>
+					        <h3>(2024년 6월호)하남스타트업캠퍼스 온라인 뉴스레터</h3>
+					        <time datetime="2024-06-12"><img src="img/calendar_ico.png" alt="달력">2024.06.12</time>
+					    </a>
+					</li>
+				 	-->
+				    </ul>
+				</div><!--gallery_wrap 게시판-->
+			
+				<div class="pagination_wrap">
+				</div><!--paging-->
+			
+				<sec:authorize ifAnyGranted="ROLE_ADMIN">
+				<a href='<c:url value="/admin/newsletter/write/form" />' class="write_btn">글쓰기</a>
+				</sec:authorize>
+				
+			</div><!-- r-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->

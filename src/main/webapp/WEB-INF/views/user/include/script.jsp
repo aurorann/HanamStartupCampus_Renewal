@@ -111,43 +111,30 @@
 		}
 		
 		
-		function newPagenation(page) { 
+		function newPagenation(page) {
 			if(page) {
 				
 				var pageContent = "";
 			
-				pageContent += '<ol>';
-				if(page.curRange!=1) {
-					pageContent += 
-						'<li>' +
-				         '<a class="page_numb" href="javascript:getPostList(' + (page.startPage-page.rangeSize) + ')" aria-label="Next">' +
-				            '<span aria-hidden="true"><img src="<c:url value='/resources/img/arrow_right_sm.png' />"></span>' +
-				          '</a>' +
-				        '</li>';
-				}
+				pageContent += '<ol>' +
+				                    '<li><a href="javascript:getPostList(1)" class="page_Pprev">처음페이지</a></li>' +
+				                    '<li><a href="javascript:getPostList(' + (page.curPage - 1) + ')" class="page_prev">이전페이지</a></li>';
 				for(i=page.startPage;i<=page.endPage;i++){
 					if(i!=page.curPage) {
-						pageContent +=
-										'<li style="transform: none;">' +
-											'<a href="javascript:getPostList(' + i + ')" class="page_numb">' + i + '</a>' +
-										'</li>';
+						pageContent+='<li><a href="javascript:getPostList(' + i + ')" class="page_numb">' + i + '</a></li>';
 					}
 					if(i==page.curPage) {
-						pageContent +=
-										'<li style="transform: none;">' +
-											'<a href="javascript:void(0);" class="page_numb active">' + i + '</a>' +
-										'</li>';
+						pageContent+='<li><a href="javascript:void(0);" class="page_numb active">' + i + '</a></li>';
 					}
 				}
-				if(page.curRange!=page.rangeCnt) {
-					pageContent += 
-						'<li>' +
-						  '<a class="page_numb" href="javascript:getPostList(' + (page.curRange*page.rangeSize+1) + ')" aria-label="Next">' +
-				            '<span aria-hidden="true"><img src="<c:url value='/resources/img/arrow_right_sm.png' />"></span>' +
-				          '</a>' +
-				        '</li>';
+				if(page.curPage==page.pageCnt){
+					pageContent+='<li><a href="javascript:void(0);" class="page_next">다음페이지</a></li>';
+				}else{
+					pageContent+='<li><a href="javascript:getPostList(' + (page.curPage + 1) + ')" class="page_next">다음페이지</a></li>';
+
 				}
-				pageContent += '</ol>';
+				pageContent +=  '<li><a href="javascript:getPostList(' + (page.pageCnt) + ')" class="page_Nnext">마지막페이지</a></li>' +
+							'</ol>';
 				
 				return pageContent;	
 			} else {

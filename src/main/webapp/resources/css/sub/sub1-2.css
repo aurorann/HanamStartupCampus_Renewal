@@ -1,0 +1,135 @@
+.container_wrap>div:not(.guide3){ margin-bottom:65px; }
+.guide2 h3, .guide3 h3{
+    font-size:22px;
+    font-weight:600;
+    line-height:100%;
+    color:#1976d3;
+    margin-bottom:25px;
+}
+.guide2 h3::before, .guide3 h3::before{
+    content:'';
+    display:inline-block;
+    width:4px;
+    height:18px;
+    background-color:#1976d3;
+    margin-right:8px;
+    vertical-align:middle;
+}
+
+/*guide1*/
+.guide1{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+}
+.right_content div{ width:85%; max-width:435px; }
+.right_content div h3{
+    background-color:#1976d3;
+    text-align:center;
+    line-height:40px;
+    font-size:18px;
+    font-weight:600;
+    color:#fff;
+}
+.right_content div ul{
+    border:1px solid #c7c7c7;
+    padding:20px 25px;
+    display:flex; flex-wrap:wrap;
+}
+.right_content div ul li{
+    width:32%;
+    font-size:15px;
+    font-weight:600;
+}
+.right_content div ul li:not(:nth-of-type(3n+1)){ margin-left:2%; }
+.right_content div ul li:not(:nth-last-child(-n+2)){ margin-bottom:20px; }
+.right_content div ul li span{
+    display:inline-block;
+    width:25px;
+    line-height:25px;
+    text-align:center;
+    margin-right:10px;
+
+    font-size:17px;
+    font-weight:500;
+    color:#fff;
+}
+.right_content div ul li:nth-of-type(1) span{  background-color:#1976d3; }
+.right_content div ul li:nth-of-type(2) span{  background-color:#ff821c; }
+.right_content div ul li:nth-of-type(3) span{  background-color:#ff4a4a; }
+.right_content div ul li:nth-of-type(4) span{  background-color:#75cf19; }
+.right_content div ul li:nth-of-type(5) span{  background-color:#ffc100; }
+.right_content div ul li:nth-of-type(6) span{  background-color:#9941d9; }
+.right_content div ul li:nth-of-type(7) span{  background-color:#4ecdd9; }
+.right_content div ul li:nth-of-type(8) span{  background-color:#a3a3a3; }
+
+/*guide2*/
+.guide2 table{ text-align:center; }
+.guide2 table thead tr th:not(:first-of-type){ border-left:1px solid #c7c7c7; }
+.guide2 table tbody tr td:not(:last-of-type){ border-right:1px solid #c7c7c7; }
+
+/*guide3*/
+.guide3 ul{ display:flex; flex-wrap:wrap; }
+.guide3 ul li{
+    width:32%;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+}
+.guide3 ul li:not(:nth-of-type(3n+1)){ margin-left:2%; }
+.guide3 ul li:not(:nth-of-type(-n+3)){ margin-top:45px; }
+.guide3 ul li img{ margin-bottom:15px; }
+
+
+
+@media screen and (max-width:1280px){
+    .container_wrap>div:not(.guide3){ margin-bottom:60px; }
+
+    .guide2 h3, .guide3 h3{ font-size:20px; }
+    .guide3 ul li{ font-size:20px; }
+    .guide3 ul li:not(:nth-of-type(-n+3)){ margin-top:40px; }
+    .guide3 ul li img{ margin-bottom:12px; }
+}
+
+@media screen and (max-width:1024px){
+    .container_wrap>div:not(.guide3){ margin-bottom:60px; }
+
+    .guide2 h3, .guide3 h3{ font-size:19px; margin-bottom:20px; }
+    .guide2 h3::before, .guide3 h3::before{
+        width:3px;
+        height:15px;
+        margin-left:6px;
+    }
+    .guide3 ul li{ font-size:18px; }
+    .guide3 ul li:not(:nth-of-type(-n+3)){ margin-top:30px; }
+}
+
+@media screen and (max-width:800px){
+    .container_wrap>div:not(.guide3){ margin-bottom:55px; }
+    .guide3 ul li{ font-size:16px; }
+    .right_content div h3{ font-size:17px; }
+}
+
+@media screen and (max-width:600px){
+    .right_content div{ width:100%; }
+
+    .guide3 ul li{ width:48.5%; }
+    .guide3 ul li:not(:nth-of-type(3n+1)){ margin-left:0; }
+    .guide3 ul li:not(:nth-of-type(2n+1)){ margin-left:3%; }
+    .guide3 ul li:not(:nth-of-type(-n+3)){ margin-top:0; }
+    .guide3 ul li:not(:nth-of-type(-n+2)){ margin-top:25px; }
+    .guide3 ul li img{ margin-bottom:10px; }
+}
+    
+@media screen and (max-width:480px){
+    .right_content div ul li{ width:50%; }
+    .right_content div ul li:not(:nth-of-type(3n+1)){ margin-left:0; }
+    .right_content div h3{ font-size:16px; }
+
+    .guide2 h3, .guide3 h3{ font-size:18px; margin-bottom:20px; }
+
+    .guide3 ul li{ width:100%; }
+    .guide3 ul li:not(:last-of-type){ margin-bottom:15px; }
+    .guide3 ul li:not(:nth-of-type(2n+1)){ margin-left:0; }
+    .guide3 ul li:not(:nth-of-type(-n+2)){ margin-top:0; }
+}

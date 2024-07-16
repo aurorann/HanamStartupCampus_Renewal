@@ -31,24 +31,71 @@
 	<!-- # common: header-menu start -->
     <%@ include file="/WEB-INF/header-menu.jsp"%>
     <!-- # common: header-menu end -->   
-   
+	
+	<!-- # common: header-menu-img start -->
+    <%@ include file="./include/header-menu-img.jsp"%>
+    <!-- # common: header-menu-img end -->  
 
 	<div class="sub_container in_1400">
 		<!-- # include: side-menu start -->
 		<%@ include file="./include/side-menu.jsp"%>
 		<!-- # include: side-menu end -->
 		<main>
-            <div class="right-contents col-lg-9">
-                    <!-- # include: title-box start -->
-	                <%@ include file="./include/title-box.jsp"%>
-	                <!-- # include: title-box end -->
+			<div class="container_wrap">
+				<!-- # include: title-box start -->
+				<%@ include file="./include/title-box.jsp"%>
+				<!-- # include: title-box end -->
     
-                    <div class="col-lg-12 r-contents">
-                    
-                    	<div class="col-lg-12" style="margin:0; padding:0;">
-	                        <h3 class="m-title"><img src="<c:url value='/resources/img/sub-title.png' />">&nbsp;&nbsp;뉴스레터 수정</h3>
+				<form id="galleryForm" onsubmit="return false">
+				
+	                <div class="board_write_wrap">
+	                    <div class="board_write_title">
+	                        <div class="titleWrap">
+	                            <label for="title">제목</label>
+	                            <input type="text" id="post_title" name="title" value="${TITLE}">
+	                        </div>
+							<div class="fileWrap">
+	                            <label for="imgFile">대표 이미지</label>
+								<input type="file"
+										class="board-input" id="representImageFile" name="representImageFile"
+										accept=".jpg,.png,.gif" />
+								<input type="hidden" value="${REPRESENT_IMAGE}" name="representImage" />
+	                            <label for="file">파일찾기</label>
+	                            <input multiple="multiple" type="file" name="file" id="file" style="display: inline-block;"/>
+							</div>
+	                        <p>※ 새로운 첨부파일 등록 시, 기존 파일 목록을 대체합니다.</p>
 	                    </div>
-						<form id="galleryForm" onsubmit="return false">
+							
+						<c:if test="${not empty FILE_NAME}">
+							<c:set var="fileNames" value="${fn:split(FILE_NAME,':')}" />
+							<c:set var="filePaths" value="${fn:split(FILE_PATH,':')}" />
+								<ul class="file_wrap">
+									<c:forEach items="${fileNames}" varStatus="status">
+										<li>
+											<a href="#" id="attach" data-post-element="file" onclick="document.getElementById('attachForm${status.index}').submit();" style="color: gray;">
+												<img src="<c:url value='/resources/img/sub_img/file_ico.png' />" alt="파일">
+												${fileNames[status.index]}
+											</a>
+											<form id="attachForm${status.index}" action="${pageContext.request.contextPath}/file/download" method="post" style="display: none;">
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+												<input type="hidden" name="fileName" value="${fileNames[status.index]}"/>
+												<input type="hidden" name="filePath" value="${filePaths[status.index]}"/>
+											</form>
+										</li>
+									</c:forEach>
+								</ul>
+						</c:if>  
+	                    
+	                    <div class="board_write_content">
+							<img id="representImageExample" src="<c:url value='/upload/newsletter/newsletter' />/${REPRESENT_IMAGE}" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
+	                    </div>
+		
+	                    <div class="board_write_post board-contents">
+							<textarea class="fomr-control" id="post_editor" name="content">${CONTENT}</textarea>
+	                    </div>
+	                    
+	                </div>
+						<!-- 
 	                        <table class="table board-table">
 	                            <thead>
 	                                <tr>
@@ -104,6 +151,7 @@
 	                                </tr>
 	                            </tbody>
 	                        </table>
+	                         -->
     					</form>
                         <c:forEach items="${fileNames}" varStatus="status">
 
@@ -114,7 +162,8 @@
                         </form>
                         
                         </c:forEach>
-                        <!-- <button type="button" class="search-btn mg-top-30" onClick="location.href='sub2-1.html'">목록</button> -->
+                        
+                        <!-- 
                         <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 						      <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group" style="margin-top: 30px;">
 								      <div class="btn-group" role="group">
@@ -125,8 +174,16 @@
 								      </div>
 								</div>
 						    </div>
+						     -->
+						     
+						     
+						<div class="board_wrap_btn">
+							<a href="#" onclick="editPost();">게시글 수정</a>
+							<a href="#" onclick="location.href='<c:url value='/admin/newsletter/view' />/${SEQ_ID}';">돌아가기</a>
+						</div>
+						    
+						    
 
-                    </div><!-- r-contents div 끝 -->
                 </div><!-- right-contents div 끝 -->
         </main>
     </div>

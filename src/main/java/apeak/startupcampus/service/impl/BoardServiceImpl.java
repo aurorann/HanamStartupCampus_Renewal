@@ -33,6 +33,7 @@ import apeak.startupcampus.model.dao.ActivityPartnerMapper;
 import apeak.startupcampus.model.dao.AgencyMapper;
 import apeak.startupcampus.model.dao.AnnouncementMapper;
 import apeak.startupcampus.model.dao.BioInfoMapper;
+import apeak.startupcampus.model.dao.CommunityCommentMapper;
 import apeak.startupcampus.model.dao.CommunityPartnerMapper;
 import apeak.startupcampus.model.dao.FaqMapper;
 import apeak.startupcampus.model.dao.FilePartnerMapper;
@@ -48,6 +49,7 @@ import apeak.startupcampus.model.dao.TotalSearchMapper;
 import apeak.startupcampus.model.dao.WebpageMapper;
 import apeak.startupcampus.model.dao.NewsletterMapper;
 import apeak.startupcampus.model.dto.BoardAgencyDTO;
+import apeak.startupcampus.model.dto.BoardCommentDTO;
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
@@ -123,6 +125,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	
 	@Resource(name = "announcementMapper")
 	private AnnouncementMapper announcementMapper;
+	
+	@Resource(name = "communityCommentMapper")
+	private CommunityCommentMapper communityCommentMapper;
 
 	// 파일 세이브 경로 (globals.properties)
 	@Value("#{globals['path.root']}")
@@ -670,6 +675,45 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	}
 	
 	
+	// # 입주기업 커뮤니티 게시글 댓글 조회
+
+	public Map<String, Object> getCommunityPostCommentList(int seqId) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("post", communityCommentMapper.selectCommunityCommentPostList(seqId));
+		return resultMap;
+	}
+	
+
+	public Map<String, Object> writeCommunityCommentPost(BoardCommentDTO commentDTO) throws Exception {
+		setWriterInfo(commentDTO);
+		
+		System.out.println(commentDTO.getCommentGroup());
+		
+		int seq = communityCommentMapper.selectCommunityCommentNextSeq();
+		int commentGroup = commentDTO.getCommentGroup();
+		
+		if(commentGroup == 0) {
+			commentDTO.setCommentGroup(seq);
+		}else {
+			commentDTO.setCommentGroup(commentGroup);
+		}
+		
+		int insertCount = communityCommentMapper.insertCommunityCommentPostOneForPartner(commentDTO);
+		
+		return getBoardWriteResultMap(insertCount, "입주기업 커뮤니티 댓글");
+		
+	}
+	
+	
+	// # 입주기업 커뮤니티 게시글 댓글 삭제
+	public Map<String, Object> deleteCommunityCommentPost(int seqId) throws Exception {
+		int insertCount = communityCommentMapper.deleteCommunityCommentPostOneForPartner(seqId);
+		return getBoardDeleteResultMap(insertCount, "입주기업 커뮤니티 댓글");
+	}
+
+	
+	
 
 	/*
 	 * 게시글 작성 메서드 category: notice, agency, faq, announcement
@@ -824,7 +868,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 		
 		int insertCount = announcementMapper.updateAnnouncementPostOne(noticeDTO);
-		return getBoardEditResultMap(insertCount, "공고");
+		return getBoardEditResultMap(insertCount, "사업공고");
 	}
 
 	public Map<String, Object> editAgencyPost(BoardAgencyDTO agencyDTO,HttpServletRequest request) throws Exception {
@@ -1081,7 +1125,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		}
 		
 		int insertCount = activityPartnerMapper.updateActivityPartnerPostOneForPartner(partnerActivityDTO);
-		return getBoardEditResultMap(insertCount, "기업 활동");
+		return getBoardEditResultMap(insertCount, "기업 소식");
 	}
 	
 	
@@ -1296,7 +1340,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			}
 		}
 		
-		return getBoardDeleteResultMap(insertCount, "기업 활동");
+		return getBoardDeleteResultMap(insertCount, "기업 소식");
 	}
 	
 	public Map<String, Object> deleteActivityPartnerPostForPartner(BoardGalleryDTO galleryDTO, HttpServletRequest request) throws Exception {
@@ -1319,7 +1363,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			}
 		}
 		
-		return getBoardDeleteResultMap(insertCount, "기업 활동");
+		return getBoardDeleteResultMap(insertCount, "기업 소식");
 	}
 
 
@@ -1497,6 +1541,26 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 			boardDTO.setWriterName("9999");
 		}
 	}
+	
+
+	private void setWriterInfo(BoardCommentDTO commentDTO) {
+		HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		// 작성자 IP 등록
+		commentDTO.setWriterIp(req.getRemoteAddr());
+
+		// 작성자 SEQ_ID 등록
+		try {
+			commentDTO.setWriterId(
+					((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeqId());
+			commentDTO.setWriterName(
+					((UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getName());
+
+		} catch (Exception e) {
+			LOGGER.debug("NO AUTH FOUND");
+			commentDTO.setWriterId(9999);
+		}
+	}
+	
 
 	private Map<String, Object> getBoardWriteResultMap(int insertCount, String boardCategory) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -1644,6 +1708,30 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		resultMap.put("result", "success");
 		resultMap.put("searchOption", searchOption);
 		resultMap.put("page", objMapper.writeValueAsString(page));
+
+		return resultMap;
+	}
+	
+	public Map<String, Object> getCommunityPostCommentCnt(int seqId) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		LOGGER.debug("getBoardSearchOption 결과");
+		ObjectMapper objMapper = new ObjectMapper();
+
+		int postCnt = 0;
+		int pageSize = 10;
+			postCnt = communityCommentMapper.selectCommunityCommentPostCount(seqId);
+	
+
+		int curPage = 1;
+		PagingUtil page = new PagingUtil(postCnt, curPage);
+		page.setPageSize(pageSize);
+
+		resultMap.put("index", page.getStartIndex());
+		resultMap.put("size", page.getPageSize());
+
+		resultMap.put("result", "success");
+		resultMap.put("page", objMapper.writeValueAsString(page));
+		resultMap.put("postCnt",postCnt);
 
 		return resultMap;
 	}

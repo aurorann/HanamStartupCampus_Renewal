@@ -35,7 +35,7 @@
 					board_notice
 				WHERE
 					1 = 1
-					AND level in('100', '103') 
+					AND level in('100', '102') 
 			]]>
 			<include refid="search" />
 			<![CDATA[
@@ -55,6 +55,7 @@
 					board_notice
 				WHERE
 					level in('100') 
+					AND CONTRACT_END_AT >= current_date()
 				]]>
 				<include refid="search" />
 				<![CDATA[
@@ -73,7 +74,7 @@
 				FROM
 					board_notice
 				WHERE
-					level in('103') 
+					level in('102') 
 				]]>
 				<include refid="search" />
 				<![CDATA[

@@ -14,6 +14,16 @@
 <!-- # common: head start -->
 <%@ include file="/WEB-INF/head.jsp"%>
 <!-- # common: head end -->
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/main.css' />">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/plugin/swiper-bundle.css' />">  
+
+<script src="<c:url value='/resources/js/plugin/swiper-bundle.min.js' />"></script>
+<script src="<c:url value='/resources/js/main.js' />"></script>
+
+
+  
+
 </head>
 
 <body>
@@ -24,27 +34,34 @@
     <main>
         <section class="main_swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="txt_title">
+                <div class="swiper-slide swiper-slide1">
+                    <div class="txt_title1">
+                        <h2>
+                            성공적인 <span>창업</span>, 함께 만들어가는
+                        </h2>
+                        <strong>하남 스타트업 캠퍼스</strong>
+                    </div>
+                </div>
+                <div class="swiper-slide swiper-slide2">
+                    <div class="txt_title2">
                         <strong>Hanam Urban Innovation Corporation</strong>
                         <h2>하남 스타트업 캠퍼스</h2>
                         <span>미래를 창조하고, 새로운 가능성을 위한 든든한 파트너</span>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="txt_title">
-                        <strong>Hanam Urban Innovation Corporation</strong>
-                        <h2>하남 스타트업 캠퍼스2</h2>
-                        <span>미래를 창조하고, 새로운 가능성을 위한 든든한 파트너</span>
+                <div class="swiper-slide swiper-slide3">
+                    <div class="txt_title3">
+                        <strong>당신의 아이디어가 현실로,</strong>
+                        <h2>
+                            성공적인 창업, 함께 만들어가는 미래
+                            <span>하남 스타트업 캠퍼스가 함께합니다</span>
+                        </h2>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="txt_title">
-                        <strong>Hanam Urban Innovation Corporation</strong>
-                        <h2>하남 스타트업 캠퍼스3</h2>
-                        <span>미래를 창조하고, 새로운 가능성을 위한 든든한 파트너</span>
-                    </div>
-                </div>
+            </div>
+            <div class="swiper-button">
+                <div class="swiper-button-prev main_prev"></div>
+                <div class="swiper-button-next main_next"></div>
             </div>
             <div class="swiper-pagination"></div>
         </section><!--main_swiper-->
@@ -59,7 +76,7 @@
                 </div>
 
                 <div id="new_tab1" class="news_swiper active">
-                    <ul class="swiper-wrapper">
+                    <ul class="swiper-wrapper" id="notice_swiper">
                     	<!-- 
                         <li class="swiper-slide">
                             <a href="#">
@@ -124,7 +141,7 @@
         
                     <div class="ent_introduce_swiper_wrap">
                         <div class="ent_introduce_swiper">
-                            <ul class="swiper-wrapper">
+                            <ul class="swiper-wrapper partnerInfo">
                                 <li class="swiper-slide"><a href="#"><img src="<c:url value='/resources/img/닉스(주)_logo.png' />" alt="닉스(주)"></a></li>
                                 <li class="swiper-slide"><a href="#"><img src="<c:url value='/resources/img/(주)스카이런_logo.png' />" alt="(주)스카이런"></a></li>
                                 <li class="swiper-slide"><a href="#"><img src="<c:url value='/resources/img/메이즈(주)_logo.png' />" alt="메이즈(주)"></a></li>
@@ -213,9 +230,9 @@
 		                        </li>
 		                    </ul>
 		                    <div class="swiper-button">
-		                        <div class="swiper-button-prev"></div>
-		                        <div class="swiper-button-next"></div>
-		                        <a href="#" class="more_btn">더보기</a>
+		                        <div class="swiper-button-prev business_prev"></div>
+		                        <div class="swiper-button-next business_next"></div>
+		                        <a href="<c:url value='/program/supporting' />" class="more_btn">더보기</a>
 		                    </div>
 		                </div>
                 </div>
@@ -225,27 +242,60 @@
                         <h4>하남스타트업캠퍼스 <span>#소통해요</span></h4>
                         <p>SNS 바로가기 서비스</p>
                         <div>
-                            <a href="#"><img src="<c:url value='/resources/img/instagram_ico.png' />" alt="인스타그램"></a>
-                            <a href="#"><img src="<c:url value='/resources/img/youtube_ico.png' />" alt="유튜브"></a>
+                            <a href="https://www.instagram.com/hanamstartup"><img src="<c:url value='/resources/img/instagram_ico.png' />" alt="인스타그램"></a>
+                            <a href="https://www.youtube.com/channel/UCIT4wZzDZCF2J9ppP6b-6Eg"><img src="<c:url value='/resources/img/youtube_ico.png' />" alt="유튜브"></a>
                         </div>
                     </div>
 
-                    <div class="guide_swiper">
-                        <div>
+                    <div class="guide_swiper_wraps">
+                        <div class="text_box">
                             <h4>시설안내 바로보기</h4>
                             <a href="<c:url value='/introduce/facility' />"><img src="<c:url value='/resources/img/puls_ico.png' />" alt="시설안내 바로보기"></a>
                         </div>
-
-                        <div class="swiper-wrapper" id="room-img">
-                        	<!-- 
-                            <a href="#" class="swiper-slide">
-                                <img src="img/sub_img/guide_img1.png" alt="입구">
-                            </a>
-                            <a href="#" class="swiper-slide">
-                                <img src="img/sub_img/guide_img2.png" alt="인포데스크 이미지월">
-                            </a>
-                             -->
-                        </div>
+						<div class="guide_swiper">
+	                        <div class="swiper-wrapper ">
+	                            <a href="#" class="swiper-slide">
+	                                <img src="<c:url value='/resources/img/sub_img/guide_img1.png' />" alt="입구">
+	                            </a>
+	                            <a href="#" class="swiper-slide">
+	                                <img src="<c:url value='/resources/img/sub_img/guide_img2.png' />" alt="인포데스크 이미지월">
+	                            </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img3.png' />" alt="공유오피스(좌측 방향)">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img4.png' />" alt="공유오피스(우측 방향)">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img5.png' />" alt="공유키친">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img6.png' />" alt="회의실 1">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img7.png' />" alt="회의실 2 (외부회의실)">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img8.png' />" alt="입주업체 사무실 외부">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img9.png' />" alt="입주ㅜ업체 사무실 내부">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img10.png' />" alt="공유오피스 1">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img11.png' />" alt="공유오피스 2">
+                                </a>
+                                <a href="#" class="swiper-slide">
+                                    <img src="<c:url value='/resources/img/sub_img/guide_img12.png' />g" alt="공유오피스 3">
+                                </a>
+	                        </div>
+                            <div class="swiper-button">
+                                <button class="swiper-button-prev guide_prev"></button>
+                                <button class="swiper-button-next guide_next"></button>
+                            </div>
+	                	</div>
                     </div>
                 </div>
             </div>
@@ -295,6 +345,7 @@
 	<!-- footer end -->
 
 	<!-- extension start -->
+
 	<script>
 		// 24시간 기준 쿠키 설정하기  
 		// expiredays 후의 클릭한 시간까지 쿠키 설정  
@@ -430,7 +481,7 @@
 			popList.push(pop);
 			</c:forEach>
 
-			console.log(popList);
+			//console.log(popList);
 
 			for (var i = 0; i < popList.length; i++) {
 				openPop(popList[i].title, popList[i].contents, popList[i].link,
@@ -442,45 +493,45 @@
 		})
 
 		function setFacilitySlider() {
-			var urlContext = '<c:url value="/resources/img/room/gallery" />';
+			var urlContext = '<c:url value="/resources/img/sub_img" />';
 			// var urlContext = 'img/room/gallery';
 
 			var htmlStringArr = [ {
 				description : "입구",
-				image : "gallery_entrance03.jpg"
+				image : "guide_img1.png"
 			}, {
 				description : "인포데스크 이미지월",
-				image : "gallery_infodesk.jpg"
+				image : "guide_img2.png"
 			}, {
 				description : "공유오피스 (좌측 방향)",
-				image : "gallery_share01.jpg"
+				image : "guide_img3.png"
 			}, {
 				description : "공유오피스 (우측 방향)",
-				image : "gallery_share02.jpg"
+				image : "guide_img4.png"
 			}, {
 				description : "공유키친",
-				image : "gallery_kitchen.jpg"
+				image : "guide_img5.png"
 			}, {
 				description : "회의실 1",
-				image : "gallery_meeting01.jpg"
+				image : "guide_img6.png"
 			}, {
 				description : "회의실 2 (외부회의실)",
-				image : "gallery_meeting03.jpg"
+				image : "guide_img7.png"
 			}, {
 				description : "입주업체 사무실 외부",
-				image : "gallery_office_partner01.jpg"
+				image : "guide_img8.png"
 			}, {
 				description : "입주업체 사무실 내부",
-				image : "gallery_office_partner02.jpg"
+				image : "guide_img9.png"
 			}, {
 				description : "공유오피스 1",
-				image : "gallery_restarea02.jpg"
+				image : "guide_img10.png"
 			}, {
 				description : "공유오피스 2",
-				image : "gallery_restarea04.jpg"
+				image : "guide_img11.png"
 			}, {
 				description : "공유오피스 3",
-				image : "gallery_restarea01.jpg"
+				image : "guide_img12.png"
 			},
 
 			/*
@@ -501,7 +552,7 @@
 								
 								
 					})
-			$("#room-img").html(htmlStringArr.join(""));
+			$(".room-img").html(htmlStringArr.join(""));
 
 			//initSlider("slider-div-sm1");
 		}
@@ -517,6 +568,7 @@
 							searchType : "NONE"
 						},
 						success : function(res) {
+							//console.log(res);
 							var fixedPost = res.Fixedpost;
 							var commonPost = res.Commonpost;
 
@@ -526,8 +578,8 @@
 									.every(function(el) {
 										if (htmlArr.length >= 9)
 											return false;
-										var titleString = (el.title.length > 40) ? el.title
-												.slice(0, 40)
+										var titleString = (el.title.length > 35) ? el.title
+												.slice(0, 35)
 												+ "..."
 												: el.title;
 
@@ -535,9 +587,6 @@
 										switch (el.level) {
 										case "100":
 											fixedLabel = '<strong class="board_label board_label_Ggongi">주요공지</strong>'
-											break;
-										case "101":
-											fixedLabel = '<strong class="board_label  board_label_Ggongo">주요공고</strong>'
 											break;
 										}
 
@@ -547,14 +596,12 @@
 												+ '\'">'
 					                            + fixedLabel
 					                            + '<h4>'
+					                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고" style="padding-right:8px;">'
 					                            + titleString
-					                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고">'
 					                            + '</h4>'
-					                            + '<time datetime="2024-05-17">'
+					                            + '<time datetime="' + el.createdAt.slice(0,10)  + '">'
 					                            + '<img src="<c:url value='/resources/img/calendar_ico.png' />\" alt="달력">'
-				                                + el.contractStartAt
-				                                + '~'
-				                                + el.contractEndAt
+				                                + el.createdAt.slice(0,10)
 					                            + '</time>'
 					                            + '</a>'
 					                        	+ '</li>';
@@ -568,11 +615,8 @@
 									.every(function(el) {
 										if (htmlArr.length >= 9)
 											return false;
-										if (el.level === "100"
-												|| el.level === "101")
-											return true;
-										var titleString = (el.title.length > 40) ? el.title
-												.slice(0, 40)
+										var titleString = (el.title.length > 35) ? el.title
+												.slice(0, 35)
 												+ "..."
 												: el.title;
 
@@ -580,9 +624,6 @@
 										switch (el.level) {
 										case "102":
 											commonLabel = '<strong class="board_label board_label_gongo">공지</strong>'
-											break;
-										case "103":
-											commonLabel = '<strong class="board_label board_label_gongo">공고</strong>'
 											break;
 										}
 
@@ -592,14 +633,12 @@
 											+ '\'">'
 				                            + commonLabel
 				                            + '<h4>'
+				                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고" style="padding-right:8px;">'
 				                            + titleString
-				                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고">'
 				                            + '</h4>'
-				                            + '<time datetime="2024-05-17">'
+				                            + '<time datetime="' + el.createdAt.slice(0,10)  + '">'
 				                            + '<img src="<c:url value='/resources/img/calendar_ico.png' />\" alt="달력">'
-			                                + el.contractStartAt
-			                                + '~'
-			                                + el.contractEndAt
+			                                + el.createdAt.slice(0,10)
 				                            + '</time>'
 				                            + '</a>'
 				                        	+ '</li>';
@@ -610,7 +649,7 @@
 							$("div#new_tab1 .swiper-wrapper").html(htmlArr.join(""));
 						},
 						error : function(error) {
-							alert('공지/공고를 불러오지 못했습니다, 관리자에게 문의해주세요.');
+							alert('공지를 불러오지 못했습니다, 관리자에게 문의해주세요.');
 						}
 					});
 		}
@@ -633,10 +672,10 @@
 
 							commonPost
 									.every(function(el) {
-										if (htmlArr.length >= 7)
+										if (htmlArr.length >= 8)
 											return false;
-										var titleString = (el.title.length > 40) ? el.title
-												.slice(0, 40)
+										var titleString = (el.title.length > 36) ? el.title
+												.slice(0, 35)
 												+ "..."
 												: el.title;
 
@@ -680,33 +719,45 @@
 							searchType : "NONE"
 						},
 						success : function(res) {
-							console.log(res);
+							//console.log(res);
 							var commonPost = res.post;
 
 							var htmlArr = [];
 
 							commonPost
 									.every(function(el) {
-										if (htmlArr.length >= 7)
+										if (htmlArr.length >= 9)
 											return false;
-										var titleString = (el.title.length > 40) ? el.title
-												.slice(0, 40)
+										var titleString = (el.title.length > 35) ? el.title
+												.slice(0, 35)
 												+ "..."
 												: el.title;
+												
+												
+										var commonLabel = "";
+										switch (el.level) {
+										case "101":
+											commonLabel = '<strong class="board_label board_label_Ggongo">주요공고</strong>'
+											break;
+										case "103":
+											commonLabel = '<strong class="board_label board_label_gongo">공고</strong>'
+											break;
+										}
+												
 
 										var commonHTML = '<li class="swiper-slide">'
 				                            + '<a href = \'<c:url value="/announce/announcement/view" />/'
 											+ el.seqId
 											+ '\'">'
-				                            + '<strong class="board_label board_label_gongo">소식</strong>'
+				                            + commonLabel
 				                            + '<h4>'
+				                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고" style="padding-right:8px;">'
 				                            + titleString
-				                            + '<img src="<c:url value='/resources/img/new.png' />\" alt="새공고">'
 				                            + '</h4>'
 				                            + '<time datetime="">'
 				                            + '<img src="<c:url value='/resources/img/calendar_ico.png' />\" alt="달력">'
 			                                + el.contractStartAt
-			                                + '~'
+			                                + ' ~ '
 			                                + el.contractEndAt
 				                            + '</time>'
 				                            + '</a>'
@@ -716,10 +767,10 @@
 										return true;
 									});
 
-							$("div#new_tab2 .swiper-wrapper").html(htmlArr.join(""));
+							$("div#new_tab2 .swiper-wrapper").html(htmlArr.join(""));							
 						},
 						error : function(error) {
-							alert('바이오 정책 · 지원을 불러오지 못했습니다, 관리자에게 문의해주세요.');
+							alert('공고를 불러오지 못했습니다, 관리자에게 문의해주세요.');
 						}
 					});
 		}
@@ -781,19 +832,18 @@
 												+ "..."
 												: el.homepage;
 
-										var commonHTML = '<li class="swiper-slide">'
-												+ '<a href="#">'
-												+ '<img src="<c:url value='/upload/partner-represent' />/'
-												+ el.profileImage
-												+ '" alt="'
-												+ el.name
-												+ '">'
-												+ '</a></li>';
+										var commonHTML =
+														'<li class="swiper-slide">' +
+															'<a href="#">' +
+																'<img src="<c:url value='/upload/partner-represent' />/' +
+																	el.profileImage +'" alt="' + el.name +'">' +
+																'</a>' +
+														'</li>';
 										htmlArr.push(commonHTML);
 										return true;
 									});
 
-							$("ul#slider-div-sm2").html(htmlArr.join(""));
+							$(".partnerInfo").html(htmlArr.join(""));
 
 							//initSlider("slider-div-sm2");
 						},
@@ -872,44 +922,10 @@
 					});
 		}
 
-		function initSlider(id) {
-			$("#" + id)
-					.slick(
-							{
-								slide : 'div', //슬라이드 되어야 할 태그 ex) div, li 
-								infinite : true, //무한 반복 옵션	 
-								slidesToShow : 1, // 한 화면에 보여질 컨텐츠 개수
-								slidesToScroll : 1, //스크롤 한번에 움직일 컨텐츠 개수
-								speed : 100, // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-								arrows : true, // 옆으로 이동하는 화살표 표시 여부
-								autoplay : true, // 자동 스크롤 사용 여부
-								autoplaySpeed : 5000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
-								pauseOnHover : true, // 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
-								vertical : false, // 세로 방향 슬라이드 옵션
-								prevArrow : "<button type='button' class='slick-prev " + id + "-button' style='display: none;'></button>", // 이전 화살표 모양 설정
-								nextArrow : "<button type='button' class='slick-next " + id + "-button' style='display: none;'></button>", // 다음 화살표 모양 설정
-								draggable : true, //드래그 가능 여부 
-
-								responsive : [ // 반응형 웹 구현 옵션
-								{
-									breakpoint : 960, //화면 사이즈 960px
-									settings : {
-										//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-										slidesToShow : 1
-									}
-								}, {
-									breakpoint : 768, //화면 사이즈 768px
-									settings : {
-										//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-										slidesToShow : 1
-									}
-								} ]
-							}).on("mouseover", function() {
-						$("button." + id + "-button").fadeIn(200);
-					}).on("mouseleave", function() {
-						$("button." + id + "-button").fadeOut(200);
-					}).trigger("mouseleave");
-		}
+		
+		
+		
+		
 	</script>
 	<!-- extension end -->
 

@@ -1,0 +1,63 @@
+.container_wrap h3{
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+.container_wrap p{
+    font-size:15px;
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+/*PW*/
+.password_wrap{
+    border:1px solid #c7c7c7;
+    padding:35px 0;
+    display:flex;
+    flex-flow:column;
+    align-items:center;
+    margin-bottom:50px;
+}
+.password_wrap div label{
+    display:inline-block;
+    width:120px;
+    font-size:18px;
+    font-weight:600;
+}
+.password_wrap div input{
+    width:230px;
+    height:40px;
+    border:1px solid #c7c7c7;
+    padding:0 15px;
+}
+.password_wrap div:not(:last-of-type){ margin-bottom:15px; }
+
+/*pw_btn*/
+.container_wrap .pw_btn{ text-align:center; }
+.container_wrap .pw_btn a{
+    display:inline-block;
+    width:150px;
+    line-height:45px;
+    background-color:#1976d3;
+    border-radius:8px;
+    font-size:15px;
+    color:#fff;
+}
+
+
+
+@media screen and (max-width:1280px){
+    .container_wrap h3{ font-size:20px; }
+    .password_wrap div label{ font-size:17px; width:115px; }
+    .password_wrap div input{ height:38px; }
+}
+
+@media screen and (max-width:1024px){
+    .password_wrap div label{ font-size:16px; width:110px; }
+    .password_wrap div input{ height:37px; }
+}
+
+@media screen and (max-width:600px){
+    .password_wrap div label{ width:95px; }
+    .password_wrap div input{ width:145px; }
+}

@@ -9,10 +9,13 @@ button{
     background-color:transparent;
     border:none;
     cursor:pointer;
+    font-family:'Pretendard GOV' !important;
 }
 img{ max-width:100%; }
-input:focus{ outline:none; }
+input:focus,
+select:focus{ outline:none; }
+table{ width:100%; border-collapse:collapse; }
 body{
-    font-family:'Pretendard GOV';
+    font-family:'Pretendard GOV' !important;
     letter-spacing:-1px;
 }

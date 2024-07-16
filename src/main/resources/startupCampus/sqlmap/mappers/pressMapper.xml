@@ -29,7 +29,7 @@
 	<select id="selectPressPostList" parameterType="map" resultType="boardGalleryDTO">
 			<![CDATA[
 				SELECT
-					SEQ_ID, REPRESENT_IMAGE, TITLE, left(CONTENT, 600) AS CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
+					SEQ_ID, FILE_PATH, REPRESENT_IMAGE, TITLE, left(CONTENT, 600) AS CONTENT, VIEW_COUNT, DATE_FORMAT(CREATED_AT,'%Y-%m-%d') AS CREATED_AT
 				FROM
 					board_press
 				WHERE
@@ -38,6 +38,7 @@
 			<include refid="search" />
 			<![CDATA[
 				ORDER BY
+					CREATED_AT DESC,
 					SEQ_ID DESC
 				LIMIT #{index}, #{size}
 			]]>

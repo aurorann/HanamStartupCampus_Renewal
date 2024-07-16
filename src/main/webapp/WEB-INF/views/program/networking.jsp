@@ -17,6 +17,9 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub2.css' />">
+
 </head>
 
 
@@ -41,35 +44,26 @@
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents program-box">
-                    <ul>
-                        <li>
-                            <div class="col-lg-4 program-title">
-                                <h1 style="color:#25a054;">네트워킹 데이</h1>
-                                <h1 class="program-icon program-icon5"></h1>
-                            </div>
-                            <div class="col-lg-8 program-text">
-                                <p style="line-height: 25px; letter-spacing:-1px;">
-                                    <strong>사업목표</strong>
-                                    <span>• 하남 건강도시 조성을 위해 각 분야의 네트워크 운영체계 확립을 통한 혁신창출 도모</span>
-                                    <span>• 캠퍼스 입주기업 네트워크 구축 기회 제공을 통한 새로운 비즈니스 협력기회 발굴</span>
-                                </p>
+	            <div class="conts_normal">
+	                <div>
+	                    <div class="left_content"><img src="<c:url value='/resources/img/sub_img/주요사업_img6.png' />" alt="주요사업"></div>
+	                    <div class="right_content">
+	                        <h3 class="title_bule">네트워킹 데이</h3>
+	                        <ul>
+	                            <li class="title_dk">자격기준</li>
+	                            <li><p>• 하남 건강도시 조성을 위해 각 분야의 네트워크 운영체계 확립을 통한 혁신창출 도모</p></li>
+	                            <li><p>• 캠퍼스 입주기업 네트워크 구축 기회 제공을 통한 새로운 비즈니스 협력기회 발굴</p></li>
+	                        </ul>
+	                        <ul>
+	                            <li class="title_dk">사업분야</li>
+	                            <li><p>• 사업대상: 하남스타트업캠퍼스 입주기업 및 업무 유관기관, 해당 기관 입주기업 등</p></li>
+	                            <li><p>• 정부/지자체 지원 사업설명회, 선배 창업자 및 VC/AC 강연</p></li>
+	                            <li><p>• 네트워킹 교류를 통한 협업사업 발굴</p></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div><!--conts_normal-->
 
-                                <p style="line-height: 25px; letter-spacing:-1px;">
-                                    <strong>사업내용</strong>
-                                    <span>• 사업대상: 하남스타트업캠퍼스 입주기업 및 업무 유관기관, 해당 기관 입주기업 등</span>
-                                    <span>• 정부/지자체 지원 사업설명회, 선배 창업자 및 VC/AC 강연</span>
-                                    <span>• 네트워킹 교류를 통한 협업사업 발굴</span>
-                                </p>
-                                
-                            </div>
-                            <div style="width:100%; text-align:center;">
-                                <img style="margin-top:50px;" src="<c:url value='/resources/img/networking.jpg' />" alt="네트워킹 데이" width="400">
-                            </div>
-                        </li>
-                    </ul>
-
-                </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->
 		</main>
     </div>

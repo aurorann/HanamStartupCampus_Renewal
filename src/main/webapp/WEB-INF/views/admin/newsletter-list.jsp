@@ -76,6 +76,9 @@
 	                </div><!--gallery_wrap 게시판-->
 
 	               <div class="pagination_wrap"></div><!--paging-->
+	               
+	                <a href='<c:url value="/admin/newsletter/write/form" />' class="write_btn">글쓰기</a>
+
                 </div><!-- r-contents div 끝 -->
         </main>
     </div>

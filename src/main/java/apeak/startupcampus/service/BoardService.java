@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import apeak.startupcampus.model.dto.BoardAgencyDTO;
+import apeak.startupcampus.model.dto.BoardCommentDTO;
 import apeak.startupcampus.model.dto.BoardDTO;
 import apeak.startupcampus.model.dto.BoardFaqDTO;
 import apeak.startupcampus.model.dto.BoardGalleryDTO;
@@ -175,7 +176,14 @@ public interface BoardService  {
 	public Map<String, Object> getCommunityPartnerPost(int seqId) throws Exception;
 	public Map<String, Object> deleteCommunityPartnerPost(int seqId) throws Exception;
 	public Map<String, Object> editCommunityPartnerPost(BoardDTO boardDTO, HttpServletRequest request) throws Exception;
-	
+
+	// 입주기업 커뮤니티 댓글 관련
+	public Map<String, Object> getCommunityPostCommentList(int seqId) throws Exception;
+	public Map<String, Object> writeCommunityCommentPost(BoardCommentDTO commentDTO) throws Exception;
+	public Map<String, Object> getCommunityPostCommentCnt(int seqId) throws Exception;
+	public Map<String, Object> deleteCommunityCommentPost(int seqId) throws Exception;
+
+
 	// # 서식 자료실 관련
 	public Map<String, Object> writeFilePartnerPost(BoardDTO boardDTO) throws Exception;
 	public Map<String, Object> getFilePartnerPostList(Map<String, Object> searchOption) throws Exception;

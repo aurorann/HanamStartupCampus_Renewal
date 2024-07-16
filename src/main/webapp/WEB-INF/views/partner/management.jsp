@@ -17,6 +17,9 @@
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/sub/sub3-1.css' />">
+
 </head>
 
 
@@ -41,7 +44,7 @@
                 <%@ include file="./include/title-box.jsp"%>
                 <!-- # include: title-box end -->
 
-                <div class="col-lg-12 r-contents">
+                <div class="container_wrap">
                    	${CONTENT}
                 </div><!-- r-contents div 끝 -->
             </div><!-- right-contents div 끝 -->

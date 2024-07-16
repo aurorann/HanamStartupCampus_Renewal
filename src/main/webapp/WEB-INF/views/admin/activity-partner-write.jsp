@@ -16,9 +16,6 @@
     <%@ include file="./include/script.jsp"%>
     <!-- # include: script end -->
     
-    <!-- Extention Start -->
-    <!-- Extention End -->
-    
 	<!-- # include: stylesheet start -->
 	<%@ include file="./include/stylesheet.jsp"%>
 	<!-- # include: stylesheet end -->
@@ -48,26 +45,33 @@
 				    <%@ include file="./include/inside-menu.jsp"%>
 				    
 					<form id="galleryForm" onsubmit="return false" enctype="multipart/form-data">
+		                 
 		                <div class="board_write_wrap">
 		                    <div class="board_write_title">
 		                        <div class="titleWrap">
 		                            <label for="title">제목</label>
-		                            <input type="text" id="post_title" name="title">
+		                            <input type="text" class="board-input" id="post_title" name="title">
 		                        </div>
-		                        <div class="fileWrap">
+								<div class="fileWrap">
 		                            <label for="imgFile">대표 이미지</label>
-									<input type="file" class="board-input" id="representImageFile" name="representImageFile"	accept=".jpg,.png,.gif" />
+									<input type="file"
+											class="board-input" id="representImageFile" name="representImageFile"
+											accept=".jpg,.png,.gif" />
 		                            <label for="file">파일찾기</label>
-									<input class="board-input" type="file" name="file" id="file" multiple="multiple" style="display: inline-block;"/>
-		                        </div>
+		                            <input class="board-input" multiple="multiple" type="file" name="file" id="file" style="display: inline-block; width: 225px;"/>
+								</div>
 		                    </div>
+		                    
 		                    <div class="board_write_content">
-					    		<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/default.png' />'" src="<c:url value='/resources/img/default.png' />" />
+								<img id="representImageExample" onerror="this.src='<c:url value='/resources/img/example_img.png' />'" src="<c:url value='/resources/img/example_img.png' />" />
 		                    </div>
+			
 		                    <div class="board_write_post board-contents">
-		                        <textarea name="fomr-control" id="post_editor" name="content"></textarea>
+								<textarea class="fomr-control" id="post_editor" name="content"></textarea>
 		                    </div>
+		                    
 		                </div>
+		                
 	                </form>
 	
 				     <!-- 
@@ -123,7 +127,6 @@
 	                <div class="board_wrap_btn"><a href="#" onclick="writeNewPost();">게시글 작성</a></div>
     
                     </div><!-- r-contents div 끝 -->
-                </div><!-- right-contents div 끝 -->
         </main>
     </div>
 	<!-- footer start -->
